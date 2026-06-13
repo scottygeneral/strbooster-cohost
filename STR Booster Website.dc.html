@@ -35,6 +35,20 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
   @keyframes floatIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
   ::selection { background: #1A7F64; color: #F5F3EE; }
+
+  /* ---- Mobile responsiveness (desktop layout unchanged above breakpoints) ---- */
+  /* Nav: hide secondary links before they overflow; keep the CTA */
+  @media (max-width: 900px) {
+    .nav-links a:not(:last-child) { display: none !important; }
+    .nav-links a:last-child { font-size: 13px !important; padding: 9px 14px !important; }
+  }
+  /* Phones / small tablets: collapse multi-column grids */
+  @media (max-width: 768px) {
+    .m-stack { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .m-2col  { grid-template-columns: repeat(2, 1fr) !important; }
+    .footer-row { flex-direction: column !important; text-align: left !important; }
+    .footer-row > div { text-align: left !important; }
+  }
 </style>
 </helmet>
 
@@ -47,7 +61,7 @@
         <svg width="36" height="33" viewBox="0 0 48 44" fill="none" aria-hidden="true"><polyline points="6,40 24,26 42,40" stroke="#0D1F2D" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="6,24 24,10 42,24" stroke="#1A7F64" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;">STR Booster</span>
       </a>
-      <div style="display: flex; align-items: center; gap: 36px;">
+      <div class="nav-links" style="display: flex; align-items: center; gap: 36px;">
         <a href="#how" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">How it works</a>
         <a href="#pricing" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">Pricing</a>
         <a href="#results" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">Results</a>
@@ -59,7 +73,7 @@
 
   <!-- ============ HERO ============ -->
   <section id="top" style="scroll-margin-top: 88px; padding: 88px 0 96px;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; align-items: center;">
+    <div class="m-stack" style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; align-items: center;">
       <div>
         <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 26px;">
           <span style="color:#C9A84C; font-size: 13px;">&#9733;</span>
@@ -105,7 +119,7 @@
 
   <!-- ============ PROOF METRICS BAND ============ -->
   <section id="results" style="scroll-margin-top: 88px; background: #0D1F2D; color: #F5F3EE; padding: 64px 0;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+    <div class="m-2col" style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
       <div>
         <div style="font-family:'Fraunces',serif; font-size: 44px; font-weight: 500; color:#1A7F64; line-height:1;">+34%</div>
         <div style="font-size: 14px; color: rgba(245,243,238,0.6); margin-top: 10px; line-height:1.5;">Average revenue lift in the first year</div>
@@ -132,7 +146,7 @@
         <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">How it works</div>
         <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0;">We run the operation. <span style="font-style:italic;">You keep the upside.</span></h2>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+      <div class="m-stack" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
         <div style="background:#fff; border:1px solid rgba(13,31,45,0.07); border-radius: 12px; padding: 28px 24px; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(13,31,45,0.25);">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 22px;">
             <span style="display:inline-flex; width:42px; height:42px; border-radius:10px; background:rgba(26,127,100,0.09); color:#1A7F64; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
@@ -178,7 +192,7 @@
         <p style="font-size: 17px; line-height: 1.6; color: #6B7B8D; margin: 0;">Adjust your numbers below. We'll estimate your take-home after our fee, based on a <span style="color:#1A7F64; font-weight:600;">+34% average revenue lift</span>.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 0.92fr; gap: 48px; align-items: start;">
+      <div class="m-stack" style="display: grid; grid-template-columns: 1fr 0.92fr; gap: 48px; align-items: start;">
         <!-- controls -->
         <div style="display:flex; flex-direction:column; gap: 34px; padding-top: 6px;">
           <div>
@@ -257,7 +271,7 @@
         <p style="font-size: 17px; line-height: 1.6; color: #6B7B8D; margin: 0;">No upfront cost, no lock-in. We only earn when your property does.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch;">
+      <div class="m-stack" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch;">
         <!-- tier 1 -->
         <div style="background:#fff; border:1px solid rgba(13,31,45,0.08); border-radius: 14px; padding: 32px 30px; display:flex; flex-direction:column; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-5px); box-shadow: 0 22px 44px -24px rgba(13,31,45,0.28);">
           <div style="font-family:'Outfit'; font-size: 11px; font-weight:600; letter-spacing: 0.14em; text-transform: uppercase; color:#6B7B8D;">Tier 1 &middot; Essentials</div>
@@ -330,7 +344,7 @@
   <!-- ============ MEET THE FOUNDER ============ -->
   <section style="padding: 0 0 104px;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
-      <div style="display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items:center;">
+      <div class="m-stack" style="display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items:center;">
         <!-- portrait -->
         <div style="position: relative;">
           <div style="position: relative; aspect-ratio: 4/5; border-radius: 16px; background: linear-gradient(165deg, #e9e2d4, #d6cdbb); border: 1px solid rgba(13,31,45,0.06); box-shadow: 0 30px 60px -28px rgba(13,31,45,0.35); overflow: hidden; display:flex; align-items:flex-end; justify-content:center;">
@@ -366,7 +380,7 @@
         <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">Owners</div>
         <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0;">More revenue, <span style="font-style:italic;">less involvement.</span></h2>
       </div>
-      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div class="m-stack" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
         <figure style="margin:0; background:#F5F3EE; border:1px solid rgba(13,31,45,0.06); border-radius: 14px; padding: 30px;">
           <div style="color:#C9A84C; font-size:15px; letter-spacing:2px; margin-bottom:18px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <blockquote style="margin:0 0 24px; font-family:'Fraunces',serif; font-size: 20px; line-height: 1.45; color:#0D1F2D; font-weight:400;">"My quarterly revenue is up 22% and I barely touch the calendar anymore. The reporting is the clearest I've ever had."</blockquote>
@@ -458,7 +472,7 @@
 
   <!-- ============ FOOTER ============ -->
   <footer style="background:#0D1F2D; border-top: 1px solid rgba(245,243,238,0.1); padding: 40px 0;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap: 24px;">
+    <div class="footer-row" style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap: 24px;">
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="display:flex; align-items:center; gap:10px;">
           <svg width="30" height="28" viewBox="0 0 48 44" fill="none" aria-hidden="true"><polyline points="6,40 24,26 42,40" stroke="#F5F3EE" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="6,24 24,10 42,24" stroke="#1A7F64" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>

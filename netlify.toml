@@ -1,0 +1,11 @@
+# Netlify config for STR Booster Cohost — static site, no build step.
+[build]
+  publish = "."
+  command = ""
+
+# Serve index.html at the root (default), and return it for unknown paths
+# so deep links don't 404 on this single-page site.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

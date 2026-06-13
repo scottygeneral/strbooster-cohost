@@ -425,11 +425,13 @@
     <div style="max-width: 720px; margin: 0 auto; padding: 0 32px; text-align:center;">
       <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(34px, 4.4vw, 52px); line-height: 1.08; letter-spacing: -0.02em; color:#F5F3EE; margin: 0 0 18px;">See how much your property <span style="font-style:italic;">could earn.</span></h2>
       <p style="font-size: 18px; line-height: 1.6; color: rgba(245,243,238,0.65); margin: 0 0 36px;">Start with a free revenue audit. We'll show you the numbers before you commit to anything.</p>
-      <form onSubmit="{{ onSubmit }}" style="display:flex; gap:12px; max-width: 480px; margin: 0 auto; flex-wrap: wrap;">
-        <input type="email" required placeholder="Your email address" style="flex:1; min-width: 220px; background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
+      <form onSubmit="{{ onSubmit }}" style="max-width: 480px; margin: 0 auto; display:flex; flex-direction:column; gap:12px; text-align:left;">
+        <input type="text" name="name" required placeholder="Your name" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
+        <input type="email" name="email" required placeholder="Your email address" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
+        <textarea name="property" rows="3" required placeholder="Your property — location, number of listings, current setup" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s; resize:vertical; line-height:1.5;" style-focus="border-color:#1A7F64;"></textarea>
         <button type="submit" style="background:#1A7F64; color:#F5F3EE; font-family:'Outfit'; font-size: 15px; font-weight:600; padding: 15px 26px; border:none; border-radius:9px; cursor:pointer; transition: background .15s, transform .12s; white-space:nowrap;" style-hover="background:#1d8d6f;" style-active="transform: scale(0.98);">{{ ctaLabel }}</button>
       </form>
-      <p style="font-size: 13px; color: rgba(245,243,238,0.4); margin: 18px 0 0;">No lock-in. Transparent reporting. Results first.</p>
+      <p style="font-size: 13px; color: {{ statusColor }}; margin: 18px 0 0;">{{ statusMsg }}</p>
     </div>
   </section>
 
@@ -504,7 +506,34 @@ class Component extends DCLogic {
       selTier1: () => this.setState({ tier: 1 }),
       selTier2: () => this.setState({ tier: 2 }),
       ctaLabel: this.state.submitted ? 'Thank you \u2713' : 'Get my free audit',
-      onSubmit: (e) => { e.preventDefault(); this.setState({ submitted: true }); },
+      statusMsg: this.state.submitted
+        ? "Thanks \u2014 we've got your details. We'll be in touch shortly."
+        : 'No lock-in. Transparent reporting. Results first.',
+      statusColor: this.state.submitted ? '#5fc6a5' : 'rgba(245,243,238,0.4)',
+      onSubmit: (e) => {
+        e.preventDefault();
+        const f = e.target;
+        const val = (n) => { const el = f.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+        const payload = {
+          name: val('name'),
+          email: val('email'),
+          property: val('property'),
+          source: 'STR Booster Website',
+          calc_nightly_rate: rate,
+          calc_nights_per_year: nights,
+          calc_properties: properties,
+          calc_plan: tiers[tier].name,
+          calc_estimated_take_home: Math.round(takeHome),
+        };
+        try {
+          fetch('https://services.leadconnectorhq.com/hooks/VYmmcd3zhhauMLyqAUSb/webhook-trigger/76d4aec2-6bad-483c-8e67-f49bfb715245', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        } catch (err) {}
+        this.setState({ submitted: true });
+      },
     };
   }
 }

@@ -428,7 +428,20 @@
       <form onSubmit="{{ onSubmit }}" style="max-width: 480px; margin: 0 auto; display:flex; flex-direction:column; gap:12px; text-align:left;">
         <input type="text" name="name" required placeholder="Your name" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
         <input type="email" name="email" required placeholder="Your email address" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
-        <textarea name="property" rows="3" required placeholder="Your property — location, number of listings, current setup" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s; resize:vertical; line-height:1.5;" style-focus="border-color:#1A7F64;"></textarea>
+        <div style="position:relative;">
+          <input type="text" name="address" autocomplete="off" required placeholder="Property address — start typing, then select" value="{{ addrQuery }}" onInput="{{ onAddrInput }}" style="width:100%; background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
+          <sc-if value="{{ addrConfirmed }}">
+            <span style="position:absolute; right:16px; top:50%; transform:translateY(-50%); color:#5fc6a5; font-size:13px; font-weight:600; pointer-events:none;">✓ verified</span>
+          </sc-if>
+          <sc-if value="{{ showSuggestions }}">
+            <div style="position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1px solid rgba(13,31,45,0.12); border-radius:9px; box-shadow:0 18px 40px -18px rgba(13,31,45,0.45); overflow:hidden; z-index:60;">
+              <sc-for list="{{ addrSuggestions }}" as="s">
+                <div onClick="{{ s.pick }}" style="padding:11px 16px; font-family:'Outfit'; font-size:14px; color:#0D1F2D; cursor:pointer; border-bottom:1px solid rgba(13,31,45,0.06);" style-hover="background:#F5F3EE;">{{ s.label }}</div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <input type="url" name="listing_url" required placeholder="Airbnb / listing or website link (https://…)" style="background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
         <button type="submit" style="background:#1A7F64; color:#F5F3EE; font-family:'Outfit'; font-size: 15px; font-weight:600; padding: 15px 26px; border:none; border-radius:9px; cursor:pointer; transition: background .15s, transform .12s; white-space:nowrap;" style-hover="background:#1d8d6f;" style-active="transform: scale(0.98);">{{ ctaLabel }}</button>
       </form>
       <p style="font-size: 13px; color: {{ statusColor }}; margin: 18px 0 0;">{{ statusMsg }}</p>
@@ -455,7 +468,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;revenueUplift&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 34, &quot;min&quot;: 0, &quot;max&quot;: 100, &quot;step&quot;: 1, &quot;tsType&quot;: &quot;number&quot;}}">
 class Component extends DCLogic {
-  state = { rate: 285, nights: 240, properties: 1, tier: 1, submitted: false };
+  state = { rate: 285, nights: 240, properties: 1, tier: 1, submitted: false, addrQuery: '', addrSuggestions: [], addrSelected: null, addrError: false };
 
   renderVals() {
     const uplift = this.props.revenueUplift ?? 34;
@@ -486,6 +499,35 @@ class Component extends DCLogic {
     const segSel = { background: '#0D1F2D', color: '#F5F3EE', borderColor: '#0D1F2D' };
     const mk = (i) => (tier === i ? { ...segBase, ...segSel } : segBase);
 
+    // --- verifiable address autocomplete (OpenStreetMap / Photon, no API key) ---
+    const fmtAddr = (p) => [
+      [p.housenumber, p.street].filter(Boolean).join(' '),
+      (!p.street && p.name) ? p.name : '',
+      p.city || p.locality || p.district,
+      p.state,
+      p.postcode,
+      p.country,
+    ].filter(Boolean).join(', ');
+    const addrItems = (this.state.addrSuggestions || []).map((feat) => {
+      const p = feat.properties || {};
+      const label = fmtAddr(p);
+      const c = (feat.geometry && feat.geometry.coordinates) || [];
+      return {
+        label,
+        pick: () => this.setState({
+          addrQuery: label,
+          addrSelected: {
+            label,
+            lat: c[1] ?? null, lon: c[0] ?? null,
+            city: p.city || p.locality || '', state: p.state || '',
+            postcode: p.postcode || '', country: p.country || '',
+          },
+          addrSuggestions: [],
+          addrError: false,
+        }),
+      };
+    });
+
     return {
       rate, nights, properties,
       rateFmt: '$' + rate,
@@ -506,18 +548,46 @@ class Component extends DCLogic {
       selTier1: () => this.setState({ tier: 1 }),
       selTier2: () => this.setState({ tier: 2 }),
       ctaLabel: this.state.submitted ? 'Thank you \u2713' : 'Get my free audit',
+      addrQuery: this.state.addrQuery,
+      addrSuggestions: addrItems,
+      showSuggestions: addrItems.length > 0 && !this.state.addrSelected,
+      addrConfirmed: !!this.state.addrSelected,
       statusMsg: this.state.submitted
         ? "Thanks \u2014 we've got your details. We'll be in touch shortly."
-        : 'No lock-in. Transparent reporting. Results first.',
-      statusColor: this.state.submitted ? '#5fc6a5' : 'rgba(245,243,238,0.4)',
+        : (this.state.addrError
+            ? 'Please pick your address from the dropdown so we can verify it.'
+            : 'No lock-in. Transparent reporting. Results first.'),
+      statusColor: this.state.submitted ? '#5fc6a5' : (this.state.addrError ? '#e0a3a3' : 'rgba(245,243,238,0.4)'),
+      onAddrInput: (e) => {
+        const q = e.target.value;
+        this.setState({ addrQuery: q, addrSelected: null, addrError: false });
+        clearTimeout(this._addrTimer);
+        if (q.trim().length < 4) { this.setState({ addrSuggestions: [] }); return; }
+        const seq = (this._addrSeq = (this._addrSeq || 0) + 1);
+        this._addrTimer = setTimeout(() => {
+          fetch('https://photon.komoot.io/api/?limit=5&q=' + encodeURIComponent(q))
+            .then((r) => r.json())
+            .then((d) => { if (seq === this._addrSeq) this.setState({ addrSuggestions: (d.features || []).filter((x) => x.properties) }); })
+            .catch(() => {});
+        }, 250);
+      },
       onSubmit: (e) => {
         e.preventDefault();
+        if (!this.state.addrSelected) { this.setState({ addrError: true }); return; }
         const f = e.target;
         const val = (n) => { const el = f.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
+        const a = this.state.addrSelected;
         const payload = {
           name: val('name'),
           email: val('email'),
-          property: val('property'),
+          address: a.label,
+          address_city: a.city,
+          address_state: a.state,
+          address_postcode: a.postcode,
+          address_country: a.country,
+          address_lat: a.lat,
+          address_lon: a.lon,
+          listing_url: val('listing_url'),
           source: 'STR Booster Website',
           calc_nightly_rate: rate,
           calc_nights_per_year: nights,

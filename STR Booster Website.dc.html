@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  summary { list-style: none; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  input[type=range] { accent-color: #1A7F64; }
+  summary svg { transition: transform .2s cubic-bezier(0.22,0.61,0.36,1); }
+  details[open] summary svg { transform: rotate(180deg); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @keyframes floatIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+  ::selection { background: #1A7F64; color: #F5F3EE; }
+</style>
+</helmet>
+
+<div data-screen-label="STR Booster — Landing" style="font-family: 'Outfit', sans-serif; color: #0D1F2D; background: #F5F3EE; min-height: 100vh; overflow-x: hidden;">
+
+  <!-- ============ NAV ============ -->
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(245,243,238,0.88); backdrop-filter: saturate(140%) blur(12px); border-bottom: 1px solid rgba(13,31,45,0.08);">
+    <nav style="max-width: 1200px; margin: 0 auto; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0D1F2D;">
+        <span style="display: inline-grid; grid-template-columns: repeat(3,5px); grid-auto-rows: 5px; gap: 2px;">
+          <span style="background:#0D1F2D;border-radius:1px;"></span><span style="background:#0D1F2D;border-radius:1px;"></span><span style="background:#0D1F2D;border-radius:1px;"></span>
+          <span style="background:#0D1F2D;border-radius:1px;"></span><span style="background:#1A7F64;border-radius:1px;"></span><span style="background:#0D1F2D;border-radius:1px;"></span>
+          <span style="background:#0D1F2D;border-radius:1px;"></span><span style="background:#0D1F2D;border-radius:1px;"></span><span style="background:#0D1F2D;border-radius:1px;"></span>
+        </span>
+        <span style="font-family: 'Fraunces', serif; font-weight: 500; font-size: 20px; letter-spacing: -0.01em;">STR Booster</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 36px;">
+        <a href="#how" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">How it works</a>
+        <a href="#pricing" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">Pricing</a>
+        <a href="#results" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">Results</a>
+        <a href="#faq" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">FAQ</a>
+        <a href="#calculator" style="text-decoration: none; background: #1A7F64; color: #F5F3EE; font-size: 14px; font-weight: 600; padding: 11px 20px; border-radius: 8px; transition: background .15s, transform .12s;" style-hover="background: #155c49;" style-active="transform: scale(0.98);">See how much you can earn</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" style="scroll-margin-top: 88px; padding: 88px 0 96px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; align-items: center;">
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 26px;">
+          <span style="color:#C9A84C; font-size: 13px;">&#9733;</span>
+          <span style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D;">Revenue-focused co-hosting</span>
+        </div>
+        <h1 style="font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(46px, 5.4vw, 74px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 24px; color: #0D1F2D; text-wrap: balance;">Your property,<br><span style="font-style: italic; font-weight: 500;">optimised.</span></h1>
+        <p style="font-size: 19px; line-height: 1.65; color: #4a5560; max-width: 480px; margin: 0 0 36px;">We handle operations, optimise pricing, and promote your listing — so your property earns more, with less involvement from you.</p>
+        <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 40px;">
+          <a href="#calculator" style="display:inline-flex; align-items:center; gap:10px; background: #1A7F64; color: #F5F3EE; font-size: 16px; font-weight: 600; padding: 16px 26px; border-radius: 9px; text-decoration: none; transition: background .15s, transform .12s; box-shadow: 0 8px 24px -10px rgba(26,127,100,0.5);" style-hover="background: #155c49;" style-active="transform: scale(0.98);">
+            See how much you can earn
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#how" style="font-size: 16px; font-weight: 600; color: #0D1F2D; text-decoration: none; border-bottom: 1.5px solid rgba(13,31,45,0.18); padding-bottom: 2px; transition: border-color .15s;" style-hover="border-color: #0D1F2D;">How it works</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+          <div style="display:flex; align-items:baseline; gap:8px;"><span style="font-family:'Fraunces',serif; font-size: 22px; font-weight: 500; color:#1A7F64;">+34%</span><span style="font-size:13px; color:#6B7B8D;">avg revenue lift</span></div>
+          <span style="width:1px; height:20px; background:rgba(13,31,45,0.12);"></span>
+          <div style="display:flex; align-items:baseline; gap:8px;"><span style="font-family:'Fraunces',serif; font-size: 22px; font-weight: 500; color:#0D1F2D;">4.9&#9733;</span><span style="font-size:13px; color:#6B7B8D;">guest rating</span></div>
+          <span style="width:1px; height:20px; background:rgba(13,31,45,0.12);"></span>
+          <div style="display:flex; align-items:baseline; gap:8px;"><span style="font-family:'Fraunces',serif; font-size: 22px; font-weight: 500; color:#0D1F2D;">90</span><span style="font-size:13px; color:#6B7B8D;">day guarantee</span></div>
+        </div>
+      </div>
+
+      <!-- hero visual -->
+      <div style="position: relative;">
+        <div style="position: relative; aspect-ratio: 4/5; border-radius: 16px; background: #e7e0d2; border: 1px solid rgba(13,31,45,0.06); box-shadow: 0 30px 60px -28px rgba(13,31,45,0.35); overflow: hidden;">
+          <img src="assets/hero-miami-rental.png" alt="Luxury Miami short-term rental living room with ocean view" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <!-- floating stat card -->
+        <div style="position: absolute; left: -26px; bottom: 40px; background: #fff; border: 1px solid rgba(13,31,45,0.06); border-radius: 12px; padding: 16px 20px; box-shadow: 0 20px 40px -16px rgba(13,31,45,0.28); min-width: 196px;">
+          <div style="font-family:'Outfit'; font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color:#6B7B8D; margin-bottom: 8px;">Projected annual revenue</div>
+          <div style="display:flex; align-items:baseline; gap:10px;">
+            <span style="font-family:'Fraunces',serif; font-size: 30px; font-weight: 500; color:#0D1F2D;">$91,656</span>
+            <span style="display:inline-flex; align-items:center; gap:3px; background:rgba(26,127,100,0.1); color:#1A7F64; font-size:12px; font-weight:600; padding:3px 8px; border-radius:999px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+              34%
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROOF METRICS BAND ============ -->
+  <section id="results" style="scroll-margin-top: 88px; background: #0D1F2D; color: #F5F3EE; padding: 64px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+      <div>
+        <div style="font-family:'Fraunces',serif; font-size: 44px; font-weight: 500; color:#1A7F64; line-height:1;">+34%</div>
+        <div style="font-size: 14px; color: rgba(245,243,238,0.6); margin-top: 10px; line-height:1.5;">Average revenue lift in the first year</div>
+      </div>
+      <div>
+        <div style="font-family:'Fraunces',serif; font-size: 44px; font-weight: 500; line-height:1;">&lt;5<span style="font-size:22px; color:rgba(245,243,238,0.55);"> hrs</span></div>
+        <div style="font-size: 14px; color: rgba(245,243,238,0.6); margin-top: 10px; line-height:1.5;">Owner time per month, on average</div>
+      </div>
+      <div>
+        <div style="font-family:'Fraunces',serif; font-size: 44px; font-weight: 500; line-height:1;">4.9&#9733;</div>
+        <div style="font-size: 14px; color: rgba(245,243,238,0.6); margin-top: 10px; line-height:1.5;">Average guest rating across co-hosted listings</div>
+      </div>
+      <div>
+        <div style="font-family:'Fraunces',serif; font-size: 44px; font-weight: 500; line-height:1;">90<span style="font-size:22px; color:rgba(245,243,238,0.55);"> days</span></div>
+        <div style="font-size: 14px; color: rgba(245,243,238,0.6); margin-top: 10px; line-height:1.5;">To grow your revenue — or you don't pay</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how" style="scroll-margin-top: 88px; padding: 104px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
+      <div style="max-width: 620px; margin-bottom: 60px;">
+        <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">How it works</div>
+        <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0;">We run the operation. <span style="font-style:italic;">You keep the upside.</span></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+        <div style="background:#fff; border:1px solid rgba(13,31,45,0.07); border-radius: 12px; padding: 28px 24px; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(13,31,45,0.25);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 22px;">
+            <span style="display:inline-flex; width:42px; height:42px; border-radius:10px; background:rgba(26,127,100,0.09); color:#1A7F64; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+            <span style="font-family:'Fraunces',serif; font-size: 15px; color:#bcc4ca; font-weight:500;">01</span>
+          </div>
+          <h3 style="font-family:'Outfit'; font-size: 17px; font-weight: 600; margin: 0 0 8px;">Free revenue audit</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #6B7B8D; margin: 0;">We analyse your listing, rates, and market to find exactly where revenue is leaking.</p>
+        </div>
+        <div style="background:#fff; border:1px solid rgba(13,31,45,0.07); border-radius: 12px; padding: 28px 24px; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(13,31,45,0.25);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 22px;">
+            <span style="display:inline-flex; width:42px; height:42px; border-radius:10px; background:rgba(26,127,100,0.09); color:#1A7F64; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+            <span style="font-family:'Fraunces',serif; font-size: 15px; color:#bcc4ca; font-weight:500;">02</span>
+          </div>
+          <h3 style="font-family:'Outfit'; font-size: 17px; font-weight: 600; margin: 0 0 8px;">We optimise pricing</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #6B7B8D; margin: 0;">Dynamic pricing tuned daily — the right rate, the right minimum stay, every night.</p>
+        </div>
+        <div style="background:#fff; border:1px solid rgba(13,31,45,0.07); border-radius: 12px; padding: 28px 24px; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(13,31,45,0.25);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 22px;">
+            <span style="display:inline-flex; width:42px; height:42px; border-radius:10px; background:rgba(26,127,100,0.09); color:#1A7F64; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <span style="font-family:'Fraunces',serif; font-size: 15px; color:#bcc4ca; font-weight:500;">03</span>
+          </div>
+          <h3 style="font-family:'Outfit'; font-size: 17px; font-weight: 600; margin: 0 0 8px;">We host your guests</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #6B7B8D; margin: 0;">Messaging, bookings, and a 5-star guest experience that drives reviews and repeat stays.</p>
+        </div>
+        <div style="background:#fff; border:1px solid rgba(13,31,45,0.07); border-radius: 12px; padding: 28px 24px; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-4px); box-shadow: 0 18px 36px -20px rgba(13,31,45,0.25);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 22px;">
+            <span style="display:inline-flex; width:42px; height:42px; border-radius:10px; background:rgba(26,127,100,0.09); color:#1A7F64; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span>
+            <span style="font-family:'Fraunces',serif; font-size: 15px; color:#bcc4ca; font-weight:500;">04</span>
+          </div>
+          <h3 style="font-family:'Outfit'; font-size: 17px; font-weight: 600; margin: 0 0 8px;">You earn more</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #6B7B8D; margin: 0;">Transparent monthly reporting. You always know the numbers — and keep full control.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVENUE CALCULATOR ============ -->
+  <section id="calculator" style="scroll-margin-top: 88px; background: #fff; border-top: 1px solid rgba(13,31,45,0.07); border-bottom: 1px solid rgba(13,31,45,0.07); padding: 104px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
+      <div style="max-width: 640px; margin-bottom: 56px;">
+        <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">Revenue calculator</div>
+        <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 14px;">See how much you can earn.</h2>
+        <p style="font-size: 17px; line-height: 1.6; color: #6B7B8D; margin: 0;">Adjust your numbers below. We'll estimate your take-home after our fee, based on a <span style="color:#1A7F64; font-weight:600;">+34% average revenue lift</span>.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 0.92fr; gap: 48px; align-items: start;">
+        <!-- controls -->
+        <div style="display:flex; flex-direction:column; gap: 34px; padding-top: 6px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
+              <label style="font-size: 14px; font-weight: 600; color:#0D1F2D;">Average nightly rate</label>
+              <span style="font-family:'Fraunces',serif; font-size: 22px; font-weight:500; color:#0D1F2D;">{{ rateFmt }}</span>
+            </div>
+            <input type="range" min="75" max="1500" step="5" value="{{ rate }}" onInput="{{ onRate }}" style="width:100%; height:24px; cursor:pointer;">
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
+              <label style="font-size: 14px; font-weight: 600; color:#0D1F2D;">Nights booked per year</label>
+              <span style="font-family:'Fraunces',serif; font-size: 22px; font-weight:500; color:#0D1F2D;">{{ nights }}<span style="font-size:13px; font-family:'Outfit'; color:#6B7B8D; font-weight:500;"> &middot; {{ occLabel }}</span></span>
+            </div>
+            <input type="range" min="30" max="350" step="5" value="{{ nights }}" onInput="{{ onNights }}" style="width:100%; height:24px; cursor:pointer;">
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
+              <label style="font-size: 14px; font-weight: 600; color:#0D1F2D;">Properties</label>
+              <span style="font-family:'Fraunces',serif; font-size: 22px; font-weight:500; color:#0D1F2D;">{{ properties }}</span>
+            </div>
+            <input type="range" min="1" max="20" step="1" value="{{ properties }}" onInput="{{ onProps }}" style="width:100%; height:24px; cursor:pointer;">
+          </div>
+          <div>
+            <label style="display:block; font-size: 14px; font-weight: 600; color:#0D1F2D; margin-bottom: 14px;">Co-hosting plan</label>
+            <div style="display:flex; gap: 10px;">
+              <button onClick="{{ selTier0 }}" style="{{ seg0Style }}">10%<span style="display:block; font-size:11px; font-weight:500; opacity:.7; margin-top:2px;">Essentials</span></button>
+              <button onClick="{{ selTier1 }}" style="{{ seg1Style }}">15%<span style="display:block; font-size:11px; font-weight:500; opacity:.7; margin-top:2px;">Hands-on</span></button>
+              <button onClick="{{ selTier2 }}" style="{{ seg2Style }}">20%<span style="display:block; font-size:11px; font-weight:500; opacity:.7; margin-top:2px;">Full service</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- result card -->
+        <div style="background: #0D1F2D; border-radius: 16px; padding: 36px; box-shadow: 0 30px 60px -28px rgba(13,31,45,0.5);">
+          <div style="font-family:'Outfit'; font-size: 11px; font-weight:600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,243,238,0.55); margin-bottom: 14px;">Estimated annual take-home</div>
+          <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+            <span style="font-family:'Fraunces',serif; font-size: clamp(40px, 5vw, 56px); font-weight: 500; color:#3fae8c; line-height:1;">{{ takeHomeFmt }}</span>
+            <span style="display:inline-flex; align-items:center; gap:4px; background: rgba(63,174,140,0.16); color:#5fc6a5; font-size:13px; font-weight:600; padding:5px 11px; border-radius:999px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+              {{ netGainPctFmt }} vs today
+            </span>
+          </div>
+          <p style="font-size: 14px; color: rgba(245,243,238,0.55); margin: 14px 0 28px; line-height:1.5;">That's <span style="color:#F5F3EE; font-weight:600;">{{ netGainFmt }}</span> more than you take home today — hosting it yourself.</p>
+
+          <div style="border-top: 1px solid rgba(245,243,238,0.12); padding-top: 22px; display:flex; flex-direction:column; gap: 16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size: 14px; color: rgba(245,243,238,0.7);">Revenue today (hosting on your own)</span>
+              <span style="font-family:'Fraunces',serif; font-size: 18px; font-weight:500; color:#F5F3EE;">{{ currentFmt }}</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size: 14px; color: rgba(245,243,238,0.7);">Projected gross with STR Booster</span>
+              <span style="font-family:'Fraunces',serif; font-size: 18px; font-weight:500; color:#F5F3EE;">{{ projectedFmt }}</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size: 14px; color: rgba(245,243,238,0.7);">Co-hosting fee ({{ tierName }} &middot; {{ feePctLabel }})</span>
+              <span style="font-family:'Fraunces',serif; font-size: 18px; font-weight:500; color:#c98a93;">{{ feeFmt }}</span>
+            </div>
+          </div>
+          <a href="#start" style="display:flex; align-items:center; justify-content:center; gap:9px; margin-top: 28px; background:#1A7F64; color:#F5F3EE; font-size:15px; font-weight:600; padding: 15px; border-radius:9px; text-decoration:none; transition: background .15s, transform .12s;" style-hover="background:#1d8d6f;" style-active="transform: scale(0.99);">
+            Get my free revenue audit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <p style="font-size: 12px; color: rgba(245,243,238,0.4); margin: 14px 0 0; text-align:center;">Illustrative estimate. Actual results vary by market and listing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING / TIERS ============ -->
+  <section id="pricing" style="scroll-margin-top: 88px; padding: 104px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
+      <div style="max-width: 620px; margin-bottom: 60px;">
+        <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">Pricing</div>
+        <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 14px;">One simple fee. <span style="font-style:italic;">A share of what you make.</span></h2>
+        <p style="font-size: 17px; line-height: 1.6; color: #6B7B8D; margin: 0;">No upfront cost, no lock-in. We only earn when your property does.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch;">
+        <!-- tier 1 -->
+        <div style="background:#fff; border:1px solid rgba(13,31,45,0.08); border-radius: 14px; padding: 32px 30px; display:flex; flex-direction:column; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-5px); box-shadow: 0 22px 44px -24px rgba(13,31,45,0.28);">
+          <div style="font-family:'Outfit'; font-size: 11px; font-weight:600; letter-spacing: 0.14em; text-transform: uppercase; color:#6B7B8D;">Tier 1 &middot; Essentials</div>
+          <div style="display:flex; align-items:baseline; gap:8px; margin: 14px 0 4px;">
+            <span style="font-family:'Fraunces',serif; font-size: 52px; font-weight: 500; line-height:1; color:#0D1F2D;">10%</span>
+          </div>
+          <div style="font-size: 14px; color:#6B7B8D; margin-bottom: 26px;">of gross revenue</div>
+          <div style="height:1px; background:rgba(13,31,45,0.08); margin-bottom: 24px;"></div>
+          <ul style="list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap: 14px; flex:1;">
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Co-hosting essentials</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Pricing guidance document</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Listing optimisation recommendations</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Guest messaging &amp; booking handled</li>
+          </ul>
+          <a href="#start" style="text-align:center; border:1.5px solid rgba(13,31,45,0.16); color:#0D1F2D; font-size: 15px; font-weight:600; padding: 13px; border-radius:9px; text-decoration:none; transition: border-color .15s, background .15s;" style-hover="border-color:#0D1F2D; background:rgba(13,31,45,0.03);">Get started</a>
+        </div>
+
+        <!-- tier 2 popular -->
+        <div style="background:#fff; border:1.5px solid #1A7F64; border-radius: 14px; padding: 32px 30px; display:flex; flex-direction:column; position:relative; box-shadow: 0 24px 48px -26px rgba(26,127,100,0.4); transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-5px); box-shadow: 0 30px 56px -26px rgba(26,127,100,0.45);">
+          <div style="position:absolute; top:-13px; left:30px; background:#1A7F64; color:#F5F3EE; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding: 6px 13px; border-radius:999px;">Most popular</div>
+          <div style="font-family:'Outfit'; font-size: 11px; font-weight:600; letter-spacing: 0.14em; text-transform: uppercase; color:#6B7B8D;">Tier 2 &middot; Hands-on</div>
+          <div style="display:flex; align-items:baseline; gap:8px; margin: 14px 0 4px;">
+            <span style="font-family:'Fraunces',serif; font-size: 52px; font-weight: 500; line-height:1; color:#0D1F2D;">15%</span>
+          </div>
+          <div style="font-size: 14px; color:#6B7B8D; margin-bottom: 26px;">of gross revenue</div>
+          <div style="height:1px; background:rgba(13,31,45,0.08); margin-bottom: 24px;"></div>
+          <ul style="list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap: 14px; flex:1;">
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600; color:#0D1F2D;">Everything in Tier 1</span></li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Hands-on dynamic pricing, done for you</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>We implement listing optimisation</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>PriceLabs integration &amp; setup</li>
+          </ul>
+          <a href="#start" style="text-align:center; background:#1A7F64; color:#F5F3EE; font-size: 15px; font-weight:600; padding: 14px; border-radius:9px; text-decoration:none; transition: background .15s, transform .12s;" style-hover="background:#155c49;" style-active="transform: scale(0.99);">Get started</a>
+        </div>
+
+        <!-- tier 3 -->
+        <div style="background:#fff; border:1px solid rgba(13,31,45,0.08); border-radius: 14px; padding: 32px 30px; display:flex; flex-direction:column; transition: transform .18s cubic-bezier(0.22,0.61,0.36,1), box-shadow .18s;" style-hover="transform: translateY(-5px); box-shadow: 0 22px 44px -24px rgba(13,31,45,0.28);">
+          <div style="font-family:'Outfit'; font-size: 11px; font-weight:600; letter-spacing: 0.14em; text-transform: uppercase; color:#6B7B8D;">Tier 3 &middot; Full service</div>
+          <div style="display:flex; align-items:baseline; gap:8px; margin: 14px 0 4px;">
+            <span style="font-family:'Fraunces',serif; font-size: 52px; font-weight: 500; line-height:1; color:#0D1F2D;">20%</span>
+          </div>
+          <div style="font-size: 14px; color:#6B7B8D; margin-bottom: 26px;">of gross revenue</div>
+          <div style="height:1px; background:rgba(13,31,45,0.08); margin-bottom: 24px;"></div>
+          <ul style="list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap: 14px; flex:1;">
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg><span style="font-weight:600; color:#0D1F2D;">Everything in Tier 2</span></li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Network promotion (social, direct, partners)</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Full onsite guest support</li>
+            <li style="display:flex; gap:11px; font-size: 15px; color:#3a4650; line-height:1.45;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A7F64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>Priority placement in STR Booster network</li>
+          </ul>
+          <a href="#start" style="text-align:center; border:1.5px solid rgba(13,31,45,0.16); color:#0D1F2D; font-size: 15px; font-weight:600; padding: 13px; border-radius:9px; text-decoration:none; transition: border-color .15s, background .15s;" style-hover="border-color:#0D1F2D; background:rgba(13,31,45,0.03);">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE REVENUE PLEDGE ============ -->
+  <section style="padding: 0 0 104px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
+      <div style="background: #0D1F2D; border-radius: 18px; padding: 72px 64px; position: relative; overflow: hidden;">
+        <div style="position:absolute; left:0; top:56px; bottom:56px; width:3px; background:#C9A84C;"></div>
+        <div style="max-width: 760px; padding-left: 28px;">
+          <div style="font-family:'Outfit'; font-size: 11px; font-weight:600; letter-spacing: 0.18em; text-transform: uppercase; color:#C9A84C; margin-bottom: 22px;">The STR Booster pledge</div>
+          <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(30px, 4vw, 48px); line-height: 1.12; letter-spacing: -0.02em; color: #F5F3EE; margin: 0 0 22px;">If we don't grow your revenue in 90 days, <span style="font-style:italic; color:#fff;">you don't pay.</span></h2>
+          <p style="font-size: 18px; line-height: 1.6; color: rgba(245,243,238,0.65); margin: 0;">Transparent reporting. No lock-in. Results first. We earn our fee by making your property earn more — or we don't earn it at all.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEET THE FOUNDER ============ -->
+  <section style="padding: 0 0 104px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
+      <div style="display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items:center;">
+        <!-- portrait -->
+        <div style="position: relative;">
+          <div style="position: relative; aspect-ratio: 4/5; border-radius: 16px; background: linear-gradient(165deg, #e9e2d4, #d6cdbb); border: 1px solid rgba(13,31,45,0.06); box-shadow: 0 30px 60px -28px rgba(13,31,45,0.35); overflow: hidden; display:flex; align-items:flex-end; justify-content:center;">
+            <img src="assets/founder-david.png" alt="David Anthony Scott, Founder of STR Booster" style="width:128%; height:128%; object-fit:contain; object-position:center bottom; display:block;">
+          </div>
+          <div style="position:absolute; left:-24px; bottom:36px; background:#fff; border:1px solid rgba(13,31,45,0.06); border-radius:12px; padding:14px 18px; box-shadow:0 20px 40px -16px rgba(13,31,45,0.28);">
+            <div style="font-family:'Outfit'; font-size:10px; letter-spacing:0.13em; text-transform:uppercase; color:#6B7B8D; margin-bottom:4px;">Hospitality, certified</div>
+            <div style="font-family:'Fraunces',serif; font-size:18px; font-weight:500; color:#0D1F2D;">Cornell School of Hotel Administration</div>
+          </div>
+        </div>
+        <!-- bio -->
+        <div>
+          <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">Meet the founder</div>
+          <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 6px;">David Anthony Scott</h2>
+          <div style="font-size: 15px; font-weight: 600; color:#1A7F64; margin-bottom: 24px;">Founder &amp; Principal</div>
+          <p style="font-size: 17px; line-height: 1.7; color: #4a5560; max-width: 560px; margin: 0 0 20px;">A Cornell-certified hospitality expert, David spent years inside the world's top hotels before founding his own boutique hotel group. He's built the systems that keep rooms full and guests loyal — and now brings that same operator's discipline to short-term rental owners.</p>
+          <blockquote style="margin: 0 0 30px; padding-left: 22px; border-left: 3px solid #C9A84C;">
+            <p style="font-family:'Fraunces',serif; font-style: italic; font-size: 23px; line-height: 1.4; color: #0D1F2D; margin: 0;">"Great hospitality isn't a feeling — it's a system. I built STR Booster to run that system for owners, so every stay performs and every guest comes back."</p>
+          </blockquote>
+          <a href="https://www.linkedin.com/in/david-anthony-scott/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; font-size: 15px; font-weight:600; color:#0D1F2D; text-decoration:none; border:1.5px solid rgba(13,31,45,0.16); padding: 11px 18px; border-radius:9px; transition: border-color .15s, background .15s;" style-hover="border-color:#0D1F2D; background:rgba(13,31,45,0.03);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0D1F2D"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section style="background:#fff; border-top: 1px solid rgba(13,31,45,0.07); border-bottom: 1px solid rgba(13,31,45,0.07); padding: 104px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
+      <div style="max-width: 620px; margin-bottom: 56px;">
+        <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">Owners</div>
+        <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0;">More revenue, <span style="font-style:italic;">less involvement.</span></h2>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <figure style="margin:0; background:#F5F3EE; border:1px solid rgba(13,31,45,0.06); border-radius: 14px; padding: 30px;">
+          <div style="color:#C9A84C; font-size:15px; letter-spacing:2px; margin-bottom:18px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote style="margin:0 0 24px; font-family:'Fraunces',serif; font-size: 20px; line-height: 1.45; color:#0D1F2D; font-weight:400;">"My quarterly revenue is up 22% and I barely touch the calendar anymore. The reporting is the clearest I've ever had."</blockquote>
+          <figcaption style="display:flex; align-items:center; gap:12px;">
+            <img src="assets/owner-marco.png" alt="Marco D." style="width:42px; height:42px; border-radius:999px; object-fit:cover; flex-shrink:0;">
+            <span><span style="display:block; font-size:14px; font-weight:600; color:#0D1F2D;">Marco D.</span><span style="display:block; font-size:13px; color:#6B7B8D;">3-bedroom villa &middot; 1 listing</span></span>
+          </figcaption>
+        </figure>
+        <figure style="margin:0; background:#F5F3EE; border:1px solid rgba(13,31,45,0.06); border-radius: 14px; padding: 30px;">
+          <div style="color:#C9A84C; font-size:15px; letter-spacing:2px; margin-bottom:18px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote style="margin:0 0 24px; font-family:'Fraunces',serif; font-size: 20px; line-height: 1.45; color:#0D1F2D; font-weight:400;">"They repriced our shoulder season and filled weeks that used to sit empty. Same property, materially more income."</blockquote>
+          <figcaption style="display:flex; align-items:center; gap:12px;">
+            <img src="assets/owner-priya-james.png" alt="Priya and James R." style="width:42px; height:42px; border-radius:999px; object-fit:cover; flex-shrink:0;">
+            <span><span style="display:block; font-size:14px; font-weight:600; color:#0D1F2D;">Priya & James R.</span><span style="display:block; font-size:13px; color:#6B7B8D;">Coastal condo &middot; 2 listings</span></span>
+          </figcaption>
+        </figure>
+        <figure style="margin:0; background:#F5F3EE; border:1px solid rgba(13,31,45,0.06); border-radius: 14px; padding: 30px;">
+          <div style="color:#C9A84C; font-size:15px; letter-spacing:2px; margin-bottom:18px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote style="margin:0 0 24px; font-family:'Fraunces',serif; font-size: 20px; line-height: 1.45; color:#0D1F2D; font-weight:400;">"I was skeptical of the guarantee. 90 days in, the numbers spoke for themselves. We've added two more properties since."</blockquote>
+          <figcaption style="display:flex; align-items:center; gap:12px;">
+            <img src="assets/owner-lena.png" alt="Lena K." style="width:42px; height:42px; border-radius:999px; object-fit:cover; flex-shrink:0;">
+            <span><span style="display:block; font-size:14px; font-weight:600; color:#0D1F2D;">Lena K.</span><span style="display:block; font-size:13px; color:#6B7B8D;">Portfolio owner &middot; 5 listings</span></span>
+          </figcaption>
+        </figure>
+      </div>
+      <p style="font-size: 12px; color:#9aa3ab; margin: 28px 0 0;">Representative owner quotes shown for illustration.</p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" style="scroll-margin-top: 88px; padding: 104px 0;">
+    <div style="max-width: 880px; margin: 0 auto; padding: 0 32px;">
+      <div style="margin-bottom: 48px;">
+        <div style="font-family:'Outfit'; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B7B8D; margin-bottom: 18px;">Questions</div>
+        <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0;">The details, up front.</h2>
+      </div>
+      <div style="border-top: 1px solid rgba(13,31,45,0.1);">
+        <details style="border-bottom: 1px solid rgba(13,31,45,0.1);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; gap:20px; padding: 24px 0; font-size: 18px; font-weight: 600; color:#0D1F2D;">How does the fee work?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7B8D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; color:#4a5560;">We charge a single percentage of your property's gross revenue — 10%, 15%, or 20%, depending on how hands-on you want us to be. There's no upfront cost and no monthly minimum. We earn when you earn.</p>
+        </details>
+        <details style="border-bottom: 1px solid rgba(13,31,45,0.1);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; gap:20px; padding: 24px 0; font-size: 18px; font-weight: 600; color:#0D1F2D;">What does "you don't pay" actually mean?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7B8D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; color:#4a5560;">If your revenue hasn't grown within the first 90 days versus your trailing baseline, we waive our fee for that period. We measure against your own numbers, transparently, and you see the reporting the whole way through.</p>
+        </details>
+        <details style="border-bottom: 1px solid rgba(13,31,45,0.1);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; gap:20px; padding: 24px 0; font-size: 18px; font-weight: 600; color:#0D1F2D;">Do I keep control of my listing and accounts?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7B8D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; color:#4a5560;">Always. Your listings, payouts, and accounts stay in your name. We co-host alongside you — you can see every change we make and step back in at any time. There's no lock-in contract.</p>
+        </details>
+        <details style="border-bottom: 1px solid rgba(13,31,45,0.1);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; gap:20px; padding: 24px 0; font-size: 18px; font-weight: 600; color:#0D1F2D;">What tools and platforms do you work with?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7B8D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; color:#4a5560;">We run pricing through PriceLabs and operate across the major booking platforms. We integrate with your existing setup rather than forcing you to switch — your channels, your data, our hands on the levers.</p>
+        </details>
+        <details style="border-bottom: 1px solid rgba(13,31,45,0.1);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; gap:20px; padding: 24px 0; font-size: 18px; font-weight: 600; color:#0D1F2D;">How quickly will I see results?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7B8D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65; color:#4a5560;">Pricing and listing changes go live within the first week. Most owners see measurable revenue movement inside the first 90 days — which is exactly the window our guarantee is built around.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section id="start" style="scroll-margin-top: 88px; background:#0D1F2D; padding: 96px 0;">
+    <div style="max-width: 720px; margin: 0 auto; padding: 0 32px; text-align:center;">
+      <h2 style="font-family:'Fraunces',serif; font-weight: 400; font-size: clamp(34px, 4.4vw, 52px); line-height: 1.08; letter-spacing: -0.02em; color:#F5F3EE; margin: 0 0 18px;">See how much your property <span style="font-style:italic;">could earn.</span></h2>
+      <p style="font-size: 18px; line-height: 1.6; color: rgba(245,243,238,0.65); margin: 0 0 36px;">Start with a free revenue audit. We'll show you the numbers before you commit to anything.</p>
+      <form onSubmit="{{ onSubmit }}" style="display:flex; gap:12px; max-width: 480px; margin: 0 auto; flex-wrap: wrap;">
+        <input type="email" required placeholder="Your email address" style="flex:1; min-width: 220px; background:rgba(245,243,238,0.06); border:1px solid rgba(245,243,238,0.18); color:#F5F3EE; font-family:'Outfit'; font-size: 15px; padding: 15px 18px; border-radius:9px; outline:none; transition: border-color .15s;" style-focus="border-color:#1A7F64;">
+        <button type="submit" style="background:#1A7F64; color:#F5F3EE; font-family:'Outfit'; font-size: 15px; font-weight:600; padding: 15px 26px; border:none; border-radius:9px; cursor:pointer; transition: background .15s, transform .12s; white-space:nowrap;" style-hover="background:#1d8d6f;" style-active="transform: scale(0.98);">{{ ctaLabel }}</button>
+      </form>
+      <p style="font-size: 13px; color: rgba(245,243,238,0.4); margin: 18px 0 0;">No lock-in. Transparent reporting. Results first.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#0D1F2D; border-top: 1px solid rgba(245,243,238,0.1); padding: 40px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: 16px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="display: inline-grid; grid-template-columns: repeat(3,4px); grid-auto-rows: 4px; gap: 2px;">
+          <span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span><span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span><span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span>
+          <span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span><span style="background:#1A7F64;border-radius:1px;"></span><span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span>
+          <span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span><span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span><span style="background:rgba(245,243,238,0.7);border-radius:1px;"></span>
+        </span>
+        <span style="font-family:'Fraunces',serif; font-weight: 500; font-size: 16px; color:#F5F3EE;">STR Booster</span>
+      </div>
+      <div style="font-size: 13px; color: rgba(245,243,238,0.45);">Revenue-focused co-hosting &middot; strbooster.com</div>
+      <div style="font-size: 12px; color: rgba(245,243,238,0.35);">Figures shown are illustrative. &copy; 2026 STR Booster.</div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;revenueUplift&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 34, &quot;min&quot;: 0, &quot;max&quot;: 100, &quot;step&quot;: 1, &quot;tsType&quot;: &quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { rate: 285, nights: 240, properties: 1, tier: 1, submitted: false };
+
+  renderVals() {
+    const uplift = this.props.revenueUplift ?? 34;
+    const { rate, nights, properties, tier } = this.state;
+    const tiers = [
+      { pct: 10, name: 'Essentials' },
+      { pct: 15, name: 'Hands-on' },
+      { pct: 20, name: 'Full service' },
+    ];
+    const current = rate * nights * properties;
+    const projected = current * (1 + uplift / 100);
+    const feePct = tiers[tier].pct;
+    const fee = projected * feePct / 100;
+    const takeHome = projected - fee;
+    const netGain = takeHome - current;
+    const netGainPct = current > 0 ? (netGain / current) * 100 : 0;
+
+    const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+    const occ = Math.round((nights / 365) * 100);
+
+    const segBase = {
+      flex: '1', padding: '14px 6px', borderRadius: '9px',
+      border: '1.5px solid #E0DBCF', background: '#fff', color: '#0D1F2D',
+      fontFamily: "'Fraunces', serif", fontWeight: 500, fontSize: '20px',
+      cursor: 'pointer', textAlign: 'center', lineHeight: '1',
+      transition: 'all .15s cubic-bezier(0.22,0.61,0.36,1)',
+    };
+    const segSel = { background: '#0D1F2D', color: '#F5F3EE', borderColor: '#0D1F2D' };
+    const mk = (i) => (tier === i ? { ...segBase, ...segSel } : segBase);
+
+    return {
+      rate, nights, properties,
+      rateFmt: '$' + rate,
+      occLabel: occ + '% occupancy',
+      currentFmt: fmt(current),
+      projectedFmt: fmt(projected),
+      feeFmt: '\u2212' + fmt(fee),
+      takeHomeFmt: fmt(takeHome),
+      netGainFmt: (netGain >= 0 ? '+' : '\u2212') + fmt(Math.abs(netGain)),
+      netGainPctFmt: (netGainPct >= 0 ? '+' : '\u2212') + Math.abs(netGainPct).toFixed(1) + '%',
+      feePctLabel: feePct + '%',
+      tierName: tiers[tier].name,
+      seg0Style: mk(0), seg1Style: mk(1), seg2Style: mk(2),
+      onRate: (e) => this.setState({ rate: +e.target.value }),
+      onNights: (e) => this.setState({ nights: +e.target.value }),
+      onProps: (e) => this.setState({ properties: +e.target.value }),
+      selTier0: () => this.setState({ tier: 0 }),
+      selTier1: () => this.setState({ tier: 1 }),
+      selTier2: () => this.setState({ tier: 2 }),
+      ctaLabel: this.state.submitted ? 'Thank you \u2713' : 'Get my free audit',
+      onSubmit: (e) => { e.preventDefault(); this.setState({ submitted: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -42,13 +42,13 @@
   @media (max-width: 900px) {
     .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
     .nav-links {
-      display: none;
+      display: none !important;
       position: absolute; top: 72px; left: 0; right: 0;
       flex-direction: column !important; align-items: stretch !important; gap: 0 !important;
       background: #F5F3EE; border-bottom: 1px solid rgba(13,31,45,0.08);
       padding: 6px 0; box-shadow: 0 20px 32px -20px rgba(13,31,45,0.35);
     }
-    .nav-links.open { display: flex; }
+    .nav-links.open { display: flex !important; }
     .nav-links a { padding: 14px 32px !important; font-size: 16px !important; }
     .nav-links a:last-child { margin: 8px 24px 6px; padding: 14px 18px !important; border-radius: 8px; text-align: center; justify-content: center; }
   }

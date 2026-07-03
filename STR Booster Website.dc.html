@@ -98,16 +98,23 @@
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div class="nav-links {{ menuClass }}" onClick="{{ closeMenu }}" style="display: flex; align-items: center; gap: 36px;">
-        <a href="#how" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">How it works</a>
-        <a href="#pricing" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">Pricing</a>
-        <a href="#results" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">Results</a>
-        <a href="#faq" style="text-decoration: none; color: #6B7B8D; font-size: 15px; font-weight: 500; transition: color .15s;" style-hover="color: #0D1F2D;">FAQ</a>
+        <div class="nav-dd">
+          <a class="nav-dd-trigger" href="/index.html">Co-Hosting<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="nav-dd-menu"><div class="nav-dd-inner">
+            <a href="/index.html#how">How It Works</a>
+            <a href="/index.html#calculator">Revenue Calculator</a>
+            <a href="/index.html#pricing">Pricing</a>
+            <a href="/index.html#results">Results</a>
+            <a href="/index.html#faq">FAQ</a>
+          </div></div>
+        </div>
         <div class="nav-dd">
           <a class="nav-dd-trigger" href="/listing-optimization.html">Optimization<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
           <div class="nav-dd-menu"><div class="nav-dd-inner">
             <a href="/listing-optimization.html#suite">The Suite</a>
             <a href="/listing-optimization.html#how">How It Works</a>
             <a href="/listing-optimization.html#faq">FAQ</a>
+            <a href="/listing-optimization.html#book">Book a Call</a>
           </div></div>
         </div>
         <a href="#calculator" style="text-decoration: none; background: #1A7F64; color: #F5F3EE; font-size: 14px; font-weight: 600; padding: 11px 20px; border-radius: 8px; transition: background .15s, transform .12s;" style-hover="background: #155c49;" style-active="transform: scale(0.98);">See how much you can earn</a>

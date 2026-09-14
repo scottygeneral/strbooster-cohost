@@ -6,6 +6,18 @@
 # Serve index.html at the root (default), and return it for unknown paths
 # so deep links don't 404 on this single-page site.
 [[redirects]]
+  from = "/community.html"
+  to = "https://my.hostgrowthhub.com/communities/groups/host-growth-hub/home?invite=6aa7a9206e3c5d8ede86e13d"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/community"
+  to = "https://my.hostgrowthhub.com/communities/groups/host-growth-hub/home?invite=6aa7a9206e3c5d8ede86e13d"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

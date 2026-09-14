@@ -15,3 +15,23 @@
 .pricelabs-partner-badge{display:block;flex:0 0 180px}
 .pricelabs-partner-badge img{width:180px;height:auto;border:0}
 .hero-trust .hero-review{flex:1 1 230px;margin:0}
+
+/* Client case studies */
+.case-card .case-metric{font-family:'Fraunces',Georgia,serif;font-size:2.3rem;line-height:1.2;color:var(--green);margin:8px 0 12px}
+.case-card .note{margin-top:0;margin-bottom:24px}
+.case-prose{max-width:940px;margin:auto}
+.case-prose h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:40px 0 18px}
+.case-prose h2:first-of-type{margin-top:0}
+.case-prose h3{margin:26px 0 10px}
+.case-prose p{max-width:850px}
+.case-table-scroll{overflow-x:auto;margin:24px 0;-webkit-overflow-scrolling:touch}
+.case-table{border-collapse:collapse;width:100%;min-width:620px;font-size:.96rem}
+.case-table caption{text-align:left;color:var(--muted);padding:0 0 14px;font-size:.9rem}
+.case-table th,.case-table td{padding:16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.case-table thead{background:var(--navy);color:white}
+.case-table tbody th{font-weight:500;min-width:180px}
+.case-table tbody tr:nth-child(even){background:var(--cream)}
+.case-evidence{background:var(--cream);border-left:3px solid var(--green);padding:26px;margin:32px 0}
+.case-evidence h2{font-family:'Outfit',sans-serif;font-size:1.2rem;margin:0 0 12px!important;font-weight:600}
+.case-evidence p{font-size:.95rem}
+.case-back{margin-top:26px}

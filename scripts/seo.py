@@ -39,6 +39,12 @@ RELATED = {
  'websites-funnels': [('guest-positioning-guide','Define the guest your website should attract'),('technology-automation','Connect your CRM and marketing workflows')],
 }
 
+RELATED['listing-optimization'] += [('case-study-brigantine','Brigantine: guest positioning and listing performance'),('case-study-tuscany','Tuscany: a closer look at listing conversion')]
+RELATED['revenue-management'] += [('case-study-phoenix','Phoenix: reviewing an existing PriceLabs setup'),('case-study-north-carolina','North Carolina: revenue and distribution results')]
+RELATED['technology-automation'] += [('case-study-north-carolina','North Carolina: getting more from Hostaway')]
+RELATED['websites-funnels'] += [('case-study-north-carolina','North Carolina: a connected direct booking website')]
+RELATED['resources'] = [('client-results','Explore client case studies')]
+
 def enhance_page(markup, slug, title, desc):
     canonical = BASE + ('/' if slug == 'index' else '/' + slug + '.html')
     if slug in HEADINGS:

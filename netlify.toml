@@ -3,8 +3,7 @@
   publish = "."
   command = ""
 
-# Serve index.html at the root (default), and return it for unknown paths
-# so deep links don't 404 on this single-page site.
+# Preserve direct community signup redirects.
 [[redirects]]
   from = "/community.html"
   to = "https://my.hostgrowthhub.com/communities/groups/host-growth-hub/home?invite=6aa7a9206e3c5d8ede86e13d"
@@ -17,13 +16,22 @@
   status = 302
   force = true
 
+# Consolidate the homepage alias; missing files use Netlify's native 404.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
 
 # Review this redesign privately in Sites. Do not publish branch/PR previews.
 [context.deploy-preview]
   ignore = "exit 0"
 [context.branch-deploy]
   ignore = "exit 0"
+
+# Retire the archived version of the previous homepage.
+[[redirects]]
+  from = "/STR Booster Website.dc.html"
+  to = "/"
+  status = 301
+  force = true

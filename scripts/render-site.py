@@ -1,5 +1,6 @@
 from pathlib import Path
 import html,json
+from seo import META, enhance_page, write_crawl_files
 R=Path(__file__).resolve().parent.parent
 logo='<svg viewBox="0 0 48 44" fill="none" aria-hidden="true"><polyline points="6,40 24,26 42,40" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="6,24 24,10 42,24" stroke="#1A7F64" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 services=[
@@ -17,12 +18,13 @@ footer=f'''<footer class="site-footer"><div class="wrap"><div class="footer-grid
 pages=[]
 def btn(label,url,secondary=False,external=False):return f'<a class="btn{" secondary" if secondary else ""}" href="{url}"'+(' target="_blank" rel="noopener noreferrer"' if external else '')+f'>{label}</a>'
 def page(slug,title,desc,body):
+    title,desc=META.get(slug,(title,desc))
     filename='index.html' if slug=='index' else slug+'.html';pages.append(filename)
-    (R/filename).write_text(f'''<!doctype html><html lang="en"><head><!-- Google Tag Manager -->
+    (R/filename).write_text(enhance_page(f'''<!doctype html><html lang="en"><head><!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}})(window,document,'script','dataLayer','GTM-55FK2NZ');</script>
 <!-- End Google Tag Manager --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(title)} | STR Booster</title><meta name="description" content="{html.escape(desc,quote=True)}"><meta property="og:title" content="{html.escape(title,quote=True)} | STR Booster"><meta property="og:description" content="{html.escape(desc,quote=True)}"><meta property="og:type" content="website"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Outfit:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ9L9GHV31"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","G-YQ9L9GHV31");</script></head><body><!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55FK2NZ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->{header}<main id="main">{body}</main>{footer}</body></html>'''.replace('><','>\n<'))
+<!-- End Google Tag Manager (noscript) -->{header}<main id="main">{body}</main>{footer}</body></html>'''.replace('><','>\n<'),slug,title,desc))
 def hero(label,title,copy,actions=''):
     return f'<section class="page-hero"><div class="wrap"><div class="breadcrumb"><a href="/">Home</a> / {label}</div><p class="eyebrow">{label}</p><h1>{title}</h1><p class="lead">{copy}</p>{actions}</div></section>'
 def section(content,cls='',id=''):return f'<section class="section {cls}"'+(f' id="{id}"' if id else '')+f'><div class="wrap">{content}</div></section>'
@@ -94,3 +96,5 @@ body+=section(intro('Not ready for implementation?','Start with the community.',
 page('get-expert-help','Get Expert Help','Discuss a focused growth project or ongoing revenue and automation support for your rental.',body)
 (R/'scripts/pages.json').write_text(json.dumps(pages,indent=2))
 print(f'Rendered {len(pages)} complete pages')
+
+write_crawl_files(R,pages)

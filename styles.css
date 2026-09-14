@@ -10,3 +10,8 @@
 .client-review figcaption{margin-top:auto}
 .client-review figcaption strong,.client-review figcaption span{display:block}
 .client-review figcaption span{font-size:.875rem;color:var(--muted);margin-top:4px}
+
+.hero-trust{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:24px}
+.pricelabs-partner-badge{display:block;flex:0 0 180px}
+.pricelabs-partner-badge img{width:180px;height:auto;border:0}
+.hero-trust .hero-review{flex:1 1 230px;margin:0}

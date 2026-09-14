@@ -1,14 +1,11 @@
-const form=document.querySelector('#rev-waitlist'),status=document.querySelector('#rev-status'),test=document.querySelector('#rev-test'),submit=form.querySelector('[type=submit]');
-test.hidden=new URLSearchParams(location.search).get('test')!=='52rev';
+const form=document.querySelector('#rev-waitlist'),status=document.querySelector('#rev-status'),submit=form.querySelector('[type=submit]');
 let sending=false;
-async function send(data,isTest){
- if(sending)return;sending=true;submit.disabled=true;test.disabled=true;status.textContent='Sending…';
- try{const r=await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,test_submission:isTest}),signal:AbortSignal.timeout(20000)});const result=await r.json();if(!r.ok||!result.ok)throw new Error(result.error||'Submission could not be confirmed.');
- status.textContent=isTest?'Test payload accepted by GoHighLevel. Email sent: '+result.test_payload.email+'. Select this newest reference request in your trigger.':'You’re on the waiting list. We’ll email you when beta access becomes available.';
- if(isTest){let preview=document.querySelector('#rev-test-payload');if(!preview){preview=document.createElement('pre');preview.id='rev-test-payload';preview.style.cssText='white-space:pre-wrap;overflow-wrap:anywhere';status.after(preview);}preview.textContent=JSON.stringify(result.test_payload,null,2);}
- if(!isTest)form.reset();
+async function send(data){
+ if(sending)return;sending=true;submit.disabled=true;status.textContent='Sending…';
+ try{const r=await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(20000)});const result=await r.json();if(!r.ok||!result.ok)throw new Error(result.error||'Submission could not be confirmed.');
+ status.textContent='You’re on the waiting list. We’ll email you when beta access becomes available.';
+ form.reset();
  }catch(e){status.textContent='Submission could not be confirmed. Please retry or contact david@strbooster.com. Your details have been kept.';}
- finally{sending=false;submit.disabled=false;test.disabled=false;status.focus();}
+ finally{sending=false;submit.disabled=false;status.focus();}
 }
-form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const d=new FormData(form);send({name:d.get('name'),email:d.get('email'),property_count:Number(d.get('property_count')),consent:d.get('consent')==='on'},false)});
-test.addEventListener('click',()=>{const email=form.elements.namedItem('email');if(!email.reportValidity())return;send({name:'52Rev Mapping Test',email:email.value.trim(),property_count:2,consent:true},true)});
+form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const d=new FormData(form);send({name:d.get('name'),email:d.get('email'),property_count:Number(d.get('property_count')),consent:d.get('consent')==='on'})});

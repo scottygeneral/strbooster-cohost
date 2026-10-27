@@ -81,6 +81,81 @@ jobs:
             await browser.close();
           })().catch(e=>{console.error(e);process.exitCode=1;});
           NODE
+      - name: Verify motion playback, preferences and keyboard control
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const assert=require('node:assert/strict');
+          const fs=require('node:fs');
+          (async()=>{
+            const browser=await chromium.launch();
+            const report=[];
+            const prepare=async(context)=>{
+              const page=await context.newPage();
+              await page.route('**/*',r=>/googletagmanager|google-analytics|leadconnectorhq|reputationhub/.test(r.request().url())?r.abort():r.continue());
+              await page.goto('http://127.0.0.1:8765/',{waitUntil:'networkidle'});
+              return page;
+            };
+            for(const width of [390,1440]){
+              const context=await browser.newContext({viewport:{width,height:960}});
+              const page=await prepare(context);
+              const errors=[];page.on('pageerror',e=>errors.push(e.message));
+              const flow=page.locator('.sb-connection');
+              const progress=async()=>Number(await flow.getAttribute('data-progress'));
+              assert.equal(await page.locator('[data-motion-control]').count(),1);
+              assert.equal(await progress(),0,'Offscreen graphic should wait');
+              await flow.scrollIntoViewIfNeeded();await page.waitForTimeout(550);
+              assert.ok(await progress()>0,'Visible graphic should play');
+              await page.locator('[data-motion-control]').click();
+              const paused=await progress();await page.waitForTimeout(300);
+              assert.equal(await progress(),paused,'Pause should stop its clock');
+              await page.locator('[data-motion-control]').click();await page.waitForTimeout(250);
+              assert.ok(await progress()>paused,'Resume should advance its clock');
+              await page.locator('#step-book').click();
+              assert.equal(await flow.getAttribute('data-stage'),'book');
+              await page.locator('#step-book').focus();await page.keyboard.press('End');
+              assert.equal(await flow.getAttribute('data-stage'),'return');
+              assert.ok(await page.locator('#panel-return').isVisible());
+              await page.locator('[data-replay-journey]').click();await page.waitForTimeout(150);
+              assert.ok(await progress()<.1,'Replay should restart');
+              await page.locator('#step-connect').click();
+              await page.screenshot({path:`previews/motion-${width}.jpg`,type:'jpeg',quality:88});
+              await page.locator('[data-replay-journey]').click();await page.waitForTimeout(200);
+              await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));await page.waitForTimeout(150);
+              const offscreen=await progress();await page.waitForTimeout(250);
+              assert.equal(await progress(),offscreen,'Offscreen playback should stop');
+              await page.locator('[data-motion-control]').click();await page.reload({waitUntil:'networkidle'});
+              assert.equal(await page.locator('html').getAttribute('data-sb-motion'),'paused','Persist pause preference');
+              assert.deepEqual(errors,[]);
+              report.push({width,playback:true,pause:true,replay:true,keyboard:true,offscreenPause:true,persistence:true});
+              await context.close();
+            }
+            const reduced=await browser.newContext({reducedMotion:'reduce'});
+            const rp=await prepare(reduced);
+            assert.ok(await rp.locator('[data-motion-control]').isDisabled());
+            assert.equal(await rp.locator('html').getAttribute('data-sb-motion'),'paused');
+            assert.equal(await rp.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length),0);
+            await rp.emulateMedia({reducedMotion:'no-preference'});
+            assert.ok(await rp.locator('[data-motion-control]').isEnabled());
+            await reduced.close();
+            const saveData=await browser.newContext();
+            await saveData.addInitScript(()=>Object.defineProperty(navigator,'connection',{configurable:true,value:{saveData:true}}));
+            const sp=await prepare(saveData);
+            assert.equal(await sp.locator('html').getAttribute('data-sb-motion'),'paused');
+            assert.ok(await sp.locator('[data-motion-control]').isDisabled());
+            await saveData.close();
+            const noJS=await browser.newContext({javaScriptEnabled:false});
+            const np=await prepare(noJS);
+            assert.ok(await np.locator('#hero-title').isVisible());
+            assert.equal(await np.locator('[data-panel]').count(),4);
+            assert.equal(await np.locator('.sb-connection').count(),0);
+            await noJS.close();
+            report.push({reducedMotion:true,preferenceChanges:true,saveData:true,noJS:true});
+            fs.writeFileSync('previews/motion-report.json',JSON.stringify(report,null,2));
+            console.log('MOTION_REVIEW',JSON.stringify(report));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1;});
+          NODE
       - name: Portable review HTML
         run: |
           if [ -f scripts/make-review.py ]; then python3 scripts/make-review.py --embed-images; fi

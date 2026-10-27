@@ -1,0 +1,93 @@
+name: Design review (no deployment)
+on:
+  push:
+    branches: [design/cinematic-guest-intel-home]
+    paths:
+      - 'templates/**'
+      - 'story.css'
+      - 'story.js'
+      - 'scripts/**'
+      - '.github/workflows/design-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: design-review-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  visual-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and check the complete checkout
+        run: |
+          python3 scripts/render-site.py
+          python3 scripts/check-story.py
+          node --check story.js
+      - name: Install browser test tools (not website dependencies)
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+      - name: Render desktop and mobile with actual repository images
+        run: |
+          mkdir -p previews
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/design-server.log 2>&1 &
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const browser=await chromium.launch();
+            const report=[];
+            for(const width of [320,390,768,1024,1440]){
+              const page=await browser.newPage({viewport:{width,height:960},deviceScaleFactor:1});
+              const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+              await page.route('**/*',route=>{
+                const url=route.request().url();
+                // Real images/fonts load; prevent test traffic entering production analytics or chat.
+                if(/googletagmanager|google-analytics|leadconnectorhq|reputationhub/.test(url))return route.abort();
+                return route.continue();
+              });
+              await page.goto('http://127.0.0.1:8765/',{waitUntil:'networkidle'});
+              await page.evaluate(async()=>{
+                document.querySelectorAll('img[loading="lazy"]').forEach(i=>i.loading='eager');
+                await document.fonts.ready;
+                await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+              });
+              const images=await page.evaluate(()=>[...document.images].map(i=>({src:i.getAttribute('src'),loaded:i.complete&&i.naturalWidth>0})));
+              const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+              const buttons=page.locator('[data-step]');
+              await buttons.nth(2).click();
+              if(!await page.locator('#panel-book').isVisible())throw Error('Booking panel did not open');
+              await buttons.nth(2).focus();await page.keyboard.press('End');
+              if(!await page.locator('#panel-return').isVisible())throw Error('End key failed');
+              await page.keyboard.press('Home');
+              if(width<=900){
+                await page.locator('.menu-toggle').click();
+                if(!await page.locator('#nav-links').isVisible())throw Error('Mobile menu failed');
+                await page.keyboard.press('Escape');
+              }
+              await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(250);
+              if(width===390||width===1440){
+                await page.screenshot({path:`previews/desktop-${width}.jpg`,fullPage:true,type:'jpeg',quality:85});
+                await page.screenshot({path:`previews/hero-${width}.jpg`,type:'jpeg',quality:88});
+              }
+              report.push({width,overflow,images,errors});
+              if(overflow||images.some(i=>!i.loaded)||errors.length)throw Error(JSON.stringify(report.at(-1)));
+              await page.close();
+            }
+            fs.writeFileSync('previews/browser-report.json',JSON.stringify(report,null,2));
+            console.log('BROWSER_REVIEW',JSON.stringify(report));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1;});
+          NODE
+      - name: Portable review HTML
+        run: |
+          if [ -f scripts/make-review.py ]; then python3 scripts/make-review.py --embed-images; fi
+      - name: Upload review files — not a public deployment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: strbooster-design-review
+          path: previews/
+          retention-days: 14

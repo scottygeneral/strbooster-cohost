@@ -26,21 +26,28 @@ jobs:
           python3 scripts/check-story.py
           node --check story.js
       - name: Install browser test tools (not website dependencies)
+        timeout-minutes: 5
         run: |
           npm install --no-save --package-lock=false playwright
-          npx playwright install --with-deps chromium
+          # Ubuntu's hosted runner already includes the browser system libraries.
+          # Avoid a full apt upgrade competing with the bounded review job.
+          npx playwright install chromium
       - name: Render desktop and mobile with actual repository images
+        timeout-minutes: 3
         run: |
           mkdir -p previews
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/design-server.log 2>&1 &
           node <<'NODE'
           const {chromium}=require('playwright');
           const fs=require('fs');
+          let browser;
           (async()=>{
-            const browser=await chromium.launch();
+            browser=await chromium.launch();
             const report=[];
             for(const width of [320,390,768,1024,1440]){
               const page=await browser.newPage({viewport:{width,height:960},deviceScaleFactor:1});
+              page.setDefaultTimeout(10000);
+              page.setDefaultNavigationTimeout(20000);
               const errors=[]; page.on('pageerror',e=>errors.push(e.message));
               await page.route('**/*',route=>{
                 const url=route.request().url();
@@ -78,19 +85,22 @@ jobs:
             }
             fs.writeFileSync('previews/browser-report.json',JSON.stringify(report,null,2));
             console.log('BROWSER_REVIEW',JSON.stringify(report));
-            await browser.close();
-          })().catch(e=>{console.error(e);process.exitCode=1;});
+          })().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();});
           NODE
       - name: Verify motion playback, preferences and keyboard control
+        timeout-minutes: 3
         run: |
           node <<'NODE'
           const {chromium}=require('playwright');
           const assert=require('node:assert/strict');
           const fs=require('node:fs');
+          let browser;
           (async()=>{
-            const browser=await chromium.launch();
+            browser=await chromium.launch();
             const report=[];
             const prepare=async(context)=>{
+              context.setDefaultTimeout(10000);
+              context.setDefaultNavigationTimeout(20000);
               const page=await context.newPage();
               await page.route('**/*',r=>/googletagmanager|google-analytics|leadconnectorhq|reputationhub/.test(r.request().url())?r.abort():r.continue());
               await page.goto('http://127.0.0.1:8765/',{waitUntil:'networkidle'});
@@ -136,7 +146,11 @@ jobs:
             assert.equal(await rp.locator('html').getAttribute('data-sb-motion'),'paused');
             assert.equal(await rp.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length),0);
             await rp.emulateMedia({reducedMotion:'no-preference'});
+            // MediaQueryList change is asynchronous: wait for the application's
+            // event handler instead of asserting before the browser dispatches it.
+            await rp.waitForFunction(()=>!document.querySelector('[data-motion-control]').disabled,null,{timeout:5000});
             assert.ok(await rp.locator('[data-motion-control]').isEnabled());
+            assert.equal(await rp.locator('html').getAttribute('data-sb-motion'),'running');
             await reduced.close();
             const saveData=await browser.newContext();
             await saveData.addInitScript(()=>Object.defineProperty(navigator,'connection',{configurable:true,value:{saveData:true}}));
@@ -153,8 +167,7 @@ jobs:
             report.push({reducedMotion:true,preferenceChanges:true,saveData:true,noJS:true});
             fs.writeFileSync('previews/motion-report.json',JSON.stringify(report,null,2));
             console.log('MOTION_REVIEW',JSON.stringify(report));
-            await browser.close();
-          })().catch(e=>{console.error(e);process.exitCode=1;});
+          })().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();});
           NODE
       - name: Portable review HTML
         run: |

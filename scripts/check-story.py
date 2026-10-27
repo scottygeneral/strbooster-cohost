@@ -1,6 +1,4 @@
-"""Dependency-free regression checks for the story-led homepage.
-Run after render-site.py. --content-only omits the complete-checkout link check.
-"""
+"""Dependency-free regression checks. Run after render-site.py."""
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -47,12 +45,26 @@ def check(root, content_only=False):
             errors.append(message)
     require(sum(tag == 'h1' for tag, _ in doc.tags) == 1, 'Homepage must have one H1.')
     require(not [key for key, n in Counter(doc.ids).items() if n > 1], 'Duplicate HTML IDs.')
-    for ident in ('main', 'the-story', 'know-your-guest', 'build-the-brand', 'build-the-funnel', 'client-results'):
+    for ident in ('main', 'the-story', 'know-your-guest', 'build-the-brand', 'build-the-funnel', 'client-results', 'guest-strategy'):
         require(ident in doc.ids, f'Missing section: {ident}')
-    links = [attrs for tag, attrs in doc.tags if tag == 'a']
-    free_links = [a for a in links if a.get('data-cta') in ('navigation', 'hero', 'guest-insight', 'final')]
-    require(len(free_links) == 4, 'Expected four primary free-report CTAs.')
-    require(all(a.get('href') == 'https://guest-intel.strbooster.com/' for a in free_links), 'Free-report destination changed.')
+    links = [a for tag, a in doc.tags if tag == 'a']
+    navigation = [a for a in links if a.get('data-cta') == 'navigation']
+    require(len(navigation) == 1 and navigation[0].get('href') == '/#guest-strategy', 'Navigation must lead to the on-site listing form.')
+    require(not any(a.get('data-cta') in ('hero', 'guest-insight', 'final') for a in links), 'Free-entry buttons must be replaced by forms.')
+    forms = [a for tag, a in doc.tags if tag == 'form' and 'data-guest-strategy' in a]
+    require({f['data-guest-strategy'] for f in forms} == {'hero', 'guest-insight', 'final'} and len(forms) == 3, 'Expected three listing-entry forms.')
+    for form in forms:
+        require(form.get('action') == 'https://guest-intel.strbooster.com/' and form.get('method', '').upper() == 'GET', 'Preserve the supplied native GET action.')
+        require('novalidate' not in form and form.get('target', '_self') == '_self', 'Forms require validation and same-tab handoff.')
+    inputs = [a for tag, a in doc.tags if tag == 'input' and a.get('name') == 'listing']
+    labels = [a.get('for') for tag, a in doc.tags if tag == 'label']
+    require(len(inputs) == 3, 'Each form needs one listing input.')
+    for field in inputs:
+        require(field.get('type') == 'url' and 'required' in field, 'Listing inputs require native URL validation.')
+        require(field.get('id') in labels, 'Listing fields need visible labels.')
+        require(field.get('pattern') == 'https?://.+', 'Only complete web URLs should be submitted.')
+        for ident in field.get('aria-describedby', '').split():
+            require(ident in doc.ids, f'Missing accessible help: {ident}')
     require('AI-powered property manager' not in text, 'Obsolete property-manager positioning.')
     require('Own the rental.' not in text, 'Obsolete homepage headline.')
     require('Illustrative example' in text, 'Guest-profile example must be labelled.')
@@ -66,15 +78,14 @@ def check(root, content_only=False):
     for tag, attrs in doc.tags:
         if tag == 'img':
             require('alt' in attrs and 'width' in attrs and 'height' in attrs, 'Images require alt and dimensions.')
-        for attr in ('href', 'src', 'data-src'):
+        for attr in ('href', 'src', 'data-src', 'action'):
             value = attrs.get(attr, '')
             if not value:
                 continue
             url = urlsplit(value)
             if url.scheme or url.netloc:
                 continue
-            path = unquote(url.path)
-            target = root / (path.lstrip('/') or 'index.html')
+            target = root / (unquote(url.path).lstrip('/') or 'index.html')
             if not content_only:
                 require(target.is_file(), f'Missing local target: {value}')
             if url.fragment and target.name == 'index.html':
@@ -83,8 +94,8 @@ def check(root, content_only=False):
         require('data-hero-video' not in text, 'Missing film must not be requested.')
     if errors:
         raise AssertionError('\n'.join(errors))
-    print(f'PASS: story structure, 4 CTAs, 4 funnel steps, schema, accessibility markup'
-          + (' (content-only; assets/other pages not checked).' if content_only else ', local links and assets.'))
+    print('PASS: story, 3 native GET forms, navigation anchor, 4 funnel steps, schema and accessible markup'
+          + (' (content only).' if content_only else ', local links and assets.'))
 
 
 if __name__ == '__main__':

@@ -1,0 +1,53 @@
+name: Guest Strategy widget checks
+on:
+  push:
+    branches: [feat/inline-guest-strategy]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: guest-strategy-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  widget-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and validate the complete site
+        run: |
+          python3 scripts/render-site.py
+          python3 scripts/check-story.py
+          node --check story.js
+          node --check guest-strategy.js
+          python3 -m py_compile scripts/guest_strategy.py
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from guest_strategy import enhance
+          for name in ['index.html', 'growth-services.html']:
+              text=Path(name).read_text()
+              assert enhance(text)==text, f'Enhancement not idempotent: {name}'
+          print('PASS: idempotent build and inner-page widget')
+          PY
+      - name: Install browser testing tools only
+        run: |
+          npm install --no-save --package-lock=false playwright
+          # The hosted Ubuntu image already provides Chromium's system libraries.
+          # Install only the matching browser, not unrelated OS/font upgrades.
+          npx playwright install chromium
+      - name: Check layout, URL handoff, keyboard and no-JavaScript use
+        timeout-minutes: 5
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/widget-server.log 2>&1 &
+          trap 'kill $!' EXIT
+          node scripts/test-guest-strategy.cjs
+      - name: Export a portable review
+        run: python3 scripts/make-review.py --embed-images
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: guest-strategy-widget-review
+          path: previews/
+          retention-days: 14

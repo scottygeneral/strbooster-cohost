@@ -1,20 +1,20 @@
-"""Build the legacy resource pages, then apply the brand-and-funnel design.
+"""Build resource pages, apply the approved design and render Guest Strategy forms.
 
-The original renderer is preserved verbatim in render-pages.py. The canonical
-homepage is templates/home.html. No third-party Python packages are required.
+The original renderer remains in render-pages.py; templates/home.html supplies
+homepage copy/layout. guest_strategy.py turns free-entry links into native forms.
 """
 from pathlib import Path
 import argparse
 import re
 import runpy
+from guest_strategy import enhance
 
 ROOT = Path(__file__).resolve().parent.parent
 FILM = Path('assets/strbooster-hero-film.mp4')
 
 
 def apply_story(root: Path) -> int:
-    """Render the homepage and synchronize the shared navigation and footer."""
-    source = (root / 'templates/home.html').read_text(encoding='utf-8')
+    source = enhance((root / 'templates/home.html').read_text(encoding='utf-8'))
     if (root / FILM).is_file():
         source = source.replace('<!-- HERO_FILM -->',
             '<video data-hero-video data-src="/assets/strbooster-hero-film.mp4" '
@@ -32,7 +32,6 @@ def apply_story(root: Path) -> int:
         if page.name in {'index.html', 'STR Booster Website.dc.html', '404.html'}:
             continue
         text = page.read_text(encoding='utf-8')
-        # Leave standalone/legal documents without the shared shell untouched.
         if not re.search(r'<header class="site-header(?: story-header)?">', text):
             continue
         text = re.sub(r'<header class="site-header(?: story-header)?">.*?</header>',
@@ -43,7 +42,6 @@ def apply_story(root: Path) -> int:
             text = text.replace('</head>', '<link rel="stylesheet" href="/story.css">\n</head>', 1)
         if 'src="/story.js"' not in text:
             text = text.replace('</head>', '<script src="/story.js" defer></script>\n</head>', 1)
-        # Consistent site-wide free entry point; keep community pages and their links.
         text = re.sub(r'<section class="dark cta-band">.*?</section>',
             '<section class="dark cta-band"><h2>Start with the guest. Build from there.</h2>'
             '<p>Get your free Guest Intel snapshot, then turn the insight into a clearer '
@@ -51,7 +49,7 @@ def apply_story(root: Path) -> int:
             '<a class="btn" href="https://guest-intel.strbooster.com/" data-cta="page-final">'
             'Get Started for Free</a><a class="btn secondary" href="/get-expert-help.html">'
             'Discuss your project</a></div></section>', text, flags=re.S)
-        page.write_text(text, encoding='utf-8')
+        page.write_text(enhance(text), encoding='utf-8')
         updated += 1
     return updated
 
@@ -59,12 +57,11 @@ def apply_story(root: Path) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--existing-only', action='store_true',
-                        help='Refresh already generated HTML without running the original renderer.')
+                        help='Refresh existing HTML without running the original renderer.')
     args = parser.parse_args()
     if not args.existing_only:
         runpy.run_path(str(ROOT / 'scripts/render-pages.py'), run_name='__main__')
-    count = apply_story(ROOT)
-    print(f'Brand + funnel story applied to {count} pages.')
+    print(f'Brand, funnel and Guest Strategy forms applied to {apply_story(ROOT)} pages.')
 
 
 if __name__ == '__main__':

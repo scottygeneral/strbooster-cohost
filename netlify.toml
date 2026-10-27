@@ -1,9 +1,8 @@
-# Netlify config for STR Booster Cohost — static site, no build step.
+# Static output. Rebuild before deployment so inner-page navigation stays in sync.
 [build]
   publish = "."
-  command = ""
+  command = "python3 scripts/render-site.py && python3 scripts/check-story.py"
 
-# Preserve direct community signup redirects.
 [[redirects]]
   from = "/community.html"
   to = "https://my.hostgrowthhub.com/communities/groups/host-growth-hub/home?invite=6aa7a9206e3c5d8ede86e13d"
@@ -16,20 +15,18 @@
   status = 302
   force = true
 
-# Consolidate the homepage alias; missing files use Netlify's native 404.
 [[redirects]]
   from = "/index.html"
   to = "/"
   status = 301
   force = true
 
-# Review this redesign privately in Sites. Do not publish branch/PR previews.
+# Preserve the existing decision not to publish branch/PR previews.
 [context.deploy-preview]
   ignore = "exit 0"
 [context.branch-deploy]
   ignore = "exit 0"
 
-# Retire the archived version of the previous homepage.
 [[redirects]]
   from = "/STR Booster Website.dc.html"
   to = "/"

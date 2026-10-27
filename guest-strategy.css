@@ -1,0 +1,46 @@
+/* Guest Strategy entry widget. Scoped to preserve the approved story/motion. */
+.gs-form,.gs-form *{box-sizing:border-box}
+.gs-form{--gs-ink:#0d1f2d;--gs-action:#1a7f64;--gs-note:#4b5e64;--gs-focus:#c9a84c;width:100%;max-width:760px;min-width:0;margin:28px 0 0;color:var(--gs-ink);font-family:'Outfit',Arial,sans-serif;text-align:left;scroll-margin-top:120px}
+.gs-form--dark{--gs-ink:#f5f3ee;--gs-note:#e0ebe4}
+.gs-form .gs-label{display:block;margin:0 0 10px;color:var(--gs-ink);font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.015em}
+.gs-form .gs-fields{display:flex;align-items:stretch;gap:6px;width:100%;min-width:0;padding:6px;background:#fff;border:1px solid #c9d4cc;border-radius:40px;box-shadow:0 8px 28px #0d1f2d0d}
+.gs-form .gs-fields:focus-within{outline:3px solid var(--gs-focus);outline-offset:4px}
+.gs-form .gs-input{display:block;flex:1 1 280px;min-width:0;width:100%;min-height:52px;margin:0;padding:14px 16px;border:1px solid transparent;border-radius:28px;background:#fff;color:#0d1f2d;font-family:inherit;font-size:16px;font-weight:400;line-height:1.5;letter-spacing:normal;box-shadow:none;outline:none}
+.gs-form .gs-input::placeholder{color:#596971;opacity:1}
+.gs-form .gs-input:focus-visible{outline:2px solid var(--gs-action);outline-offset:-2px}
+.gs-form .gs-input[aria-invalid="true"]{border-color:#a52c24}
+.gs-form .gs-submit{display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;gap:20px;min-height:52px;max-width:100%;margin:0;padding:14px 22px;border:1px solid var(--gs-action);border-radius:30px;background:var(--gs-action);color:#fff;font-family:inherit;font-size:14px;font-weight:500;line-height:1.5;text-align:center;letter-spacing:normal;cursor:pointer;transition:background .2s,border-color .2s}
+.gs-form .gs-submit:hover{background:#125f49;border-color:#125f49}
+.gs-form .gs-submit:focus-visible{outline:3px solid var(--gs-focus);outline-offset:4px}
+.gs-form .gs-arrow{font-size:22px;line-height:1;flex-shrink:0}
+.gs-form .gs-help,.gs-form .gs-error{max-width:none;margin:12px 0 0!important;padding:0;color:var(--gs-note);font-size:12px!important;line-height:1.6!important;font-weight:400;letter-spacing:normal}
+.gs-form .gs-error{color:#a52c24;font-size:14px!important}
+.gs-form--dark .gs-error{color:#ffcfbf}
+.gs-form [hidden]{display:none!important}
+/* Give the hero widget room without shifting the right-hand editorial caption. */
+.journey-home .v-hero-bottom>div:first-child{flex:1 1 720px;min-width:0;max-width:760px}
+.journey-home .v-hero-bottom{gap:36px}
+.journey-home .v-hero-caption{flex:0 1 300px}
+/* The insight column remains deliberately compact at desktop/tablet widths. */
+.v-insight-copy .gs-fields{flex-direction:column;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:10px}
+.v-insight-copy .gs-input{flex:none;border-color:#bac9c0;border-radius:30px}
+.v-insight-copy .gs-submit{width:100%;min-height:54px}
+.v-insight-copy .gs-fields:focus-within{outline:none}
+.journey-home .v-final .gs-form,.cta-band .gs-form{margin:32px auto 0}
+.cta-band .actions:has(>.gs-form){display:block;max-width:760px;margin-inline:auto}
+.cta-band .actions>.gs-form+.btn{margin-top:24px}
+@media(max-width:1100px){
+  .v-hero .gs-fields{flex-direction:column;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:10px}
+  .v-hero .gs-input{flex:none;border-radius:30px;border-color:#c9d4cc}
+  .v-hero .gs-submit{width:100%;min-height:54px}
+  .v-hero .gs-fields:focus-within{outline:none}
+}
+@media(max-width:680px){
+  .gs-form{margin-top:24px;max-width:100%}
+  .gs-form .gs-fields{flex-direction:column;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:10px}
+  .gs-form .gs-fields:focus-within{outline:none}
+  .gs-form .gs-input{flex:none;min-height:54px;padding:14px 18px;border-color:#c9d4cc;border-radius:30px}
+  .gs-form .gs-submit{width:100%;min-height:54px;gap:12px;padding:14px 16px;font-size:14px}
+  .gs-form .gs-label{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.gs-form .gs-submit{transition:none}}

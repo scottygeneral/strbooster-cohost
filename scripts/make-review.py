@@ -1,7 +1,5 @@
-"""Create a portable, analytics-free HTML review from the actual homepage.
-
-Images use the public review branch; --embed-images makes an offline review
-on a complete checkout. The production template/integrations are untouched.
+"""Create a portable, analytics-free HTML review of the actual homepage.
+--embed-images makes an offline image review; Google Fonts retains its fallback.
 """
 from pathlib import Path
 import argparse
@@ -10,7 +8,7 @@ import mimetypes
 import re
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = 'https://raw.githubusercontent.com/scottygeneral/strbooster-cohost/design/cinematic-guest-intel-home/'
+RAW = 'https://raw.githubusercontent.com/scottygeneral/strbooster-cohost/main/'
 
 
 def build(root=ROOT, embed=False):
@@ -19,9 +17,10 @@ def build(root=ROOT, embed=False):
     source = re.sub(r'<script\b(?![^>]*type="application/ld\+json")[^>]*>.*?</script>', '', source, flags=re.S)
     source = re.sub(r'<link rel="canonical"[^>]*>', '', source)
     source = source.replace('<head>', '<head>\n<meta name="robots" content="noindex,nofollow">')
-    source = source.replace('<title>', '<title>DESIGN DRAFT 02 — ')
-    source = source.replace('<link rel="stylesheet" href="/story.css">',
-                            '<style>\n' + (root / 'story.css').read_text() + '\n</style>')
+    source = source.replace('<title>', '<title>DESIGN REVIEW — ')
+    for name in ('story.css', 'guest-strategy.css'):
+        source = source.replace(f'<link rel="stylesheet" href="/{name}">',
+                                '<style>\n' + (root / name).read_text() + '\n</style>')
     def media(match):
         attr, path = match.groups()
         file = root / path.lstrip('/')
@@ -35,7 +34,9 @@ def build(root=ROOT, embed=False):
     source = re.sub(r'href="/(?!/)([^\"]*)"', r'href="https://strbooster.com/\1"', source)
     source = re.sub(r'<details class="v-review-disclosure".*?</details>',
                     '<p><a class="v-text-link" href="https://strbooster.com/client-results.html">Read client stories ↗</a></p>', source, flags=re.S)
-    source = source.replace('</body>', '<script>\n' + (root / 'story.js').read_text() + '\n</script>\n</body>')
+    scripts = '\n'.join('<script>\n' + (root / name).read_text() + '\n</script>'
+                        for name in ('story.js', 'guest-strategy.js'))
+    source = source.replace('</body>', scripts + '\n</body>')
     destination = root / 'previews/index.html'
     destination.parent.mkdir(exist_ok=True)
     destination.write_text(source, encoding='utf-8')

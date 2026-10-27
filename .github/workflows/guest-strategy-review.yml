@@ -5,10 +5,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: guest-strategy-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   widget-review:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - name: Build and validate the complete site
@@ -31,7 +34,9 @@ jobs:
       - name: Install browser testing tools only
         run: |
           npm install --no-save --package-lock=false playwright
-          npx playwright install --with-deps chromium
+          # The hosted Ubuntu image already provides Chromium's system libraries.
+          # Install only the matching browser, not unrelated OS/font upgrades.
+          npx playwright install chromium
       - name: Check layout, URL handoff, keyboard and no-JavaScript use
         timeout-minutes: 5
         run: |

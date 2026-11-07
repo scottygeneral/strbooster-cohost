@@ -30,6 +30,7 @@ changes only grammar and world will fail it.
 |---|---|---|---|---|---|---|---|---|
 
 | STR Booster AI growth | Outcome-led service page with one scroll explanation | Slim sticky branded header; discovery call CTA | Connected HTML/SVG service layers and owner-control stamp | Hero → benefits → three-step pinned example → control → qualified proof → managers → FAQ → call | Centered question with discovery call and email fallback | Scenario switch plus owner-approval exception, changing real sample conversation text | Navy, green, pale surfaces; Outfit | Production static site |
+| STR Booster AI team revision (2026-11-07) | Same service-site grammar, with clearer capability examples | Same branded discovery-call intent; services, examples and approach navigation | Short desktop pin with independent task planes and drawn connections; static compact-phone diagram | Hero assembly → five-service ledger → unpinned sample workflows → control → managers → FAQ → call and full footer | Preserved discovery-call question, now resolved with prominent legal and social navigation | Four separate jobs assemble into one connected AI team while the headline and CTA stay stable | Existing navy and green identity, dark hero, pale service ledger; Outfit | Production static site; revision of AI growth |
 
 ---
 
@@ -41,6 +42,7 @@ act-count-and-length band. The shared columns are what the next build inherits
 as a constraint, so writing them down is the whole point.
 
 - This build claims the connected marketing/sales/concierge hero and the scenario-plus-owner-approval walkthrough. It is the first registered build, so there are no earlier rows to compare against.
+- The AI team revision claims the short task-to-system hero assembly. It intentionally shares the service-site grammar, branded discovery-call navigation and call close with the original build; this is a user-directed revision, not a new-build uniqueness claim. The original row remains unchanged.
 
 ---
 

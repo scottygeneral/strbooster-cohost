@@ -151,3 +151,13 @@ After the revised source is verified and shipped, append an explicitly labelled 
 8. Compare intended feelings to the visually observed sequence. Confirm the hero is the single peak and the close remains complete. Fix concrete findings, retain failure evidence and rerun the affected checks against the final files.
 
 Report only observed verification. Distinguish emulated phone layouts from testing on a physical phone, and link inspection from completing an external booking flow. Keep the final user report concise and focused on the delivered website changes.
+
+## Shipped revision and observed review
+
+The revised source shipped through [pull request 6](https://github.com/scottygeneral/strbooster-cohost/pull/6) on 2026-11-07. The [final hosted review](https://github.com/scottygeneral/strbooster-cohost/actions/runs/42378092932) passed all 10 browser cases and the complete 18-page build checks. Desktop, phone and reduced-motion scroll passes detected no dead scroll. Review used emulated browser sizes, not physical-device testing.
+
+Manual screenshot review covered the opening, intermediate and resolved hero; compact 360px phone; 390px phone content; 768px tablet; service rows; sample workflows; owner-control section; and footer. Separate task planes visibly settle at different rates and connectors progressively draw. The resolved hero remains readable, and the phone composition places the booking action before the compact diagram. The services and final call retain the intended calmer reading pace. Independent visual review found no blocking clipping, missing content or footer defects.
+
+An initial verification assertion incorrectly parsed a retained SVG `calc()` expression. Screenshots already showed the connection animation; the test was corrected to resolve the browser's actual CSS numeric value and retain its independent-layer, changing-pixel and monotonic-drawing assertions. The final run measured connector offsets of 1, approximately 0.5 and 0 at the three sampled hero positions on both desktop sizes.
+
+Calendar handoffs were intercepted in the browser tests, and external analytics/chat writes were blocked. No real discovery appointment or message was submitted. The live homepage was confirmed to contain the new hero and social footer after the merge. The append-only fingerprint registry records this as a revision of the existing site.

@@ -8,7 +8,7 @@ async function send(data){
  status.textContent='You’re on the waiting list. We’ll email you when beta access becomes available.';
  measure('generate_lead');
  form.reset();started=false;
- }catch(e){measure('lead_submission_error');status.textContent='Submission could not be confirmed. Please retry or contact david@strbooster.com. Your details have been kept.';}
+ }catch(e){measure('lead_submission_error');status.textContent='Submission could not be confirmed. Please retry or contact info@strbooster.com. Your details have been kept.';}
  finally{sending=false;submit.disabled=false;status.focus();}
 }
 form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const d=new FormData(form);send({name:d.get('name'),email:d.get('email'),property_count:Number(d.get('property_count')),consent:d.get('consent')==='on',attribution:window.strBoosterAttribution?.()||{}})});

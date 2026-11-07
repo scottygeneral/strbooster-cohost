@@ -55,7 +55,7 @@ def enhance_page(markup, slug, title, desc):
         links=''.join('<li><a href="/'+target+'.html">'+label+'</a></li>' for target,label in RELATED[slug])
         section='<section class="section white"><div class="wrap"><h2>Put the next step into practice</h2><ul>'+links+'</ul></div></section>'
         markup=markup.replace('</main>',section+'</main>')
-    graph=[{'@type':'Organization','@id':BASE+'/#organization','name':'STR Booster','url':BASE+'/', 'email':'david@strbooster.com'},
+    graph=[{'@type':'Organization','@id':BASE+'/#organization','name':'STR Booster','url':BASE+'/', 'email':'info@strbooster.com'},
            {'@type':'WebSite','@id':BASE+'/#website','url':BASE+'/','name':'STR Booster','publisher':{'@id':BASE+'/#organization'}},
            {'@type':'WebPage','@id':canonical+'#webpage','url':canonical,'name':title,'description':desc,'isPartOf':{'@id':BASE+'/#website'}}]
     if slug!='index':

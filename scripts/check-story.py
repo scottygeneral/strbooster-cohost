@@ -151,7 +151,7 @@ def check(root, content_only=False):
                             f'{name}: missing anchor {value}')
 
     discovery = texts.get('get-expert-help.html', '')
-    require(BOOKING_URL in discovery and 'mailto:david@strbooster.com' in discovery,
+    require(BOOKING_URL in discovery and 'mailto:info@strbooster.com' in discovery,
             'Discovery page requires the verified calendar and an email alternative.')
     require('30-minute' in discovery, 'Discovery page must explain the call duration.')
     if errors:

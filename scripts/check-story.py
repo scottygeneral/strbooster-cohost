@@ -8,8 +8,8 @@ import json
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
-REQUIRED_SECTIONS = ('main', 'benefits', 'how-it-works', 'owner-control',
-                     'for-managers', 'lets-talk')
+REQUIRED_SECTIONS = ('main', 'premise', 'stack', 'how', 'guest-focus', 'founder',
+                     'lets-talk')
 LEGACY_ASSETS = {'/story.css', '/story.js', '/guest-strategy.css', '/guest-strategy.js'}
 MEDIA_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif',
                     '.svg', '.ico', '.mp4', '.webm', '.woff', '.woff2'}
@@ -61,14 +61,16 @@ def check(root, content_only=False):
     require(sum(tag == 'h1' for tag, _ in doc.tags) == 1, 'Homepage must have one H1.')
     for ident in REQUIRED_SECTIONS:
         require(ident in doc.ids, f'Homepage is missing section: {ident}')
-    require(not any(tag in {'picture', 'video'} for tag, _ in doc.tags),
-            'Homepage must use product visuals without lifestyle imagery or video.')
     for tag, attrs in doc.tags:
-        if tag in {'img', 'image'}:
-            src = attrs.get('src', attrs.get('href', ''))
-            require(urlsplit(src).path.lower().endswith('.svg'),
-                    'Homepage image elements may contain vector icons only.')
-    require('data-hero-video' not in text, 'Previous hero film must not be loaded.')
+        if tag == 'img':
+            require('alt' in attrs, f'Homepage image needs an alt attribute: {attrs.get("src")}')
+            require(attrs.get('width') and attrs.get('height'),
+                    f'Homepage image needs intrinsic dimensions: {attrs.get("src")}')
+        if tag == 'video':
+            require('muted' in attrs and 'autoplay' not in attrs,
+                    'Homepage video must be muted and started only by the motion script.')
+    require(not any(tag == 'audio' for tag, _ in doc.tags), 'Homepage must not play audio.')
+    require('<!--include:' not in text, 'Homepage has an unresolved partial include.')
     require('Get Started for Free' not in text and 'Get my free Guest Strategy' not in text,
             'Homepage must lead to a discovery call rather than the previous free entry.')
     require(not any(tag == 'form' for tag, _ in doc.tags),

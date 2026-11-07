@@ -7,11 +7,11 @@ https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU
 
 ## Design and content
 
-The homepage leads with **More bookings. Less busywork.** It uses the existing navy and green brand colours, Outfit typography, clear outcome sections and original HTML/SVG product illustrations. No lifestyle photography, generated people, fake software screens or invented performance metrics are used on the new homepage.
+The homepage is a single dark, motion-led page: **AI growth systems for short-term rentals.** "Custom AI for your marketing, bookings and guest service. Built for your business, with support that keeps you in control." Every call to action is **Let’s talk** (the discovery calendar above). The brief and feeling curve are in `scrollcraft/builds/disruptor/BRIEF.md`.
 
-Clearly labelled example workflows cover guest enquiries, social content and daily operations. Visitors can choose a scenario, explore its three steps and see where owner approval is needed. The examples do not submit messages, make bookings or run an AI agent. Client stories and result claims have been removed from the public site; their old routes redirect to the services page.
+Sections: hero (Higgsfield-generated rental render with a muted, script-started loop video and floating service chips), a scroll-reactive service marquee, the premise (manifesto that lights up word by word over a tangle-to-signal render), the growth stack (four systems, each with an animated HTML/CSS interface illustration from `partials/systems-ui.html`), how it works, a light guest-focus section with illustrative lifestyle photography, the founder, and a full-screen “Let’s talk.” close.
 
-The requested [Scrollcraft skill](https://github.com/nateherkai/scroll-craft) guides the motion. Its MIT-licensed engine is vendored unchanged. The hero has a short desktop pin that connects four independently moving task layers into one AI team. The heading and call link remain stable. Later sections use natural flow, restrained entrances and connector reveals. Phones, short viewports and reduced-motion visitors receive a complete, static hero diagram with no extra pin space. Content and calendar links remain available without JavaScript.
+There are no client logos, testimonials or results figures. Interface illustrations are labelled as illustrations, and generated photography is marked as illustrative. Reduced-motion visitors get every section in its final state with no video, marquee or scroll effects; the page is readable without JavaScript.
 
 ## Build and preview
 
@@ -29,7 +29,9 @@ Open http://127.0.0.1:8765 after building. Netlify runs the renderer and content
 
 ## Source files
 
-- `templates/home.html`: homepage and shared navigation/footer.
+- `templates/home.html`: homepage and shared navigation/footer. `home.css` and `home.js` style and animate the homepage only (scoped to `body.dx-home`).
+- `partials/systems-ui.html`, `systems-ui.css`: the four animated system illustrations, inserted by `render-site.py` at `<!--include:systems-ui#key-->` markers.
+- `assets/dx-*`: homepage imagery and the hero loop (generated with Higgsfield).
 - `templates/services.html`, `templates/approach.html`, `templates/discovery.html`: main-content fragments for the three core inner pages.
 - `growth.css`, `growth.js`: new design, responsive layout and progressively enhanced workflow.
 - `vendor/scrollcraft/`: unchanged third-party engine, license and source attribution.

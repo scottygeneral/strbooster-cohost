@@ -1,7 +1,9 @@
 """Build the site with shared growth-system navigation and discovery-call CTAs.
 
 The original renderer preserves resource, case-study and legal content.
-templates/home.html is the homepage source; templates/discovery.html supplies
+templates/home.html is the homepage source (with figures from
+partials/systems-ui.html inserted at <!--include:systems-ui#key--> markers);
+templates/discovery.html supplies
 only the main content for the existing contact page. Guest Intel remains a
 resource, while the primary site-wide action is the discovery-call calendar.
 """
@@ -127,10 +129,28 @@ def apply_discovery(source: str, content: str, title: str = DISCOVERY_TITLE,
                   update_schema, source, flags=re.S)
 
 
+def include_partials(source: str, root: Path) -> str:
+    """Insert one <figure data-system="key"> from partials/systems-ui.html per marker."""
+    partial = root / 'partials/systems-ui.html'
+    figures = {}
+    if partial.is_file():
+        for match in re.finditer(r'<figure\b[^>]*\bdata-system="([^"]+)".*?</figure>',
+                                 partial.read_text(encoding='utf-8'), flags=re.S):
+            figures[match.group(1)] = match.group()
+
+    def insert(match: re.Match) -> str:
+        key = match.group(1)
+        if key not in figures:
+            raise ValueError(f'partials/systems-ui.html has no figure for {key!r}.')
+        return figures[key]
+
+    return re.sub(r'<!--include:systems-ui#([a-z-]+)-->', insert, source)
+
+
 def apply_growth(root: Path) -> int:
-    source = apply_assets(replace_legacy_ctas(
-        (root / 'templates/home.html').read_text(encoding='utf-8')
-    ))
+    source = apply_assets(replace_legacy_ctas(include_partials(
+        (root / 'templates/home.html').read_text(encoding='utf-8'), root
+    )))
     header = re.search(HEADER, source, re.S)
     footer = re.search(FOOTER, source, re.S)
     if not header or not footer:

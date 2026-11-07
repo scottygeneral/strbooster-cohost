@@ -1,10 +1,12 @@
-/* Page-specific behaviour. Scrollcraft is vendored without modification. */
+/* Page-specific choreography. The vendored Scrollcraft engine remains unchanged. */
 (() => {
   'use strict';
   document.documentElement.classList.add('has-js');
 
   const demo = document.querySelector('[data-demo]');
   if (!demo) return;
+  const hero = document.querySelector('.sb-team-hero');
+  const heroStage = hero.querySelector('[data-sc-stage]');
   const workflow = document.querySelector('#how-it-works');
   const stageSurface = workflow.querySelector('[data-sc-stage]');
   const stageButtons = [...demo.querySelectorAll('[data-stage]')];
@@ -13,45 +15,42 @@
   const approval = document.querySelector('#approval-toggle');
   const announcement = demo.querySelector('[data-demo-announcement]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const desktop = matchMedia('(min-width: 1024px) and (min-height: 860px)');
+  const desktop = matchMedia('(min-width: 1024px) and (min-height: 780px)');
   let scenario = 'booking';
-  let step = 0;
+  let step = 2;
   let engine = null;
-  let pinned = false;
+  let heroPinned = false;
   let frame = 0;
-  let manual = false;
-  let manualProgress = 0;
 
   const examples = {
     booking: {
       title: 'From interest to booking',
       person: 'Guest',
-      details: ['A guest asks about your property.', 'Your approved information does the work.', 'A clear route to your booking engine.'],
-      messages: ['“Would your place suit a family weekend?”', 'Shares the family-friendly details you have approved, then helps with the next question.', 'The guest checks dates and completes their reservation through your booking engine.'],
-      statuses: ['A potential guest has a question.', 'Helpful answers, based on your property.', 'Your booking engine handles dates and payment.'],
-      exception: ['“Could we check in early on Friday?”', 'Explains that early check-in needs confirmation. It does not promise a time without approval.', 'You or your team receive the request and decide. The guest gets your confirmed answer.']
+      steps: ['An enquiry arrives', 'A helpful response', 'The right next step'],
+      details: ['A guest asks about your property.', 'Your approved information supplies the answer.', 'A clear route to your booking engine.'],
+      messages: ['“Would your place suit a family weekend?”', 'Your agent shares the family-friendly details, answers questions and follows up on the enquiry.', 'The guest gets a direct booking link to check dates and reserve.'],
+      statuses: ['A potential guest has a question.', 'Useful answers, based on your property.', 'Interest has a clear next step.'],
+      exception: ['“Could we check in early on Friday?”', 'Your agent checks the agreed guidance and flags the request for approval.', 'You or your team confirm what is possible before the guest receives a promise.']
     },
-    concierge: {
-      title: 'A useful answer, without the repeat admin',
-      person: 'Guest',
-      details: ['A guest needs practical information.', 'Your property guide supplies the answer.', 'The guest knows what to do next.'],
-      messages: ['“Where can we park when we arrive?”', 'Shares the parking and arrival instructions from the property information you have approved.', 'The guest has the instructions. Anything outside the agreed guidance comes to you or your team.'],
-      statuses: ['An everyday guest question.', 'Your information, ready when guests need it.', 'Routine questions handled. Exceptions stay visible.'],
-      exception: ['“Can we bring an extra guest tonight?”', 'Explains that a change to the reservation needs the host’s approval. It does not change the booking.', 'You review the request against your rules and capacity before confirming the answer.']
+    social: {
+      title: 'From a reason to stay to a ready-to-share post',
+      person: 'Your plan',
+      steps: ['A reason to stay', 'Content takes shape', 'You approve the post'],
+      details: ['Give the right guests a reason to choose you.', 'Turn your property’s strengths into useful content.', 'Keep your channels active on your terms.'],
+      messages: ['“Show couples why this is a great autumn escape.”', 'Your agent drafts a post and caption using your property details, photos and brand voice.', 'You review the content, then approved posts go into your publishing plan.'],
+      statuses: ['Start with the guest you want to attract.', 'Your stay becomes something worth sharing.', 'Approved content, ready for your channels.'],
+      exception: ['“Should this post include a last-minute discount?”', 'Your agent flags the pricing decision instead of adding an unapproved offer.', 'You choose the offer and approve the final post before it is scheduled.']
     },
-    owner: {
-      title: 'From owner interest to a sales conversation',
-      person: 'Property owner',
-      details: ['An owner asks about your service.', 'The system gathers relevant details.', 'A qualified conversation reaches your team.'],
-      messages: ['“Could you help manage my holiday home?”', 'Asks about the property, location and owner’s goals using the questions you have agreed.', 'A suitable enquiry is invited to a discovery call. Your team sees the context for the conversation.'],
-      statuses: ['A new opportunity for your management business.', 'Relevant questions, consistent follow-up.', 'Your team takes the sales conversation forward.'],
-      exception: ['“Can you guarantee what my property will earn?”', 'Explains that income depends on the property and market. It makes no revenue promise.', 'The owner is referred to your team for a property review and a properly scoped discussion.']
+    operations: {
+      title: 'From a booking update to less chasing',
+      person: 'Booking update',
+      steps: ['A stay is coming up', 'The right reminders', 'Everyone knows the plan'],
+      details: ['An agreed booking event starts the workflow.', 'Messages and tasks reach the right people.', 'Keep track of what still needs attention.'],
+      messages: ['“The next guests arrive tomorrow.”', 'Your workflow sends arrival information and prompts the team to check the property is ready.', 'You can follow the handoff and get an alert when a task needs attention.'],
+      statuses: ['A routine event starts the agreed workflow.', 'Less copying, forwarding and chasing.', 'Your tools and team stay connected.'],
+      exception: ['“The cleaner has flagged a maintenance issue.”', 'The workflow alerts the right person and puts the exception in front of you.', 'You or your team decide the fix and confirm the next steps.']
     }
   };
-
-  function progress() {
-    return Math.max(0, Math.min(1, parseFloat(getComputedStyle(workflow).getPropertyValue('--sc-p')) || 0));
-  }
 
   function render(next, speak = false) {
     const previous = step;
@@ -64,13 +63,15 @@
     demo.dataset.approval = String(requiresApproval);
     demo.querySelector('[data-demo-title]').textContent = example.title;
     demo.querySelector('[data-message="0"] .sb-message-who').textContent = example.person;
+    demo.querySelector('[data-message="1"] .sb-message-who').textContent = scenario === 'operations' ? 'Your workflow' : 'Your AI agent';
     demo.querySelector('[data-next-label]').textContent = requiresApproval ? 'Your decision' : 'Next step';
     scenarioButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.scenario === scenario)));
     stageButtons.forEach((button, i) => {
       button.classList.toggle('is-current', i === step);
       button.classList.toggle('is-complete', i < step);
       button.setAttribute('aria-pressed', String(i === step));
-      demo.querySelector(`[data-step-detail="${i}"]`).textContent = requiresApproval && i === 2 ? 'You decide before anything is promised.' : example.details[i];
+      button.querySelector('strong').textContent = example.steps[i];
+      demo.querySelector(`[data-step-detail="${i}"]`).textContent = requiresApproval && i === 2 ? 'You decide before the next step.' : example.details[i];
     });
     messages.forEach((message, i) => {
       message.querySelector('[data-message-text]').textContent = text[i];
@@ -79,50 +80,51 @@
       message.setAttribute('aria-hidden', String(!visible));
       message.classList.remove('is-entering');
       if (i === step && step !== previous && !reduced.matches) {
-        // Re-trigger only a newly revealed message, never every scroll frame.
         void message.offsetWidth;
         message.classList.add('is-entering');
       }
     });
-    const status = requiresApproval && step > 0
-      ? (step === 1 ? 'No promise made before your approval.' : 'You stay in control of the decision.')
+    demo.querySelector('[data-demo-status]').textContent = requiresApproval && step > 0
+      ? (step === 1 ? 'The exception comes to you.' : 'You stay in control of the decision.')
       : example.statuses[step];
-    demo.querySelector('[data-demo-status]').textContent = status;
     stageSurface.setAttribute('data-sc-verify-state', `${scenario}:${step}:${requiresApproval ? 'approval' : 'routine'}:messages-${step + 1}`);
-    if (speak) announcement.textContent = `${stageButtons[step].querySelector('strong').textContent}. ${text[step]}`;
+    stageSurface.setAttribute('data-sc-verify-hold', 'true');
+    if (speak) announcement.textContent = `${example.steps[step]}. ${text[step]}`;
   }
 
-  function userChoice() {
-    manual = true;
-    manualProgress = progress();
+  function trackChoice() {
     window.strBoosterTrack?.('workflow_example', { scenario, requires_approval: approval.checked, step: step + 1 });
   }
-
   scenarioButtons.forEach(button => button.addEventListener('click', () => {
     scenario = button.dataset.scenario;
     render(2, true);
-    userChoice();
+    trackChoice();
   }));
   stageButtons.forEach(button => button.addEventListener('click', () => {
     render(Number(button.dataset.stage), true);
-    userChoice();
+    trackChoice();
   }));
-  approval.addEventListener('change', () => {
-    render(2, true);
-    userChoice();
-  });
+  approval.addEventListener('change', () => { render(2, true); trackChoice(); });
+
+  function reportHeroState() {
+    if (!heroPinned) {
+      heroStage.dataset.scVerifyState = 'connected-static';
+      heroStage.dataset.scVerifyHold = 'true';
+      return;
+    }
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > innerHeight) return;
+    const p = Math.max(0, Math.min(1, parseFloat(getComputedStyle(hero).getPropertyValue('--sc-p')) || 0));
+    const assembled = Math.min(1, p / .86);
+    // These values are the same transforms/line reveal painted by the CSS,
+    // not a raw scroll counter standing in for visible change.
+    heroStage.dataset.scVerifyState = `core-tilt-${(12 * (1 - assembled)).toFixed(1)}:node-spread-${(30 * (1 - assembled)).toFixed(1)}:connection-${assembled.toFixed(2)}`;
+    heroStage.dataset.scVerifyHold = String(assembled >= 1);
+  }
 
   function onScroll() {
-    if (!pinned || frame || document.hidden) return;
-    frame = requestAnimationFrame(() => {
-      frame = 0;
-      const p = progress();
-      if (manual && Math.abs(p - manualProgress) < .13) return;
-      manual = false;
-      const next = p < .27 ? 0 : p < .61 ? 1 : 2;
-      if (next !== step) render(next);
-      stageSurface.setAttribute('data-sc-verify-hold', String(p >= .92));
-    });
+    if (frame || document.hidden) return;
+    frame = requestAnimationFrame(() => { frame = 0; reportHeroState(); });
   }
 
   function configureMotion() {
@@ -130,18 +132,14 @@
     frame = 0;
     engine?.destroy();
     engine = null;
-    pinned = desktop.matches && !reduced.matches && Boolean(window.ScrollCraft);
-    workflow.dataset.scAct = pinned ? 'pin' : 'flow';
-    workflow.classList.remove('sc-act--pinned');
-    workflow.style.removeProperty('height');
-    workflow.style.removeProperty('--sc-p');
-    stageSurface.classList.remove('sc-stage');
-    stageSurface.removeAttribute('data-sc-verify-hold');
-    document.querySelectorAll('[data-depth]').forEach(layer => {
-      layer.style.removeProperty('transform');
-      if (desktop.matches && !reduced.matches) layer.setAttribute('data-sc-parallax', layer.dataset.depth);
-      else layer.removeAttribute('data-sc-parallax');
-    });
+    heroPinned = desktop.matches && !reduced.matches && Boolean(window.ScrollCraft);
+    hero.dataset.scAct = heroPinned ? 'pin' : 'flow';
+    hero.classList.toggle('has-hero-motion', heroPinned);
+    hero.classList.remove('sc-act--pinned');
+    hero.style.removeProperty('height');
+    hero.style.removeProperty('--sc-p');
+    heroStage.classList.remove('sc-stage');
+    workflow.dataset.scAct = 'flow';
     document.querySelectorAll('[data-enter]').forEach(element => {
       if (!reduced.matches && window.ScrollCraft) element.setAttribute('data-sc-in', '');
       else {
@@ -155,31 +153,27 @@
     if (window.ScrollCraft && !reduced.matches) {
       try { engine = ScrollCraft.mount(document.querySelector('main')); }
       catch (error) {
-        // All content and call links remain usable if enhancement is unavailable.
-        pinned = false;
-        workflow.dataset.scAct = 'flow';
-        workflow.style.removeProperty('height');
-        workflow.classList.remove('sc-act--pinned');
-        stageSurface.classList.remove('sc-stage');
+        heroPinned = false;
+        hero.dataset.scAct = 'flow';
+        hero.classList.remove('has-hero-motion', 'sc-act--pinned');
+        hero.style.removeProperty('height');
+        heroStage.classList.remove('sc-stage');
         document.querySelectorAll('[data-sc-in]').forEach(element => element.classList.add('sc-in'));
         console.warn('Scroll enhancement could not start.', error);
       }
-    } else {
-      document.querySelectorAll('[data-sc-count]').forEach(element => {
-        element.textContent = element.dataset.scCount.trim().split(/\s+/)[1];
-      });
     }
-    manual = false;
-    render(pinned ? 0 : 2);
-    onScroll();
+    reportHeroState();
   }
 
   demo.classList.add('is-interactive');
+  render(2);
   configureMotion();
   addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll, { passive: true });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) onScroll(); });
   reduced.addEventListener('change', configureMotion);
   desktop.addEventListener('change', configureMotion);
+  document.fonts?.ready.then(onScroll);
   document.querySelectorAll('.sb-questions details').forEach(item => item.addEventListener('toggle', () => {
     if (!item.open) return;
     document.querySelectorAll('.sb-questions details').forEach(other => { if (other !== item) other.open = false; });

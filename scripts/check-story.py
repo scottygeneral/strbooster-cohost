@@ -9,7 +9,7 @@ import json
 ROOT = Path(__file__).resolve().parent.parent
 BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
 REQUIRED_SECTIONS = ('main', 'benefits', 'how-it-works', 'owner-control',
-                     'for-managers', 'results', 'lets-talk')
+                     'for-managers', 'lets-talk')
 LEGACY_ASSETS = {'/story.css', '/story.js', '/guest-strategy.css', '/guest-strategy.js'}
 MEDIA_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif',
                     '.svg', '.ico', '.mp4', '.webm', '.woff', '.woff2'}
@@ -73,6 +73,8 @@ def check(root, content_only=False):
             'Homepage must lead to a discovery call rather than the previous free entry.')
     require(not any(tag == 'form' for tag, _ in doc.tags),
             'Homepage discovery-call CTA must be a direct, accessible link.')
+    require('client-results' not in text and 'case-study-' not in text and 'sb-proof' not in text,
+            'Homepage must not contain client stories or results promotions.')
     home_canonicals = [a for tag, a in doc.tags if tag == 'link' and a.get('rel') == 'canonical']
     require(len(home_canonicals) == 1 and home_canonicals[0].get('href') == 'https://strbooster.com/',
             'Homepage canonical must uniquely identify the live home URL.')
@@ -111,6 +113,10 @@ def check(root, content_only=False):
                 f'{name}: old story or Guest Strategy assets are still loaded.')
         require(not any(tag == 'form' and 'data-guest-strategy' in a for tag, a in page.tags),
                 f'{name}: obsolete free-report form remains.')
+        footer = page_text.split('<footer', 1)[-1].split('</footer>', 1)[0]
+        for destination in ('/privacy.html', '/terms.html', 'https://www.instagram.com/strbooster/',
+                            'https://www.youtube.com/@strbooster'):
+            require(destination in footer, f'{name}: footer is missing {destination}')
         for tag, attrs in page.tags:
             if tag == 'a' and attrs.get('data-cta') in {'navigation', 'hero', 'final', 'page-final'}:
                 require(attrs.get('href') == BOOKING_URL,

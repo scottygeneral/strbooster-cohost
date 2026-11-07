@@ -137,10 +137,10 @@ def apply_growth(root: Path) -> int:
         raise ValueError('The homepage template must contain its shared header and footer.')
     overrides = {
         'get-expert-help.html': ('discovery.html', DISCOVERY_TITLE, DISCOVERY_DESCRIPTION),
-        'growth-services.html': ('services.html', 'Custom AI Systems for Short-Term Rentals',
-            'Custom AI marketing, direct booking, sales, guest concierge and owner acquisition systems. Built around your rental business, with ongoing support.'),
+        'growth-services.html': ('services.html', 'AI Agents & Automation for Short-Term Rentals',
+            'AI agents for marketing, social media, booking enquiries, guest support and operations. Built for your rental business, with setup and ongoing support.'),
         'our-approach.html': ('approach.html', 'How We Build Your AI Growth System',
-            'Discover, build and support. See how STR Booster designs custom AI systems around your guests, your existing tools and your business goals.'),
+            'Start with the work you want to improve. STR Booster builds AI agents and automation around your rental business, then helps you keep them working.'),
     }
     (root / 'index.html').write_text(source, encoding='utf-8')
     updated = 1

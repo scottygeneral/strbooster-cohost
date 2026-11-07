@@ -33,7 +33,7 @@ def build(root=ROOT, embed=False):
     source = source.replace('href="/#', 'href="#')
     source = re.sub(r'href="/(?!/)([^\"]*)"', r'href="https://strbooster.com/\1"', source)
     source = re.sub(r'<details class="v-review-disclosure".*?</details>',
-                    '<p><a class="v-text-link" href="https://strbooster.com/client-results.html">Read client stories ↗</a></p>', source, flags=re.S)
+                    '<p><a class="v-text-link" href="https://strbooster.com/growth-services.html">Explore our services ↗</a></p>', source, flags=re.S)
     scripts = '\n'.join('<script>\n' + (root / name).read_text() + '\n</script>'
                         for name in ('story.js', 'guest-strategy.js'))
     source = source.replace('</body>', scripts + '\n</body>')

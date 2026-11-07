@@ -4,6 +4,13 @@ import json
 import re
 
 BASE = 'https://strbooster.com'
+RETIRED_STORY_PAGES = frozenset({
+    'client-results.html',
+    'case-study-brigantine.html',
+    'case-study-north-carolina.html',
+    'case-study-tuscany.html',
+    'case-study-phoenix.html',
+})
 META = {
  'index': ('Vacation Rental Growth & Automation', 'Grow your vacation rental with guest insights, revenue management, listing optimization and automation. Explore expert services and a free host community.'),
  'our-approach': ('Vacation Rental Growth Strategy', 'Connect guest positioning, pricing, marketing and automation in one vacation rental growth strategy. Build a more valuable stay and a stronger business.'),
@@ -37,13 +44,8 @@ RELATED = {
  'revenue-management': [('weekly-revenue-guide','Build a weekly pricing and marketing routine'),('tools-partners','Explore pricing and distribution tools')],
  'technology-automation': [('automation-guide','Choose your first automation'),('tools-partners','Explore software and partner offers')],
  'websites-funnels': [('guest-positioning-guide','Define the guest your website should attract'),('technology-automation','Connect your CRM and marketing workflows')],
+ 'resources': [('growth-services','Explore AI agents and automation services')],
 }
-
-RELATED['listing-optimization'] += [('case-study-brigantine','Brigantine: guest positioning and listing performance'),('case-study-tuscany','Tuscany: a closer look at listing conversion')]
-RELATED['revenue-management'] += [('case-study-phoenix','Phoenix: reviewing an existing PriceLabs setup'),('case-study-north-carolina','North Carolina: revenue and distribution results')]
-RELATED['technology-automation'] += [('case-study-north-carolina','North Carolina: getting more from Hostaway')]
-RELATED['websites-funnels'] += [('case-study-north-carolina','North Carolina: a connected direct booking website')]
-RELATED['resources'] = [('client-results','Explore client case studies')]
 
 def enhance_page(markup, slug, title, desc):
     canonical = BASE + ('/' if slug == 'index' else '/' + slug + '.html')
@@ -66,7 +68,8 @@ def enhance_page(markup, slug, title, desc):
     return markup.replace('</head>',metadata+'</head>')
 
 def write_crawl_files(root, pages):
-    urls=[BASE+('/' if p=='index.html' else '/'+p) for p in pages if p!='community.html']
+    urls=[BASE+('/' if p=='index.html' else '/'+p) for p in pages
+          if p!='community.html' and p not in RETIRED_STORY_PAGES]
     (root/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('  <url><loc>'+html.escape(url)+'</loc></url>\n' for url in urls)+'</urlset>\n')
     (root/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\n')
     (root/'404.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | STR Booster</title><link rel="stylesheet" href="/styles.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head><body><main class="wrap"><section class="page-hero"><p class="eyebrow">STR Booster · 404</p><h1>We could not find that page.</h1><p>The link may have changed. Explore our services or return to the homepage.</p><div class="actions"><a class="btn" href="/">Return Home</a><a class="btn secondary" href="/growth-services.html">Explore Growth Services</a></div></section></main></body></html>''')

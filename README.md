@@ -1,50 +1,60 @@
-# STR Booster — Brand + Booking Funnel
+# STR Booster — Custom AI Growth Systems
 
-STR Booster builds vacation rental brands and booking funnels to attract more direct bookings and bring guests back. Marketing is the specialty; this is not a property-management or PMS replacement.
+STR Booster builds custom AI systems for short-term rental marketing, direct bookings, sales follow-up, guest concierge and property-manager owner acquisition. The offer combines implementation with ongoing support and owner control.
 
-## Design
+The primary site-wide CTA is **Let’s talk**, linking to the existing 30-minute discovery calendar:
+https://links.strbooster.com/widget/booking/OnBzpe1qEasSowPwkxXU
 
-A hospitality-led, editorial homepage inspired by the storytelling direction discussed using Journey as a reference. All copy and layout are original to this rebuild; no Journey imagery, logos or footage are included. Retains STR Booster navy (#0d1f2d), green (#1a7f64), cream (#f5f3ee), Fraunces and Outfit, and existing repository imagery.
+## Design and content
 
-Homepage story: the opportunity → understand the guest → build the brand → build the booking funnel → documented client work → founder → scope/FAQ → free Guest Intel report.
+The homepage leads with **More bookings. Less busywork.** It uses the existing navy and green brand colours, Outfit typography, clear outcome sections and original HTML/SVG product illustrations. No lifestyle photography, generated people, fake software screens or invented performance metrics are used on the new homepage.
 
-The primary CTA is **Get Started for Free** and links to https://guest-intel.strbooster.com/. The illustrative guest-profile card is explicitly labelled as an example, not an actual report or client result. Case-study metrics retain their existing periods and qualifications. HighLevel is described as the supporting software, with affiliate disclosure in the FAQ.
+A labelled illustrative workflow explains guest booking, guest questions and owner enquiries. Visitors can choose a scenario, explore its three steps and try an exception that needs owner approval. It does not submit messages, make bookings or run an AI agent. Existing client results retain their dates and qualifications; they are not presented as measured results from the illustrative AI system.
+
+The requested [Scrollcraft skill](https://github.com/nateherkai/scroll-craft) guides the motion. Its MIT-licensed engine is vendored unchanged. The site adds restrained hero depth, section entrances, an existing-result count and one short pinned workflow on suitable desktop viewports. Phones, short viewports and reduced-motion visitors receive a natural-flow explanation. Content and calendar links remain available without JavaScript.
 
 ## Build and preview
 
-Python 3; no third-party Python dependencies.
+Python 3; no third-party Python build dependencies.
 
 ```sh
 python3 scripts/render-site.py
 python3 scripts/check-story.py
-python3 -m http.server 8000
+python3 -m http.server 8765
 ```
 
-Open http://localhost:8000 after running the build. The existing Netlify root-directory deployment now runs the renderer and regression checks before publishing. Existing redirects and the disabled branch/PR-preview settings are preserved. This pull request does not deploy or merge itself.
+Open http://127.0.0.1:8765 after building. Netlify runs the renderer and content checks before publishing the repository root. Existing redirects, functions and deployment settings are retained.
 
-## Editing
+`python3 scripts/render-site.py --existing-only` reapplies the shared shell to already generated HTML. Use the full build before deployment.
 
-- `templates/home.html`: canonical homepage, including the shared header/footer.
-- `index.html`: committed homepage output; regenerate it rather than editing it separately.
-- `story.css`: homepage design and namespaced shared navigation/footer styling.
-- `story.js`: progressively enhanced, keyboard-accessible booking-journey tabs; optional hero-film controls; lazy review widget.
-- `scripts/render-site.py`: build entry point. Runs the existing page generator, renders the new homepage, and applies the shared navigation/footer and free-report CTA to generated inner pages.
-- `scripts/render-pages.py`: the previous production generator, retained verbatim for existing service/resource/case-study content.
-- `scripts/seo.py`, `scripts/case_studies.py`, `styles.css`, `app.js`: existing inner-page metadata/content, styles, analytics and chat integration retained.
+## Source files
 
-`python3 scripts/render-site.py --existing-only` refreshes the new design around already generated files without running the original generator. Always use the full build before deployment so all inner-page navigation is current.
+- `templates/home.html`: homepage and shared navigation/footer.
+- `templates/services.html`, `templates/approach.html`, `templates/discovery.html`: main-content fragments for the three core inner pages.
+- `growth.css`, `growth.js`: new design, responsive layout and progressively enhanced workflow.
+- `vendor/scrollcraft/`: unchanged third-party engine, license and source attribution.
+- `scripts/render-site.py`: build entry point, source overrides and shared discovery-call CTAs.
+- `scripts/render-pages.py`: retained generator for existing service, resource and case-study content.
+- `scripts/check-story.py`: content, schema, local targets, analytics and CTA checks.
+- `scripts/test-growth.cjs`: browser checks and screenshots for responsive layouts, interactions, reduced motion and no JavaScript.
+- `scripts/verify-scroll.mjs`: the Scrollcraft screenshot harness adapted for isolated test traffic and this page’s reduced-motion fallback.
+- `scrollcraft/builds/ai-growth/BRIEF.md`: design rationale and motion plan.
 
-## Hero film
+Generated root HTML is committed for static hosting; edit the templates and rebuild rather than changing the outputs independently. The former story/form assets remain in repository history and files, but are not loaded by the new core pages.
 
-No film asset is included. The existing property image is the real default, not a broken video request. Add an approved, licensed, optimized landscape loop at `assets/strbooster-hero-film.mp4` and rebuild to enable the video. The renderer only inserts a video if that file exists. Playback is muted, inline and pausable; reduced-motion/data-saving preferences and page visibility are respected. Failed playback leaves the image visible. No new film was generated or licensed as part of this code update.
+## Browser review
 
-## Validation and remaining review
+The **Design Review** workflow builds the complete checkout, checks syntax/content and runs Chromium against a local HTTP server. It captures desktop, tablet, phone, compact-phone, reduced-motion and no-JavaScript evidence. Third-party analytics/chat requests are blocked during automated tests. Booking-link navigation is intercepted with a clearly labelled fixture, so tests cannot create appointments or contacts.
 
-- Python syntax and homepage content/CTA/schema checks passed locally.
-- Offline Chromium layout tests passed at 320, 375, 390, 768, 1024 and 1440px with no horizontal overflow.
-- Mobile menu/Escape, funnel clicks and arrow/Home/End keyboard control, FAQ disclosure, no-JavaScript content fallback and reduced-motion behavior passed with no page JavaScript errors.
-- Renderer fixture tests passed for shared-shell replacement, preserving page content/metadata, idempotence and video-present/video-absent output.
-- Local browser tests used neutral image fixtures and blocked external services because original image bytes, remote fonts and integrations were unavailable in that environment. They do NOT constitute final imagery/font review or end-to-end testing of Guest Intel, analytics, chat or reviews.
-- The original full renderer and Netlify deployment have not been executed in the local test environment. Review a complete-checkout build and actual asset rendering before merging. Inner-page body content is preserved, not fully redesigned.
+The workflow uploads screenshots and JSON reports for review. These tests establish local layout and interaction behaviour; they do not assert that a third-party calendar, chat service or analytics account is available to every visitor. The existing calendar configuration is separate from this website.
 
-No new testimonials, client counts, time-savings or performance guarantees have been added.
+For local browser checks after installing Playwright and Chromium:
+
+```sh
+QA_BASE_URL=http://127.0.0.1:8765 node scripts/test-growth.cjs
+node scripts/verify-scroll.mjs --url http://127.0.0.1:8765 --width 1440 --height 900 --out qa/scroll-desktop
+```
+
+A partial source checkout may use `python3 scripts/check-story.py --content-only` to identify missing legacy media separately. Production CI uses the full check; this flag never skips homepage assets or local code/link targets.
+
+Existing analytics IDs, the GHL chat integration, case-study content and the separate 52Rev waitlist remain in place. Guest Intel remains available as a resource; it is no longer the primary acquisition CTA.

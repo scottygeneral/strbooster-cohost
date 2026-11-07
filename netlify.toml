@@ -32,3 +32,64 @@
   to = "/"
   status = 301
   force = true
+
+# Retired client stories lead visitors to the current service overview.
+[[redirects]]
+  from = "/client-results.html"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/client-results"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-brigantine.html"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-brigantine"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-north-carolina.html"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-north-carolina"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-tuscany.html"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-tuscany"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-phoenix.html"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-study-phoenix"
+  to = "/growth-services.html"
+  status = 301
+  force = true

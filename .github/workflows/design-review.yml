@@ -1,7 +1,7 @@
-name: AI growth site review (no deployment)
+name: AI agents website review (no deployment)
 on:
   push:
-    branches: [design/ai-growth-systems]
+    branches: [design/ai-growth-systems, update/ai-agents-scroll-footer]
     paths:
       - 'templates/**'
       - 'growth.css'

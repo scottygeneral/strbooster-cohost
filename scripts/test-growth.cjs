@@ -11,7 +11,13 @@ const BASE = new URL(process.env.QA_BASE_URL || 'http://127.0.0.1:8765/');
 assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(BASE.hostname) && BASE.protocol === 'http:',
   'Browser checks may run only against a local HTTP server.');
 const BOOKING = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU';
-const SECTIONS = ['benefits', 'how-it-works', 'owner-control', 'results', 'for-managers', 'lets-talk'];
+const SECTIONS = ['benefits', 'how-it-works', 'owner-control', 'for-managers', 'lets-talk'];
+const FOOTER_LINKS = [
+  ['Privacy Policy', '/privacy.html'],
+  ['Terms & Conditions', '/terms.html'],
+  ['Instagram', 'https://www.instagram.com/strbooster/'],
+  ['YouTube', 'https://www.youtube.com/@strbooster']
+];
 const RUN = new Date().toISOString().replace(/[:.]/g, '-');
 const OUTPUT = path.resolve(process.env.QA_OUTPUT_DIR || 'previews/growth-review', RUN);
 fs.mkdirSync(OUTPUT, { recursive: true });
@@ -24,8 +30,8 @@ async function waitForServer() {
     try {
       const response = await fetch(BASE, { signal: AbortSignal.timeout(1500) });
       const html = await response.text();
-      assert.ok(response.ok && /Custom AI Growth Systems/.test(html) && html.includes('data-demo'),
-        'Port 8765 must serve the rebuilt STR Booster page, not a different or stale site.');
+      assert.ok(response.ok && html.includes('sb-team-hero') && html.includes('data-demo'),
+        'The local URL must serve the rebuilt STR Booster AI-team page.');
       return;
     } catch (error) {
       if (error instanceof assert.AssertionError || attempt === 19) throw error;
@@ -208,29 +214,100 @@ async function screenshot(page, name, fullPage = false) {
   await page.screenshot({ path: path.join(OUTPUT, `${name}.png`), fullPage });
 }
 
-async function scrollStage(page, progress, stage) {
-  await page.evaluate(progress => {
-    const section = document.querySelector('#how-it-works');
-    const top = section.getBoundingClientRect().top + scrollY;
-    window.scrollTo({ top: top + (section.offsetHeight - innerHeight) * progress, behavior: 'instant' });
-  }, progress);
-  await page.waitForFunction(({ progress, stage }) => {
-    const section = document.querySelector('#how-it-works');
-    const actual = parseFloat(getComputedStyle(section).getPropertyValue('--sc-p'));
-    return Math.abs(actual - progress) < .035 && document.querySelector('[data-demo]').dataset.stage === String(stage);
-  }, { progress, stage });
-  const visible = await page.locator('[data-message]').evaluateAll(messages => messages
-    .filter(message => getComputedStyle(message).display !== 'none' && message.getAttribute('aria-hidden') !== 'true').length);
-  assert.equal(visible, stage + 1, 'Scrolling must reveal actual conversation messages.');
-  await readable(page, `[data-message="${stage}"] p`, { viewport: true, fontSize: 11 });
+async function contentAndFooter(page, name, home = false) {
+  assert.equal(await page.locator('#results').count(), 0, 'Client results have been removed.');
+  const storyLinks = await page.locator('a[href]').evaluateAll(anchors => anchors
+    .filter(anchor => /client-results|case-study-|#results/.test(anchor.getAttribute('href')))
+    .map(anchor => anchor.getAttribute('href')));
+  assert.deepEqual(storyLinks, [], 'No navigation or content links lead to client stories.');
+  assert.doesNotMatch(await page.locator('main').innerText(), /client success stories|client stories/i);
+  if (home) {
+    assert.equal(await page.locator('#benefits .sb-outcome').count(), 5, 'Five concrete service examples must be present.');
+    assert.deepEqual((await page.locator('#benefits .sb-service-note').allTextContents()).map(text => text.trim()),
+      ['Marketing agents', 'Social media', 'Enquiries & sales', 'Guest support', 'Operations automation']);
+    for (const row of await page.locator('#benefits .sb-outcome').all()) {
+      await row.locator('h3').scrollIntoViewIfNeeded();
+      assert.ok(await row.locator('h3').isVisible());
+      assert.ok((await row.locator('p').innerText()).trim().length > 30, 'Each service has a useful example.');
+    }
+  }
+  assert.equal(await page.locator('footer.story-footer').count(), 1);
+  for (const [label, href] of FOOTER_LINKS) {
+    const selector = `footer.story-footer a[href="${href}"]`;
+    const link = page.locator(selector);
+    assert.equal(await link.count(), 1, `Footer must include ${label}.`);
+    assert.ok((await link.innerText()).includes(label));
+    await link.scrollIntoViewIfNeeded();
+    await readable(page, selector, { viewport: true, fontSize: 10 });
+    if (href.startsWith('https:')) {
+      assert.equal(await link.getAttribute('target'), '_blank');
+      assert.match(await link.getAttribute('rel'), /noopener/);
+      assert.match(await link.getAttribute('aria-label'), /opens in a new tab/);
+    }
+  }
+  assert.ok(await page.locator('footer.story-footer .sb-brand').isVisible());
+  await noOverflow(page, `${name} footer`);
+  await screenshot(page, `${name}-footer`);
+  return 'Five service examples, no client story links, and visible legal/social footer destinations verified';
 }
 
-async function conversations(page, name, pinned) {
+async function heroMotion(page, name, pinned) {
+  const hero = page.locator('.sb-team-hero');
+  assert.equal(await hero.getAttribute('data-sc-act'), pinned ? 'pin' : 'flow');
+  assert.equal(await hero.getAttribute('data-sc-span'), '1.75');
+  assert.equal(await page.locator('#how-it-works').getAttribute('data-sc-act'), 'flow');
+  assert.equal(await page.locator('.sc-act--pinned').count(), pinned ? 1 : 0,
+    'The hero is the only pinned section.');
+  assert.equal(await page.locator('.sb-system-art').getAttribute('role'), 'img');
+  assert.match(await page.locator('.sb-system-art').getAttribute('aria-label'), /marketing.*social media.*guest support.*operations/i);
+  if (!pinned) {
+    assert.equal(await hero.evaluate(element => element.classList.contains('has-hero-motion')), false);
+    const offset = await page.locator('.sb-network-lines').evaluate(element => parseFloat(getComputedStyle(element).strokeDashoffset));
+    assert.ok(Math.abs(offset) < .01, 'The static hero shows fully connected services.');
+    return 'Natural flow with the complete connected service diagram';
+  }
+  const frames = [];
+  const pixels = [];
+  for (const [index, progress] of [0, .43, .9].entries()) {
+    await page.evaluate(progress => {
+      const section = document.querySelector('.sb-team-hero');
+      const top = section.getBoundingClientRect().top + scrollY;
+      window.scrollTo({ top: top + (section.offsetHeight - innerHeight) * progress, behavior: 'instant' });
+    }, progress);
+    await page.waitForFunction(progress => {
+      const actual = parseFloat(getComputedStyle(document.querySelector('.sb-team-hero')).getPropertyValue('--sc-p'));
+      return Math.abs(actual - progress) < .035;
+    }, progress);
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    await readable(page, 'h1', { viewport: true, fontSize: 30 });
+    await readable(page, '[data-cta="hero"]', { viewport: true, fontSize: 12 });
+    await noOverflow(page, `${name} hero progress ${progress}`);
+    frames.push(await hero.evaluate(element => ({
+      progress: parseFloat(getComputedStyle(element).getPropertyValue('--sc-p')),
+      transforms: [...element.querySelectorAll('[data-hero-layer]')].map(layer => getComputedStyle(layer).transform),
+      connectorOffset: parseFloat(getComputedStyle(element.querySelector('.sb-network-lines')).strokeDashoffset)
+    })));
+    await screenshot(page, `${name}-hero-scroll-${index + 1}`);
+    pixels.push(await page.locator('.sb-system-art').screenshot({ path: path.join(OUTPUT, `${name}-hero-art-${index + 1}.png`) }));
+  }
+  for (let i = 1; i < frames.length; i++) {
+    const changed = frames[i].transforms.filter((transform, j) => transform !== frames[i - 1].transforms[j]).length;
+    assert.ok(changed >= 3, 'Scroll must move independent hero layers.');
+    assert.ok(frames[i].connectorOffset < frames[i - 1].connectorOffset, 'Connections visibly draw as the team assembles.');
+    assert.equal(pixels[i].equals(pixels[i - 1]), false, 'Hero diagram screenshots must change with real scroll.');
+  }
+  assert.ok(frames.at(-1).connectorOffset < .02, 'The hero resolves into the connected team.');
+  return frames;
+}
+
+async function conversations(page, name) {
   const cases = [
-    { id: 'booking', question: /family weekend/i, answer: /family-friendly/i, next: /booking engine/i, exception: /early.*Friday/i },
-    { id: 'concierge', question: /park.*arrive/i, answer: /parking and arrival/i, next: /instructions/i, exception: /extra guest/i },
-    { id: 'owner', question: /manage.*holiday home/i, answer: /property.*location.*goals/i, next: /discovery call/i, exception: /guarantee/i }
+    { id: 'booking', question: /family weekend/i, answer: /family-friendly/i, next: /direct booking link/i, exception: /early.*Friday/i },
+    { id: 'social', question: /couples.*autumn escape/i, answer: /post and caption/i, next: /publishing plan/i, exception: /last-minute discount/i },
+    { id: 'operations', question: /guests arrive tomorrow/i, answer: /arrival information/i, next: /task needs attention/i, exception: /maintenance issue/i }
   ];
+  assert.equal(await page.locator('[data-demo]').getAttribute('data-stage'), '2', 'The full example is visible before interaction.');
+  assert.equal(await page.locator('[data-message][aria-hidden="false"]').count(), 3);
   let previous = '';
   for (const example of cases) {
     await page.locator(`button[data-scenario="${example.id}"]`).click();
@@ -244,7 +321,7 @@ async function conversations(page, name, pinned) {
     assert.notEqual(texts.join(' '), previous, 'Scenario changes must update real messages.');
     previous = texts.join(' ');
     assert.ok(await page.locator('button[data-stage="1"]').isVisible(), 'The second workflow step is available.');
-    if (!pinned) await page.locator('[data-message="2"]').scrollIntoViewIfNeeded();
+    await page.locator('[data-message="2"]').scrollIntoViewIfNeeded();
     await readable(page, '[data-message="2"] p', { viewport: true, fontSize: 11 });
     await page.locator('#approval-toggle').check();
     assert.equal(await page.locator('[data-demo]').getAttribute('data-approval'), 'true');
@@ -254,7 +331,7 @@ async function conversations(page, name, pinned) {
     assert.notEqual(approvalTexts[2], texts[2], 'Approval changes the next step.');
     assert.equal((await page.locator('[data-next-label]').textContent()).trim(), 'Your decision');
     assert.ok(await page.locator('[data-message="2"]').isVisible());
-    if (example.id === 'owner') await screenshot(page, `${name}-owner-approval`);
+    if (example.id === 'operations') await screenshot(page, `${name}-operations-approval`);
     await page.locator('#approval-toggle').uncheck();
     assert.deepEqual(await page.locator('[data-message-text]').allTextContents(), texts,
       'Turning approval off restores the routine example.');
@@ -264,8 +341,10 @@ async function conversations(page, name, pinned) {
   assert.equal(await page.locator('[data-demo]').getAttribute('data-stage'), '1');
   assert.ok(await page.locator('[data-message="1"]').isVisible());
   assert.equal(await page.locator('[data-message="2"]').isVisible(), false);
-  await page.locator('button[data-stage="2"]').click();
+  await page.locator('button[data-stage="2"]').focus();
+  await page.keyboard.press('Enter');
   assert.ok(await page.locator('[data-message="2"]').isVisible());
+  assert.ok((await page.locator('[data-demo-announcement]').textContent()).trim(), 'Keyboard interaction announces the updated workflow.');
 }
 
 async function faq(page) {
@@ -353,23 +432,15 @@ async function main() {
       entry.primaryLinks = await primaryLinks(page, true);
       await screenshot(page, `${name}-hero`);
       entry.navigation = await menuEscape(page);
-      const pinned = viewport.width >= 1024 && viewport.height >= 860;
-      assert.equal(await page.locator('#how-it-works').getAttribute('data-sc-act'), pinned ? 'pin' : 'flow');
-      if (pinned) {
-        for (const [progress, stage] of [[.08, 0], [.43, 1], [.78, 2]]) {
-          await scrollStage(page, progress, stage);
-          await screenshot(page, `${name}-scroll-step-${stage + 1}`);
-          await noOverflow(page, `${name} scroll step ${stage + 1}`);
-        }
-      }
-      await conversations(page, name, pinned);
+      const pinned = viewport.width >= 1024 && viewport.height >= 780;
+      entry.heroMotion = await heroMotion(page, name, pinned);
+      await conversations(page, name);
       await faq(page);
       await reachableSections(page);
       await screenshot(page, `${name}-closing`);
       if ([390, 1440].includes(viewport.width)) await screenshot(page, `${name}-full-page`, true);
-      entry.workflow = pinned
-        ? 'Three scroll stages, three scenarios and approval routing verified'
-        : 'Three scenarios and approval routing verified; the workflow remains in normal flow';
+      entry.content = await contentAndFooter(page, name, true);
+      entry.workflow = 'Three scenarios, keyboard stage controls and approval routing verified; the workflow remains in normal flow';
       await handoff(page, diagnostics);
     });
   }
@@ -377,25 +448,27 @@ async function main() {
     const name = `reduced-${viewport.width}`;
     await runCase(name, { viewport, reducedMotion: 'reduce' }, async (page, entry) => {
       entry.primaryLinks = await primaryLinks(page, true);
-      assert.equal(await page.locator('.sc-act--pinned').count(), 0);
-      assert.equal(await page.locator('#how-it-works').getAttribute('data-sc-act'), 'flow');
+      entry.heroMotion = await heroMotion(page, name, false);
+      await screenshot(page, `${name}-hero`);
       assert.equal(await page.locator('[data-demo]').getAttribute('data-stage'), '2');
       assert.ok(await page.locator('[data-message="2"]').isVisible());
       assert.equal(await page.evaluate(() => document.getAnimations().filter(animation => animation.playState === 'running').length), 0);
       await reachableSections(page);
       await screenshot(page, `${name}-closing`);
+      entry.content = await contentAndFooter(page, name, true);
       entry.reachability = 'Every section and final call link reachable without pinning or running animations';
     });
   }
   await runCase('no-js-390', { viewport: { width: 390, height: 844 }, javaScriptEnabled: false }, async (page, entry, diagnostics) => {
     entry.primaryLinks = await primaryLinks(page, true);
     assert.ok(await page.locator('#nav-links').isVisible(), 'Navigation remains available without JavaScript.');
-    assert.equal(await page.locator('.sc-act--pinned').count(), 0);
+    entry.heroMotion = await heroMotion(page, 'no-js-390', false);
     assert.equal(await page.locator('[data-message]').count(), 3);
     assert.ok(await page.locator('[data-message="2"]').isVisible(), 'The full example is in the HTML.');
     await faq(page);
     await reachableSections(page);
     await screenshot(page, 'no-js-390-full-page', true);
+    entry.content = await contentAndFooter(page, 'no-js-390', true);
     await handoff(page, diagnostics, false);
     entry.fallback = 'Complete reading flow, native FAQ and direct booking link work without JavaScript';
   });
@@ -414,9 +487,7 @@ async function main() {
         assert.equal(await page.locator('link[href="/story.css"], script[src="/story.js"], script[src="/guest-strategy.js"]').count(), 0);
         await menuEscape(page);
         await screenshot(page, `shared-${viewport.width}-${path.basename(route, '.html')}`);
-        await page.locator('.story-footer').scrollIntoViewIfNeeded();
-        assert.ok(await page.locator('.story-footer .sb-brand').isVisible());
-        await noOverflow(page, `${route} footer`);
+        await contentAndFooter(page, `shared-${viewport.width}-${path.basename(route, '.html')}`);
         entry.pages.push(route);
       }
     });

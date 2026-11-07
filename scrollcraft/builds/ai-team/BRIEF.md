@@ -35,7 +35,7 @@ Heading, with the intended two-line desktop composition:
 
 Proposed lead, 18 words:
 
-> AI agents and automations for your marketing, social media, guest support and daily operations. Built around your business.
+> We build AI agents for your marketing, social media, guest enquiries and daily operations. You stay in control.
 
 Use the existing short-term-rental context and **Let's talk** action without adding extra claims, statistics, trust strips or distracting secondary offers. The headline, lead and button are readable at first paint and remain readable while the diagram moves.
 
@@ -74,7 +74,7 @@ Use the existing short-term-rental context and **Let's talk** action without add
 - **Midpoint:** the planes move at distinct restrained rates; connector paths draw as the tasks begin to align. Depth comes from independent travel, overlap, scale and offset shadows, not blur decoration.
 - **Resolved exit:** tasks settle into a clearly connected system and the diagram exits cleanly into the service ledger. Do not leave a ghost headline, cropped node or empty pinned frame behind.
 
-Desktop pin target: approximately **1.75 viewport heights total**, leaving roughly 0.75 viewport of useful pinned travel. Keep content short enough to fit the stage below the header. Confirm rendered behavior rather than relying only on the chosen span value.
+Desktop pin target: approximately **1.75 viewport heights total**, enabled from 1024px wide and 700px high, leaving roughly 0.75 viewport of useful pinned travel. Keep content short enough to fit the stage below the header. Confirm rendered behavior rather than relying only on the chosen span value.
 
 ### Phone and reduced-motion composition
 

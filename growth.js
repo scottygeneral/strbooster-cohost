@@ -15,7 +15,7 @@
   const approval = document.querySelector('#approval-toggle');
   const announcement = demo.querySelector('[data-demo-announcement]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const desktop = matchMedia('(min-width: 1024px) and (min-height: 780px)');
+  const desktop = matchMedia('(min-width: 1024px) and (min-height: 700px)');
   let scenario = 'booking';
   let step = 2;
   let engine = null;

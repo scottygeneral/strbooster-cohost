@@ -432,7 +432,6 @@ html { scroll-padding-top: 100px; }
   .sb-hero-action .sb-button { min-height: 50px; font-size: 15px; padding: 13px 20px; gap: 30px; }
   .sb-network { width: min(100%, 355px); max-width: none; aspect-ratio: 13 / 10; justify-self: center; margin-top: 5px; }
   .sb-network-orbit { width: 53%; border-radius: 19px; }
-  .sb-network-links { transform: scaleY(.96); }
   .sb-network-core { width: 28%; border-radius: 12px; }
   .sb-network-core strong { font-size: 21px; }
   .sb-network-core > span { font-size: 6.5px; }

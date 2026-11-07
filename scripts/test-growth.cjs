@@ -432,7 +432,7 @@ async function main() {
       entry.primaryLinks = await primaryLinks(page, true);
       await screenshot(page, `${name}-hero`);
       entry.navigation = await menuEscape(page);
-      const pinned = viewport.width >= 1024 && viewport.height >= 780;
+      const pinned = viewport.width >= 1024 && viewport.height >= 700;
       entry.heroMotion = await heroMotion(page, name, pinned);
       await conversations(page, name);
       await faq(page);

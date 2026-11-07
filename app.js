@@ -31,11 +31,11 @@ document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListen
  document.addEventListener('click',event=>{
   const link=event.target.closest('a[href]');if(!link)return;
   let url;try{url=new URL(link.href,location.href);}catch{return;}
-  const locationName=link.closest('.site-header')?'navigation':link.closest('.site-footer')?'footer':link.closest('.page-hero,.hero')?'hero':'content';
+  const locationName=link.dataset.cta||(link.closest('.site-header')?'navigation':link.closest('.site-footer')?'footer':link.closest('.page-hero,.hero,.sb-hero')?'hero':'content');
   const detail={button_location:locationName};
   if(url.hostname==='my.hostgrowthhub.com'&&url.pathname.startsWith('/communities/')){
    window.strBoosterTrack('community_click',detail);
-  }else if(url.hostname==='links.strbooster.com'&&url.pathname.includes('/widget/booking/')){
+  }else if(['links.strbooster.com','api.leadconnectorhq.com'].includes(url.hostname)&&url.pathname.includes('/widget/booking/')){
    window.strBoosterTrack('booking_click',detail);
   }else if(url.hostname==='guest-intel.strbooster.com'){
    window.strBoosterTrack('app_click',{...detail,app_name:'guest_intel'});
@@ -63,3 +63,4 @@ document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListen
  script.async=true;
  document.body.appendChild(script);
 })();
+

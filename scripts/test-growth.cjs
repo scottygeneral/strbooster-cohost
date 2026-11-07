@@ -10,7 +10,7 @@ catch { ({ chromium } = require('playwright')); }
 const BASE = new URL(process.env.QA_BASE_URL || 'http://127.0.0.1:8765/');
 assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(BASE.hostname) && BASE.protocol === 'http:',
   'Browser checks may run only against a local HTTP server.');
-const BOOKING = 'https://links.strbooster.com/widget/booking/OnBzpe1qEasSowPwkxXU';
+const BOOKING = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU';
 const SECTIONS = ['benefits', 'how-it-works', 'owner-control', 'results', 'for-managers', 'lets-talk'];
 const RUN = new Date().toISOString().replace(/[:.]/g, '-');
 const OUTPUT = path.resolve(process.env.QA_OUTPUT_DIR || 'previews/growth-review', RUN);
@@ -290,11 +290,26 @@ async function reachableSections(page) {
   await readable(page, '[data-cta="final"]', { viewport: true, fontSize: 12 });
 }
 
-async function handoff(page, diagnostics) {
+async function handoff(page, diagnostics, javaScriptEnabled = true) {
+  const events = [];
+  if (javaScriptEnabled) {
+    await page.exposeFunction('recordBookingEventForTest', (...args) => events.push(args));
+    await page.evaluate(() => {
+      window.gtag = (...args) => window.recordBookingEventForTest(...args);
+    });
+  }
   await page.locator('[data-cta="final"]').click();
   await page.waitForURL(BOOKING);
   assert.deepEqual(diagnostics.handoffs, [{ method: 'GET', url: BOOKING }]);
   assert.equal(await page.title(), 'Local booking-link test');
+  if (javaScriptEnabled) {
+    assert.equal(events.length, 1, 'The discovery call click records one analytics event.');
+    assert.equal(events[0][0], 'event');
+    assert.equal(events[0][1], 'booking_click');
+    assert.equal(events[0][2].button_location, 'final');
+    assert.equal(events[0][2].send_to, 'G-YQ9L9GHV31');
+    assert.deepEqual(Object.keys(events[0][2]).sort(), ['button_location', 'page_path', 'send_to', 'transport_type']);
+  }
 }
 
 async function runCase(name, options, test) {
@@ -338,7 +353,7 @@ async function main() {
       entry.primaryLinks = await primaryLinks(page, true);
       await screenshot(page, `${name}-hero`);
       entry.navigation = await menuEscape(page);
-      const pinned = viewport.width >= 1024 && viewport.height >= 760;
+      const pinned = viewport.width >= 1024 && viewport.height >= 860;
       assert.equal(await page.locator('#how-it-works').getAttribute('data-sc-act'), pinned ? 'pin' : 'flow');
       if (pinned) {
         for (const [progress, stage] of [[.08, 0], [.43, 1], [.78, 2]]) {
@@ -381,7 +396,7 @@ async function main() {
     await faq(page);
     await reachableSections(page);
     await screenshot(page, 'no-js-390-full-page', true);
-    await handoff(page, diagnostics);
+    await handoff(page, diagnostics, false);
     entry.fallback = 'Complete reading flow, native FAQ and direct booking link work without JavaScript';
   });
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {

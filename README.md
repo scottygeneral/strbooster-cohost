@@ -2,8 +2,8 @@
 
 STR Booster builds custom AI systems for short-term rental marketing, direct bookings, sales follow-up, guest concierge and property-manager owner acquisition. The offer combines implementation with ongoing support and owner control.
 
-The primary site-wide CTA is **Let’s talk**, linking to the existing 30-minute discovery calendar:
-https://links.strbooster.com/widget/booking/OnBzpe1qEasSowPwkxXU
+The primary site-wide CTA is **Let’s talk**, linking to the verified provider-hosted page for the existing 30-minute discovery calendar:
+https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU
 
 ## Design and content
 

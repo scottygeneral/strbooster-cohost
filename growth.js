@@ -13,7 +13,7 @@
   const approval = document.querySelector('#approval-toggle');
   const announcement = demo.querySelector('[data-demo-announcement]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const desktop = matchMedia('(min-width: 1024px) and (min-height: 760px)');
+  const desktop = matchMedia('(min-width: 1024px) and (min-height: 860px)');
   let scenario = 'booking';
   let step = 0;
   let engine = null;

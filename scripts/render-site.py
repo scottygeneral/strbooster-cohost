@@ -13,7 +13,7 @@ import re
 import runpy
 
 ROOT = Path(__file__).resolve().parent.parent
-BOOKING_URL = 'https://links.strbooster.com/widget/booking/OnBzpe1qEasSowPwkxXU'
+BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
 DISCOVERY_TITLE = 'Book a Discovery Call'
 DISCOVERY_DESCRIPTION = (
     'Book a 30-minute discovery call with STR Booster. Discuss your rental '

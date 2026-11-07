@@ -7,7 +7,7 @@ import argparse
 import json
 
 ROOT = Path(__file__).resolve().parent.parent
-BOOKING_URL = 'https://links.strbooster.com/widget/booking/OnBzpe1qEasSowPwkxXU'
+BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
 REQUIRED_SECTIONS = ('main', 'benefits', 'how-it-works', 'owner-control',
                      'for-managers', 'results', 'lets-talk')
 LEGACY_ASSETS = {'/story.css', '/story.js', '/guest-strategy.css', '/guest-strategy.js'}

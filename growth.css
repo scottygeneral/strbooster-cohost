@@ -160,9 +160,9 @@ html { scroll-padding-top: 100px; }
 .sb-status-icon { display: inline-block; color: #a9dbbc; }
 .sb-status-icon svg { width: 15px; height: 15px; }
 .sb-demo-bottom { padding: 15px 25px; border-top: 1px solid #40535d; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.sb-approval { display: flex; align-items: center; gap: 11px; cursor: pointer; position: relative; font-size: 11px; color: #d1e2df; }
+.sb-approval { display: flex; align-items: center; gap: 11px; min-height: 36px; cursor: pointer; position: relative; font-size: 11px; color: #d1e2df; }
 .sb-approval input { position: absolute; opacity: 0; left: 0; width: 36px; height: 22px; margin: 0; }
-.sb-switch { width: 32px; height: 19px; flex: 0 0 32px; border: 1px solid #68808a; background: #2a4552; border-radius: 11px; padding: 3px; transition: background 160ms ease-out; }
+.sb-switch { width: 32px; height: 19px; flex: 0 0 32px; border: 1px solid #68808a; background: #2a4552; border-radius: 11px; padding: 3px; pointer-events: none; transition: background 160ms ease-out; }
 .sb-switch::after { content: ''; display: block; width: 11px; height: 11px; border-radius: 50%; background: #e6f0ec; transition: transform 160ms ease-out; }
 .sb-approval input:checked + .sb-switch { background: #a9dbbc; border-color: #a9dbbc; }
 .sb-approval input:checked + .sb-switch::after { transform: translateX(13px); background: #173b2d; }
@@ -241,7 +241,7 @@ html { scroll-padding-top: 100px; }
 .sb-services .card p, .sb-approach .card p, .sb-discovery .card p { max-width: 68ch; }
 .sb-services .btn, .sb-approach .btn { background: #1a7f64; color: #fff; }
 
-@media (min-width: 1024px) and (min-height: 760px) {
+@media (min-width: 1024px) and (min-height: 860px) {
   .sb-workflow.sc-act--pinned .sb-workflow-stage { padding-block: 105px 45px; }
   .sb-workflow.sc-act--pinned .sb-demo-body { min-height: 346px; }
 }
@@ -380,7 +380,7 @@ html { scroll-padding-top: 100px; }
   .sb-demo.is-interactive .sb-messages { min-height: 272px; }
   .sb-message p { font-size: 12px; }
   .sb-demo-bottom { padding: 17px 14px; }
-  .sb-approval { font-size: 10px; min-height: 28px; gap: 9px; }
+  .sb-approval { font-size: 10px; min-height: 44px; gap: 9px; }
   .sb-approval > span:last-child { max-width: 26ch; }
   .sb-section-lead { font-size: 16px; max-width: 40ch; margin: 20px 0 16px !important; }
   .sb-control-list > div { padding-left: 23px; }

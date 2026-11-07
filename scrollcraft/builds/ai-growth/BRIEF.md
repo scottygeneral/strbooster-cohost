@@ -17,7 +17,7 @@ Self-authored implementation brief under the user's explicit instruction to proc
 
 - Independent owners and small STR operators who want more bookings and less repetitive work; property managers get a distinct owner-acquisition pathway.
 - Custom system design, integration, implementation and ongoing support. Software and capabilities are scoped to the client's tools and needs.
-- Primary action everywhere: **Let's talk**, using the verified existing 30-minute discovery calendar, https://links.strbooster.com/widget/booking/OnBzpe1qEasSowPwkxXU.
+- Primary action everywhere: **Let's talk**, using the verified existing 30-minute discovery calendar, https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU.
 - Calendar evidence: source already links to this URL; connected GHL calendar is active with available slots. The cloud browser returned an access response, so public rendering must be checked separately and the existing email contact remains available.
 
 ## Feeling curve (before the score)

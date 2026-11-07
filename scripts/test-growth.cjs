@@ -251,6 +251,38 @@ async function contentAndFooter(page, name, home = false) {
   return 'Five service examples, no client story links, and visible legal/social footer destinations verified';
 }
 
+async function connectorState(page) {
+  return page.locator('.sb-network-lines path').first().evaluate(element => {
+    const css = getComputedStyle(element).strokeDashoffset;
+    // SVG computed styles can retain calc()/clamp() expressions. parseFloat
+    // turns those real painted values into NaN, so ask the browser to resolve
+    // the number or absolute length instead of parsing only its first token.
+    if (typeof CSSNumericValue !== 'undefined') {
+      for (const unit of ['px', 'number']) {
+        try {
+          const value = CSSNumericValue.parse(css).to(unit).value;
+          if (Number.isFinite(value)) return { connectorOffset: value, connectorCSS: css, connectorResolution: `typed-${unit}` };
+        } catch {}
+      }
+    }
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;visibility:hidden;pointer-events:none;';
+    document.body.append(probe);
+    try {
+      for (const [transform, field] of [[`translateX(${css})`, 'm41'], [`scaleX(${css})`, 'a']]) {
+        probe.style.transform = '';
+        probe.style.transform = transform;
+        if (!probe.style.transform) continue;
+        const resolved = getComputedStyle(probe).transform;
+        if (resolved === 'none') continue;
+        const value = new DOMMatrixReadOnly(resolved)[field];
+        if (Number.isFinite(value)) return { connectorOffset: value, connectorCSS: css, connectorResolution: transform };
+      }
+    } finally { probe.remove(); }
+    throw new Error(`Cannot resolve the painted SVG stroke-dashoffset: ${css}`);
+  });
+}
+
 async function heroMotion(page, name, pinned) {
   const hero = page.locator('.sb-team-hero');
   assert.equal(await hero.getAttribute('data-sc-act'), pinned ? 'pin' : 'flow');
@@ -262,8 +294,8 @@ async function heroMotion(page, name, pinned) {
   assert.match(await page.locator('.sb-system-art').getAttribute('aria-label'), /marketing.*social media.*guest support.*operations/i);
   if (!pinned) {
     assert.equal(await hero.evaluate(element => element.classList.contains('has-hero-motion')), false);
-    const offset = await page.locator('.sb-network-lines').evaluate(element => parseFloat(getComputedStyle(element).strokeDashoffset));
-    assert.ok(Math.abs(offset) < .01, 'The static hero shows fully connected services.');
+    const connector = await connectorState(page);
+    assert.ok(Math.abs(connector.connectorOffset) < .01, `The static hero shows fully connected services: ${JSON.stringify(connector)}`);
     return 'Natural flow with the complete connected service diagram';
   }
   const frames = [];
@@ -282,18 +314,20 @@ async function heroMotion(page, name, pinned) {
     await readable(page, 'h1', { viewport: true, fontSize: 30 });
     await readable(page, '[data-cta="hero"]', { viewport: true, fontSize: 12 });
     await noOverflow(page, `${name} hero progress ${progress}`);
-    frames.push(await hero.evaluate(element => ({
+    const frame = await hero.evaluate(element => ({
       progress: parseFloat(getComputedStyle(element).getPropertyValue('--sc-p')),
-      transforms: [...element.querySelectorAll('[data-hero-layer]')].map(layer => getComputedStyle(layer).transform),
-      connectorOffset: parseFloat(getComputedStyle(element.querySelector('.sb-network-lines')).strokeDashoffset)
-    })));
+      transforms: [...element.querySelectorAll('[data-hero-layer]')].map(layer => getComputedStyle(layer).transform)
+    }));
+    frames.push({ ...frame, ...await connectorState(page) });
     await screenshot(page, `${name}-hero-scroll-${index + 1}`);
     pixels.push(await page.locator('.sb-system-art').screenshot({ path: path.join(OUTPUT, `${name}-hero-art-${index + 1}.png`) }));
   }
+  fs.writeFileSync(path.join(OUTPUT, `${name}-hero-motion.json`), JSON.stringify(frames, null, 2));
   for (let i = 1; i < frames.length; i++) {
     const changed = frames[i].transforms.filter((transform, j) => transform !== frames[i - 1].transforms[j]).length;
     assert.ok(changed >= 3, 'Scroll must move independent hero layers.');
-    assert.ok(frames[i].connectorOffset < frames[i - 1].connectorOffset, 'Connections visibly draw as the team assembles.');
+    assert.ok(frames[i].connectorOffset < frames[i - 1].connectorOffset,
+      `Connections visibly draw as the team assembles: ${JSON.stringify(frames.map(frame => ({ progress: frame.progress, offset: frame.connectorOffset, css: frame.connectorCSS })))}`);
     assert.equal(pixels[i].equals(pixels[i - 1]), false, 'Hero diagram screenshots must change with real scroll.');
   }
   assert.ok(frames.at(-1).connectorOffset < .02, 'The hero resolves into the connected team.');

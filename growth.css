@@ -545,3 +545,12 @@ html { scroll-padding-top: 100px; }
 @media (max-width: 760px) { .sb-reviews { top: 84px; right: 12px; } .sb-reviews-badge { padding: 6px 12px; font-size: .78rem; } }
 @media print { .sb-reviews { display: none; } }
 @media (prefers-reduced-motion: reduce) { .sb-reviews-badge { transition: none; } .sb-reviews-badge:hover { transform: none; } }
+
+/* Booked Solid panel on guide pages */
+.community-panel.guide-book { grid-template-columns: minmax(150px, 220px) 1fr; align-items: center; gap: 48px; }
+.guide-book-cover { display: block; border-radius: 6px; box-shadow: 0 18px 40px #0d1f2d40; transition: transform .2s, box-shadow .2s; }
+.guide-book-cover img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.guide-book-cover:hover { transform: translateY(-3px) rotate(-1deg); box-shadow: 0 24px 48px #0d1f2d55; }
+.guide-book-cover:focus-visible { outline: 3px solid #cb9a22; outline-offset: 4px; }
+@media (max-width: 760px) { .community-panel.guide-book { grid-template-columns: 1fr; gap: 28px; } .guide-book-cover { max-width: 180px; } }
+@media (prefers-reduced-motion: reduce) { .guide-book-cover { transition: none; } .guide-book-cover:hover { transform: none; } }

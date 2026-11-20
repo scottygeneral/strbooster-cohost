@@ -11,13 +11,19 @@ BOOK_URL = 'https://www.amazon.com/dp/B0FF3BR42Q'
 
 
 def book_panel(chapters: str) -> str:
-    return ('<div class="community-panel guide-book"><div><p class="eyebrow">Go deeper</p>'
+    link = f'href="{BOOK_URL}" target="_blank" rel="noopener noreferrer"'
+    return ('<div class="community-panel guide-book">'
+            f'<a class="guide-book-cover" {link} aria-label="Get Booked Solid by David Anthony Scott on Amazon (opens in a new tab)">'
+            '<picture><source srcset="/assets/booked-solid-cover.webp" type="image/webp">'
+            '<img src="/assets/booked-solid-cover.jpg" alt="Booked Solid book cover by David Anthony Scott" '
+            'width="480" height="768" loading="lazy"></picture></a>'
+            '<div><p class="eyebrow">Go deeper</p>'
             '<h2>From the book <em>Booked Solid</em></h2>'
             f'<p>This guide is adapted from {chapters} of <em>Booked Solid: Scaling Direct Bookings and Guest '
             'Loyalty Through Brand Story and Experience</em> by David Anthony Scott. The book includes worked '
-            'examples, AI prompts and a practical workbook.</p></div><div class="actions">'
-            f'<a class="btn" href="{BOOK_URL}" target="_blank" rel="noopener noreferrer">Get Booked Solid on Amazon ↗</a>'
-            '</div></div>')
+            'examples, AI prompts and a practical workbook.</p><div class="actions">'
+            f'<a class="btn" {link}>Get the book on Amazon <span aria-hidden="true">→</span></a>'
+            '</div></div></div>')
 
 
 GUIDES = {

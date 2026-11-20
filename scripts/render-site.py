@@ -108,6 +108,9 @@ def apply_discovery(source: str, content: str, title: str = DISCOVERY_TITLE,
         ('property', 'og:title', f'{title} | STR Booster'),
         ('property', 'og:description', description),
         ('property', 'og:image', 'https://strbooster.com/assets/ai-growth-social.png'),
+        ('name', 'twitter:title', f'{title} | STR Booster'),
+        ('name', 'twitter:description', description),
+        ('name', 'twitter:image', 'https://strbooster.com/assets/ai-growth-social.png'),
     ):
         source = re.sub(
             rf'<meta\b[^>]*\b{attr}=["\']{key}["\'][^>]*>',

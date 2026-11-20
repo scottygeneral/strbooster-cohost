@@ -116,7 +116,7 @@ def guide_steps(markup):
     if not article:
         return []
     return [(re.sub(r'^\d+\.\s*', '', html.unescape(n)), html.unescape(t))
-            for n, t in re.findall(r'<h2>(.*?)</h2>\s*<p>(.*?)</p>', article.group(1), re.S)]
+            for n, t in re.findall(r'<h2>(\d+\..*?)</h2>\s*<p>(.*?)</p>', article.group(1), re.S)]
 
 
 def enhance_page(markup, slug, title, desc):
@@ -148,7 +148,7 @@ def enhance_page(markup, slug, title, desc):
     if slug in GUIDES:
         graph.append({'@type':'Article','@id':canonical+'#article','headline':title,'description':desc,'url':canonical,
                       'mainEntityOfPage':{'@id':canonical+'#webpage'},'author':{'@id':BASE+'/#founder'},
-                      'publisher':{'@id':BASE+'/#organization'},'dateModified':GUIDE_UPDATED,'image':OG_IMAGE,'inLanguage':'en'})
+                      'publisher':{'@id':BASE+'/#organization'},'dateModified':GUIDE_UPDATED,'image':OG_IMAGE,'inLanguage':'en','isBasedOn':{'@type':'Book','name':'Booked Solid: Scaling Direct Bookings and Guest Loyalty Through Brand Story and Experience','bookEdition':'Second edition','author':{'@id':BASE+'/#founder'},'url':'https://www.amazon.com/dp/B0FF3BR42Q'}})
         steps=guide_steps(markup)
         if steps:
             graph.append({'@type':'HowTo','name':title,'description':desc,'totalTime':HOWTO_TIME.get(slug,'PT1H'),

@@ -11,7 +11,7 @@ The homepage is a single dark, motion-led page: **AI growth systems for short-te
 
 Sections: hero (Higgsfield-generated rental render with a muted, script-started loop video and floating service chips), a scroll-reactive service marquee, the premise (manifesto that lights up word by word over a tangle-to-signal render), the growth stack (four systems, each with an animated HTML/CSS interface illustration from `partials/systems-ui.html`), how it works, a light guest-focus section with illustrative lifestyle photography, the founder, and a full-screen “Let’s talk.” close.
 
-There are no client logos, testimonials or results figures. Interface illustrations are labelled as illustrations, and generated photography is marked as illustrative. Reduced-motion visitors get every section in its final state with no video, marquee or scroll effects; the page is readable without JavaScript.
+There are no client logos or results figures on the page itself. Client reviews come from the GHL Reputation widget, opened from a small floating “Client reviews” badge (`reviews.js`) near the top-right of every page; the widget loads only when a visitor opens it. Interface illustrations are labelled as illustrations, and generated photography is marked as illustrative. Reduced-motion visitors get every section in its final state with no video, marquee or scroll effects; the page is readable without JavaScript.
 
 ## Build and preview
 
@@ -34,6 +34,8 @@ Open http://127.0.0.1:8765 after building. Netlify runs the renderer and content
 - `assets/dx-*`: homepage imagery and the hero loop (generated with Higgsfield).
 - `templates/services.html`, `templates/approach.html`, `templates/discovery.html`: main-content fragments for the three core inner pages.
 - `growth.css`, `growth.js`: new design, responsive layout and progressively enhanced workflow.
+- `reviews.js`: floating client-reviews badge and panel (GHL Reputation widget, lazy-loaded). Styles live at the end of `growth.css`.
+- `scripts/guides_content.py`: long-form guide content adapted from *Booked Solid*.
 - `vendor/scrollcraft/`: unchanged third-party engine, license and source attribution.
 - `scripts/render-site.py`: build entry point, source overrides and shared discovery-call CTAs.
 - `scripts/render-pages.py`: retained generator for existing service, resource and case-study content.

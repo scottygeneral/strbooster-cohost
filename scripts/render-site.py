@@ -86,7 +86,7 @@ def apply_assets(source: str) -> str:
     additions = []
     if not re.search(r'\bhref=["\']/growth\.css(?:\?[^"\']*)?["\']', source):
         additions.append('<link rel="stylesheet" href="/growth.css">')
-    for asset in ('app.js', 'growth.js'):
+    for asset in ('app.js', 'growth.js', 'reviews.js'):
         if not re.search(r'\bsrc=["\']/' + re.escape(asset) + r'(?:\?[^"\']*)?["\']', source):
             additions.append(f'<script src="/{asset}" defer></script>')
     if additions:

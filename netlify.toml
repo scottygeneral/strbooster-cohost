@@ -1,7 +1,10 @@
 # Static output. Rebuild before deployment so inner-page navigation stays in sync.
+# Only the public site files are copied into _site/ (see scripts/build-public.py),
+# so the README, scripts, templates, briefs, uploads and screenshots stay private.
 [build]
-  publish = "."
-  command = "python3 scripts/render-site.py && python3 scripts/check-story.py"
+  publish = "_site"
+  command = "python3 scripts/render-site.py && python3 scripts/check-story.py && python3 scripts/build-public.py"
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/community.html"

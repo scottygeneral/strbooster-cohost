@@ -93,3 +93,16 @@
   to = "/growth-services.html"
   status = 301
   force = true
+
+# The 30-day growth sprint offer is retired; send old links to the service overview.
+[[redirects]]
+  from = "/growth-sprint.html"
+  to = "/growth-services.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/growth-sprint"
+  to = "/growth-services.html"
+  status = 301
+  force = true

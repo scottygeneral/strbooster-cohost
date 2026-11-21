@@ -1,0 +1,67 @@
+name: Site checks
+# Runs on every pull request into main, before anything reaches strbooster.com.
+# Netlify deploys main straight to production, so this is the safety net.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    name: Build and content checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild the site from templates
+        run: |
+          python3 scripts/render-site.py
+          python3 scripts/check-story.py
+      - name: Committed pages match the templates
+        # sitemap.xml is skipped because the build stamps today's date into it.
+        run: |
+          if ! git diff --quiet -- . ':(exclude)sitemap.xml'; then
+            echo "::error::These generated pages differ from what the templates produce. Edit templates/ and re-run scripts/render-site.py, then commit the result."
+            git diff --stat -- . ':(exclude)sitemap.xml'
+            exit 1
+          fi
+      - name: JavaScript syntax
+        run: |
+          for f in *.js netlify/functions/*.js; do node --check "$f"; done
+
+  browser:
+    name: Pages load on desktop and phone
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test tools only
+        timeout-minutes: 5
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install chromium
+      - name: Check every page
+        timeout-minutes: 6
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/site-server.log 2>&1 &
+          trap 'kill $!' EXIT
+          for i in $(seq 40); do curl -sf http://127.0.0.1:8765/ >/dev/null && break; sleep 0.25; done
+          node scripts/test-site.cjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-screenshots
+          path: previews/site-check/
+          if-no-files-found: warn
+          retention-days: 14

@@ -372,7 +372,7 @@ html { scroll-padding-top: 100px; }
 
 /* A substantial shared footer with explicit legal and social destinations. */
 .site-footer.story-footer { margin: 0; padding: 58px 0 25px; background: #0d1f2d; color: #e5f0eb; border-top: 1px solid #28424b; font: 400 14px/1.6 var(--sc-font-text); }
-.story-footer .sb-footer-main { display: grid; grid-template-columns: 1.5fr .8fr 1fr; align-items: start; gap: 64px; }
+.story-footer .sb-footer-main { display: grid; grid-template-columns: 1.4fr .9fr .8fr 1fr; align-items: start; gap: 56px; }
 .story-footer .sb-brand { color: #f5faf8; }
 .story-footer .sb-brand svg > polyline:last-child { stroke: #a9dbbc; }
 .story-footer .sb-footer-brand > p { color: #b7cdce; font-size: 14px; line-height: 1.7; margin: 22px 0 0; }
@@ -418,7 +418,7 @@ html { scroll-padding-top: 100px; }
   .growth-home .sb-network-core > svg { width: 22px; height: 20px; margin-bottom: 6px; }
   .sb-network-caption { font-size: 8px; }
   .sb-benefits-grid { gap: 45px; grid-template-columns: 1fr 1.2fr; }
-  .story-footer .sb-footer-main { gap: 35px; grid-template-columns: 1.2fr .7fr 1fr; }
+  .story-footer .sb-footer-main { gap: 30px; grid-template-columns: 1.1fr .9fr .7fr 1fr; }
 }
 @media (max-width: 700px) {
   .sb-hero-stage { min-height: 0; padding-block: 30px 24px; }
@@ -454,7 +454,7 @@ html { scroll-padding-top: 100px; }
   .sb-workflow-heading > p { max-width: 40ch; }
   .sb-scenarios button { min-height: 44px; font-size: 10px; padding-inline: 7px; }
   .site-footer.story-footer { padding-block: 40px 24px; }
-  .story-footer .sb-footer-main { grid-template-columns: .85fr 1.15fr; gap: 30px 20px; }
+  .story-footer .sb-footer-main { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
   .story-footer .sb-footer-brand { grid-column: 1 / -1; }
   .story-footer .sb-footer-brand > p { margin-top: 15px; font-size: 13px; }
   .story-footer .sb-footer-column h2 { font-size: 13px; margin-bottom: 8px; }
@@ -554,3 +554,44 @@ html { scroll-padding-top: 100px; }
 .guide-book-cover:focus-visible { outline: 3px solid #cb9a22; outline-offset: 4px; }
 @media (max-width: 760px) { .community-panel.guide-book { grid-template-columns: 1fr; gap: 28px; } .guide-book-cover { max-width: 180px; } }
 @media (prefers-reduced-motion: reduce) { .guide-book-cover { transition: none; } .guide-book-cover:hover { transform: none; } }
+
+/* Services dropdown in the shared header (details/summary; app.js closes it on outside click and Escape). */
+.story-header .sb-nav-group { position: relative; }
+.story-header .sb-nav-group > summary { display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; list-style: none; cursor: pointer; font: 450 14px/1.4 var(--sc-font-text); color: #3c505a; white-space: nowrap; }
+.story-header .sb-nav-group > summary::-webkit-details-marker { display: none; }
+.story-header .sb-nav-group > summary::after { content: none; }
+.story-header .sb-nav-group > summary:hover, .story-header .sb-nav-group[open] > summary { color: #1a7f64; }
+.sb-chevron { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 160ms ease-out; }
+.sb-nav-group[open] .sb-chevron { transform: rotate(180deg); }
+.story-header .sb-dropdown { position: absolute; top: calc(100% + 14px); left: -18px; z-index: 80; width: 320px; display: flex; flex-direction: column; padding: 10px; background: #fff; border: 1px solid var(--sb-line, #d9e1df); border-radius: 12px; box-shadow: 0 18px 40px -18px #0d1f2d40; }
+.story-header .sb-dropdown a { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: #0d1f2d; }
+.story-header .sb-dropdown a:hover { background: #eaf3ee; }
+.story-header .sb-dropdown strong { font: 550 14px/1.35 var(--sc-font-text); }
+.story-header .sb-dropdown small { font: 400 12px/1.4 var(--sc-font-text); color: #536775; }
+@media (max-width: 900px) {
+  .story-header .sb-nav-group > summary { font-size: 12px; }
+}
+/* Legacy styles.css makes .nav-links scroll under 1000px, which would clip the dropdown. */
+@media (min-width: 701px) { .story-header .sb-nav-links { overflow: visible; max-height: none; } }
+@media (max-width: 700px) {
+  .has-js .story-header .sb-nav-links.open { flex-direction: column; align-items: stretch; flex-wrap: nowrap; }
+  .story-header .sb-nav-links.open > a:not(.sb-button) { font-size: 13px; }
+  .story-header .sb-nav-group { flex: none; width: 100%; border-bottom: 1px solid var(--sb-line, #d9e1df); }
+  body:has(.sb-nav-links.open) .sb-reviews { display: none; }
+  .story-header .sb-nav-group > summary { width: 100%; justify-content: space-between; padding: 12px 0; font-size: 13px; }
+  .story-header .sb-dropdown { position: static; width: 100%; padding: 0 0 10px; border: 0; box-shadow: none; background: transparent; }
+  .story-header .sb-dropdown a { padding: 9px 0; min-height: 44px; justify-content: center; }
+}
+/* Dark homepage header */
+.dx-home .story-header .sb-nav-group > summary { color: var(--soft); font-weight: 500; }
+.dx-home .story-header .sb-nav-group > summary:hover, .dx-home .story-header .sb-nav-group[open] > summary { color: var(--bone); }
+.dx-home .story-header .sb-dropdown { background: rgb(7 22 33 / .96); border-color: var(--line); backdrop-filter: blur(14px); }
+.dx-home .story-header .sb-dropdown a { color: var(--bone); }
+.dx-home .story-header .sb-dropdown a:hover { background: rgb(245 243 238 / .07); }
+.dx-home .story-header .sb-dropdown small { color: var(--soft); }
+@media (max-width: 700px) {
+  .dx-home .story-header .sb-nav-group { border-color: var(--line); }
+  .dx-home .site-header.story-header:has(.sb-nav-links.open) { background: #071621; backdrop-filter: none; border-color: var(--line); max-height: 100dvh; overflow-y: auto; }
+  .dx-home .story-header .sb-dropdown { background: transparent; backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .sb-chevron { transition: none; } }

@@ -22,6 +22,7 @@ RETIRED_STORY_PAGES = frozenset({
     'case-study-north-carolina.html',
     'case-study-tuscany.html',
     'case-study-phoenix.html',
+    'growth-sprint.html',  # 30-day sprint offer retired; redirects to /growth-services.html
 })
 META = {
  'index': ('Vacation Rental Growth & Automation', 'Grow your vacation rental with guest insights, revenue management, listing optimization and automation. Explore expert services and a free host community.'),
@@ -35,7 +36,6 @@ META = {
  'guest-intel': ('Guest Intel: Find Your Ideal Vacation Rental Guest', 'Identify your ideal vacation rental guest with Guest Intel. Apply guest insights to positioning, listing content and marketing, with STR Booster support.'),
  '52rev': ('52Rev: Vacation Rental Revenue Marketing Beta', 'Join the 52Rev beta waitlist. Connect weekly guest targeting, revenue planning and marketing playbooks for your vacation rental.'),
  'tools-partners': ('Vacation Rental Software & Partner Offers', 'Explore vacation rental software for pricing, PMS, guest marketing and operations, with partner offers from Hospitable, HighLevel, PriceLabs and more.'),
- 'growth-sprint': ('30-Day Vacation Rental Revenue Growth Sprint', 'Implement a focused vacation rental growth plan in 30 days. Connect guest positioning, pricing and automation for one primary property. US$2,750.'),
  'get-expert-help': ('Vacation Rental Consulting: Talk to STR Booster', 'Discuss your vacation rental with STR Booster. Get help choosing a focused project or ongoing support for revenue, positioning, marketing and automation.'),
  'guest-positioning-guide': ('How to Identify Your Ideal Vacation Rental Guest', 'Use guest reviews, travel needs and seasonal demand to identify your ideal vacation rental guest and improve your listing positioning.'),
  'weekly-revenue-guide': ('Vacation Rental Pricing & Marketing: A Weekly Plan', 'Follow a weekly routine to review booking pace, target relevant guests and coordinate vacation rental pricing, stay rules and marketing.'),
@@ -143,7 +143,7 @@ def enhance_page(markup, slug, title, desc):
            {'@type':'WebPage','@id':canonical+'#webpage','url':canonical,'name':title,'description':desc,'isPartOf':{'@id':BASE+'/#website'}}]
     if slug!='index':
         graph.append({'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':BASE+'/'},{'@type':'ListItem','position':2,'name':title,'item':canonical}]})
-    if slug in ['listing-optimization','revenue-management','technology-automation','websites-funnels','growth-sprint']:
+    if slug in ['listing-optimization','revenue-management','technology-automation','websites-funnels']:
         graph.append({'@type':'Service','name':title,'description':desc,'url':canonical,'provider':{'@id':BASE+'/#organization'}})
     if slug in GUIDES:
         graph.append({'@type':'Article','@id':canonical+'#article','headline':title,'description':desc,'url':canonical,

@@ -6,6 +6,15 @@
   command = "python3 scripts/render-site.py && python3 scripts/check-story.py && python3 scripts/build-public.py"
   functions = "netlify/functions"
 
+# Images, video and fonts rarely change, so browsers keep them for a week
+# instead of re-checking on every visit (PageSpeed flags the default of 0).
+# A replaced file under the same name can take up to a week to show for
+# returning visitors; give a changed asset a new file name to avoid that.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
 # One host for search engines: canonical tags, the sitemap and llms.txt all use
 # the apex domain, so www requests move there permanently.
 [[redirects]]

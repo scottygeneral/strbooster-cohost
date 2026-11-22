@@ -1,20 +1,21 @@
 # STR Booster
 
-> STR Booster builds custom AI growth systems for short-term rental owners, co-hosts and property managers: AI agents for marketing, revenue management and sales, direct bookings and guest service, set up and supported so the owner stays in control. STR Booster is a division of Green Door Hotel Inc., founded by David Anthony Scott.
+> STR Booster builds and runs growth systems for independent short-term rental property managers with 10 to 100 doors. Two outcomes: more direct revenue (Direct Revenue System) and more owner contracts (Owner Acquisition System), tied together by revenue management in the Growth Partner plan. STR Booster is a division of Green Door Hotel Inc., founded by David Anthony Scott.
 
 ## About
 
-- [Homepage](https://strbooster.com/): the four systems (marketing agents, revenue management and sales, direct booking systems, guest concierge), how engagements work and the founder.
-- [How we work](https://strbooster.com/our-approach): discovery, build and ongoing support.
-- [Book a discovery call](https://strbooster.com/get-expert-help): 30-minute call to scope the work. Pricing is agreed on this call.
+- [Homepage](https://strbooster.com/): the two systems, plans, how engagements work and the founder.
+- [Systems and pricing](https://strbooster.com/growth-services): Growth Audit (free), Direct Revenue System, Owner Acquisition System and Growth Partner, with starting prices and guarantees.
+- [Owner Acquisition System](https://strbooster.com/owner-acquisition): owner landing page, revenue estimate, AI follow-up, nurture for owners and realtors, monthly pipeline report.
+- [How we work](https://strbooster.com/our-approach): Growth Audit, build and run.
+- [Book a discovery call](https://strbooster.com/get-expert-help): 30-minute call; final scope is confirmed before any work begins.
 
-## Services
+## What's inside the systems
 
-- [AI agents and automation](https://strbooster.com/growth-services): marketing, social media, enquiry and sales, guest support and operations agents.
 - [Revenue management](https://strbooster.com/revenue-management): pricing, minimum stays, seasonal strategy and channel mix.
+- [Websites and booking funnels](https://strbooster.com/websites-funnels): direct booking websites, lead capture and follow-up.
 - [Listing optimization](https://strbooster.com/listing-optimization): ideal-guest positioning, listing copy and photo strategy.
 - [Technology and automation](https://strbooster.com/technology-automation): PMS, CRM and AI workflow setup.
-- [Websites and booking funnels](https://strbooster.com/websites-funnels): direct booking websites, lead capture and follow-up.
 
 ## Guides
 
@@ -23,10 +24,10 @@
 - [Short-term rental automation: where to start](https://strbooster.com/automation-guide)
 - [All resources](https://strbooster.com/resources)
 
-## Apps
+## Free tools
 
-- [Guest Intel](https://strbooster.com/guest-intel): identify a rental's ideal guest.
-- [52Rev](https://strbooster.com/52rev): weekly revenue marketing planning (beta).
+- [Guest Intel](https://strbooster.com/guest-intel): identify a rental's ideal guest (free).
+- [52Rev](https://strbooster.com/52rev): weekly revenue marketing planning (free beta waitlist).
 
 ## Contact
 

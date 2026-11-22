@@ -1,15 +1,15 @@
-# STR Booster — Custom AI Growth Systems
+# STR Booster — Growth Systems for STR Property Managers
 
-STR Booster builds AI agents and automation for short-term rental marketing, social media, booking enquiries, guest support and operations. A separate owner-acquisition pathway serves property managers and co-hosts. The offer combines implementation with ongoing support and owner control.
+STR Booster builds and runs growth systems for independent short-term rental property managers with 10 to 100 doors. Two outcomes: more direct revenue (Direct Revenue System) and more owner contracts (Owner Acquisition System), tied together by revenue management in the Growth Partner plan. The free Growth Audit is the main lead magnet; Guest Intel and 52Rev are free tools, not services. Plans, starting prices and guarantees live on `/growth-services.html#pricing` and the homepage `#pricing` section.
 
 The primary site-wide CTA is **Let’s talk**, linking to the verified provider-hosted page for the existing 30-minute discovery calendar:
 https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU
 
 ## Design and content
 
-The homepage is a single dark, motion-led page: **AI growth systems for short-term rentals.** "Custom AI for your marketing, bookings and guest service. Built for your business, with support that keeps you in control." Every call to action is **Let’s talk** (the discovery calendar above). The brief and feeling curve are in `scrollcraft/builds/disruptor/BRIEF.md`.
+The homepage is a single dark, motion-led page: **More direct bookings. More owners.** for managers with 10 to 100 doors. Every primary call to action is **Let’s talk** (the discovery calendar above). The brief and feeling curve are in `scrollcraft/builds/disruptor/BRIEF.md`.
 
-Sections: hero (Higgsfield-generated rental render with a muted, script-started loop video and floating service chips), a scroll-reactive service marquee, the premise (manifesto that lights up word by word over a tangle-to-signal render), the growth stack (four systems, each with an animated HTML/CSS interface illustration from `partials/systems-ui.html`), how it works, a light guest-focus section with illustrative lifestyle photography, the founder, and a full-screen “Let’s talk.” close.
+Sections: hero, a scroll-reactive marquee, the premise (OTA fees and owner churn), the growth stack (two systems, each with an animated HTML/CSS interface illustration from `partials/systems-ui.html`, then Growth Partner and the concierge add-on), plans and starting prices, how it works with a fit list, a light guest-focus section, the founder, and a full-screen “Let’s talk.” close. The owner acquisition page is `templates/owner-acquisition.html` (main content swapped into the `owner-acquisition` shell from `render-pages.py`).
 
 There are no client logos or results figures on the page itself. Client reviews come from the GHL Reputation widget, opened from a small floating “Client reviews” badge (`reviews.js`) near the top-right of every page; the widget loads only when a visitor opens it. Interface illustrations are labelled as illustrations, and generated photography is marked as illustrative. Reduced-motion visitors get every section in its final state with no video, marquee or scroll effects; the page is readable without JavaScript.
 

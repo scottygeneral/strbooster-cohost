@@ -13,8 +13,8 @@ assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(BASE.hostname) && BASE.pr
 const BOOKING = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU';
 const SECTIONS = ['benefits', 'how-it-works', 'owner-control', 'for-managers', 'lets-talk'];
 const FOOTER_LINKS = [
-  ['Privacy Policy', '/privacy.html'],
-  ['Terms & Conditions', '/terms.html'],
+  ['Privacy Policy', '/privacy'],
+  ['Terms & Conditions', '/terms'],
   ['Instagram', 'https://www.instagram.com/strbooster/'],
   ['YouTube', 'https://www.youtube.com/@strbooster']
 ];

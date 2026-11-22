@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parent.parent
 BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
 DISCOVERY_TITLE = 'Book a Discovery Call'
 DISCOVERY_DESCRIPTION = (
-    'Book a 30-minute discovery call with STR Booster. Discuss your rental '
-    'business, the work you want to automate and custom AI systems for growth.'
+    'Book a 30-minute discovery call with STR Booster. Discuss your portfolio, '
+    'your direct revenue and owner growth goals, and which growth system fits.'
 )
 HEADER = r'<header class="site-header(?: story-header)?">.*?</header>'
 FOOTER = r'<footer class="site-footer(?: story-footer)?">.*?</footer>'
@@ -160,10 +160,12 @@ def apply_growth(root: Path) -> int:
         raise ValueError('The homepage template must contain its shared header and footer.')
     overrides = {
         'get-expert-help.html': ('discovery.html', DISCOVERY_TITLE, DISCOVERY_DESCRIPTION),
-        'growth-services.html': ('services.html', 'AI Agents & Automation for Short-Term Rentals',
-            'AI agents for marketing, social media, booking enquiries, guest support and operations. Built for your rental business, with setup and ongoing support.'),
-        'our-approach.html': ('approach.html', 'How We Build Your AI Growth System',
-            'Start with the work you want to improve. STR Booster builds AI agents and automation around your rental business, then helps you keep them working.'),
+        'growth-services.html': ('services.html', 'Growth Systems & Pricing for STR Property Managers',
+            'Direct Revenue System, Owner Acquisition System and Growth Partner plans for short-term rental managers with 10 to 100 doors. Starting prices, guarantees and a free Growth Audit.'),
+        'owner-acquisition.html': ('owner-acquisition.html', 'Owner Acquisition for Short-Term Rental Property Managers',
+            'Win more owner contracts with an owner landing page, revenue estimates, AI follow-up and nurture for owners and realtors. Built and run for property managers.'),
+        'our-approach.html': ('approach.html', 'How We Build Your Growth System',
+            'Start with a free Growth Audit. STR Booster builds your direct revenue and owner acquisition systems around your PMS and markets, then runs them with you.'),
     }
     (root / 'index.html').write_text(source, encoding='utf-8')
     updated = 1

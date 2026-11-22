@@ -27,15 +27,16 @@ RETIRED_STORY_PAGES = frozenset({
 META = {
  'index': ('Vacation Rental Growth & Automation', 'Grow your vacation rental with guest insights, revenue management, listing optimization and automation. Explore expert services and a free host community.'),
  'our-approach': ('Vacation Rental Growth Strategy', 'Connect guest positioning, pricing, marketing and automation in one vacation rental growth strategy. Build a more valuable stay and a stronger business.'),
- 'growth-services': ('Vacation Rental Consulting & Growth Services', 'Explore vacation rental consulting for listing optimization, revenue management, automation and direct booking websites. Choose focused or ongoing support.'),
+ 'growth-services': ('Growth Systems & Pricing for STR Property Managers', 'Direct Revenue System, Owner Acquisition System and Growth Partner plans for short-term rental managers with 10 to 100 doors. Starting prices, guarantees and a free Growth Audit.'),
+ 'owner-acquisition': ('Owner Acquisition for Short-Term Rental Property Managers', 'Win more owner contracts with an owner landing page, revenue estimates, AI follow-up and nurture for owners and realtors. Built and run for property managers.'),
  'listing-optimization': ('Airbnb & Vacation Rental Listing Optimization', 'Improve your vacation rental listing with ideal guest positioning, copy, photo strategy and amenity priorities. Get focused help from STR Booster.'),
  'revenue-management': ('Vacation Rental Revenue Management Services', 'Connect vacation rental pricing, minimum stays, seasonal marketing and channel distribution. Get revenue management support built around your property.'),
  'technology-automation': ('Short-Term Rental Automation & PMS Optimization', 'Improve your PMS, CRM and guest workflows with short-term rental automation. Connect marketing, social media and defined AI tasks around your operation.'),
  'websites-funnels': ('Vacation Rental Websites & Direct Booking Funnels', 'Build a vacation rental website with booking pathways, lead capture, CRM, chatbots and automated follow-up. Turn guest interest into booking opportunities.'),
- 'our-apps': ('Vacation Rental Apps: Guest Intel & 52Rev', 'Explore Guest Intel for ideal guest insights and 52Rev for weekly revenue marketing. Specialist apps developed by STR Booster to complement your growth plan.'),
+ 'our-apps': ('Free Vacation Rental Tools: Guest Intel & 52Rev', 'Free tools from STR Booster: Guest Intel for ideal guest insights and the 52Rev beta waitlist for weekly revenue marketing.'),
  'guest-intel': ('Guest Intel: Find Your Ideal Vacation Rental Guest', 'Identify your ideal vacation rental guest with Guest Intel. Apply guest insights to positioning, listing content and marketing, with STR Booster support.'),
  '52rev': ('52Rev: Vacation Rental Revenue Marketing Beta', 'Join the 52Rev beta waitlist. Connect weekly guest targeting, revenue planning and marketing playbooks for your vacation rental.'),
- 'tools-partners': ('Vacation Rental Software & Partner Offers', 'Explore vacation rental software for pricing, PMS, guest marketing and operations, with partner offers from Hospitable, HighLevel, PriceLabs and more.'),
+ 'tools-partners': ('Vacation Rental Software: Partner Tools (Affiliate)', 'Vacation rental software we use and recommend for pricing, PMS, guest marketing and operations. Affiliate links, plainly disclosed.'),
  'get-expert-help': ('Vacation Rental Consulting: Talk to STR Booster', 'Discuss your vacation rental with STR Booster. Get help choosing a focused project or ongoing support for revenue, positioning, marketing and automation.'),
  'guest-positioning-guide': ('How to Identify Your Ideal Vacation Rental Guest', 'Use guest reviews, travel needs and seasonal demand to identify your ideal vacation rental guest and improve your listing positioning.'),
  'weekly-revenue-guide': ('Vacation Rental Pricing & Marketing: A Weekly Plan', 'Follow a weekly routine to review booking pace, target relevant guests and coordinate vacation rental pricing, stay rules and marketing.'),
@@ -46,17 +47,17 @@ HEADINGS = {
  'revenue-management': 'Vacation rental revenue management.<br><em>Pricing and channels, aligned.</em>',
  'technology-automation': 'Short-term rental automation.<br><em>Make your tools do more.</em>',
  'websites-funnels': 'Vacation rental websites.<br><em>Built for direct bookings.</em>',
- 'tools-partners': 'Vacation rental software.<br><em>Tools and partner offers.</em>',
+ 'tools-partners': 'Vacation rental software.<br><em>Affiliate links, plainly disclosed.</em>',
 }
 RELATED = {
  'guest-positioning-guide': [('guest-intel','Explore Guest Intel'),('listing-optimization','Get listing optimization support')],
  'weekly-revenue-guide': [('revenue-management','Explore revenue management services'),('52rev','Discover 52Rev revenue marketing')],
- 'automation-guide': [('technology-automation','Explore rental automation services'),('tools-partners','Compare tools and partner offers')],
+ 'automation-guide': [('technology-automation','Explore rental automation services'),('technology-automation','Explore tech and automation support')],
  'listing-optimization': [('guest-positioning-guide','How to identify your ideal guest'),('websites-funnels','Carry your positioning into your website')],
- 'revenue-management': [('weekly-revenue-guide','Build a weekly pricing and marketing routine'),('tools-partners','Explore pricing and distribution tools')],
- 'technology-automation': [('automation-guide','Choose your first automation'),('tools-partners','Explore software and partner offers')],
+ 'revenue-management': [('weekly-revenue-guide','Build a weekly pricing and marketing routine'),('growth-services','See plans and pricing')],
+ 'technology-automation': [('automation-guide','Choose your first automation'),('growth-services','See plans and pricing')],
  'websites-funnels': [('guest-positioning-guide','Define the guest your website should attract'),('technology-automation','Connect your CRM and marketing workflows')],
- 'resources': [('growth-services','Explore AI agents and automation services')],
+ 'resources': [('growth-services','See growth systems and pricing'),('owner-acquisition','Explore the Owner Acquisition System')],
 }
 
 # Visible FAQ sections (rendered on the page) with matching FAQPage schema.
@@ -72,7 +73,7 @@ FAQS = {
   ('What is vacation rental revenue management?', 'Vacation rental revenue management is the practice of setting nightly rates, minimum stays, gap-night rules, booking windows and channel mix from real demand, so each night earns as much as it reasonably can after the cost of winning the booking.'),
   ('Do I need to change my pricing tool?', 'No. We work with the tools you already use, including dynamic pricing tools such as PriceLabs. Any change or new subscription is agreed with you before implementation.'),
   ('How are pricing and marketing connected?', 'Each week of the calendar is reviewed for booking pace and the guest most likely to travel. Pricing, stay rules and promotion then respond to the same plan instead of working separately.'),
-  ('How much does revenue management support cost?', 'Scope and cost depend on your property and the level of support you need. They are agreed on a 30-minute discovery call before any work begins.'),
+  ('How much does revenue management support cost?', 'Revenue management is part of the Growth Partner plan, from $2,000 a month, alongside the Direct Revenue and Owner Acquisition systems. See the pricing page for details.'),
  ],
  'technology-automation': [
   ('What can be automated in a short-term rental business?', 'Common starting points are guest messaging, enquiry follow-up, review requests, CRM updates, social media scheduling and repetitive PMS tasks. The best first automation has a clear trigger and a result you can check.'),

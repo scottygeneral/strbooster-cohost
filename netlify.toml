@@ -6,6 +6,14 @@
   command = "python3 scripts/render-site.py && python3 scripts/check-story.py && python3 scripts/build-public.py"
   functions = "netlify/functions"
 
+# One host for search engines: canonical tags, the sitemap and llms.txt all use
+# the apex domain, so www requests move there permanently.
+[[redirects]]
+  from = "https://www.strbooster.com/*"
+  to = "https://strbooster.com/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/community.html"
   to = "https://my.hostgrowthhub.com/communities/groups/host-growth-hub/home?invite=6aa7a9206e3c5d8ede86e13d"

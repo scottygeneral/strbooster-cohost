@@ -5,6 +5,7 @@ import re
 
 BASE = 'https://strbooster.com'
 OG_IMAGE = BASE + '/assets/dx-og.jpg'
+GUIDE_PUBLISHED = '2026-09-14'
 GUIDE_UPDATED = '2026-11-20'
 GUIDE_UPDATED_LABEL = 'November 2026'
 SAME_AS = ['https://www.instagram.com/strbooster/', 'https://www.youtube.com/@strbooster',
@@ -27,19 +28,20 @@ RETIRED_STORY_PAGES = frozenset({
 META = {
  'index': ('Vacation Rental Growth & Automation', 'Grow your vacation rental with guest insights, revenue management, listing optimization and automation. Explore expert services and a free host community.'),
  'our-approach': ('Vacation Rental Growth Strategy', 'Connect guest positioning, pricing, marketing and automation in one vacation rental growth strategy. Build a more valuable stay and a stronger business.'),
- 'growth-services': ('Growth Systems & Pricing for STR Property Managers', 'Direct Revenue System, Owner Acquisition System and Growth Partner plans for short-term rental managers with 10 to 100 doors. Starting prices, guarantees and a free Growth Audit.'),
- 'owner-acquisition': ('Owner Acquisition for Short-Term Rental Property Managers', 'Win more owner contracts with an owner landing page, revenue estimates, AI follow-up and nurture for owners and realtors. Built and run for property managers.'),
+ 'growth-services': ('Short-Term Rental Growth Systems & Pricing', 'Direct Revenue, Owner Acquisition and Growth Partner plans for STR managers with 10 to 100 doors, with starting prices, guarantees and a free Growth Audit.'),
+ 'owner-acquisition': ('Owner Acquisition for Vacation Rental Managers', 'Win more owner contracts with an owner landing page, revenue estimates, AI follow-up and nurture for owners and realtors. Built and run for property managers.'),
  'listing-optimization': ('Airbnb & Vacation Rental Listing Optimization', 'Improve your vacation rental listing with ideal guest positioning, copy, photo strategy and amenity priorities. Get focused help from STR Booster.'),
  'revenue-management': ('Vacation Rental Revenue Management Services', 'Connect vacation rental pricing, minimum stays, seasonal marketing and channel distribution. Get revenue management support built around your property.'),
  'technology-automation': ('Short-Term Rental Automation & PMS Optimization', 'Improve your PMS, CRM and guest workflows with short-term rental automation. Connect marketing, social media and defined AI tasks around your operation.'),
  'websites-funnels': ('Vacation Rental Websites & Direct Booking Funnels', 'Build a vacation rental website with booking pathways, lead capture, CRM, chatbots and automated follow-up. Turn guest interest into booking opportunities.'),
- 'our-apps': ('Free Vacation Rental Tools: Guest Intel & 52Rev', 'Free tools from STR Booster: Guest Intel for ideal guest insights and the 52Rev beta waitlist for weekly revenue marketing.'),
- 'guest-intel': ('Guest Intel: Find Your Ideal Vacation Rental Guest', 'Identify your ideal vacation rental guest with Guest Intel. Apply guest insights to positioning, listing content and marketing, with STR Booster support.'),
+ 'our-apps': ('Free Vacation Rental Tools: Guest Intel & 52Rev', 'Free tools from STR Booster: Guest Intel shows who your rental is best placed to win, and the 52Rev beta plans weekly revenue marketing.'),
+ 'guest-intel': ('Guest Intel: Find Your Ideal Rental Guest', 'Identify your ideal vacation rental guest with Guest Intel. Apply guest insights to positioning, listing content and marketing, with STR Booster support.'),
  '52rev': ('52Rev: Vacation Rental Revenue Marketing Beta', 'Join the 52Rev beta waitlist. Connect weekly guest targeting, revenue planning and marketing playbooks for your vacation rental.'),
- 'tools-partners': ('Vacation Rental Software: Partner Tools (Affiliate)', 'Vacation rental software we use and recommend for pricing, PMS, guest marketing and operations. Affiliate links, plainly disclosed.'),
+ 'tools-partners': ('Vacation Rental Software Picks (Affiliate)', 'Vacation rental software we use and recommend for pricing, PMS, guest marketing and operations. Affiliate links, plainly disclosed.'),
  'get-expert-help': ('Vacation Rental Consulting: Talk to STR Booster', 'Discuss your vacation rental with STR Booster. Get help choosing a focused project or ongoing support for revenue, positioning, marketing and automation.'),
  'guest-positioning-guide': ('How to Identify Your Ideal Vacation Rental Guest', 'Use guest reviews, travel needs and seasonal demand to identify your ideal vacation rental guest and improve your listing positioning.'),
- 'weekly-revenue-guide': ('Vacation Rental Pricing & Marketing: A Weekly Plan', 'Follow a weekly routine to review booking pace, target relevant guests and coordinate vacation rental pricing, stay rules and marketing.'),
+ 'weekly-revenue-guide': ('Vacation Rental Pricing & Marketing Weekly Plan', 'Follow a weekly routine to review booking pace, target relevant guests and coordinate vacation rental pricing, stay rules and marketing.'),
+ 'resources': ('Guides & Tools for Short-Term Rental Managers', 'Free guides, video tutorials and tools for short-term rental managers: direct bookings, pricing, guest positioning and automation.'),
  'automation-guide': ('Short-Term Rental Automation: Where to Start', 'Choose your first short-term rental automation: map the task, check your existing tools, test the workflow and measure the effort saved.'),
 }
 HEADINGS = {
@@ -149,7 +151,7 @@ def enhance_page(markup, slug, title, desc):
     if slug in GUIDES:
         graph.append({'@type':'Article','@id':canonical+'#article','headline':title,'description':desc,'url':canonical,
                       'mainEntityOfPage':{'@id':canonical+'#webpage'},'author':{'@id':BASE+'/#founder'},
-                      'publisher':{'@id':BASE+'/#organization'},'dateModified':GUIDE_UPDATED,'image':OG_IMAGE,'inLanguage':'en','isBasedOn':{'@type':'Book','name':'Booked Solid: Scaling Direct Bookings and Guest Loyalty Through Brand Story and Experience','bookEdition':'Second edition','author':{'@id':BASE+'/#founder'},'url':'https://www.amazon.com/dp/B0FF3BR42Q'}})
+                      'publisher':{'@id':BASE+'/#organization'},'datePublished':GUIDE_PUBLISHED,'dateModified':GUIDE_UPDATED,'image':OG_IMAGE,'inLanguage':'en','isBasedOn':{'@type':'Book','name':'Booked Solid: Scaling Direct Bookings and Guest Loyalty Through Brand Story and Experience','bookEdition':'Second edition','author':{'@id':BASE+'/#founder'},'url':'https://www.amazon.com/dp/B0FF3BR42Q'}})
         steps=guide_steps(markup)
         if steps:
             graph.append({'@type':'HowTo','name':title,'description':desc,'totalTime':HOWTO_TIME.get(slug,'PT1H'),
@@ -162,10 +164,17 @@ def enhance_page(markup, slug, title, desc):
     return markup.replace('</head>',metadata+'</head>')
 
 def write_crawl_files(root, pages):
-    import datetime
-    lastmod=datetime.date.today().isoformat()
-    urls=[BASE+('/' if p=='index.html' else '/'+p[:-5]) for p in pages
+    import datetime, subprocess
+    today=datetime.date.today().isoformat()
+    def lastmod(page):
+        # The date the page last changed in git, so lastmod only moves when content does.
+        try:
+            out=subprocess.run(['git','log','-1','--format=%cs','--',page],cwd=root,capture_output=True,text=True,timeout=10).stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            out=''
+        return out or today
+    urls=[(BASE+('/' if p=='index.html' else '/'+p[:-5]),lastmod(p)) for p in pages
           if p!='community.html' and p not in RETIRED_STORY_PAGES]
-    (root/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('  <url><loc>'+html.escape(url)+'</loc><lastmod>'+lastmod+'</lastmod></url>\n' for url in urls)+'</urlset>\n')
+    (root/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('  <url><loc>'+html.escape(url)+'</loc><lastmod>'+mod+'</lastmod></url>\n' for url,mod in urls)+'</urlset>\n')
     (root/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\n')
-    (root/'404.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | STR Booster</title><link rel="stylesheet" href="/styles.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head><body><main class="wrap"><section class="page-hero"><p class="eyebrow">STR Booster · 404</p><h1>We could not find that page.</h1><p>The link may have changed. Explore our services or return to the homepage.</p><div class="actions"><a class="btn" href="/">Return Home</a><a class="btn secondary" href="/growth-services.html">Explore Growth Services</a></div></section></main></body></html>''')
+    (root/'404.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | STR Booster</title><link rel="stylesheet" href="/styles.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head><body><main class="wrap"><section class="page-hero"><p class="eyebrow">STR Booster · 404</p><h1>We could not find that page.</h1><p>The link may have changed. Explore our services or return to the homepage.</p><div class="actions"><a class="btn" href="/">Return Home</a><a class="btn secondary" href="/growth-services">Explore Growth Services</a></div></section></main></body></html>''')

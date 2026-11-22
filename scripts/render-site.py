@@ -16,7 +16,7 @@ import runpy
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
-DISCOVERY_TITLE = 'Book a Discovery Call'
+DISCOVERY_TITLE = 'Book a Discovery Call: STR Growth Systems'
 DISCOVERY_DESCRIPTION = (
     'Book a 30-minute discovery call with STR Booster. Discuss your portfolio, '
     'your direct revenue and owner growth goals, and which growth system fits.'
@@ -160,9 +160,9 @@ def apply_growth(root: Path) -> int:
         raise ValueError('The homepage template must contain its shared header and footer.')
     overrides = {
         'get-expert-help.html': ('discovery.html', DISCOVERY_TITLE, DISCOVERY_DESCRIPTION),
-        'growth-services.html': ('services.html', 'Growth Systems & Pricing for STR Property Managers',
-            'Direct Revenue System, Owner Acquisition System and Growth Partner plans for short-term rental managers with 10 to 100 doors. Starting prices, guarantees and a free Growth Audit.'),
-        'owner-acquisition.html': ('owner-acquisition.html', 'Owner Acquisition for Short-Term Rental Property Managers',
+        'growth-services.html': ('services.html', 'Short-Term Rental Growth Systems & Pricing',
+            'Direct Revenue, Owner Acquisition and Growth Partner plans for STR managers with 10 to 100 doors, with starting prices, guarantees and a free Growth Audit.'),
+        'owner-acquisition.html': ('owner-acquisition.html', 'Owner Acquisition for Vacation Rental Managers',
             'Win more owner contracts with an owner landing page, revenue estimates, AI follow-up and nurture for owners and realtors. Built and run for property managers.'),
         'our-approach.html': ('approach.html', 'How We Build Your Growth System',
             'Start with a free Growth Audit. STR Booster builds your direct revenue and owner acquisition systems around your PMS and markets, then runs them with you.'),
@@ -187,6 +187,105 @@ def apply_growth(root: Path) -> int:
     return updated
 
 
+SITE = 'https://strbooster.com'
+LOGO_URL = SITE + '/assets/logo-512.png'
+# Offers published on the pricing pages. check-story.py confirms each price is
+# still visible on the page, so the schema cannot drift from the copy.
+OFFERS = {
+    'growth-audit': ('Growth Audit', 0, None),
+    'direct-revenue': ('Direct Revenue System', 3500, 750),
+    'owner-system': ('Owner Acquisition System', 2500, 995),
+    'growth-partner': ('Growth Partner', None, 2000),
+}
+SERVICE_PAGES = {
+    'growth-services': ('Growth systems for short-term rental property managers',
+                        ['growth-audit', 'direct-revenue', 'owner-system', 'growth-partner']),
+    'owner-acquisition': ('Owner Acquisition System', ['owner-system']),
+}
+FAQ_SCHEMA_PAGES = {'growth-services', 'owner-acquisition', 'tools-partners'}
+LINK = re.compile(r'(\bhref=")/([A-Za-z0-9_-]+)\.html([#?][^"]*)?"')
+
+
+def offer_schema(key: str) -> dict:
+    name, setup, monthly = OFFERS[key]
+    prices = []
+    if setup is not None:
+        prices.append({'@type': 'UnitPriceSpecification', 'name': 'Setup' if setup else 'Free',
+                       'price': setup, 'priceCurrency': 'USD'})
+    if monthly is not None:
+        spec = {'@type': 'UnitPriceSpecification', 'name': 'Monthly', 'price': monthly,
+                'priceCurrency': 'USD', 'unitCode': 'MON',
+                'referenceQuantity': {'@type': 'QuantitativeValue', 'value': 1, 'unitCode': 'MON'}}
+        if setup is None:
+            spec['name'] = 'Monthly, starting price'
+        prices.append(spec)
+    return {'@type': 'Offer', 'name': name, 'url': SITE + '/growth-services#' + key, 'priceCurrency': 'USD',
+            'price': setup if setup is not None else monthly,
+            'priceSpecification': prices, 'seller': {'@id': SITE + '/#organization'}}
+
+
+def page_faqs(source: str) -> list:
+    """Question and answer pairs from the visible FAQ block (not the nav dropdowns)."""
+    block = re.search(r'<div class="faq">(.*?)</div>\s*</div>\s*</section>', source, re.S)
+    if not block:
+        return []
+    pairs = []
+    for summary, answer in re.findall(r'<details>\s*<summary>(.*?)</summary>(.*?)</details>', block.group(1), re.S):
+        question = ' '.join(html.unescape(re.sub(r'<[^>]+>', '', summary)).split())
+        text = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', answer)).split())
+        if question and text:
+            pairs.append((question, text))
+    return pairs
+
+
+def apply_search_polish(root: Path) -> None:
+    """Final pass: canonical internal links and richer structured data."""
+    for page in sorted(root.glob('*.html')):
+        if page.name in {'STR Booster Website.dc.html'}:
+            continue
+        slug = page.stem
+        text = page.read_text(encoding='utf-8')
+
+        # Link to the canonical, extensionless URL that the sitemap and canonical tags use.
+        def clean(match: re.Match) -> str:
+            name, rest = match.group(2), match.group(3) or ''
+            if not (root / f'{name}.html').is_file():
+                return match.group()
+            return f'{match.group(1)}{"/" if name == "index" else "/" + name}{rest}"'
+        text = LINK.sub(clean, text)
+
+        def update_schema(match: re.Match) -> str:
+            data = json.loads(match.group(1))
+            nodes = data.get('@graph', [data])
+            canonical = SITE + ('/' if slug == 'index' else '/' + slug)
+            for node in nodes:
+                if node.get('@id') == SITE + '/#organization':
+                    node['logo'] = {'@type': 'ImageObject', 'url': LOGO_URL, 'width': 512, 'height': 512}
+                    node['contactPoint'] = {'@type': 'ContactPoint', 'contactType': 'sales',
+                                            'email': 'info@strbooster.com', 'url': BOOKING_URL,
+                                            'availableLanguage': 'English'}
+            if slug in SERVICE_PAGES and not any(n.get('@type') == 'Service' for n in nodes):
+                name, keys = SERVICE_PAGES[slug]
+                nodes.append({'@type': 'Service', '@id': canonical + '#service', 'name': name, 'url': canonical,
+                              'provider': {'@id': SITE + '/#organization'},
+                              'audience': {'@type': 'BusinessAudience',
+                                           'name': 'Short-term rental property managers with 10 to 100 units'},
+                              'offers': [offer_schema(k) for k in keys]})
+            if slug in FAQ_SCHEMA_PAGES and not any(n.get('@type') == 'FAQPage' for n in nodes):
+                faqs = page_faqs(text)
+                if faqs:
+                    nodes.append({'@type': 'FAQPage', '@id': canonical + '#faq', 'mainEntity': [
+                        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}}
+                        for q, a in faqs]})
+            if '@graph' not in data:
+                data = {'@context': 'https://schema.org', '@graph': nodes}
+            return ('<script type="application/ld+json">'
+                    + json.dumps(data, ensure_ascii=False).replace('<', '\\u003c') + '</script>')
+
+        text = re.sub(r'<script type="application/ld\+json">(.*?)</script>', update_schema, text, flags=re.S)
+        page.write_text(text, encoding='utf-8')
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--existing-only', action='store_true',
@@ -195,6 +294,8 @@ def main() -> None:
     if not args.existing_only:
         runpy.run_path(str(ROOT / 'scripts/render-pages.py'), run_name='__main__')
     print(f'Growth-system design and discovery-call CTAs applied to {apply_growth(ROOT)} pages.')
+    apply_search_polish(ROOT)
+    print('Internal links point at canonical URLs; FAQ, Service and Offer schema applied.')
 
 
 if __name__ == '__main__':

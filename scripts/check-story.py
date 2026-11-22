@@ -116,7 +116,7 @@ def check(root, content_only=False):
         require(not any(tag == 'form' and 'data-guest-strategy' in a for tag, a in page.tags),
                 f'{name}: obsolete free-report form remains.')
         footer = page_text.split('<footer', 1)[-1].split('</footer>', 1)[0]
-        for destination in ('/privacy.html', '/terms.html', 'https://www.instagram.com/strbooster/',
+        for destination in ('/privacy', '/terms', 'https://www.instagram.com/strbooster/',
                             'https://www.youtube.com/@strbooster'):
             require(destination in footer, f'{name}: footer is missing {destination}')
         for tag, attrs in page.tags:
@@ -138,6 +138,9 @@ def check(root, content_only=False):
                 elif url.path.startswith('/.netlify/functions/'):
                     # Netlify maps this public route to the checked-in handler.
                     target = root / 'netlify/functions' / (url.path.rsplit('/', 1)[-1] + '.js')
+                if not target.is_file() and not target.suffix and target.with_name(target.name + '.html').is_file():
+                    # Netlify pretty URLs: /growth-services serves growth-services.html.
+                    target = target.with_name(target.name + '.html')
                 if not target.is_file():
                     if content_only and name != 'index.html' and target.suffix.lower() in MEDIA_EXTENSIONS:
                         skipped_media.add(relative)
@@ -154,6 +157,27 @@ def check(root, content_only=False):
     require(BOOKING_URL in discovery and 'mailto:info@strbooster.com' in discovery,
             'Discovery page requires the verified calendar and an email alternative.')
     require('30-minute' in discovery, 'Discovery page must explain the call duration.')
+
+    # Structured data must match what visitors read: offer prices visible on the
+    # page, and every FAQ in the schema shown in the page's FAQ block.
+    import html
+    import re
+    for name in ('growth-services.html', 'owner-acquisition.html', 'tools-partners.html'):
+        page_text = texts.get(name, '')
+        nodes = []
+        for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page_text, re.S):
+            data = json.loads(block)
+            nodes.extend(data.get('@graph', [data]))
+        faq = [n for n in nodes if n.get('@type') == 'FAQPage']
+        require(faq and faq[0]['mainEntity'], f'{name}: FAQPage schema is missing.')
+        for question in (faq[0]['mainEntity'] if faq else []):
+            require(f'<summary>{question["name"]}' in html.unescape(page_text),
+                    f'{name}: FAQ schema question not shown on the page: {question["name"]}')
+        for service in (n for n in nodes if n.get('@type') == 'Service'):
+            for offer in service.get('offers', []):
+                for spec in offer.get('priceSpecification', []):
+                    shown = 'Free' if spec['price'] == 0 else f'${spec["price"]:,}'
+                    require(shown in page_text, f'{name}: offer price {shown} for {offer["name"]} is not on the page.')
     if errors:
         raise AssertionError('\n'.join(errors))
     print(f'PASS: {len(managed)} pages; discovery CTAs, shared assets, schema, anchors and analytics.')

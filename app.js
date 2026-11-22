@@ -52,15 +52,33 @@ document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListen
  });
 })();
 
-/* Load the shared HighLevel chat widget once on every page. */
+/* Load the shared HighLevel chat widget (Serge) once on every page.
+   The widget is a large third-party bundle, so it waits until the page has
+   loaded and the visitor first scrolls, taps, clicks or presses a key,
+   or 6 seconds after load if they do none of those. The chat bubble still
+   appears for every visitor; it just stops competing with the first paint. */
 (()=>{
  const widgetId='6aa7fb1fef660e70afde2470';
- if(document.querySelector('script[data-widget-id="'+widgetId+'"]'))return;
- const script=document.createElement('script');
- script.src='https://widgets.leadconnectorhq.com/loader.js';
- script.dataset.resourcesUrl='https://widgets.leadconnectorhq.com/chat-widget/loader.js';
- script.dataset.widgetId=widgetId;
- script.async=true;
- document.body.appendChild(script);
+ const events=['scroll','pointerdown','touchstart','keydown'];
+ let started=false,timer=0;
+ const load=()=>{
+  if(started)return;
+  started=true;
+  clearTimeout(timer);
+  events.forEach(type=>removeEventListener(type,load,{passive:true}));
+  if(document.querySelector('script[data-widget-id="'+widgetId+'"]'))return;
+  const script=document.createElement('script');
+  script.src='https://widgets.leadconnectorhq.com/loader.js';
+  script.dataset.resourcesUrl='https://widgets.leadconnectorhq.com/chat-widget/loader.js';
+  script.dataset.widgetId=widgetId;
+  script.async=true;
+  document.body.appendChild(script);
+ };
+ const arm=()=>{
+  events.forEach(type=>addEventListener(type,load,{passive:true,once:true}));
+  timer=setTimeout(load,6000);
+ };
+ if(document.readyState==='complete')arm();
+ else addEventListener('load',arm,{once:true});
 })();
 

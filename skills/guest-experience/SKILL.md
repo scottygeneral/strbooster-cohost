@@ -36,8 +36,8 @@ The experience has to prove the brand promise. So never write a storyboard witho
 ## Step 1: The brand (must come first)
 
 Look for an existing brand before asking anything:
-- A brand document from the Hospitality Brand Blueprint skill (a .docx or its text), a `brand.md`, or brand notes in `business-brain.md`.
-- If the person has the Hospitality Brand Blueprint skill and no brand yet, offer to run it first. It takes longer but gives the full brand.
+- A `brand.md` or brand guide from the **Brand Guide** skill (step 2), or brand notes in `business-brain.md`.
+- If there is no brand yet, offer to run the Brand Guide skill first. It takes longer but gives the full brand.
 
 If there's nothing, build a **brand core** in about 10 minutes. Ask one question at a time:
 1. "In a few words, what is this place, and where is it?" (Read the listing if they give a URL.)

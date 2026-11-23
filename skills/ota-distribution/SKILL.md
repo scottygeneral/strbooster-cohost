@@ -24,7 +24,7 @@ This step reads what the earlier playbook steps produced. Look for these files f
 | Input | Where it comes from | What you take |
 |---|---|---|
 | Goals and guardrails | `business-brain.md` from **The Brain** skill (step 1) | The 12-month goal (occupancy, nightly rate or NOI), the floor (break-even nightly rate or the person's "never under" rule), the rules they never break, and the strategies that point at step 5. |
-| Brand promise | `brand.md` or the brand core from the **Guest Experience Storyboard** skill, or a Hospitality Brand Blueprint | The promise (6 words or fewer), voice, banned words and palette. |
+| Brand promise | `brand.md` from the **Brand Guide** skill (step 2), or the brand core from the **Guest Experience Storyboard** skill | The promise (6 words or fewer), voice, banned words and palette. |
 | Ideal guest | The **Guest Intelligence Report** (its JSON, HTML or PDF) | Who books, how far ahead, which channels they use, what triggers a booking, the market's peak seasons and events. |
 | The listing | The Airbnb or other listing URL | Facts, photos, house rules, current channels. |
 

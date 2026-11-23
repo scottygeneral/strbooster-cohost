@@ -1,13 +1,13 @@
 /* STR Booster "workbench" theme (Nov 2026): tan grid paper, cream panels with thick
    ink borders and hard offset shadows, Geist + Geist Mono. Loaded last on every page. */
 :root {
-  --tan: #cca884;
-  --grid: rgb(172 138 105 / .55);
-  --cream: #f0eee6;
-  --ink: #262624;
-  --ink-2: #4a4843;
-  --brand: #0f6b51;
-  --rule: #d9d4c7;
+  --tan: #e7f1eb;
+  --grid: rgb(26 127 100 / .16);
+  --cream: #ffffff;
+  --ink: #0d1f2d;
+  --ink-2: #3d505c;
+  --brand: #1a7f64;
+  --rule: #dce4e0;
   --sans: "Geist", "Outfit", -apple-system, "Segoe UI", sans-serif;
   --mono: "Geist Mono", ui-monospace, Menlo, Consolas, monospace;
   --sc-canvas: var(--tan);
@@ -38,7 +38,7 @@ em { color: var(--brand); }
 
 /* Banner + boxed nav */
 .bx-banner { margin: 0; padding: 7px 16px; background: var(--ink); color: var(--cream); text-align: center; font: 700 12px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-.bx-banner span { color: #e0895c; margin-right: 6px; }
+.bx-banner span { color: #a9dbbc; margin-right: 6px; }
 .site-header.story-header { position: sticky; top: 0; background: transparent; border: 0; box-shadow: none; backdrop-filter: none; padding: 0 0 4px; }
 .story-header .sb-navigation { margin-top: 10px; background: var(--cream); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding-inline: 18px; min-height: 58px; }
 .sb-brand { color: var(--ink); font-family: var(--mono); font-weight: 700; letter-spacing: .06em; font-size: 14px; }
@@ -68,7 +68,7 @@ em { color: var(--brand); }
 .bx-ico { font: 700 18px/1.2 var(--mono); color: var(--ink); text-align: center; }
 .bx-turn { margin-top: 18px; font-size: 1.02rem; color: var(--ink); }
 .bx-cta, .bx-actions { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 14px; }
-.bx-btn { display: inline-flex; align-items: center; padding: 11px 18px; background: var(--ink); color: var(--cream); border: 3px solid var(--ink); font: 600 15px/1.2 var(--sans); text-decoration: none; box-shadow: 4px 4px 0 rgb(38 38 36 / .35); }
+.bx-btn { display: inline-flex; align-items: center; padding: 11px 18px; background: var(--ink); color: var(--cream); border: 3px solid var(--ink); font: 600 15px/1.2 var(--sans); text-decoration: none; box-shadow: 4px 4px 0 rgb(13 31 45 / .35); }
 .bx-btn:hover { background: var(--brand); }
 .bx-btn-ghost { background: var(--cream); color: var(--ink); }
 .bx-btn-ghost:hover { background: var(--ink); color: var(--cream); }
@@ -99,8 +99,8 @@ em { color: var(--brand); }
 .bx-you { display: inline-flex; align-items: center; gap: 12px; padding: 12px 20px; box-shadow: 5px 5px 0 var(--ink); border-width: 3px; }
 .bx-you .bx-ico { font-size: 26px; }
 .bx-you b { display: block; font: 700 1rem/1 var(--mono); letter-spacing: .06em; }
-.bx-you i { display: inline-block; margin-top: 5px; font: 700 11px/1 var(--mono); font-style: normal; letter-spacing: .08em; background: var(--ink); color: #e0895c; padding: 4px 6px; }
-.bx-tree { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 10px; margin-top: 34px; padding-top: 22px; border-top: 3px solid #ac8a69; max-width: 340px; }
+.bx-you i { display: inline-block; margin-top: 5px; font: 700 11px/1 var(--mono); font-style: normal; letter-spacing: .08em; background: var(--ink); color: #a9dbbc; padding: 4px 6px; }
+.bx-tree { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 10px; margin-top: 34px; padding-top: 22px; border-top: 3px solid var(--brand); max-width: 340px; }
 .bx-tree::before { content: "▲"; position: absolute; top: -32px; left: 50%; transform: translateX(-50%); font-size: 18px; color: var(--ink); line-height: 1; }
 .bx-tree span { background: var(--ink); color: var(--cream); font: 700 11px/1 var(--mono); letter-spacing: .08em; padding: 7px 8px; }
 
@@ -113,8 +113,8 @@ em { color: var(--brand); }
 .bx-stack strong { display: block; font-size: 1.2rem; font-weight: 700; }
 .bx-stack small { font: 600 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
 .bx-stack .is-first a { background: var(--ink); color: var(--cream); }
-.bx-stack .is-first b { color: #e0895c; }
-.bx-stack .is-first small { color: #cfcabe; }
+.bx-stack .is-first b { color: #a9dbbc; }
+.bx-stack .is-first small { color: #c2d3d6; }
 .bx-stack a:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--ink); }
 
 /* Routes */
@@ -179,3 +179,8 @@ a.bx-file:hover { background: var(--ink); color: var(--cream); }
 .bx-home .sb-reviews, body:has(.bx) .sb-reviews { display: none; }
 /* Footer on the same ink as the panels' borders */
 .site-footer.story-footer { background: var(--ink); border-top: 4px solid var(--ink); }
+/* STR Booster brand accents: green primary buttons and step numbers */
+.bx-btn:not(.bx-btn-ghost), .story-header .sb-nav-links .sb-button { background: var(--brand); border-color: var(--ink); color: #fff; }
+.bx-btn:not(.bx-btn-ghost):hover, .story-header .sb-nav-links .sb-button:hover { background: var(--ink); }
+.bx-num { box-shadow: 3px 3px 0 #a9dbbc; }
+.bx-tab span, .bx-banner span { color: #a9dbbc; }

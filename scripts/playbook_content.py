@@ -130,7 +130,7 @@ def signup_form(form_id, heading_id):
 TITLE_CASE = {
     'brain': 'The Brain: Objectives And Strategies', 'brand': 'Brand Building', 'guest': 'Know Your Guest',
     'listings': 'Optimize Your Listings', 'distribution': 'OTA Distribution', 'marketing': 'Marketing And Sales',
-    'revenue': 'Revenue Management', 'owners': 'Owner Acquisition', 'experience': 'Guest Experience',
+    'revenue': 'Revenue Management', 'owners': 'Scale Up: Win More Homes', 'experience': 'Guest Experience',
 }
 STAGES = [('Stage 1', 'Foundation.', 0, 3), ('Stage 2', 'Get Booked.', 3, 6), ('Stage 3', 'Grow.', 6, 9)]
 

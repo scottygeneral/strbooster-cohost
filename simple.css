@@ -243,3 +243,4 @@ body {
 .bx-photo .bx-proof i { font-style: normal; margin: 0 6px; color: var(--lime); }
 .bx-photo .bx-proof cite { font-style: normal; }
 .bx-photo figcaption .bx-who { font: 700 1.05rem/1.2 var(--sans); letter-spacing: -.01em; text-transform: none; color: #fff; }
+.bx-paths-one { grid-template-columns: minmax(0, 520px); }

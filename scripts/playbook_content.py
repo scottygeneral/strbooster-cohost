@@ -110,6 +110,35 @@ JOURNEY = [
      [('skill:guest-experience', 'Guest Experience Storyboard skill'), ('guest-messaging-agent', 'Guest Messaging Agent')]),
 ]
 
+# Answer-first copy. Each answer is short and self-contained so search engines and
+# AI assistants can quote it as is. The FAQPage schema is read from the visible FAQ.
+JOURNEY_ANSWER = ('The STR AI Journey is a free, nine-step system for running a short-term rental business '
+                  'with Claude. Each step names one problem, gives you a prompt to copy and a Claude skill to '
+                  'download, and builds on the step before it: set up your business brain first, then brand, '
+                  'guests, listings, channels, marketing, pricing, owners and guest experience.')
+SKILLS_ANSWER = ('A Claude skill is a small folder of instructions, and sometimes scripts and templates, that '
+                 'teaches Claude to do one job the same way every time. These skills cover short-term rental '
+                 'work such as the business brain, brand guide, guest intelligence report, channel plan, '
+                 'marketing plan and guest experience. They are free and open on GitHub.')
+JOURNEY_FAQ = [
+    ('What is the STR AI Journey?', JOURNEY_ANSWER),
+    ('Is it really free?', 'Yes. The journey, the prompts, the files and the emailed playbook are free, and there is nothing to buy. You do not need to sign up to use anything on this page.'),
+    ('What order should I follow?', 'Go in order. Step 1, the business brain, gives Claude your goals, numbers and rules, and every later skill reads it. Property managers who want more homes can jump to step 8 once steps 1 to 3 are done.'),
+    ('How long does the journey take?', 'Step 1 takes about 45 minutes, once. Most other steps take 15 to 60 minutes to set up, then a few minutes each week or month to run.'),
+    ('Why Claude?', 'One assistant, set up once with your facts, replaces a pile of single-purpose apps. Projects keep each property’s facts together, and Skills let Claude follow the same steps every time.'),
+    ('Do I need a paid Claude plan?', 'You can start on the free plan. Projects, Skills and longer files work best on a paid Claude plan, which is what we use.'),
+    ('Do I need to be technical?', 'No. Each step is plain language and a prompt to copy. Each file is a text file you upload. If you can write a guest message, you can use these.'),
+    ('Will the AI reply to my guests on its own?', 'Not unless you set it up to. Everything here drafts first, with clear rules for when a person must step in. Automate only what you have tested.'),
+]
+SKILLS_FAQ = [
+    ('What is a Claude skill?', SKILLS_ANSWER),
+    ('How do I install a Claude skill?', 'Download the skill’s .zip without unzipping it. In Claude, open Settings, find Skills and upload the .zip. Then ask for the job in plain words and Claude uses the skill on its own.'),
+    ('Are these skills free?', 'Yes. Every skill is free to download, use and change. There is no sign-up, and nothing is for sale.'),
+    ('Which skill should I start with?', 'Start with The Brain. It builds your business-brain.md file with your goals, numbers and rules, and the other skills read that file so their answers fit your business.'),
+    ('Can I use a skill without uploading it?', 'Yes. Every skill is plain text. You can read SKILL.md on the site or on GitHub, and the single-file .md kits also work dropped into a Claude project.'),
+    ('Can I change a skill to fit my business?', 'Yes. Edit the text in SKILL.md, zip the folder again and upload it. Every skill is open on GitHub, so you can see exactly what it tells Claude to do.'),
+]
+
 GHL_FORM_ID = 'X2ch8hqmAh3G9qypYlVe'  # HighLevel form "Newsletter Sign Up" (STR Booster sub-account)
 
 
@@ -199,6 +228,7 @@ def body():
             '<div class="breadcrumb"><a href="/">Home</a> / The Journey</div>'
             '<h1>The Journey.</h1>'
             '<p class="bx-lede">Nine steps. Read the step, copy the prompt, take the file.</p>'
+            f'<p class="bx-sub bx-answer">{html.escape(JOURNEY_ANSWER)}</p>'
             '<p class="bx-actions"><a class="bx-btn" href="#step-1" data-cta="journey-start">Start Step 1</a>'
             '<a class="bx-btn bx-btn-ghost" href="/skills.html" data-cta="journey-skills">All Skills</a>'
             '<a class="bx-btn bx-btn-ghost" href="#get-the-kits" data-cta="playbook-email">Get The Playbook</a></p>'
@@ -227,13 +257,8 @@ def body():
 
     faq = ('<section class="bx-section" id="faq"><div class="bx-wrap">' + tab('Questions', '?')
            + '<div class="bx-card bx-panel"><h2>Fair Questions.</h2><div class="faq">'
-           + ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in [
-               ('Is it really free?', 'Yes. The journey, the prompts, the files and the emailed playbook are free, and there is nothing to buy. You do not need to sign up to use anything on this page.'),
-               ('Why Claude?', 'One assistant, set up once with your facts, replaces a pile of single-purpose apps. Projects keep each property’s facts together, and Skills let Claude follow the same steps every time.'),
-               ('Do I need a paid Claude plan?', 'You can start on the free plan. Projects, Skills and longer files work best on a paid Claude plan, which is what we use.'),
-               ('Do I need to be technical?', 'No. Each step is plain language and a prompt to copy. Each file is a text file you upload. If you can write a guest message, you can use these.'),
-               ('Will the AI reply to my guests on its own?', 'Not unless you set it up to. Everything here drafts first, with clear rules for when a person must step in. Automate only what you have tested.'),
-           ]) + '</div></div></div></section>')
+           + ''.join(f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in JOURNEY_FAQ)
+           + '</div></div></div></section>')
 
     email = ('<section class="bx-section bx-last" id="get-the-kits"><div class="bx-wrap">' + tab('Email', '✉')
              + '<div class="bx-card bx-panel"><h2 id="pb-signup-heading">Get The Playbook.</h2>'
@@ -308,6 +333,7 @@ def skills_body():
             '<div class="breadcrumb"><a href="/">Home</a> / Skills</div>'
             '<h1>Skills.</h1>'
             f'<p class="bx-lede">{ready} free Claude skills for short-term rentals. Download one, upload it to Claude, and it does the job the same way every time.</p>'
+            f'<p class="bx-sub bx-answer">{html.escape(SKILLS_ANSWER)}</p>'
             '<p class="bx-actions"><a class="bx-btn" href="#all-skills" data-cta="skills-browse">Browse The Skills</a>'
             f'<a class="bx-btn bx-btn-ghost" href="{GITHUB_SKILLS}" target="_blank" rel="noopener noreferrer" data-cta="skills-github">All Skills On GitHub ↗</a></p>'
             '</div></section>')
@@ -330,4 +356,107 @@ def skills_body():
              '<p class="bx-sub">One email when a new skill drops, plus the whole journey in one document. No spam. Nothing to buy.</p>'
              + signup_form('sk-signup-form', 'sk-signup-heading') + '</div></div></section>')
 
-    return '<div class="bx">' + hero + grid + install + email + '</div><script src="/playbook.js" defer></script><script src="/motion.js" defer></script>'
+    faq = ('<section class="bx-section" id="faq"><div class="bx-wrap">' + tab('Questions', '?')
+           + '<div class="bx-card bx-panel"><h2>Skill Questions.</h2><div class="faq">'
+           + ''.join(f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in SKILLS_FAQ)
+           + '</div></div></div></section>')
+
+    return '<div class="bx">' + hero + grid + install + faq + email + '</div><script src="/playbook.js" defer></script><script src="/motion.js" defer></script>'
+
+
+# ---- Structured data and llms.txt, built from the same lists as the pages ----
+SITE = 'https://strbooster.com'
+JOURNEY_TIME = {'brain': 'PT45M', 'brand': 'PT30M', 'guest': 'PT20M', 'listings': 'PT15M', 'distribution': 'PT1H',
+                'marketing': 'PT1H', 'revenue': 'PT20M', 'owners': 'PT15M', 'experience': 'PT30M'}
+
+
+def _resource_url(slug):
+    return f'{SITE}/skills/{slug[6:]}.zip' if slug.startswith('skill:') else f'{SITE}/assets/kits/{slug}.md'
+
+
+def journey_schema():
+    """HowTo for the nine steps on /playbook (ItemList order = journey order)."""
+    url = SITE + '/playbook'
+    steps = []
+    for n, (anchor, _title, problem, todo, _prompt, _time, resources) in enumerate(JOURNEY, 1):
+        steps.append({'@type': 'HowToStep', 'position': n, 'name': TITLE_CASE[anchor], 'url': f'{url}#step-{n}',
+                      'text': problem + ' ' + ' '.join(todo),
+                      'itemListElement': [{'@type': 'HowToDirection', 'position': i + 1, 'text': t}
+                                          for i, t in enumerate(todo)]})
+    return {'@type': 'HowTo', '@id': url + '#howto', 'name': 'The STR AI Journey: 9 steps to run a short-term rental business with Claude',
+            'description': JOURNEY_ANSWER, 'url': url, 'inLanguage': 'en', 'isAccessibleForFree': True,
+            'author': {'@id': SITE + '/#founder'}, 'publisher': {'@id': SITE + '/#organization'},
+            'tool': [{'@type': 'HowToTool', 'name': 'Claude'}],
+            'supply': [{'@type': 'HowToSupply', 'name': 'Your property facts, reviews and calendar'}],
+            'step': steps}
+
+
+def skills_schema():
+    """ItemList of the free skills on /skills, each a CreativeWork by the founder."""
+    url = SITE + '/skills'
+    items = []
+    for pos, (key, name, desc, n, step_title, kind, ready) in enumerate((r for r in catalog() if r[6]), 1):
+        work = {'@type': 'CreativeWork', '@id': f'{url}#skill-{key}', 'name': name, 'description': short(desc, 300),
+                'url': f'{url}#skill-{key}', 'inLanguage': 'en', 'isAccessibleForFree': True,
+                'genre': 'Claude skill', 'about': f'Step {n} of the STR AI Journey: {step_title}',
+                'author': {'@id': SITE + '/#founder'}, 'publisher': {'@id': SITE + '/#organization'},
+                'isPartOf': {'@id': SITE + '/playbook#howto'},
+                'encoding': {'@type': 'MediaObject', 'contentUrl': f'{SITE}/skills/{key}.zip', 'encodingFormat': 'application/zip'}}
+        if kind == 'skill':
+            work['codeRepository'] = f'{GITHUB_SKILLS}/{key}'
+            work['@type'] = ['CreativeWork', 'SoftwareSourceCode']
+            work['programmingLanguage'] = 'Markdown'
+        items.append({'@type': 'ListItem', 'position': pos, 'item': work})
+    return {'@type': 'ItemList', '@id': url + '#skills', 'name': 'Free Claude skills for short-term rentals',
+            'numberOfItems': len(items), 'itemListOrder': 'https://schema.org/ItemListOrderAscending',
+            'itemListElement': items}
+
+
+def llms_txt(full=False):
+    """llms.txt (and llms-full.txt) for AI assistants, generated so it never drifts from the site."""
+    rows = [r for r in catalog() if r[6]]
+    out = ['# STR Booster', '',
+           '> STR Booster shares free growth systems for short-term rental hosts and property managers, built on Claude: '
+           'a nine-step STR AI Journey and free, downloadable Claude skills. Nothing is for sale: no services, no pricing, '
+           'no affiliate links. Founded by David Anthony Scott. A division of Green Door Hotel Inc.', '',
+           'Key facts:', '',
+           '- What it is: a free, open playbook and skill library for running a short-term rental (vacation rental, Airbnb, Vrbo) business with Claude.',
+           '- Who it is for: hosts who run everything themselves, and property managers and co-hosts who want to win more homes.',
+           '- Approach: learn the job, systematize it as a Claude skill with your own facts, and never do the same work twice.',
+           '- Cost: free. Downloads are ungated. An optional email list sends the full playbook and new skills.',
+           '- Founder: David Anthony Scott, 300+ properties optimized, Cornell (eCornell) certificate in hotel real estate investments and asset management, author of Booked Solid.',
+           '',
+           '## Start here', '',
+           f'- [Homepage]({SITE}/): what STR Booster is and who it is for.',
+           f'- [The STR AI Journey]({SITE}/playbook): {JOURNEY_ANSWER}',
+           f'- [Claude skills]({SITE}/skills): {SKILLS_ANSWER}',
+           f'- [All skills on GitHub]({GITHUB_SKILLS}): source for every skill.',
+           '', '## The nine steps', '']
+    for n, row in enumerate(JOURNEY, 1):
+        anchor, _t, problem, todo, prompt, time, resources = row
+        out.append(f'{n}. [{TITLE_CASE[anchor]}]({SITE}/playbook#step-{n}) ({time}): {problem}')
+        if full:
+            out += [f'   - {t}' for t in todo]
+            out.append(f'   - Prompt: "{prompt}"')
+            out += [f'   - Download: [{name}]({_resource_url(slug)})' for slug, name in resources if resource_ready(slug)]
+    out += ['', '## Claude skills (free downloads)', '']
+    for key, name, desc, n, step_title, kind, ready in rows:
+        read = f'{SITE}/skills/{key}/SKILL.md' if kind == 'skill' else f'{SITE}/assets/kits/{key}.md'
+        line = f'- [{name}]({SITE}/skills/{key}.zip) (step {n}, {step_title}): {short(desc, 400 if full else 200)} Read it: {read}'
+        out.append(line)
+    out += ['', '## Questions', '']
+    for q, a in (JOURNEY_FAQ + SKILLS_FAQ[1:] if full else JOURNEY_FAQ[:4] + SKILLS_FAQ[1:3]):
+        out += [f'### {q}', '', a, '']
+    out += ['## Guides and free tools', '',
+            f'- [How to identify your ideal vacation rental guest]({SITE}/guest-positioning-guide)',
+            f'- [Vacation rental pricing and marketing: a weekly plan]({SITE}/weekly-revenue-guide)',
+            f'- [Short-term rental automation: where to start]({SITE}/automation-guide)',
+            f'- [Guest Intel]({SITE}/guest-intel): free tool that identifies a rental\'s ideal guest.',
+            f'- [52Rev]({SITE}/52rev): weekly revenue marketing planning (free beta waitlist).',
+            f'- [All resources]({SITE}/resources)', '']
+    if not full:
+        out += ['## Optional', '', f'- [llms-full.txt]({SITE}/llms-full.txt): every step with its actions, prompt and downloads.', '']
+    out += ['## Contact', '', '- Email: info@strbooster.com', '- Founder: https://davidanthonyscott.com',
+            '- YouTube: https://www.youtube.com/@strbooster', '- Instagram: https://www.instagram.com/strbooster/',
+            '- LinkedIn: https://www.linkedin.com/company/strbooster', '']
+    return '\n'.join(out)

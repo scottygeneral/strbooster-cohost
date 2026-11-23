@@ -1,0 +1,162 @@
+# STR Booster
+
+> STR Booster shares free growth systems for short-term rental hosts and property managers, built on Claude: a nine-step STR AI Journey and free, downloadable Claude skills. Nothing is for sale: no services, no pricing, no affiliate links. Founded by David Anthony Scott. A division of Green Door Hotel Inc.
+
+Key facts:
+
+- What it is: a free, open playbook and skill library for running a short-term rental (vacation rental, Airbnb, Vrbo) business with Claude.
+- Who it is for: hosts who run everything themselves, and property managers and co-hosts who want to win more homes.
+- Approach: learn the job, systematize it as a Claude skill with your own facts, and never do the same work twice.
+- Cost: free. Downloads are ungated. An optional email list sends the full playbook and new skills.
+- Founder: David Anthony Scott, 300+ properties optimized, Cornell (eCornell) certificate in hotel real estate investments and asset management, author of Booked Solid.
+
+## Start here
+
+- [Homepage](https://strbooster.com/): what STR Booster is and who it is for.
+- [The STR AI Journey](https://strbooster.com/playbook): The STR AI Journey is a free, nine-step system for running a short-term rental business with Claude. Each step names one problem, gives you a prompt to copy and a Claude skill to download, and builds on the step before it: set up your business brain first, then brand, guests, listings, channels, marketing, pricing, owners and guest experience.
+- [Claude skills](https://strbooster.com/skills): A Claude skill is a small folder of instructions, and sometimes scripts and templates, that teaches Claude to do one job the same way every time. These skills cover short-term rental work such as the business brain, brand guide, guest intelligence report, channel plan, marketing plan and guest experience. They are free and open on GitHub.
+- [All skills on GitHub](https://github.com/scottygeneral/strbooster-cohost/tree/main/skills): source for every skill.
+
+## The nine steps
+
+1. [The Brain: Objectives And Strategies](https://strbooster.com/playbook#step-1) (45 minutes, once): AI with no goals and no facts gives random answers. Most hosts skip this step, then decide AI does not work.
+   - Write down your goals for the next 12 months: revenue, occupancy, owners, time back.
+   - List your properties, who books them, the numbers you watch and the rules you never break.
+   - Create one Claude project called “Business brain” and add that document. Every later step starts here.
+   - Prompt: "Interview me one question at a time to build the “business brain” for my short-term rental business: my goals for the next 12 months, my properties, my guests, the numbers I track, my voice and my rules. When we are done, write it as one clear document I can add to a Claude project. Do not invent anything I have not told you."
+   - Download: [The Brain skill](https://strbooster.com/skills/the-brain.zip)
+2. [Brand Building](https://strbooster.com/playbook#step-2) (30 minutes): If your listing sounds like every other listing, you compete on price. A clear brand is why a guest books you, and books direct next time.
+   - Write your promise in six words or fewer. It must be true of your place and false of the cheaper one down the road.
+   - Say who it is for and who it is not for, then pick three voice words and the words you never use.
+   - Save the brand guide and its brand.md in your business brain. Every later step reads it.
+   - Prompt: "Using my business brain, draft a brand guide for my rentals: the promise in six words or fewer, who it is for and who it is not for, three voice words with a do and a don’t example for each, and five phrases we use and five we avoid. Ask me before you invent any detail."
+   - Download: [Brand Guide skill](https://strbooster.com/skills/brand-guide.zip)
+3. [Know Your Guest](https://strbooster.com/playbook#step-3) (20 minutes): You cannot market to everyone. Your reviews already tell you who loves your place most, and why.
+   - Paste your last 30 to 50 reviews into Claude with the Review Insight kit.
+   - Find your happiest guest: why they came, who they came with, what they praised.
+   - Add that guest profile to your business brain. It drives every step after this.
+   - Prompt: "Here are my latest reviews. Find the guests who were happiest: their trip purpose, group type and season. List the top five things they praise, with exact short quotes, and anything that comes up more than once as a problem. Do not invent quotes or counts."
+   - Download: [Guest Intelligence Report skill](https://strbooster.com/skills/guest-intelligence-report.zip)
+   - Download: [Review Reply + Insight Miner](https://strbooster.com/assets/kits/review-reply-and-insights.md)
+4. [Optimize Your Listings](https://strbooster.com/playbook#step-4) (15 minutes per listing): Most listings are written for the host, not the guest. The title, first photo and first two lines decide the click.
+   - Run the Listing Audit for the guest you found in step 3.
+   - Make the free fixes first: title, photo order, opening lines, amenity names.
+   - Note your views and bookings now, then run the audit again in 30 days.
+   - Prompt: "Audit this listing for my target guest. Score the title, first photo and photo order, opening lines, fit signals, amenities, objection handling, proof and house rules from 1 to 5 with evidence. Then give me the top five fixes, free ones first, and three rewritten titles."
+   - Download: [Listing Audit](https://strbooster.com/assets/kits/listing-audit.md)
+5. [OTA Distribution](https://strbooster.com/playbook#step-5) (1 hour, then quarterly): One channel is one algorithm change away from an empty calendar. But every channel has its own guests, fees and rules, and the wrong one discounts your best nights.
+   - Match the channels to your guest, your brand and your strategy: Airbnb, Vrbo, Booking.com, your own site, and niche ones like Whimstay for last-minute gaps.
+   - Write each channel its own first line for its own users, and keep every fact identical everywhere.
+   - Decide which nights open where: peak nights on the channels where you keep the most, soft nights and gaps on the rest, nothing below your floor.
+   - Prompt: "Using my business brain, brand promise and guest profile, research which booking channels fit this property, including niche ones. Score each on guest fit, brand fit, strategy fit, money kept after fees and effort. Recommend two or three core channels and at most two tests, say how to position the listing on each, and tell me which high-demand nights to open on which channel. Check current fees and event dates with sources. Never let a channel sell below my floor."
+   - Download: [OTA Distribution skill](https://strbooster.com/skills/ota-distribution.zip)
+6. [Marketing And Sales](https://strbooster.com/playbook#step-6) (1 hour a month): No time for content, and past guests forgotten the day they check out. Your cheapest next booking is someone who already stayed.
+   - Collect past-guest emails with consent, and send a short note each season.
+   - Turn real reviews and local events into posts. No stock phrases, no fake urgency.
+   - Answer every direct enquiry within five minutes, even with a holding reply.
+   - Prompt: "Using my brand guide and guest profile, write a four-week plan: one past-guest email and two social posts a week, each built only from the reviews, photos and local events I give you. Keep my voice. No discounts unless I ask for one."
+   - Download: [Monthly Marketing Plan skill](https://strbooster.com/skills/marketing-plan.zip)
+7. [Revenue Management](https://strbooster.com/playbook#step-7) (20 minutes a week): Prices left on autopilot, or panic-discounted. A calm weekly check beats both.
+   - Export the next 90 days from your pricing tool or PMS.
+   - Run the Weekly Pricing Check: pace by week, orphan nights, a short watch list.
+   - Make one change per date range and log it, so you learn what works for your home.
+   - Prompt: "Here are my next 90 nights: date, booked, price and minimum stay, plus my typical lead time and floor price. Show pace by week as ahead, on track or behind, list orphan nights, and give me a watch list of three to five date ranges with one suggested action each. Never invent market data."
+   - Download: [Weekly Pricing Check](https://strbooster.com/assets/kits/weekly-pricing-check.md)
+8. [Scale Up: Win More Homes](https://strbooster.com/playbook#step-8) (15 minutes per owner): For property managers and co-hosts: owner pitches all sound the same. Show the owner their home and their guests, not your logo.
+   - Before the first call, build a “who will book your home” report for that owner.
+   - Send it as a one-page PDF with one line of context.
+   - Use the call to walk through it together, with real numbers from your pricing tool.
+   - Prompt: "Prepare a one-page report titled “Who will book [owner]’s home” for this property: the main guest it can win and why, the three most likely guest types with when they come and what wins them, best and slowest seasons, and three low-cost changes you would make first. Do not invent revenue figures or results."
+   - Download: [“Who Will Book Your Home” Owner Report](https://strbooster.com/assets/kits/who-will-book-your-home-report.md)
+9. [Guest Experience](https://strbooster.com/playbook#step-9) (30 minutes to set up): The same twenty questions, every day, at every hour. Fast, warm, accurate replies are what five-star reviews are made of.
+   - Set up the Guest Messaging Agent with your property facts.
+   - Draft every reply with it for two weeks, edit, and send yourself.
+   - Then automate only the safe questions: check-in, Wi-Fi, parking, directions. Keep money, complaints and safety with a person.
+   - Prompt: "You are my guest messaging assistant. Using only the property facts I gave you, draft a reply to the guest message below in my voice, under 90 words. If it involves a refund, a complaint, damage, safety or anything not in my facts, start with “HOST NEEDED” and give me a holding reply instead."
+   - Download: [Guest Experience Storyboard skill](https://strbooster.com/skills/guest-experience.zip)
+   - Download: [Guest Messaging Agent](https://strbooster.com/assets/kits/guest-messaging-agent.md)
+
+## Claude skills (free downloads)
+
+- [The Brain skill](https://strbooster.com/skills/the-brain.zip) (step 1, The Brain: Objectives And Strategies): Build the business brain for a short-term rental business. Interview the host for goals, revenue and costs, work out NOI per property and for the portfolio, value each property with its contents (FF&E), work out cap rates, and set calibrated targets in business-brain.md. Read it: https://strbooster.com/skills/the-brain/SKILL.md
+- [Brand Guide skill](https://strbooster.com/skills/brand-guide.zip) (step 2, Brand Building): Build a brand guide for a short-term rental, a group of rentals or a property management company. Finds the one promise only this place can make, who it is for and not for, the positioning against real alternatives, the voice (with words to use and words to ban), the visual direction from the real logo, and the channel rules. Produces a styled HTML/PDF guide plus a brand.md that every later step… Read it: https://strbooster.com/skills/brand-guide/SKILL.md
+- [Guest Intelligence Report skill](https://strbooster.com/skills/guest-intelligence-report.zip) (step 3, Know Your Guest): Turn an Airbnb listing URL into a Guest Intelligence Report (ideal guest avatar, travel patterns, 7-stage journey map, upsells, amenity additions, strategy, market intel) as a styled HTML/PDF. Read it: https://strbooster.com/skills/guest-intelligence-report/SKILL.md
+- [Review Reply + Insight Miner](https://strbooster.com/skills/review-reply-and-insights.zip) (step 3, Know Your Guest): Drafts public replies to guest reviews in the host's voice and turns a batch of reviews into a list of listing, marketing and operations improvements. Use after new reviews arrive, or monthly for a portfolio review. Read it: https://strbooster.com/assets/kits/review-reply-and-insights.md
+- [Listing Audit](https://strbooster.com/skills/listing-audit.zip) (step 4, Optimize Your Listings): Audits an Airbnb or Vrbo listing against the guest it should win and returns a scored, prioritized fix list. Use when a listing is under-booking, before a relaunch, or when onboarding a new property. Read it: https://strbooster.com/assets/kits/listing-audit.md
+- [OTA Distribution skill](https://strbooster.com/skills/ota-distribution.zip) (step 5, OTA Distribution): Build an OTA distribution plan for a short-term rental. Match the property, brand and ideal guest to the best booking channels (Airbnb, Vrbo, Booking.com, direct and niche ones such as Whimstay or Hipcamp), say how to position the listing for each channel's users, and decide which high-demand nights open on which channel. Sends research subagents to check channels, fees and demand dates. Read it: https://strbooster.com/skills/ota-distribution/SKILL.md
+- [Monthly Marketing Plan skill](https://strbooster.com/skills/marketing-plan.zip) (step 6, Marketing And Sales): Build a monthly marketing plan for a short-term rental. Four weeks of one past-guest email and two social posts a week, each built only from the host's real reviews, photos and local events, aimed at the nights the calendar needs to sell. Includes a guest circle (consent-based email list) with a welcome sequence, a five-minute enquiry reply, and an offer check that compares what each booking… Read it: https://strbooster.com/skills/marketing-plan/SKILL.md
+- [Weekly Pricing Check](https://strbooster.com/skills/weekly-pricing-check.zip) (step 7, Revenue Management): Runs a 20-minute weekly pricing and pacing review for a short-term rental from the host's own calendar and pricing-tool data, and returns a short action list. Use once a week, or when a period is booking slower or faster than expected. Read it: https://strbooster.com/assets/kits/weekly-pricing-check.md
+- [“Who Will Book Your Home” Owner Report](https://strbooster.com/skills/who-will-book-your-home-report.zip) (step 8, Scale Up: Win More Homes): Builds a one-page "Who will book your home" report for a prospective property owner, showing the guests most likely to book their home and how a manager would win them. Use when pitching a new owner or preparing an owner meeting. Read it: https://strbooster.com/assets/kits/who-will-book-your-home-report.md
+- [Guest Experience Storyboard skill](https://strbooster.com/skills/guest-experience.zip) (step 9, Guest Experience): Turn a property's brand promise and its ideal guest into a Guest Experience Storyboard. Six panels (Booking to Advocacy), a Pre Stay / Stay / After Stay checklist, and 12 beats with the exact words, costs and risks, all tested against the brand promise. Read it: https://strbooster.com/skills/guest-experience/SKILL.md
+- [Guest Messaging Agent](https://strbooster.com/skills/guest-messaging-agent.zip) (step 9, Guest Experience): Drafts guest replies for a short-term rental in the host's voice, using the property's own facts, and flags anything that needs a human. Use when a guest message, enquiry or review needs a reply. Read it: https://strbooster.com/assets/kits/guest-messaging-agent.md
+
+## Questions
+
+### What is the STR AI Journey?
+
+The STR AI Journey is a free, nine-step system for running a short-term rental business with Claude. Each step names one problem, gives you a prompt to copy and a Claude skill to download, and builds on the step before it: set up your business brain first, then brand, guests, listings, channels, marketing, pricing, owners and guest experience.
+
+### Is it really free?
+
+Yes. The journey, the prompts, the files and the emailed playbook are free, and there is nothing to buy. You do not need to sign up to use anything on this page.
+
+### What order should I follow?
+
+Go in order. Step 1, the business brain, gives Claude your goals, numbers and rules, and every later skill reads it. Property managers who want more homes can jump to step 8 once steps 1 to 3 are done.
+
+### How long does the journey take?
+
+Step 1 takes about 45 minutes, once. Most other steps take 15 to 60 minutes to set up, then a few minutes each week or month to run.
+
+### Why Claude?
+
+One assistant, set up once with your facts, replaces a pile of single-purpose apps. Projects keep each property’s facts together, and Skills let Claude follow the same steps every time.
+
+### Do I need a paid Claude plan?
+
+You can start on the free plan. Projects, Skills and longer files work best on a paid Claude plan, which is what we use.
+
+### Do I need to be technical?
+
+No. Each step is plain language and a prompt to copy. Each file is a text file you upload. If you can write a guest message, you can use these.
+
+### Will the AI reply to my guests on its own?
+
+Not unless you set it up to. Everything here drafts first, with clear rules for when a person must step in. Automate only what you have tested.
+
+### How do I install a Claude skill?
+
+Download the skill’s .zip without unzipping it. In Claude, open Settings, find Skills and upload the .zip. Then ask for the job in plain words and Claude uses the skill on its own.
+
+### Are these skills free?
+
+Yes. Every skill is free to download, use and change. There is no sign-up, and nothing is for sale.
+
+### Which skill should I start with?
+
+Start with The Brain. It builds your business-brain.md file with your goals, numbers and rules, and the other skills read that file so their answers fit your business.
+
+### Can I use a skill without uploading it?
+
+Yes. Every skill is plain text. You can read SKILL.md on the site or on GitHub, and the single-file .md kits also work dropped into a Claude project.
+
+### Can I change a skill to fit my business?
+
+Yes. Edit the text in SKILL.md, zip the folder again and upload it. Every skill is open on GitHub, so you can see exactly what it tells Claude to do.
+
+## Guides and free tools
+
+- [How to identify your ideal vacation rental guest](https://strbooster.com/guest-positioning-guide)
+- [Vacation rental pricing and marketing: a weekly plan](https://strbooster.com/weekly-revenue-guide)
+- [Short-term rental automation: where to start](https://strbooster.com/automation-guide)
+- [Guest Intel](https://strbooster.com/guest-intel): free tool that identifies a rental's ideal guest.
+- [52Rev](https://strbooster.com/52rev): weekly revenue marketing planning (free beta waitlist).
+- [All resources](https://strbooster.com/resources)
+
+## Contact
+
+- Email: info@strbooster.com
+- Founder: https://davidanthonyscott.com
+- YouTube: https://www.youtube.com/@strbooster
+- Instagram: https://www.instagram.com/strbooster/
+- LinkedIn: https://www.linkedin.com/company/strbooster

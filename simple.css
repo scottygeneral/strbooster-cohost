@@ -295,3 +295,19 @@ body {
 .bx-skill .bx-files { margin-top: auto; padding-top: 10px; }
 .bx-skill-soon { border-style: dashed; box-shadow: none; background: transparent; }
 .bx-file-skill { background: var(--lime, #c4f421); }
+
+/* Newsletter form (posts to the newsletter-signup function) */
+.sb-signup { margin-top: 18px; }
+.sb-signup-row { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 12px; align-items: end; }
+.sb-field { display: grid; gap: 6px; font: 700 11px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+.sb-field input { width: 100%; min-height: 50px; padding: 12px 14px; border: 3px solid var(--ink); border-radius: 0; background: #fff; color: var(--ink); font: 500 16px/1.2 var(--sans); letter-spacing: 0; text-transform: none; box-shadow: 4px 4px 0 rgb(13 31 45 / .18); }
+.sb-field input:focus { outline: none; box-shadow: 4px 4px 0 var(--lime, #c4f421); border-color: var(--ink); }
+.sb-signup-btn { min-height: 50px; justify-content: center; cursor: pointer; white-space: nowrap; }
+.sb-signup-btn[disabled] { opacity: .7; cursor: wait; }
+.sb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.sb-signup-status { margin: 12px 0 0; font-weight: 600; min-height: 1.2em; }
+.sb-signup-status[data-state="ok"] { color: var(--brand); }
+.sb-signup-status[data-state="error"] { color: #b42318; }
+.sb-signup.is-done .sb-signup-row { display: none; }
+.sb-signup.is-done .sb-signup-status { padding: 14px 16px; background: var(--lime, #c4f421); color: var(--ink); border: 3px solid var(--ink); }
+@media (max-width: 720px) { .sb-signup-row { grid-template-columns: 1fr; } .sb-signup-btn { width: 100%; } }

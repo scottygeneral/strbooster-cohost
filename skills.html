@@ -285,13 +285,28 @@
 <div class="bx-card bx-panel">
 <h2 id="sk-signup-heading">Get New Skills By Email.</h2>
 <p class="bx-sub">One email when a new skill drops, plus the whole journey in one document. No spam. Nothing to buy.</p>
-<div class="pb-form pb-ghl" id="sk-signup-form" aria-labelledby="sk-signup-heading">
-<iframe src="https://api.leadconnectorhq.com/widget/form/X2ch8hqmAh3G9qypYlVe" id="inline-X2ch8hqmAh3G9qypYlVe" class="pb-ghl-frame bx-form" title="Newsletter sign up" loading="lazy" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Newsletter Sign Up" data-height="320" data-layout-iframe-id="inline-X2ch8hqmAh3G9qypYlVe" data-form-id="X2ch8hqmAh3G9qypYlVe">
-</iframe>
-<script src="https://link.msgsndr.com/js/form_embed.js" defer>
-</script>
-<p class="pb-consent-note">By subscribing you agree to get the playbook and the weekly STR Booster Brief by email. Unsubscribe any time. See our <a href="/privacy">privacy policy</a>.</p>
+<form class="sb-signup" id="sk-signup-form" action="/.netlify/functions/newsletter-signup" method="post" aria-labelledby="sk-signup-heading" novalidate>
+<div class="sb-signup-row">
+<label class="sb-field">
+<span>First name</span>
+<input type="text" name="first_name" autocomplete="given-name" maxlength="80" placeholder="Jamie">
+</label>
+<label class="sb-field">
+<span>Email</span>
+<input type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
+</label>
+<button type="submit" class="bx-btn sb-signup-btn">Send It To Me</button>
 </div>
+<input type="hidden" name="page" value="/skills">
+<input type="hidden" name="anchor" value="sk-signup-form">
+<label class="sb-hp" aria-hidden="true">Company<input type="text" name="company" tabindex="-1" autocomplete="off">
+</label>
+<p class="sb-signup-status" role="status" aria-live="polite">
+</p>
+<p class="pb-consent-note">One email when a new skill drops. Unsubscribe any time. <a href="/privacy">Privacy</a>.</p>
+</form>
+<script src="/signup.js" defer>
+</script>
 </div>
 </div>
 </section>

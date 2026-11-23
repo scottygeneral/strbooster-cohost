@@ -139,7 +139,6 @@ SKILLS_FAQ = [
     ('Can I change a skill to fit my business?', 'Yes. Edit the text in SKILL.md, zip the folder again and upload it. Every skill is open on GitHub, so you can see exactly what it tells Claude to do.'),
 ]
 
-GHL_FORM_ID = 'X2ch8hqmAh3G9qypYlVe'  # HighLevel form "Newsletter Sign Up" (STR Booster sub-account)
 
 
 def resource_ready(slug):
@@ -174,13 +173,24 @@ def resource_link(slug, name):
             f'<span class="pb-res-name">{html.escape(name)}</span><span class="pb-res-action">Coming soon</span></div>')
 
 
-def signup_form(form_id, heading_id):
-    """HighLevel form embed: signups land in HighLevel directly, no API key needed."""
-    return f'''<div class="pb-form pb-ghl" id="{form_id}" aria-labelledby="{heading_id}">
-<iframe src="https://api.leadconnectorhq.com/widget/form/{GHL_FORM_ID}" id="inline-{GHL_FORM_ID}" class="pb-ghl-frame bx-form" title="Newsletter sign up" loading="lazy" data-layout="{{'id':'INLINE'}}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Newsletter Sign Up" data-height="320" data-layout-iframe-id="inline-{GHL_FORM_ID}" data-form-id="{GHL_FORM_ID}"></iframe>
-<script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
-<p class="pb-consent-note">By subscribing you agree to get the playbook and the weekly STR Booster Brief by email. Unsubscribe any time. See our <a href="/privacy.html">privacy policy</a>.</p>
-</div>'''
+def signup_form(form_id, heading_id, page='/playbook'):
+    """The site's own newsletter form. netlify/functions/newsletter-signup.js
+    forwards it to the HighLevel workflow's Inbound Webhook."""
+    return newsletter_form(form_id, heading_id, page)
+
+
+def newsletter_form(form_id, heading_id, page):
+    return f'''<form class="sb-signup" id="{form_id}" action="/.netlify/functions/newsletter-signup" method="post" aria-labelledby="{heading_id}" novalidate>
+<div class="sb-signup-row">
+<label class="sb-field"><span>First name</span><input type="text" name="first_name" autocomplete="given-name" maxlength="80" placeholder="Jamie"></label>
+<label class="sb-field"><span>Email</span><input type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required></label>
+<button type="submit" class="bx-btn sb-signup-btn">Send It To Me</button>
+</div>
+<input type="hidden" name="page" value="{page}"><input type="hidden" name="anchor" value="{form_id}">
+<label class="sb-hp" aria-hidden="true">Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+<p class="sb-signup-status" role="status" aria-live="polite"></p>
+<p class="pb-consent-note">One email when a new skill drops. Unsubscribe any time. <a href="/privacy.html">Privacy</a>.</p>
+</form><script src="/signup.js" defer></script>'''
 
 
 TITLE_CASE = {
@@ -354,7 +364,7 @@ def skills_body():
     email = ('<section class="bx-section bx-last" id="get-the-kits"><div class="bx-wrap">' + tab('Email', '✉')
              + '<div class="bx-card bx-panel"><h2 id="sk-signup-heading">Get New Skills By Email.</h2>'
              '<p class="bx-sub">One email when a new skill drops, plus the whole journey in one document. No spam. Nothing to buy.</p>'
-             + signup_form('sk-signup-form', 'sk-signup-heading') + '</div></div></section>')
+             + signup_form('sk-signup-form', 'sk-signup-heading', '/skills') + '</div></div></section>')
 
     faq = ('<section class="bx-section" id="faq"><div class="bx-wrap">' + tab('Questions', '?')
            + '<div class="bx-card bx-panel"><h2>Skill Questions.</h2><div class="faq">'

@@ -1,0 +1,199 @@
+{
+ "propertyName": "Songbird Acres",
+ "location": "Jefferson, GA",
+ "preparedFor": "Songbird Acres hosts",
+ "date": "December 2026",
+ "month": "January 2027",
+ "brand": {
+  "promise": "Eleven acres between you and noise.",
+  "voice": "Short, warm and plain. Specifics over adjectives: acres, minutes, bird names. Never pushy, never loud.",
+  "antiVocabulary": ["cozy", "nestled", "stunning", "oasis", "amazing", "!!!"],
+  "palette": {"ink": "#24382c", "ground": "#f3efe3", "accent": "#b5743b", "support": "#5d7a5f"},
+  "displayFont": "Georgia"
+ },
+ "inputs": {
+  "goal": "Booked nights from Est. 30% to 40% in 12 months, without cutting game-weekend rates",
+  "goalSource": "From the brain (demo numbers)",
+  "guest": "Denise, 52, a UGA parent from Alpharetta",
+  "guestWhere": "Instagram and UGA parents Facebook groups. Reads every review. Books game weekends 2 to 4 months ahead.",
+  "monthJob": "Fill January's soft nights and grow the guest circle before the 2027 football schedule drops",
+  "monthWhy": "January runs Est. 25% booked. The circle's first access to game weekends is the reason to join.",
+  "floor": "Floor $129 a night, after fees",
+  "rules": ["No discounts unless the host asks", "Never discount a game weekend", "No parties"]
+ },
+ "planLine": "January is quiet, so sell the quiet. Two stories carry the month: a couple's reset weekend and a birder's slow morning. Every email builds the guest circle, whose one privilege is 48 hours of first access to 2027 game weekends. No discounts: the numbers show a discount wipes out what booking direct is worth.",
+ "nights": [
+  {"when": "Jan 8 to 10", "class": "Shoulder", "status": "Open", "ask": "A post-holiday reset: two nights, nobody to host."},
+  {"when": "Jan 15 to 18 (MLK weekend)", "class": "High", "status": "Open", "ask": "Three nights for two. Invite couples first, then parents dropping a student back.", "confirm": "MLK Day is Monday, January 18, 2027."},
+  {"when": "Sun to Thu, all month", "class": "Soft", "status": "Mostly open", "ask": "Midweek birding and parent visits. 1-night minimum already allowed."},
+  {"when": "Jan 22 to 24 and 29 to 31", "class": "Shoulder", "status": "Open", "ask": "Winter birding weekends, ahead of the Great Backyard Bird Count.", "confirm": "Confirm February count dates on birdcount.org."},
+  {"when": "2027 home game weekends", "class": "Peak", "status": "Not on sale yet", "ask": "Not sold this month. The circle gets 48 hours first the day the schedule is published.", "confirm": "Check georgiadogs.com for the 2027 schedule."}
+ ],
+ "angles": [
+  {"name": "The reset weekend", "guest": "Denise and Mark, after a full house at Christmas",
+   "desire": "Two nights where nobody needs anything from them.",
+   "tension": "December was all hosting, cooking and driving. Home still has the tree up and a list on the fridge.",
+   "moment": "Saturday, 8 am. Coffee on the covered patio, frost on the meadow, and the only plan is a second cup.",
+   "proof": ["11 acres, no neighbors in sight", "Covered patio facing the meadow", "King bed", "Keypad entry, so no one to meet"],
+   "useFor": "Week 1 and the MLK weekend"},
+  {"name": "The slow birding morning", "guest": "Denise, who keeps a bird list on her phone",
+   "desire": "To see something she can't see from her subdivision.",
+   "tension": "At home the feeder gets sparrows and a leaf blower.",
+   "moment": "A pair of bluebirds on the fence line while the deer cross behind them.",
+   "proof": ["Meadow and woodland edge on 11 acres", "Bird list kept by the hosts (demo)", "Deer at sunrise, mentioned in a review (demo)"],
+   "useFor": "Weeks 1, 3 and 4, and the bird-count weekends"},
+  {"name": "The easy parent visit", "guest": "Denise, when her daughter is back on campus",
+   "desire": "Take her daughter to dinner without a game-day price or a loud hotel.",
+   "tension": "Athens hotels feel like a tax on being a UGA parent.",
+   "moment": "Her daughter on the sofa bed with leftovers, saying she slept better here than in her dorm.",
+   "proof": ["About 25 minutes to campus", "Full kitchen", "Sofa bed for a guest", "Midweek nights from 1 night"],
+   "useFor": "Week 3, and every circle email about planning ahead"}
+ ],
+ "weeks": [
+  {"week": "Week 1 · Jan 4 to 10", "theme": "The reset weekend",
+   "items": [
+    {"type": "Past-guest email", "channel": "Guest circle", "day": "Monday", "angle": "The reset weekend", "builtFrom": "Photo: frost on the meadow (Dec 28). Calendar: Jan 8 to 10 open.",
+     "hook": "A new-year note, not a sales email.", "subject": "The meadow this morning",
+     "copy": "Hi {first name},\n\nThe meadow had frost on it at 7 this morning, and the deer came through at 7:40, right on time.\n\nIf December was a lot of hosting, January is a good month to be the guest. The weekend of January 8 is open, and so is most of the month midweek.\n\nOne more thing: when the 2027 UGA schedule comes out, the guest circle hears first. You'll get 48 hours to pick your game weekends before they open anywhere else.\n\nHappy new year from all eleven acres.",
+     "cta": "Reply with dates, or book on the direct page."},
+    {"type": "Social post", "channel": "Instagram reel", "day": "Wednesday", "angle": "The reset weekend", "builtFrom": "Clips from the scene library: slow morning. Demo review line: \"We didn't talk to anyone for two days and it was perfect.\"",
+     "hook": "Opening text: \"Your December, then your Saturday.\"",
+     "copy": "Two nights. Nobody to host. Coffee on the patio and frost on the meadow.\n\n\"We didn't talk to anyone for two days and it was perfect.\" (guest review)\n\nJan 8 to 10 is open. Link in bio.",
+     "cta": "Link in bio to the direct page.", "shots": ["Mug set down on the patio rail", "Frost on the meadow, wide", "Keypad door opening", "Bed made, morning light"]},
+    {"type": "Social post", "channel": "Facebook page", "day": "Friday", "angle": "The slow birding morning", "builtFrom": "Event: Christmas Bird Count season ends Jan 5. Host's own bird list (demo).",
+     "hook": "What we counted this week.",
+     "copy": "The Christmas Bird Count season wraps up on January 5, so we did our own count on the eleven acres this week: eastern bluebirds, a red-tailed hawk, a pileated woodpecker and more cardinals than we could keep track of.\n\nIf you keep a list too, midweek nights are open all January.",
+     "cta": "Comment with your best backyard bird. Link to the direct page in the comments.", "shots": ["Bluebird on the fence line", "Hand writing on the bird list card"]}
+   ]},
+  {"week": "Week 2 · Jan 11 to 17", "theme": "Three nights for two (MLK weekend)",
+   "items": [
+    {"type": "Past-guest email", "channel": "Guest circle", "day": "Monday", "angle": "The reset weekend", "builtFrom": "Calendar: Jan 15 to 18 open. Demo review line about sleeping well.",
+     "hook": "A long weekend that's easy to say yes to.", "subject": "A three-day weekend, if you want it",
+     "copy": "Hi {first name},\n\nMonday the 18th is a holiday for a lot of people, and the studio is open Friday the 15th to Monday the 18th.\n\nThree nights is long enough to stop checking your phone. One guest told us they slept better here than at home, and we think it's the dark and the quiet more than the king bed.\n\nIf you're dropping a student back in Athens that weekend, campus is about 25 minutes away.",
+     "cta": "Book on the direct page, or reply and ask me anything."},
+    {"type": "Social post", "channel": "Instagram carousel", "day": "Tuesday", "angle": "The reset weekend", "builtFrom": "Demo reviews: two lines. Photos: patio, meadow at dusk, bedroom.",
+     "hook": "Slide 1: \"What guests say about the quiet.\"",
+     "copy": "Slide 1: What guests say about the quiet.\nSlide 2: \"We slept better than at home.\"\nSlide 3: \"We didn't talk to anyone for two days.\"\nSlide 4: Eleven acres between you and noise. MLK weekend is open.",
+     "cta": "Link in bio.", "shots": ["Meadow at dusk", "Patio chairs, no people", "Bedroom, lamp on"]},
+    {"type": "Social post", "channel": "Instagram reel", "day": "Thursday", "angle": "The reset weekend", "builtFrom": "Scene library: arrival.",
+     "hook": "Point of view: you just got here.",
+     "copy": "Park at the door. Keypad. Bag down. Kettle on. That's the whole check-in.\n\nFriday the 15th to Monday the 18th is still open.",
+     "cta": "Link in bio.", "shots": ["Car pulling up on gravel", "Keypad close-up", "Bag set on the bench", "Kettle and window"]}
+   ]},
+  {"week": "Week 3 · Jan 18 to 24", "theme": "The easy parent visit",
+   "items": [
+    {"type": "Past-guest email", "channel": "Guest circle", "day": "Tuesday", "angle": "The easy parent visit", "builtFrom": "Events: UGA spring semester, G-Day, spring commencement (dates to confirm).",
+     "hook": "Useful planning, no booking ask in the first line.", "subject": "Planning your spring trips to Athens",
+     "copy": "Hi {first name},\n\nIf you have a student at UGA, here's the spring as we understand it: classes are back this month, G-Day is in April and commencement is in May. Check the dates on UGA's own pages before you plan.\n\nCommencement sells out every room in town early. If you already know you're coming, it's worth looking now.\n\nAnd for the quieter visits in between, a single weeknight is fine here. Dinner in Athens, back to the meadow, home by lunch.",
+     "cta": "Reply with your dates and I'll check them."},
+    {"type": "Social post", "channel": "Facebook page", "day": "Wednesday", "angle": "The easy parent visit", "builtFrom": "Fact: about 25 minutes to campus. Host's back-roads route card.",
+     "hook": "The back way into Athens.",
+     "copy": "Our favorite route into Athens skips the traffic and takes about 25 minutes. We print it for every guest who comes for a game or a visit.\n\nMidweek this month, one night is fine. Take your student to dinner, sleep somewhere quiet, and be home by lunch.",
+     "cta": "Link to the direct page.", "shots": ["Printed route card on the counter", "Car keys and the card"]},
+    {"type": "Social post", "channel": "Instagram post", "day": "Friday", "angle": "The slow birding morning", "builtFrom": "Photo: meadow at sunset (Nov). Demo review line about the deer.",
+     "hook": "\"The deer came through at sunrise, every morning.\"",
+     "copy": "\"The deer came through at sunrise, every morning.\" (guest review)\n\nThey still do. Weekends of the 22nd and 29th are open.",
+     "cta": "Link in bio.", "shots": ["Meadow at sunset, wide"]}
+   ]},
+  {"week": "Week 4 · Jan 25 to 31", "theme": "Join before the schedule drops",
+   "items": [
+    {"type": "Past-guest email", "channel": "Guest circle", "day": "Monday", "angle": "The easy parent visit", "builtFrom": "The circle's privilege. Booked Solid's first-access model.",
+     "hook": "Explain the privilege plainly, with its limits.", "subject": "How first access to game weekends works",
+     "copy": "Hi {first name},\n\nThe 2027 UGA football schedule isn't out yet. When it is, here's what happens:\n\nI'll email the circle the home game weekends and the time they open to everyone else. You get 48 hours to book first, at the same price everyone else will see. There's no obligation, and the email doesn't hold a date for you.\n\nIf you have a friend who's a UGA parent, they can join with the link below.",
+     "cta": "Forward to a friend, or join from the direct page."},
+    {"type": "Social post", "channel": "Instagram reel", "day": "Wednesday", "angle": "The slow birding morning", "builtFrom": "Event: Great Backyard Bird Count in February (confirm dates). Scene library: birding.",
+     "hook": "Count birds from the porch.",
+     "copy": "The Great Backyard Bird Count is in February. Anyone can join: count birds for 15 minutes and send in your list.\n\nWe'll be counting from the porch. If you want to count from ours, February weekends are open.",
+     "cta": "Link in bio. Link to birdcount.org in the caption.", "shots": ["Binoculars on the porch rail", "Feeder close-up", "Bird list card"]},
+    {"type": "Social post", "channel": "Instagram story + Facebook page", "day": "Friday", "angle": "The easy parent visit", "builtFrom": "The circle's privilege.",
+     "hook": "UGA parents: get game weekends first.",
+     "copy": "When the 2027 schedule drops, our guest circle gets 48 hours to book game weekends before they open anywhere else. Same price, no obligation. Free to join, about one email a month.",
+     "cta": "Join from the link in bio.", "shots": ["Printed route card and a red mug on the patio"]}
+   ]}
+ ],
+ "circle": {
+  "name": "The Songbird Acres guest circle",
+  "invitation": "Coming back for a game, a visit or a quiet weekend? Join the guest circle for what we're seeing on the eleven acres, and 48 hours of first access when new game weekends open. About one email a month.",
+  "privilege": "48 hours of first access to 2027 home game weekends, at the public price. First access is a head start, not a held date.",
+  "frequency": "About once a month, plus one note the day the schedule drops.",
+  "capture": [
+   {"route": "Direct booking page", "how": "A short signup box below the photos, plus an unticked box at checkout.", "consent": "Separate, unticked box. Save the date and wording."},
+   {"route": "In the studio", "how": "A printed card by the kettle with a QR code to the signup page.", "consent": "The guest chooses to scan and sign up. Nothing is added for them."},
+   {"route": "Direct enquiries", "how": "Answer the question first. Mention the circle once, at the end.", "consent": "Add them only if they say yes."},
+   {"route": "Airbnb and Vrbo guests", "how": "Only through the printed card. Never use channel messages or channel email addresses for marketing.", "consent": "Check each channel's current off-platform rules."}
+  ],
+  "welcome": [
+   {"when": "Right away", "subject": "Welcome to the guest circle",
+    "body": "Glad you're here. About once a month I'll share what's happening on the eleven acres: the birds, the seasons, and anything worth planning around in Athens. When new game weekends open, the circle hears first. If you're already planning a trip, reply and tell me. A real person reads these."},
+   {"when": "Day 3", "subject": "The part of a game weekend I'd plan first",
+    "body": "Before the tickets, think about Friday night. Who arrives late? Does anyone want a simple dinner in? The studio has a full kitchen and a sofa bed for a student who wants to stay over. Getting Friday right makes Saturday easier. If there's something you can't find on the listing, ask me."},
+   {"when": "Day 7", "subject": "How your first access works",
+    "body": "When the schedule comes out, I'll send the home game weekends and the time they open to everyone else. You get 48 hours first, at the same price. There's no obligation, and the email doesn't hold a date for you. It's just a head start."}
+  ]
+ },
+ "enquiry": {
+  "rule": "Direct enquiries go cold fast. A short, true holding reply inside five minutes, then the real answer by the time you promised.",
+  "holding": "Thanks for asking about Songbird Acres. I'm checking the dates and will reply by 7 pm today. This message doesn't hold the dates yet.",
+  "followUp": "Is there anything about the studio that would help you decide? Happy to send a photo of the stairs, or the route in from Athens. If plans changed, no problem at all."
+ },
+ "offer": {
+  "note": "Before any offer, work out what each route keeps from the same stay. Demo numbers: replace them with your own fees and costs.",
+  "math": {
+   "basis": "2 nights at $150 plus a $75 cleaning fee = $375. Turnover $60, supplies and utilities $15 (Est.)",
+   "rows": [
+    {"route": "Direct, guest circle, full price", "math": "$375 less about 3% card fee ($11.25), Est. $5 to reach them, $60, $15", "keep": "About $284"},
+    {"route": "Airbnb", "math": "$375 less 15.5% host fee ($58.13), $60, $15", "keep": "About $242"},
+    {"route": "Direct, circle, 15% off the nights", "math": "$330 less 3% ($9.90), $5, $60, $15", "keep": "About $240"},
+    {"route": "Direct, paid social ad", "math": "$375 less 3% ($11.25), Est. $60 ad cost per booking, $60, $15", "keep": "About $229"}
+   ]
+  },
+  "decision": "No discount this month. Use the privilege instead.",
+  "why": "A 15% discount turns a direct booking into one worth slightly less than an Airbnb booking. First access costs nothing to deliver and gives UGA parents a real reason to join.",
+  "privilegeCost": "First access: about $0, and game weekends still sell at full price. If the host wants a returning-guest touch, a jar of the property's pecans costs about $6 (Est.), less than any discount.",
+  "ceiling": "To beat an Airbnb booking, a direct booking can cost at most about $46 to win (Est.). Skip paid ads until a test shows a lower cost per completed stay."
+ },
+ "discovery": [
+  {"route": "Search (direct page)", "action": "Publish one helpful page: \"Where to stay for a UGA weekend without the downtown noise\", with the back-roads route, drive times and a planning checklist.", "note": "Write what a parent needs to know. Keep dates current."},
+  {"route": "Google Vacation Rentals", "action": "Ask the PMS whether the direct page is connected and the price and dates match.", "note": "Set up in the OTA Distribution step. A connection doesn't guarantee placement."},
+  {"route": "UGA parents Facebook groups", "action": "Answer questions about where to stay only where the group allows it. Help first, link only if asked.", "note": "Read each group's rules before posting."},
+  {"route": "One local partner", "action": "Swap a feature with a Jefferson business guests already love, such as a farm stand or a bird-supply shop. No money changes hands.", "note": "Pick a partner that fits the quiet. No paid or referral deals."}
+ ],
+ "sceneLibrary": [
+  {"scene": "Slow morning", "shots": ["Mug on the patio rail", "Frost or mist on the meadow", "Deer crossing, long lens"], "use": "Reset reels, welcome email header"},
+  {"scene": "Arrival", "shots": ["Car on gravel", "Keypad close-up", "Bag down, kettle on"], "use": "Point-of-view reel, check-in section on the direct page"},
+  {"scene": "Birding", "shots": ["Binoculars on the rail", "Feeder", "Bird list card", "Bluebird on the fence"], "use": "Bird-count posts, birding page"},
+  {"scene": "Game-weekend prep", "shots": ["Kitchen counter with snacks", "Printed route card", "Sofa bed made up"], "use": "Circle emails, parent posts"},
+  {"scene": "Evening", "shots": ["Meadow at sunset", "Porch chairs", "Lamp-lit bedroom"], "use": "Stills, carousel closers"}
+ ],
+ "routine": [
+  {"when": "Day 1", "task": "Gather new reviews, 10 to 15 photos or clips, next month's events and the calendar's open nights.", "minutes": "15 min"},
+  {"when": "Day 1", "task": "Run the skill. Edit every piece so it sounds like you.", "minutes": "20 min"},
+  {"when": "Day 1", "task": "Schedule the posts in Meta Business Suite and the emails in your email tool.", "minutes": "15 min"},
+  {"when": "Last day", "task": "Read the replies and fill in the five numbers below.", "minutes": "10 min"}
+ ],
+ "never": [
+  "Offer a discount the host didn't ask for, or any discount on a game weekend.",
+  "Email anyone who didn't opt in to marketing. Booking messages are not marketing.",
+  "Use Airbnb or Vrbo messages to push guests off the platform.",
+  "Show a view, amenity or AI-made image that isn't the real property.",
+  "Use fake urgency: \"only 1 left\", countdown timers, \"prices going up\".",
+  "Use a guest's name, face or words without permission, or offer anything for a review."
+ ],
+ "measures": [
+  "Guest circle signups, by where they joined",
+  "Replies to circle emails (the best sign the relationship works)",
+  "Saves, shares and profile visits per post, not views",
+  "Direct enquiries and first reply time",
+  "January nights booked, by source, with contribution after fees"
+ ],
+ "sources": [
+  {"item": "Review lines", "source": "Demo lines made up for this sample. Use only real reviews, quoted exactly."},
+  {"item": "Photos and clips", "source": "Demo shot list. Use only real photos of the property."},
+  {"item": "Christmas Bird Count", "source": "Audubon runs it from December 14 to January 5 each season (audubon.org)."},
+  {"item": "Great Backyard Bird Count", "source": "Held each February. Confirm 2027 dates on birdcount.org."},
+  {"item": "MLK Day", "source": "Monday, January 18, 2027 (US federal holiday, third Monday of January)."},
+  {"item": "UGA dates", "source": "Spring classes, G-Day and commencement: confirm on uga.edu. The 2027 football schedule wasn't published when this plan was made (georgiadogs.com)."},
+  {"item": "Fees", "source": "Airbnb 15.5% host-only fee and card processing as used in the OTA Distribution plan, checked November 2026."}
+ ],
+ "footer": "Sample plan with demo inputs: the goal, review lines, photos and costs are made up. Event dates marked \"confirm\" need checking before anything is published."
+}

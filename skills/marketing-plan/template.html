@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monthly Marketing Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--ground:#f6f2ea;--accent:#f07c33;--support:#3d5a48;--paper:#fff;--line:#e4ddd0;--mute:#6f6a60;--display:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:13px/1.5 Inter,system-ui,sans-serif}
+.page{max-width:900px;margin:0 auto;padding:32px 24px}
+h1,h2,h3,.disp{font-family:var(--display);font-weight:400;margin:0}
+h2{font-size:24px;margin:34px 0 4px;break-after:avoid}
+.kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.mute{color:var(--mute)}
+.lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:3px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.head .disp{font-size:30px;line-height:1.1}
+.head .meta{text-align:right;font-size:12px}
+.banner{background:var(--accent);color:#fff;font-weight:800;font-size:32px;letter-spacing:.02em;text-transform:uppercase;text-align:center;padding:14px 10px;margin:18px -24px 0;line-height:1.1}
+.banner small{display:block;font-size:13px;letter-spacing:.14em;font-weight:700;opacity:.9;margin-top:4px}
+.promise{background:var(--ink);color:#fff;text-align:center;padding:14px 20px;margin:0 -24px}
+.promise .disp{font-size:22px;font-style:italic}
+.promise .sub{font-size:12px;opacity:.75;margin-top:4px}
+.inputs{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--ink);margin-top:20px}
+.inputs>div{padding:10px 12px;border-right:2px solid var(--ink)}
+.inputs>div:last-child{border-right:0}
+.inputs b{display:block;font-size:13.5px;line-height:1.35}
+.inputs span{display:block;color:var(--mute);font-size:11.5px;margin-top:2px}
+.oneline{font-family:var(--display);font-size:19px;line-height:1.4;margin:22px 0 0;padding-left:14px;border-left:4px solid var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:6px;border-bottom:2px solid var(--ink)}
+td{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.why{color:var(--mute);font-size:11.5px}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700;white-space:nowrap;background:var(--ground);border:1px solid var(--accent)}
+.pill.email{background:var(--support);border-color:var(--support);color:#fff}
+.pill.post{background:var(--ground)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.card{background:var(--paper);border:2px solid var(--ink);break-inside:avoid;display:flex;flex-direction:column}
+.card .top{background:var(--ground);border-bottom:2px solid var(--ink);padding:10px 14px}
+.card .top h3{font-family:Inter,sans-serif;font-weight:800;font-size:16px}
+.card .body{padding:10px 14px 12px;display:grid;gap:7px}
+.card ul{margin:0;padding-left:16px}
+.moment{font-family:var(--display);font-style:italic;font-size:14.5px;border-left:3px solid var(--accent);padding-left:8px}
+.week{border:2px solid var(--ink);margin-top:16px;break-inside:avoid}
+.week .wk{display:flex;justify-content:space-between;gap:12px;align-items:baseline;background:var(--ink);color:#fff;padding:8px 14px}
+.week .wk b{font-size:15px}
+.week .wk span{font-size:12px;opacity:.85}
+.item{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 14px;border-top:1px solid var(--line);break-inside:avoid}
+.item:first-of-type{border-top:0}
+.item .side{font-size:11.5px;color:var(--mute);display:grid;gap:6px;align-content:start}
+.item .hook{font-weight:700;font-size:13.5px}
+.copy{white-space:pre-line;background:var(--ground);border-left:3px solid var(--accent);padding:8px 10px;margin:6px 0;font-size:12.5px}
+.subj{font-size:12px;margin-top:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line);border-radius:10px;padding:14px;break-inside:avoid}
+ul.plain{margin:4px 0 0;padding-left:18px}
+ul.plain li{margin:0 0 4px}
+.seq{display:grid;gap:10px;margin-top:10px}
+.seq .copy{margin:4px 0 0}
+.econ td:last-child{font-weight:700}
+.decision{background:var(--support);color:#fff;padding:12px 14px;margin-top:10px;font-size:13.5px}
+.decision b{display:block;font-size:15px;margin-bottom:2px}
+.foot{margin-top:30px;border-top:2px solid var(--ink);padding-top:10px;font-size:11px;color:var(--mute)}
+@media (max-width:700px){.inputs,.cards,.row,.item{grid-template-columns:1fr}.inputs>div{border-right:0;border-bottom:2px solid var(--ink)}.banner{font-size:22px}.scroll{overflow-x:auto}}
+@media print{.page{padding:18px 20px}.banner,.promise{margin-left:-20px;margin-right:-20px}h2{margin-top:24px}}
+</style>
+</head>
+<body>
+<div class="page" id="app"></div>
+<script type="application/json" id="plan-data">{}</script>
+<script>
+const D = JSON.parse(document.getElementById('plan-data').textContent);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const B = D.brand || {};
+const P = B.palette || {};
+for (const k of ['ink','ground','accent','support']) if (P[k]) document.documentElement.style.setProperty('--' + k, P[k]);
+if (B.displayFont) document.documentElement.style.setProperty('--display', B.displayFont + ", Georgia, serif");
+const list = a => (a || []).map(x => '<li>' + esc(x) + '</li>').join('');
+const I = D.inputs || {};
+let h = '';
+let n = 0;
+const sec = (title, note) => { n++; return `<h2>${n}. ${esc(title)}</h2>` + (note ? `<p class="mute">${esc(note)}</p>` : ''); };
+
+h += `<div class="head"><div><div class="kicker">STR Booster playbook · Step 6</div><div class="disp">${esc(D.propertyName)}</div><div class="mute">${esc(D.location)}</div></div>
+<div class="meta">Prepared for <b>${esc(D.preparedFor)}</b><br>${esc(D.date)}</div></div>`;
+h += `<div class="banner">Marketing Plan<small>${esc(D.month)}</small></div>`;
+if (B.promise) h += `<div class="promise"><div class="disp">“${esc(B.promise)}”</div><div class="sub">The guest is the hero. The property is the setting. Every post and email below keeps this promise.</div></div>`;
+h += `<div class="inputs">
+<div><div class="lbl">Goal</div><b>${esc(I.goal)}</b><span>${esc(I.goalSource)}</span></div>
+<div><div class="lbl">Ideal guest</div><b>${esc(I.guest)}</b><span>${esc(I.guestWhere)}</span></div>
+<div><div class="lbl">This month's job</div><b>${esc(I.monthJob)}</b><span>${esc(I.monthWhy)}</span></div>
+<div><div class="lbl">Guardrails</div><b>${esc(I.floor)}</b><span>${esc((I.rules || []).join(' · '))}</span></div></div>`;
+if (D.planLine) h += `<p class="oneline">${esc(D.planLine)}</p>`;
+
+const nights = D.nights || [];
+if (nights.length) {
+  h += sec('The nights this month has to sell', 'Marketing starts from the calendar, not from a content calendar. These are the dates that need help, and the invitation that fits each one.');
+  h += `<div class="scroll"><table><thead><tr><th>When</th><th>Class</th><th>Status</th><th>The invitation</th></tr></thead><tbody>`;
+  for (const x of nights) h += `<tr><td><b>${esc(x.when)}</b>${x.confirm ? `<div class="why">${esc(x.confirm)}</div>` : ''}</td><td>${esc(x.class)}</td><td>${esc(x.status)}</td><td>${esc(x.ask)}</td></tr>`;
+  h += `</tbody></table></div>`;
+}
+
+const angles = D.angles || [];
+if (angles.length) {
+  h += sec('The guest stories', 'Each angle has a person, a desire, a little tension and a moment of possibility. The property only appears as the setting that makes the moment real.');
+  h += `<div class="cards">`;
+  for (const a of angles) h += `<div class="card"><div class="top"><h3>${esc(a.name)}</h3><div class="why">${esc(a.guest)}</div></div><div class="body">
+<div><div class="lbl">Wants</div>${esc(a.desire)}</div>
+<div><div class="lbl">Tension</div>${esc(a.tension)}</div>
+<div class="moment">${esc(a.moment)}</div>
+<div><div class="lbl">True because</div><ul>${list(a.proof)}</ul></div>
+${a.useFor ? `<div><div class="lbl">Use it for</div>${esc(a.useFor)}</div>` : ''}
+</div></div>`;
+  h += `</div>`;
+}
+
+const weeks = D.weeks || [];
+if (weeks.length) {
+  h += sec('The four weeks', 'One past-guest email and two social posts a week. Every piece is built only from the reviews, photos and local events supplied, and says which one.');
+  for (const w of weeks) {
+    h += `<div class="week"><div class="wk"><b>${esc(w.week)}</b><span>${esc(w.theme)}</span></div>`;
+    for (const it of (w.items || [])) {
+      const isEmail = /email/i.test(it.type || '');
+      h += `<div class="item"><div class="side"><span><span class="pill ${isEmail ? 'email' : 'post'}">${esc(it.type)}</span></span>
+<span><b>${esc(it.channel)}</b>${it.day ? ' · ' + esc(it.day) : ''}</span>
+<span><span class="lbl">Angle</span><br>${esc(it.angle)}</span>
+<span><span class="lbl">Built from</span><br>${esc(it.builtFrom)}</span></div>
+<div><div class="hook">${esc(it.hook)}</div>${it.subject ? `<div class="subj"><span class="lbl">Subject</span> ${esc(it.subject)}</div>` : ''}
+<div class="copy">${esc(it.copy)}</div>
+<div class="why"><b>Next step:</b> ${esc(it.cta)}</div>
+${it.shots && it.shots.length ? `<div class="why"><b>Shots:</b> ${it.shots.map(esc).join(' · ')}</div>` : ''}</div></div>`;
+    }
+    h += `</div>`;
+  }
+}
+
+const C = D.circle;
+if (C) {
+  h += sec('The guest circle', 'Interest that ends at a booking button disappears. The circle keeps the relationship going, with permission, until the next trip is possible.');
+  h += `<div class="row"><div class="box"><div class="lbl">Name</div><b>${esc(C.name)}</b>
+<div class="lbl" style="margin-top:10px">The invitation</div><div class="copy">${esc(C.invitation)}</div>
+<div class="lbl" style="margin-top:10px">The one privilege</div>${esc(C.privilege)}
+<div class="lbl" style="margin-top:10px">How often</div>${esc(C.frequency)}</div>
+<div class="box"><div class="lbl">Where people join</div><table><tbody>`;
+  for (const r of (C.capture || [])) h += `<tr><td><b>${esc(r.route)}</b><div class="why">${esc(r.how)}</div><div class="why"><b>Consent:</b> ${esc(r.consent)}</div></td></tr>`;
+  h += `</tbody></table></div></div>`;
+  if ((C.welcome || []).length) {
+    h += `<div class="seq"><div class="lbl" style="margin-top:12px">Welcome sequence</div>`;
+    for (const m of C.welcome) h += `<div class="box"><b>${esc(m.when)}</b> · <span class="mute">Subject:</span> ${esc(m.subject)}<div class="copy">${esc(m.body)}</div></div>`;
+    h += `</div>`;
+  }
+}
+
+const E = D.enquiry;
+if (E) {
+  h += sec('Every direct enquiry, inside five minutes', E.rule);
+  h += `<div class="row"><div class="box"><div class="lbl">Holding reply (send within 5 minutes)</div><div class="copy">${esc(E.holding)}</div></div>
+<div class="box"><div class="lbl">One follow-up, if they go quiet</div><div class="copy">${esc(E.followUp)}</div></div></div>`;
+}
+
+const O = D.offer;
+if (O) {
+  h += sec('The offer check', O.note);
+  if (O.math && O.math.rows) {
+    h += `<div class="scroll"><table class="econ"><thead><tr><th>Route</th><th>How it is worked out (${esc(O.math.basis)})</th><th>Contribution</th></tr></thead><tbody>`;
+    for (const r of O.math.rows) h += `<tr><td><b>${esc(r.route)}</b></td><td class="mute">${esc(r.math)}</td><td>${esc(r.keep)}</td></tr>`;
+    h += `</tbody></table></div>`;
+  }
+  h += `<div class="decision"><b>${esc(O.decision)}</b>${esc(O.why)}</div>`;
+  if (O.ceiling || O.privilegeCost) h += `<div class="row" style="margin-top:12px">${O.privilegeCost ? `<div class="box"><div class="lbl">What the privilege costs</div>${esc(O.privilegeCost)}</div>` : ''}${O.ceiling ? `<div class="box"><div class="lbl">Most you'd pay to win one booking</div>${esc(O.ceiling)}</div>` : ''}</div>`;
+}
+
+const disc = D.discovery || [];
+if (disc.length) {
+  h += sec('Other ways to be found', 'Social creates desire before dates are chosen. These routes reach people who are already planning.');
+  h += `<table><thead><tr><th>Route</th><th>This month</th></tr></thead><tbody>`;
+  for (const r of disc) h += `<tr><td><b>${esc(r.route)}</b></td><td>${esc(r.action)}${r.note ? `<div class="why">${esc(r.note)}</div>` : ''}</td></tr>`;
+  h += `</tbody></table>`;
+}
+
+const scenes = D.sceneLibrary || [];
+if (scenes.length) {
+  h += sec('The scene library', 'One filming session, sorted by guest moment rather than by room, so each clip can serve a reel, a still, a website section and an email.');
+  h += `<table><thead><tr><th>Moment</th><th>Shots to capture</th><th>Use</th></tr></thead><tbody>`;
+  for (const s of scenes) h += `<tr><td><b>${esc(s.scene)}</b></td><td>${esc((s.shots || []).join(' · '))}</td><td>${esc(s.use)}</td></tr>`;
+  h += `</tbody></table>`;
+}
+
+h += sec('The hour, the rules and the numbers');
+h += `<div class="row"><div class="box"><div class="lbl">One hour a month</div><table><tbody>`;
+for (const r of (D.routine || [])) h += `<tr><td style="white-space:nowrap"><b>${esc(r.when)}</b></td><td>${esc(r.task)}</td><td style="white-space:nowrap" class="why">${esc(r.minutes)}</td></tr>`;
+h += `</tbody></table></div><div class="box"><div class="lbl">Never</div><ul class="plain">${list(D.never)}</ul><div class="lbl" style="margin-top:12px">Measure it monthly</div><ul class="plain">${list(D.measures)}</ul></div></div>`;
+
+if ((D.sources || []).length) {
+  h += sec('Where every piece came from');
+  h += `<table><thead><tr><th>Material</th><th>Source</th></tr></thead><tbody>`;
+  for (const s of D.sources) h += `<tr><td><b>${esc(s.item)}</b></td><td>${esc(s.source)}</td></tr>`;
+  h += `</tbody></table>`;
+}
+h += `<div class="foot">${esc(D.footer)}<br>Made with the free Marketing Plan skill from STR Booster · strbooster.com/skills · Method from Booked Solid by David Anthony Scott</div>`;
+document.getElementById('app').innerHTML = h;
+</script>
+</body>
+</html>

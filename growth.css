@@ -669,3 +669,10 @@ html { scroll-padding-top: 100px; }
   .pb-step { grid-template-columns: 42px 1fr; gap: 12px; }
   .pb-step-num { height: 40px; font-size: 1.1rem; }
 }
+/* HighLevel form embed on the playbook */
+.pb-ghl { gap: 10px; }
+.pb-ghl-frame { width: 100%; min-height: 320px; border: 0; border-radius: 10px; background: #fff; }
+.pb-consent-note { font-size: .85rem; color: var(--sb-muted); line-height: 1.5; }
+.pb-unlock { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; cursor: pointer; justify-self: start; text-decoration: underline; text-underline-offset: 3px; color: var(--sc-ink); }
+.pb-unlocked .pb-unlock { display: none; }
+.pb-closing-cta { display: flex; align-items: center; }

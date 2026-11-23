@@ -235,3 +235,11 @@ body {
 @media (max-width: 860px) { .ac-grid { grid-template-columns: 1fr; } .ac-total { position: static; } }
 @media (max-width: 560px) { .ac-list { grid-template-columns: 1fr; } }
 .bx-tab > span[aria-hidden] { display: none; }
+/* Proof line under the founder photo */
+.bx-photo figcaption { display: block; }
+.bx-photo .bx-who { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.bx-photo .bx-proof { display: block; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgb(255 255 255 / .2); font: 600 11px/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #dfe8e4; }
+.bx-photo .bx-proof b { color: var(--lime); }
+.bx-photo .bx-proof i { font-style: normal; margin: 0 6px; color: var(--lime); }
+.bx-photo .bx-proof cite { font-style: normal; }
+.bx-photo figcaption .bx-who { font: 700 1.05rem/1.2 var(--sans); letter-spacing: -.01em; text-transform: none; color: #fff; }

@@ -1,5 +1,5 @@
 /* Pull-request browser check for every page in scripts/pages.json.
- * Runs only against a local server. External requests (calendar, chat,
+ * Runs only against a local server. External requests (chat,
  * analytics, reviews) are blocked, so nothing reaches live services.
  * Saves desktop and phone screenshots of each page for visual review. */
 'use strict';
@@ -11,7 +11,8 @@ const { chromium } = require('playwright');
 const BASE = new URL(process.env.QA_BASE_URL || 'http://127.0.0.1:8765/');
 assert.ok(['127.0.0.1', 'localhost'].includes(BASE.hostname) && BASE.protocol === 'http:',
   'Browser checks may run only against a local HTTP server.');
-const BOOKING = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU';
+// Nov 2026: nothing is for sale; the primary action on every page is the free playbook.
+const PLAYBOOK = new Set(['/playbook', '/playbook.html']);
 const PAGES = JSON.parse(fs.readFileSync(path.join(__dirname, 'pages.json'), 'utf8'));
 const OUTPUT = path.resolve(process.env.QA_OUTPUT_DIR || 'previews/site-check');
 const VIEWPORTS = [
@@ -55,17 +56,13 @@ async function checkPage(browser, file, viewport) {
         h1: h1 ? h1.textContent.trim() : '',
         h1Shown: !!box && box.width > 0 && box.height > 0,
         overflow: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - innerWidth,
-        talkLinks: [...document.querySelectorAll('a')]
-          .filter(a => /^Let[’']s talk\b/i.test(a.textContent.trim()))
-          .map(a => a.getAttribute('href'))
+        navCta: document.querySelector('[data-cta="navigation"]')?.getAttribute('href') || ''
       };
     });
     if (!facts.title) problems.push('Page has no <title>');
     if (!facts.h1 || !facts.h1Shown) problems.push('Main heading (h1) is missing or hidden');
     if (facts.overflow > 1) problems.push(`Page scrolls sideways by ${facts.overflow}px`);
-    if (!facts.talkLinks.length) problems.push('No "Let\'s talk" booking link');
-    facts.talkLinks.filter(h => h !== BOOKING)
-      .forEach(h => problems.push(`"Let's talk" link points somewhere else: ${h}`));
+    if (!PLAYBOOK.has(facts.navCta)) problems.push(`Navigation action should open the free playbook, found: ${facts.navCta || 'none'}`);
 
     const shot = path.join(OUTPUT, viewport.name, file.replace(/\.html$/, '') + '.png');
     fs.mkdirSync(path.dirname(shot), { recursive: true });

@@ -1,9 +1,8 @@
 # STR Booster — Growth Systems for STR Property Managers
 
-STR Booster builds and runs growth systems for independent short-term rental property managers with 10 to 100 doors. Two outcomes: more direct revenue (Direct Revenue System) and more owner contracts (Owner Acquisition System), tied together by revenue management in the Growth Partner plan. The free Growth Audit is the main lead magnet; Guest Intel and 52Rev are free tools, not services. Plans, starting prices and guarantees live on `/growth-services.html#pricing` and the homepage `#pricing` section.
+STR Booster builds growth systems for short-term rental hosts and property managers on Claude and shares them for free (Nov 2026: services, pricing, audience sizing and affiliate links were removed). The main entry point is the free STR AI Playbook at `/playbook`, with five Claude kits in `assets/kits/`. Former service pages redirect to `/playbook` (see `netlify.toml`).
 
-The primary site-wide CTA is **Let’s talk**, linking to the verified provider-hosted page for the existing 30-minute discovery calendar:
-https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU
+The primary site-wide CTA is **Get the free playbook** (`/playbook`). `scripts/check-story.py` enforces it and fails the build if any page carries an affiliate link.
 
 ## Design and content
 

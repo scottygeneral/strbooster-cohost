@@ -5,13 +5,13 @@ description: Builds a one-page "Who will book your home" report for a prospectiv
 
 # "Who Will Book Your Home" Owner Report
 
-A free starter kit from STR Booster (strbooster.com/playbook). For property managers and co-hosts.
+A free Claude kit from STR Booster (strbooster.com/playbook). For property managers and co-hosts.
 
 **What it does:** turns a few facts about a prospective owner's home into a short, specific report: who is most likely to book it, when, what they will pay attention to, and the three things you would do first. Your first owner conversation starts with a plan instead of a pitch deck.
 
 **Why it works:** most owner pitches talk about the manager. This one talks about the owner's home and the guests who will love it. It shows you did homework before the call.
 
-**Works with:** Claude, ChatGPT or Gemini. Web search on gives better local detail.
+**Built for Claude:** upload this file as a Claude Skill or add it to a Claude project. Turn on web search in Claude for better local detail.
 
 **Time per report:** 10 to 15 minutes, including your own review.
 

@@ -5,13 +5,13 @@ description: Runs a 20-minute weekly pricing and pacing review for a short-term 
 
 # Weekly Pricing Check
 
-A free starter kit from STR Booster (strbooster.com/playbook).
+A free Claude kit from STR Booster (strbooster.com/playbook).
 
 **What it does:** gives you a calm, repeatable weekly review of the next 90 days. It looks at what is booked, what is not, and how far out you are, then tells you which dates need attention and what kind of action to consider: price, stay rules, or promotion.
 
 **What it does not do:** set your prices. Your dynamic pricing tool (PriceLabs, Wheelhouse, Beyond or your PMS) does the price maths. This kit helps you decide where to look and what to try, and it never invents a market rate.
 
-**Works with:** Claude, ChatGPT or Gemini. Upload a CSV or paste a simple table.
+**Built for Claude:** upload this file as a Claude Skill or add it to a Claude project. Upload a CSV or paste a simple table.
 
 **Time:** 20 minutes a week.
 

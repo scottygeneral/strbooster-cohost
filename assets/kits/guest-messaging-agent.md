@@ -5,11 +5,11 @@ description: Drafts guest replies for a short-term rental in the host's voice, u
 
 # Guest Messaging Agent
 
-A free starter kit from STR Booster (strbooster.com/playbook).
+A free Claude kit from STR Booster (strbooster.com/playbook).
 
 **What it does:** turns your house manual and rules into an assistant that drafts guest replies in your voice. It answers only from facts you give it, and it tells you when a message needs you instead of guessing.
 
-**Works with:** Claude (save this file as a Skill or Project instructions), ChatGPT (paste into a Custom GPT or Project), Gemini (paste into a Gem). Fill in the brackets once and reuse it for every message.
+**Built for Claude:** upload this file as a Claude Skill, or add it to a Claude project for the property. Fill in the brackets once and reuse it for every message.
 
 **Time to set up:** 20 to 30 minutes.
 
@@ -101,7 +101,7 @@ You want: 1 and 2 answered from your facts, 3 politely declined (over max guests
 
 ## What this kit will not do
 
-It does not connect to Airbnb, Vrbo or your PMS by itself, and it should not send messages without a person checking them until you have tested it properly. If you want it connected and running across your portfolio, that is the kind of system STR Booster builds.
+It does not connect to Airbnb, Vrbo or your PMS by itself, and it should not send messages without a person checking them until you have tested it properly. Connecting it to your messaging tool is a later step, once your drafts rarely need edits.
 
 ---
 

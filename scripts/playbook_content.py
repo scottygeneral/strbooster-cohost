@@ -6,8 +6,6 @@ str-booster-brief tag. playbook.js handles the form and unlocks the kit download
 """
 import html
 
-HIGHLEVEL_AFFILIATE = 'https://www.gohighlevel.com/?fp_ref=str-booster-18'
-HOSPITABLE_AFFILIATE = 'https://hospitable.com/partners/refer?utm_source=affiliates&utm_medium=other&utm_campaign=V4SALU6R'
 
 KITS = [
     ('guest-messaging-agent', 'Guest Messaging Agent', 'Hosts and PMs',
@@ -33,8 +31,8 @@ PHASES = [
         ('Write the facts down once',
          'Put check-in, parking, Wi-Fi, pets, rules, local tips and your money rules in one document per property. AI is only as good as the facts you give it, and this one file feeds every step below.',
          '45 min per property', 'guest-messaging-agent'),
-        ('Pick one assistant and one home for your prompts',
-         'Choose Claude, ChatGPT or Gemini and create one project per property or portfolio. Save the kits there. Ten scattered chats teach you nothing; one project gets sharper every week.',
+        ('Set up Claude with one project per property',
+         'Create a Claude project for each property or portfolio, add your facts document and save the kits as Skills. Ten scattered chats teach you nothing; one project gets sharper every week.',
          '15 min', None),
         ('Find the guest you win most often',
          'Paste your last 30 to 50 reviews into the Insight Miner. Look for who is happiest, why they came and what they praise. That guest becomes the target for your listing and your marketing.',
@@ -111,9 +109,9 @@ def body():
     hero = '''<section class="pb-hero"><div class="wrap pb-hero-grid"><div>
 <div class="breadcrumb"><a href="/">Home</a> / Free playbook</div>
 <p class="eyebrow">Free. No catch, no call.</p>
-<h1>The STR AI Playbook.<br><em>Twelve steps. Five kits. Free.</em></h1>
-<p class="lead">A practical way for hosts and property managers to put AI to work on guest messages, listings, pricing, reviews and owner growth. Use it with the AI assistant you already have. No new app to learn.</p>
-<ul class="pb-hero-list"><li>12-step playbook, readable right here</li><li>5 ready-to-use AI kits you can download (.md files)</li><li>One useful email a week, plus a note when a new kit drops</li></ul>
+<h1>The STR AI Playbook.<br><em>Twelve steps. Five Claude kits. Free.</em></h1>
+<p class="lead">Growth systems for hosts and property managers, built on Claude. Put it to work on guest messages, listings, pricing, reviews and owner growth. No new app to learn.</p>
+<ul class="pb-hero-list"><li>12-step playbook, readable right here</li><li>5 ready-to-use Claude kits you can download and save as Skills</li><li>One useful email a week, plus a note when a new kit drops</li></ul>
 </div>
 <div class="pb-signup" id="get-the-kits"><p class="eyebrow">Get the kits</p><h2 id="pb-signup-heading">Where should we send them?</h2>
 <p>Enter your email and the downloads unlock right away. We will also send the weekly STR Booster Brief. Unsubscribe in one click.</p>
@@ -134,28 +132,27 @@ def body():
                 + ''.join(steps) + '</div></section>')
 
     kits = ('<section class="section" id="kits"><div class="wrap"><div class="intro"><p class="eyebrow">Starter kits</p>'
-            '<h2>Five kits. Copy, fill in, use today.</h2>'
-            '<p>Each kit is a plain text file with instructions, a fill-in template and a tested prompt. Save it as a Skill in Claude, '
-            'paste it into a ChatGPT project or a Gemini Gem. Every kit is built to say “ask a person” rather than guess.</p></div>'
+            '<h2>Five Claude kits. Fill in, use today.</h2>'
+            '<p>Each kit is a Claude Skill: instructions, a fill-in template and a tested prompt in one file. Upload it to Claude as a Skill, '
+            'or add it to a Claude project. Every kit is built to say “ask a person” rather than guess.</p></div>'
             '<div class="pb-kit-grid">' + ''.join(kit_card(*k) for k in KITS) + '</div>'
             '<p class="pb-unlock-note" id="pb-unlock-note">Downloads unlock when you <a href="#get-the-kits">enter your email</a>.</p>'
             '</div></section>')
 
-    tools = f'''<section class="section white" id="tools"><div class="wrap"><div class="intro"><p class="eyebrow">Tools we actually use</p><h2>A short list, on purpose.</h2>
-<p>You can run every kit with a free or paid AI assistant and the PMS you already have. When you are ready for more, these are the tools we build on.</p></div>
-<div class="grid two"><article class="card"><p class="eyebrow">CRM, follow-up and direct booking</p><h3>HighLevel</h3><p>One place for leads, owner follow-up, texting, email, booking pages and automations. It is what STR Booster builds its systems on. Sign up through our link and you get our STR setup support.</p><a class="btn" href="{HIGHLEVEL_AFFILIATE}" target="_blank" rel="sponsored noopener noreferrer">Try HighLevel ↗</a></article>
-<article class="card"><p class="eyebrow">Guest messaging and operations</p><h3>Hospitable</h3><p>Guest messaging, scheduled messages and hosting workflows across Airbnb, Vrbo and direct bookings. A natural home for the “safe 60 percent” from step 5.</p><a class="btn" href="{html.escape(HOSPITABLE_AFFILIATE, quote=True)}" target="_blank" rel="sponsored noopener noreferrer">25% off Hospitable ↗</a></article></div>
-<p class="note affiliate-disclosure"><strong>Affiliate disclosure:</strong> STR Booster earns a commission if you subscribe through these links, at no extra cost to you. You never need either tool to use the playbook or the kits. See all <a href="/tools-partners.html">partner tools</a>.</p>
+    tools = '''<section class="section white" id="claude"><div class="wrap"><div class="intro"><p class="eyebrow">Why Claude</p><h2>One assistant. Your facts. Your rules.</h2>
+<p>Everything STR Booster builds runs on Claude. One assistant, set up once with your property facts, replaces a pile of single-purpose apps.</p></div>
+<div class="grid three"><article class="card"><h3>Skills you can reuse</h3><p>Each kit installs as a Claude Skill, so Claude follows the same steps and rules every time you ask, for every property.</p></article>
+<article class="card"><h3>Projects per property</h3><p>A Claude project keeps a property’s facts, reviews and listing together, so every answer starts from what is true about that home.</p></article>
+<article class="card"><h3>You stay in control</h3><p>The kits draft and check. Refunds, complaints, safety and anything about money always come back to a person.</p></article></div>
 </div></section>'''
 
     faq = ('<section class="section" id="faq"><div class="wrap"><div class="intro"><p class="eyebrow">Questions</p><h2>Fair questions.</h2></div><div class="faq">'
            + ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in [
-               ('Is it really free?', 'Yes. The playbook, the kits and the weekly email are free. We earn money from the growth systems we build for property managers and from clearly marked partner links. Most of what we send is just useful.'),
+               ('Is it really free?', 'Yes. The playbook, the kits and the weekly email are free, and there is nothing to buy. We build these systems and share them.'),
                ('What will you email me?', 'The STR Booster Brief: one short email a week with one idea you can use, plus a note when a new kit drops. No daily blasts. Unsubscribe in one click.'),
-               ('Which AI assistant do I need?', 'Any current assistant works: Claude, ChatGPT or Gemini, on a free or paid plan. Paid plans handle longer files and web search better.'),
-               ('Do I need to be technical?', 'No. Each kit is a text file. You fill in your details, paste it in and follow the steps. If you can write a guest message, you can use these.'),
+               ('Do I need a paid Claude plan?', 'You can start on the free plan. Projects, Skills and longer files work best on a paid Claude plan, which is what we use.'),
+               ('Do I need to be technical?', 'No. Each kit is a text file. You fill in your details, upload it to Claude and follow the steps. If you can write a guest message, you can use these.'),
                ('Will the AI reply to my guests on its own?', 'Not unless you set it up to. The kits are built for drafting first, with clear rules for when a person must step in. Automate only what you have tested.'),
-               ('Can you set this up for me?', 'Yes. Connecting these kits to your PMS, CRM and website, and running them across a portfolio, is what STR Booster does. <a href="/growth-services.html">See how we work</a>.'),
            ]) + '</div></div></section>')
 
     closing = '''<section class="section white" id="join"><div class="wrap"><div class="pb-closing"><div><p class="eyebrow">Not ready yet?</p><h2 id="pb-closing-heading">Get the kits and the weekly Brief.</h2><p>One email a week. A new kit when it drops. Leave any time.</p></div>''' + signup_form('pb-closing-form', 'pb-closing-heading') + '''</div></div></section>'''

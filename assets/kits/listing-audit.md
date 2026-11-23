@@ -5,11 +5,11 @@ description: Audits an Airbnb or Vrbo listing against the guest it should win an
 
 # Listing Audit
 
-A free starter kit from STR Booster (strbooster.com/playbook).
+A free Claude kit from STR Booster (strbooster.com/playbook).
 
 **What it does:** scores your listing in eight areas and gives you a short, prioritized list of fixes, starting with the ones that cost nothing. It judges the listing through the eyes of the guest you most want, not a generic checklist.
 
-**Works with:** Claude, ChatGPT or Gemini. Paste your listing text. Add screenshots of the first five photos if your assistant can read images.
+**Built for Claude:** upload this file as a Claude Skill or add it to a Claude project. Paste your listing text and attach screenshots of the first five photos; Claude can read images.
 
 **Time:** 15 minutes per listing.
 

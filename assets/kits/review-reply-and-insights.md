@@ -5,14 +5,14 @@ description: Drafts public replies to guest reviews in the host's voice and turn
 
 # Review Reply + Insight Miner
 
-A free starter kit from STR Booster (strbooster.com/playbook).
+A free Claude kit from STR Booster (strbooster.com/playbook).
 
 **What it does:** two jobs in one kit.
 
 1. **Reply:** drafts a short, human public reply to each review, including the difficult ones.
 2. **Mine:** reads 20 to 100 reviews at once and tells you what guests love (use it in your listing), what keeps coming up (fix it), and who your happiest guests are (market to more of them).
 
-**Works with:** Claude, ChatGPT or Gemini. Paste reviews, or upload an export from your PMS.
+**Built for Claude:** upload this file as a Claude Skill or add it to a Claude project. Paste reviews, or upload an export from your PMS.
 
 **Time:** 2 minutes per reply; 15 minutes for a monthly insight review.
 

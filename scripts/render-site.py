@@ -13,6 +13,11 @@ import html
 import json
 import re
 import runpy
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import playbook_content  # noqa: E402
+from seo import BOOK, FOUNDER, ORGANIZATION  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
@@ -193,6 +198,7 @@ def apply_growth(root: Path) -> int:
 
 
 SITE = 'https://strbooster.com'
+
 LOGO_URL = SITE + '/assets/logo-512.png'
 # Offers published on the pricing pages. check-story.py confirms each price is
 # still visible on the page, so the schema cannot drift from the copy.
@@ -203,7 +209,7 @@ OFFERS = {
     'growth-partner': ('Growth Partner', None, 2000),
 }
 SERVICE_PAGES = {}
-FAQ_SCHEMA_PAGES = {'playbook'}
+FAQ_SCHEMA_PAGES = {'index', 'playbook', 'skills'}
 LINK = re.compile(r'(\bhref=")/([A-Za-z0-9_-]+)\.html([#?][^"]*)?"')
 
 
@@ -259,12 +265,19 @@ def apply_search_polish(root: Path) -> None:
             data = json.loads(match.group(1))
             nodes = data.get('@graph', [data])
             canonical = SITE + ('/' if slug == 'index' else '/' + slug)
+            # One definition of the brand and founder entities on every page (the
+            # homepage template carries its own copy, so it is refreshed here too).
+            canonical_nodes = {n['@id']: n for n in (ORGANIZATION, FOUNDER, BOOK)}
+            nodes[:] = [canonical_nodes.get(n.get('@id'), n) for n in nodes]
+            if not any(n.get('@id') == BOOK['@id'] for n in nodes):
+                nodes.insert(2, BOOK)
+            if slug == 'playbook' and not any(n.get('@type') == 'HowTo' for n in nodes):
+                nodes.append(playbook_content.journey_schema())
+            if slug == 'skills' and not any(n.get('@type') == 'ItemList' for n in nodes):
+                nodes.append(playbook_content.skills_schema())
             for node in nodes:
-                if node.get('@id') == SITE + '/#organization':
-                    node['logo'] = {'@type': 'ImageObject', 'url': LOGO_URL, 'width': 512, 'height': 512}
-                    node['contactPoint'] = {'@type': 'ContactPoint', 'contactType': 'customer support',
-                                            'email': 'info@strbooster.com',
-                                            'availableLanguage': 'English'}
+                if node.get('@type') == 'WebPage' and slug in {'playbook', 'skills'}:
+                    node['mainEntity'] = {'@id': canonical + ('#howto' if slug == 'playbook' else '#skills')}
             if slug in SERVICE_PAGES and not any(n.get('@type') == 'Service' for n in nodes):
                 name, keys = SERVICE_PAGES[slug]
                 nodes.append({'@type': 'Service', '@id': canonical + '#service', 'name': name, 'url': canonical,
@@ -287,6 +300,11 @@ def apply_search_polish(root: Path) -> None:
         page.write_text(text, encoding='utf-8')
 
 
+def write_llms(root: Path) -> None:
+    (root / 'llms.txt').write_text(playbook_content.llms_txt(), encoding='utf-8')
+    (root / 'llms-full.txt').write_text(playbook_content.llms_txt(full=True), encoding='utf-8')
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--existing-only', action='store_true',
@@ -296,7 +314,8 @@ def main() -> None:
         runpy.run_path(str(ROOT / 'scripts/render-pages.py'), run_name='__main__')
     print(f'Growth-system design and discovery-call CTAs applied to {apply_growth(ROOT)} pages.')
     apply_search_polish(ROOT)
-    print('Internal links point at canonical URLs; FAQ, Service and Offer schema applied.')
+    write_llms(ROOT)
+    print('Internal links point at canonical URLs; FAQ, HowTo and ItemList schema applied; llms.txt written.')
 
 
 if __name__ == '__main__':

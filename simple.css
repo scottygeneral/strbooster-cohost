@@ -151,6 +151,13 @@ a.bx-file:hover { background: var(--ink); color: var(--cream); }
 .bx .faq { max-width: none; margin-top: 10px; }
 .bx .faq details { border-bottom: 1px solid var(--rule); }
 .bx .faq summary { font-weight: 600; color: var(--ink); font-family: var(--sans); }
+/* FAQ toggles on pages that do not load styles.css (the homepage). */
+.bx .faq summary { list-style: none; display: flex; justify-content: space-between; gap: 25px; font-size: 1.12rem; padding: 23px 0; cursor: pointer; }
+.bx .faq summary::after { content: '+'; font-size: 1.4rem; }
+.bx .faq details[open] summary::after { content: '\2212'; }
+.bx .faq summary::-webkit-details-marker { display: none; }
+.bx .faq details p { padding-bottom: 24px; margin: 0; }
+.bx .bx-answer { max-width: 900px; }
 .pb-ghl { display: block; }
 
 /* Mobile bottom tab bar */

@@ -169,7 +169,7 @@ def check(root, content_only=False):
     # page, and every FAQ in the schema shown in the page's FAQ block.
     import html
     import re
-    for name in ('playbook.html',):
+    for name in ('index.html', 'playbook.html', 'skills.html'):
         page_text = texts.get(name, '')
         nodes = []
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page_text, re.S):

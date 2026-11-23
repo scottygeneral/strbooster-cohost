@@ -19,7 +19,7 @@ OUT = ROOT / '_site'
 # Top-level file types that make up the site. Design-tool exports
 # (*.dc.html) are excluded explicitly below.
 PUBLIC_SUFFIXES = {'.html', '.css', '.js'}
-PUBLIC_FILES = {'robots.txt', 'sitemap.xml', 'llms.txt', 'favicon.svg'}
+PUBLIC_FILES = {'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'favicon.svg'}
 EXCLUDED_FILES = {'STR Booster Website.dc.html'}
 # Folders whose whole contents are served.
 PUBLIC_DIRS = ['assets', 'skills']

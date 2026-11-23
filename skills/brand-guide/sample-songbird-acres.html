@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--ground:#f6f2ea;--accent:#b5743b;--support:#3d5a48;--paper:#fff;--line:#e4ddd0;--mute:#6f6a60;--good:#2f7d4f;--bad:#a94438;--display:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:13px/1.5 Inter,system-ui,sans-serif}
+.page{max-width:900px;margin:0 auto;padding:32px 24px}
+h1,h2,h3,.disp{font-family:var(--display);font-weight:400;margin:0}
+h2{font-size:24px;margin:34px 0 4px;break-after:avoid}
+h3{font-size:17px;margin:16px 0 6px;break-after:avoid}
+p{margin:6px 0}
+.kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.mute{color:var(--mute)}
+.lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:3px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.head .disp{font-size:30px;line-height:1.1}
+.head .meta{text-align:right;font-size:12px}
+.banner{background:var(--accent);color:#fff;font-weight:800;font-size:32px;letter-spacing:.02em;text-transform:uppercase;text-align:center;padding:14px 10px;margin:18px -24px 0;line-height:1.1}
+.quote{background:var(--ink);color:var(--ground);text-align:center;padding:18px 24px;margin:0 -24px;break-inside:avoid}
+.quote .disp{font-size:24px;font-style:italic;line-height:1.3}
+.quote .sub{font-size:12px;opacity:.8;margin-top:6px}
+.quote .att{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-top:8px;filter:brightness(1.35)}
+.quote.inset{margin:12px 0;border-radius:4px}
+.inputs{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--ink);margin-top:20px}
+.inputs>div{padding:10px 12px;border-right:2px solid var(--ink)}
+.inputs>div:last-child{border-right:0}
+.inputs b{display:block;font-size:13.5px;line-height:1.35}
+.inputs span{display:block;color:var(--mute);font-size:11.5px;margin-top:2px}
+.accent{background:color-mix(in srgb,var(--accent) 9%,#fff);border-left:6px solid var(--accent);padding:12px 16px;margin:12px 0;break-inside:avoid}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:6px;border-bottom:2px solid var(--ink)}
+td{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+tr{break-inside:avoid}
+.def td:first-child{width:28%;font-weight:700;color:var(--support);background:color-mix(in srgb,var(--accent) 7%,#fff)}
+.def tr:nth-child(even) td:first-child{background:var(--ground)}
+.vip td.good{font-family:var(--display);font-size:13.5px;border-left:3px solid var(--good)}
+.vip td.bad{color:var(--bad);font-size:12px;border-left:3px solid var(--bad);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.vip td:first-child{width:16%;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.cards.two{grid-template-columns:1fr 1fr}
+.cards.four{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--paper);border:2px solid var(--ink);break-inside:avoid;display:flex;flex-direction:column}
+.card .top{background:var(--ground);border-bottom:2px solid var(--ink);padding:8px 12px}
+.card .top h3{font-family:Inter,sans-serif;font-weight:800;font-size:15px;margin:0}
+.card .body{padding:10px 12px 12px;display:grid;gap:7px}
+.yes{border-left:3px solid var(--good);padding-left:8px;font-family:var(--display);font-size:13.5px}
+.no{border-left:3px solid var(--bad);padding-left:8px;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{border:1px solid var(--ink);border-radius:999px;padding:3px 10px;font-size:12px}
+.chip.ban{border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;break-inside:avoid}
+ul.plain{margin:4px 0 0;padding-left:18px}
+ul.plain li{margin:0 0 4px}
+.sw{border:1px solid var(--line);break-inside:avoid}
+.sw .fill{height:78px;border-bottom:1px solid var(--line)}
+.sw .cap{background:var(--ground);padding:8px 10px;font-size:11.5px;text-align:center}
+.sw .cap b{display:block;font-size:12.5px}
+.sw code{font-size:11.5px}
+ol.filter{margin:6px 0 0;padding-left:22px}
+ol.filter li{margin:0 0 7px}
+ol.filter b{font-family:var(--display);font-size:15px;font-weight:400}
+.foot{margin-top:30px;border-top:2px solid var(--ink);padding-top:10px;font-size:11px;color:var(--mute)}
+@media (max-width:700px){.inputs,.cards,.cards.two,.cards.four,.row{grid-template-columns:1fr}.inputs>div{border-right:0;border-bottom:2px solid var(--ink)}.banner{font-size:22px}.scroll{overflow-x:auto}}
+@media print{.page{padding:18px 20px}.banner,.quote:not(.inset){margin-left:-20px;margin-right:-20px}h2{margin-top:24px}}
+</style>
+</head>
+<body>
+<div class="page" id="app"></div>
+<script type="application/json" id="guide-data">{
+ "propertyName": "Songbird Acres",
+ "location": "Jefferson, GA",
+ "preparedFor": "Songbird Acres hosts",
+ "date": "November 2026",
+ "scope": "One property, one kind of guest",
+ "brand": {
+  "promise": "Eleven acres between you and noise.",
+  "promiseMeaning": "The quiet is the product. Every touchpoint protects it or gets out of its way.",
+  "values": [
+   "Quiet",
+   "Unhurried",
+   "Honest",
+   "Neighborly"
+  ],
+  "personality": "A calm Georgia neighbor who waves from the porch, answers fast, and then leaves you be.",
+  "voice": "Short, warm and plain. Specifics over adjectives: acres, minutes, bird names. Never pushy, never loud.",
+  "antiVocabulary": [
+   "cozy",
+   "nestled",
+   "stunning",
+   "oasis",
+   "hidden gem",
+   "serene",
+   "getaway",
+   "amazing",
+   "!!!"
+  ],
+  "palette": {
+   "ink": "#24382c",
+   "ground": "#f3efe3",
+   "accent": "#b5743b",
+   "support": "#5d7a5f"
+  },
+  "displayFont": "Georgia",
+  "paletteSource": "Starting point. There is no logo yet, so these four colors come from the meadow, the pines and the pecan shells. Swap in the logo's real colors once it exists."
+ },
+ "positioning": "A private studio on eleven acres, 25 minutes from Sanford Stadium. Close enough for game day, far enough that the only thing you hear at night is the meadow.",
+ "forWho": "UGA parents in their 40s and 50s who come for games and campus weekends and want to sleep somewhere calm.",
+ "notFor": [
+  "Groups looking for a party base before or after the game",
+  "Anyone who wants to walk to downtown Athens",
+  "Events, showers or photo shoots",
+  "Guests who can't manage one flight of stairs"
+ ],
+ "foundation": {
+  "what": "Songbird Acres is a one-bedroom studio above the hosts' workshop on 11 acres of meadow and pecan trees outside Jefferson, Georgia. It sleeps four (a king bed and a sofa bed), has a full kitchen and a covered patio facing the meadow. The hosts live on the far side of the property.",
+  "different": [
+   "11 private acres. No neighbors in sight of the patio.",
+   "About 25 minutes to Sanford Stadium, by back roads on game day.",
+   "Deer at sunrise and cardinals at the feeder most mornings (from the first two reviews).",
+   "Hosts on site but out of sight, with replies inside the hour.",
+   "Pecans from the property's own trees."
+  ],
+  "settles": [
+   "Lead every channel with the quiet and the drive time, not the décor.",
+   "No events, ever, even when asked.",
+   "The welcome gift comes from the land, not a store.",
+   "Game weekends are never discounted. The quiet is worth the rate."
+  ]
+ },
+ "architecture": {
+  "model": "One brand",
+  "why": "One home, one kind of guest. A second name or sub-brand would cost time and confuse the few reviews the listing has.",
+  "expressions": [
+   {
+    "name": "Songbird Acres",
+    "audience": "UGA parents on game and campus weekends, plus couples on quiet weekends",
+    "channels": "Airbnb, Vrbo, a simple direct booking page for repeat guests",
+    "says": "Eleven acres, 25 minutes to campus, a real king bed, and quiet."
+   }
+  ],
+  "revisit": "If a second unit is built on the land, or the hosts ever decide to host small gatherings. Gatherings would become a separate expression, sold by direct enquiry only, never on the stay listings."
+ },
+ "identity": {
+  "nameMeaning": "Named for the birds that wake guests up. The name is the promise in miniature: the loudest thing here is a bird.",
+  "nameRules": [
+   "Always Songbird Acres, two words, both capitalized. Never 'the Acres' or 'SA'.",
+   "In guest messages, the hosts sign off as themselves, not as 'the Songbird Acres team'."
+  ],
+  "mission": "To give parents a place so quiet that a game weekend feels like a rest, by keeping eleven acres between them and everything loud.",
+  "values": [
+   {
+    "word": "Quiet",
+    "means": "No check-in visits, no humming appliances, no events. Protect the silence first."
+   },
+   {
+    "word": "Unhurried",
+    "means": "Late checkout when the calendar allows. Short messages that never rush the guest."
+   },
+   {
+    "word": "Honest",
+    "means": "Say there are stairs before they ask. Photos show exactly where they sleep."
+   },
+   {
+    "word": "Neighborly",
+    "means": "Answer inside the hour, then leave them be. Help like a neighbor, not a concierge."
+   }
+  ]
+ },
+ "guest": {
+  "who": "A UGA parent in their 40s or 50s, usually a couple from metro Atlanta, whose son or daughter is at the university.",
+  "trigger": "The football schedule drops and Athens hotels are already over $300 a night with two-night minimums.",
+  "before": "Braced for game-day prices, traffic and a noisy rental full of students.",
+  "after": "Rested. They saw their kid, saw the game, slept like they were at home, and already want next season's dates."
+ },
+ "position": {
+  "proof": [
+   {
+    "claim": "It is quiet",
+    "evidence": "11 acres, no neighbors in sight of the patio. Review: \"We slept better than at home.\" (demo review)"
+   },
+   {
+    "claim": "It is close enough",
+    "evidence": "About 25 minutes to Sanford Stadium by Google Maps, longer on game day."
+   },
+   {
+    "claim": "The hosts answer",
+    "evidence": "Replies inside the hour (Airbnb response time)."
+   },
+   {
+    "claim": "It is what the photos show",
+    "evidence": "Every room photographed, stairs shown and mentioned in the first message."
+   }
+  ],
+  "moat": [
+   {
+    "advantage": "Eleven acres this close to Athens",
+    "whyHard": "Land this size within 30 minutes of campus is rarely a rental. Hotels can't add acreage."
+   },
+   {
+    "advantage": "The hosts live there",
+    "whyHard": "Fast, local answers and small touches (pecans, bird cards) that a remote operator can't match."
+   },
+   {
+    "advantage": "A clear 'not for' list",
+    "whyHard": "Downtown rentals need party groups on game weekends. Songbird Acres can turn them away."
+   }
+  ],
+  "landscape": [
+   {
+    "alternative": "Athens hotels",
+    "offers": "Walk to the game, front desk, points.",
+    "weWin": "They want to sleep, not queue for an elevator, and pay less than game-day hotel rates."
+   },
+   {
+    "alternative": "Downtown Athens rentals",
+    "offers": "Walking distance to bars and campus.",
+    "weWin": "They want quiet and don't want a student party through the wall."
+   },
+   {
+    "alternative": "Other rural rentals near Jefferson",
+    "offers": "Space and lower prices. Est. similar drive times.",
+    "weWin": "The host answers in an hour and the photos match. Few have a real king bed and the meadow."
+   },
+   {
+    "alternative": "Driving home the same night",
+    "offers": "No cost.",
+    "weWin": "A 90-minute drive after a night game sounds worse than a quiet bed 25 minutes away."
+   }
+  ]
+ },
+ "voice": {
+  "words": [
+   {
+    "word": "Plain",
+    "soundsLike": "\"25 minutes to the stadium. Take Hwy 129 in on game day.\"",
+    "never": "\"Conveniently located near all the action!\""
+   },
+   {
+    "word": "Calm",
+    "soundsLike": "\"The patio lights come on at sunset. The deer come out a bit after.\"",
+    "never": "\"Get ready for the ultimate game-day experience!!\""
+   },
+   {
+    "word": "Specific",
+    "soundsLike": "\"Cardinals at the feeder around 7 am.\"",
+    "never": "\"Abundant wildlife in a breathtaking natural setting.\""
+   }
+  ],
+  "examples": [
+   {
+    "context": "Location",
+    "good": "Eleven acres outside Jefferson. About 25 minutes to Sanford Stadium.",
+    "bad": "Nestled in the heart of beautiful Georgia countryside, just minutes from all the action in Athens!"
+   },
+   {
+    "context": "The home",
+    "good": "One bedroom with a real king bed, a sofa bed, and a full kitchen for game-day food.",
+    "bad": "Our stunning cozy studio boasts luxurious amenities and charming rustic décor!"
+   },
+   {
+    "context": "Privacy",
+    "good": "We live across the meadow. You'll have the patio and the quiet to yourselves.",
+    "bad": "Enjoy your own private oasis, a true hidden gem away from it all!"
+   },
+   {
+    "context": "An evening",
+    "good": "Back from the game by dark? Sit on the patio. The only sound is the field.",
+    "bad": "Unwind and relax in total serenity after an amazing day!"
+   },
+   {
+    "context": "A problem",
+    "good": "So sorry. Unplug the white box under the TV for 30 seconds. I've left a hotspot at the stairs too.",
+    "bad": "We apologize for any inconvenience! Rural internet can be spotty, please be patient!"
+   },
+   {
+    "context": "Call to action",
+    "good": "Next season's home games are open. Book direct and we'll hold the same weekend for you next year.",
+    "bad": "Don't miss out!! Book NOW before it's gone!!!"
+   }
+  ],
+  "use": [
+   "eleven acres",
+   "25 minutes",
+   "the meadow",
+   "game day",
+   "quiet",
+   "the patio",
+   "deer at sunrise",
+   "back roads"
+  ],
+  "channels": [
+   {
+    "channel": "OTA listing",
+    "how": "Lead with the acres and the drive time. Title example: \"11 private acres, 25 min to UGA, king bed\"."
+   },
+   {
+    "channel": "Guest messages",
+    "how": "Under 80 words. Use their name, answer the question they haven't asked yet, then step back."
+   },
+   {
+    "channel": "House book and cards",
+    "how": "One page. Handwritten card in the host's words. Bird names, not adjectives."
+   },
+   {
+    "channel": "Social posts",
+    "how": "One real photo, one plain line, one fact. No walls of hashtags, no stock phrases."
+   },
+   {
+    "channel": "Email to past guests",
+    "how": "Seasonal, short, from the host by name. Lead with what the land is doing that month."
+   }
+  ]
+ },
+ "visual": {
+  "swatchRoles": {
+   "ink": "Headlines, text and the dark quote blocks",
+   "ground": "Backgrounds and paper",
+   "accent": "One highlight per page: labels, rules, the banner",
+   "support": "Section labels and secondary color"
+  },
+  "type": {
+   "display": "Georgia, for headlines and the promise",
+   "body": "Inter or Arial, for everything else",
+   "labels": "Small capitals with wide letter spacing, used sparingly"
+  },
+  "photography": {
+   "shoot": [
+    "The meadow from the patio in the last hour of light",
+    "The king bed, made tight, in morning light",
+    "The stairs and the luggage cart, honestly",
+    "Pecans and the bird card on the counter",
+    "A deer or the feeder at sunrise (real, not stock)",
+    "The gravel pad and parking sign, so arrival is clear"
+   ],
+   "avoid": [
+    "Wide-angle lenses that make the studio look bigger than it is",
+    "Drone shots that hide the home in the landscape",
+    "Filters and heavy edits",
+    "Football props and party scenes",
+    "Empty staged rooms with no sign of life"
+   ]
+  }
+ },
+ "distribution": [
+  {
+   "expression": "Songbird Acres stays",
+   "channels": "Airbnb, Vrbo, direct booking page",
+   "rules": "Same facts everywhere. Airbnb and Vrbo lead with the acres and the drive. The direct page speaks to repeat parents and holds next season's weekends first."
+  }
+ ],
+ "separationRules": [
+  "No party, tailgate-host or event language on any channel.",
+  "Never list on deal or last-minute party apps for game weekends.",
+  "If gatherings ever start, they are sold by direct enquiry only, never on the stay listings."
+ ],
+ "usage": {
+  "filter": [
+   {
+    "q": "Does it serve the right guest?",
+    "detail": "A UGA parent who wants to see the game and then sleep in quiet. Not a party group, not a crowd."
+   },
+   {
+    "q": "Does it keep the promise?",
+    "detail": "\"Eleven acres between you and noise.\" Anything that adds noise, rush or worry at the promise's expense is wrong."
+   },
+   {
+    "q": "Does it pull in the wrong guest?",
+    "detail": "If a photo, line or channel would attract a party group or an event, it doesn't run."
+   },
+   {
+    "q": "Is it specific?",
+    "detail": "\"Eleven acres\" over \"private\". \"25 minutes\" over \"close to Athens\". \"Cardinals at 7 am\" over \"wildlife\"."
+   }
+  ],
+  "always": [
+   "Answers inside the hour",
+   "Mentions the stairs before arrival",
+   "Uses real photos, taken in real light",
+   "Gives gifts from the land",
+   "Holds next season's dates for repeat guests first"
+  ],
+  "never": [
+   "Discounts a game weekend",
+   "Hosts events or parties",
+   "Visits guests during a stay unless asked",
+   "Uses the banned words or exclamation marks",
+   "Asks for a 5-star review"
+  ]
+ },
+ "footer": "Sample guide for a demo property. The two review lines are demo text, the palette is a starting point (no logo yet), and anything marked Est. is an estimate."
+}</script>
+<script>
+const D = JSON.parse(document.getElementById('guide-data').textContent);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const B = D.brand || {};
+const P = B.palette || {};
+for (const k of ['ink','ground','accent','support']) if (P[k]) document.documentElement.style.setProperty('--' + k, P[k]);
+if (B.displayFont) document.documentElement.style.setProperty('--display', B.displayFont + ", Georgia, serif");
+const list = a => (a || []).map(x => '<li>' + esc(x) + '</li>').join('');
+const F = D.foundation || {}, A = D.architecture || {}, I = D.identity || {}, G = D.guest || {}, PO = D.position || {}, V = D.voice || {}, VI = D.visual || {}, U = D.usage || {};
+let n = 0; const sec = (t, sub) => `<h2>${++n}. ${esc(t)}</h2>${sub ? `<p class="mute">${esc(sub)}</p>` : ''}`;
+let h = '';
+
+h += `<div class="head"><div><div class="kicker">STR Booster playbook · Step 2</div><div class="disp">${esc(D.propertyName)}</div><div class="mute">${esc(D.location)}</div></div>
+<div class="meta">Prepared for <b>${esc(D.preparedFor)}</b><br>${esc(D.date)}</div></div>`;
+h += `<div class="banner">Brand Guide</div>`;
+if (B.promise) h += `<div class="quote"><div class="disp">“${esc(B.promise)}”</div><div class="sub">${esc(B.promiseMeaning)}</div><div class="att">The brand promise</div></div>`;
+const vw = (V.words || []).map(w => w.word).join(' · ');
+h += `<div class="inputs">
+<div><div class="lbl">Brand model</div><b>${esc(A.model)}</b><span>${esc(D.scope)}</span></div>
+<div><div class="lbl">For</div><b>${esc(D.forWho)}</b></div>
+<div><div class="lbl">Not for</div><b>${esc((D.notFor || []).join(' · '))}</b></div>
+<div><div class="lbl">Voice</div><b>${esc(vw)}</b><span>Values: ${esc((B.values || []).join(', '))}</span></div></div>`;
+
+h += sec('Foundation', 'What the place is, what makes it different, and what this guide settles.');
+h += `<p>${esc(F.what)}</p><div class="row"><div class="box"><div class="lbl">What makes it different</div><ul class="plain">${list(F.different)}</ul></div>
+<div class="box"><div class="lbl">What this guide settles</div><ul class="plain">${list(F.settles)}</ul></div></div>`;
+
+h += sec('Brand architecture');
+h += `<div class="accent"><div class="lbl">The decision</div><b class="disp" style="font-size:18px">${esc(A.model)}</b><p>${esc(A.why)}</p></div>`;
+if ((A.expressions || []).length) {
+  h += `<div class="scroll"><table><thead><tr><th>Expression</th><th>For</th><th>Lives on</th><th>What it says</th></tr></thead><tbody>`;
+  for (const x of A.expressions) h += `<tr><td><b>${esc(x.name)}</b></td><td>${esc(x.audience)}</td><td>${esc(x.channels)}</td><td>${esc(x.says)}</td></tr>`;
+  h += `</tbody></table></div>`;
+}
+if (A.revisit) h += `<p class="mute"><b>Revisit when:</b> ${esc(A.revisit)}</p>`;
+
+h += sec('Brand identity');
+h += `<table class="def"><tbody>
+<tr><td>The name</td><td>${esc(I.nameMeaning)}${(I.nameRules || []).length ? `<ul class="plain">${list(I.nameRules)}</ul>` : ''}</td></tr>
+<tr><td>Mission</td><td class="disp" style="font-size:15px">${esc(I.mission)}</td></tr>
+<tr><td>Personality</td><td>${esc(B.personality)}</td></tr></tbody></table>`;
+h += `<h3>Values</h3><div class="cards four">`;
+for (const v of (I.values || [])) h += `<div class="card"><div class="top"><h3>${esc(v.word)}</h3></div><div class="body">${esc(v.means)}</div></div>`;
+h += `</div>`;
+
+h += sec('Who it is for', 'One specific guest. Saying who it is not for is part of the brand.');
+h += `<table class="def"><tbody>
+<tr><td>The guest</td><td>${esc(G.who)}</td></tr>
+<tr><td>Why they book</td><td>${esc(G.trigger)}</td></tr>
+<tr><td>Arriving</td><td>${esc(G.before)}</td></tr>
+<tr><td>Leaving</td><td>${esc(G.after)}</td></tr>
+<tr><td>Not for</td><td><ul class="plain">${list(D.notFor)}</ul></td></tr></tbody></table>`;
+
+h += sec('Competitive position');
+if (D.positioning) h += `<div class="quote inset"><div class="disp" style="font-size:19px">${esc(D.positioning)}</div><div class="att">Positioning statement</div></div>`;
+h += `<h3>Why believe it</h3><table><thead><tr><th>Claim</th><th>Evidence</th></tr></thead><tbody>`;
+for (const p of (PO.proof || [])) h += `<tr><td><b>${esc(p.claim)}</b></td><td class="mute">${esc(p.evidence)}</td></tr>`;
+h += `</tbody></table><h3>The moat</h3><table class="def"><tbody>`;
+for (const m of (PO.moat || [])) h += `<tr><td>${esc(m.advantage)}</td><td>${esc(m.whyHard)}</td></tr>`;
+h += `</tbody></table><h3>The landscape</h3><div class="scroll"><table><thead><tr><th>Alternative</th><th>What it offers</th><th>The guest picks us when</th></tr></thead><tbody>`;
+for (const l of (PO.landscape || [])) h += `<tr><td><b>${esc(l.alternative)}</b></td><td>${esc(l.offers)}</td><td>${esc(l.weWin)}</td></tr>`;
+h += `</tbody></table></div>`;
+
+h += sec('Brand voice', B.voice);
+h += `<div class="cards">`;
+for (const w of (V.words || [])) h += `<div class="card"><div class="top"><h3>${esc(w.word)}</h3></div><div class="body"><div><div class="lbl">Sounds like</div><div class="yes">${esc(w.soundsLike)}</div></div><div><div class="lbl">Never</div><div class="no">${esc(w.never)}</div></div></div></div>`;
+h += `</div><h3>Voice in practice</h3><div class="scroll"><table class="vip"><thead><tr><th>Context</th><th>Sounds like this</th><th>Not like this</th></tr></thead><tbody>`;
+for (const x of (V.examples || [])) h += `<tr><td>${esc(x.context)}</td><td class="good">${esc(x.good)}</td><td class="bad">${esc(x.bad)}</td></tr>`;
+h += `</tbody></table></div>`;
+h += `<div class="row" style="margin-top:12px"><div class="box"><div class="lbl">Words we use</div><div class="chips">${(V.use || []).map(w => `<span class="chip">${esc(w)}</span>`).join('')}</div></div>
+<div class="box"><div class="lbl">Words we never use</div><div class="chips">${(B.antiVocabulary || []).map(w => `<span class="chip ban">${esc(w)}</span>`).join('')}</div></div></div>`;
+if ((V.channels || []).length) {
+  h += `<h3>Voice by channel</h3><table class="def"><tbody>`;
+  for (const c of V.channels) h += `<tr><td>${esc(c.channel)}</td><td>${esc(c.how)}</td></tr>`;
+  h += `</tbody></table>`;
+}
+
+h += sec('Visual direction', B.paletteSource);
+const roles = VI.swatchRoles || {};
+const names = {ink:'Ink', ground:'Ground', accent:'Accent', support:'Support'};
+h += `<div class="cards four">`;
+for (const k of ['ink','ground','accent','support']) if (P[k]) h += `<div class="sw"><div class="fill" style="background:${esc(P[k])}"></div><div class="cap"><b>${names[k]}</b><code>${esc(P[k])}</code><div class="mute">${esc(roles[k])}</div></div></div>`;
+h += `</div>`;
+const T = VI.type || {};
+h += `<table class="def" style="margin-top:12px"><tbody><tr><td>Headlines</td><td><span class="disp" style="font-size:16px">${esc(T.display)}</span></td></tr><tr><td>Body</td><td>${esc(T.body)}</td></tr><tr><td>Labels</td><td>${esc(T.labels)}</td></tr></tbody></table>`;
+const PH = VI.photography || {};
+h += `<div class="row" style="margin-top:12px"><div class="box"><div class="lbl">Shoot this</div><ul class="plain">${list(PH.shoot)}</ul></div><div class="box"><div class="lbl">Avoid</div><ul class="plain">${list(PH.avoid)}</ul></div></div>`;
+
+h += sec('Distribution alignment', 'Where each expression lives and what it says there. The OTA Distribution skill (step 5) builds the full channel plan.');
+h += `<table class="def"><tbody>`;
+for (const d of (D.distribution || [])) h += `<tr><td>${esc(d.expression)}<div class="mute" style="font-weight:400">${esc(d.channels)}</div></td><td>${esc(d.rules)}</td></tr>`;
+h += `</tbody></table>`;
+if ((D.separationRules || []).length) h += `<div class="accent"><div class="lbl">Separation rules</div><ul class="plain">${list(D.separationRules)}</ul></div>`;
+
+h += sec('Brand usage guide');
+h += `<div class="accent"><div class="lbl">The decision filter. Ask these in order.</div><ol class="filter">${(U.filter || []).map(f => `<li><b>${esc(f.q)}</b><div class="mute">${esc(f.detail)}</div></li>`).join('')}</ol></div>`;
+h += `<div class="row"><div class="box"><div class="lbl">The brand always</div><ul class="plain">${list(U.always)}</ul></div><div class="box"><div class="lbl">The brand never</div><ul class="plain">${list(U.never)}</ul></div></div>`;
+
+h += `<div class="foot">${esc(D.footer)}<br>Made with the free Brand Guide skill from the STR Booster playbook, strbooster.com/playbook.</div>`;
+document.getElementById('app').innerHTML = h;
+document.title = 'Brand Guide · ' + (D.propertyName || '');
+</script>
+</body>
+</html>

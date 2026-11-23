@@ -41,7 +41,7 @@ Look for these files first and don't re-ask what they answer:
 | Input | Where it comes from | What you take |
 |---|---|---|
 | Goals and guardrails | `business-brain.md` from **The Brain** skill (step 1) | The 12-month goal, the floor (lowest nightly rate after fees), rules never broken, and any strategy pointed at marketing. |
-| Brand | `brand.md`, the brand core in the **Guest Experience Storyboard** JSON, or a Hospitality Brand Blueprint | Promise, voice, banned words (anti-vocabulary), palette and display font. |
+| Brand | `brand.md` from the **Brand Guide** skill (step 2), or the brand core in the **Guest Experience Storyboard** JSON | Promise, voice, banned words (anti-vocabulary), palette and display font. |
 | Ideal guest | The **Guest Intelligence Report** (JSON, HTML or PDF) | Who they are, what they want from the trip, pain points, booking triggers, where they research (Instagram, Facebook groups, search), occasion types and lead time. |
 | Guest experience | The **Guest Experience Storyboard** | The signature moment, the after-stay and advocacy beats, scripts already in use. Marketing must promise only what the stay delivers. |
 | Calendar plan | The plan JSON from the **OTA Distribution** skill (step 5) | Night classes (Peak, High, Shoulder, Soft, Gap), high-demand dates, the floor, and any "past guests first" release rule. |

@@ -9,8 +9,7 @@ import json
 ROOT = Path(__file__).resolve().parent.parent
 # Nov 2026: nothing is for sale; primary CTAs lead to the free playbook.
 PLAYBOOK_URLS = {'/playbook', '/playbook.html'}
-REQUIRED_SECTIONS = ('main', 'premise', 'stack', 'how', 'guest-focus', 'founder',
-                     'lets-talk')
+REQUIRED_SECTIONS = ('main', 'problem', 'journey', 'founder', 'who', 'get-the-playbook')
 LEGACY_ASSETS = {'/story.css', '/story.js', '/guest-strategy.css', '/guest-strategy.js'}
 MEDIA_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif',
                     '.svg', '.ico', '.mp4', '.webm', '.woff', '.woff2'}

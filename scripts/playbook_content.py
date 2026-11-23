@@ -121,7 +121,7 @@ def resource_link(slug, name):
 def signup_form(form_id, heading_id):
     """HighLevel form embed: signups land in HighLevel directly, no API key needed."""
     return f'''<div class="pb-form pb-ghl" id="{form_id}" aria-labelledby="{heading_id}">
-<iframe src="https://api.leadconnectorhq.com/widget/form/{GHL_FORM_ID}" id="inline-{GHL_FORM_ID}" class="pb-ghl-frame" title="Newsletter sign up" loading="lazy" data-layout="{{'id':'INLINE'}}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Newsletter Sign Up" data-height="320" data-layout-iframe-id="inline-{GHL_FORM_ID}" data-form-id="{GHL_FORM_ID}"></iframe>
+<iframe src="https://api.leadconnectorhq.com/widget/form/{GHL_FORM_ID}" id="inline-{GHL_FORM_ID}" class="pb-ghl-frame bx-form" title="Newsletter sign up" loading="lazy" data-layout="{{'id':'INLINE'}}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Newsletter Sign Up" data-height="320" data-layout-iframe-id="inline-{GHL_FORM_ID}" data-form-id="{GHL_FORM_ID}"></iframe>
 <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
 <p class="pb-consent-note">By subscribing you agree to get the playbook and the weekly STR Booster Brief by email. Unsubscribe any time. See our <a href="/privacy.html">privacy policy</a>.</p>
 </div>'''
@@ -130,74 +130,80 @@ def signup_form(form_id, heading_id):
 TITLE_CASE = {
     'brain': 'The Brain: Objectives And Strategies', 'brand': 'Brand Building', 'guest': 'Know Your Guest',
     'listings': 'Optimize Your Listings', 'distribution': 'OTA Distribution', 'marketing': 'Marketing And Sales',
-    'revenue': 'Revenue Management', 'owners': 'Owner Acquisition', 'experience': 'Guest Experience',
+    'revenue': 'Revenue Management', 'owners': 'Scale Up: Win More Homes', 'experience': 'Guest Experience',
 }
 STAGES = [('Stage 1', 'Foundation.', 0, 3), ('Stage 2', 'Get Booked.', 3, 6), ('Stage 3', 'Grow.', 6, 9)]
 
 
 def file_chip(slug, name):
     if resource_ready(slug):
-        return (f'<a class="cm-file" href="/assets/kits/{slug}.md" download data-kit="{slug}">{slug}.md'
+        return (f'<a class="bx-file" href="/assets/kits/{slug}.md" download data-kit="{slug}">{slug}.md'
                 f'<span class="sr-only"> ({html.escape(name)})</span> <span aria-hidden="true">↓</span></a>')
-    return f'<span class="cm-file cm-file-soon">{slug}.md · coming soon</span>'
+    return f'<span class="bx-file bx-file-soon">{slug}.md · coming soon</span>'
+
+
+def tab(label, glyph='■', ident=''):
+    idattr = f' id="{ident}"' if ident else ''
+    return f'<p class="bx-tab"{idattr}><span aria-hidden="true">{glyph}</span>{html.escape(label)}</p>'
 
 
 def journey_step(n, anchor, title, problem, todo, prompt, time, resources):
     items = ''.join(f'<li>{html.escape(t)}</li>' for t in todo)
     files = ''.join(file_chip(slug, name) for slug, name in resources)
-    return (f'<li class="cm-step" id="step-{n}"><span class="cm-num" aria-hidden="true">{n}</span><div>'
-            f'<h4 id="{anchor}">{html.escape(TITLE_CASE[anchor])}.</h4>'
+    return (f'<li class="bx-step" id="step-{n}"><span class="bx-num" aria-hidden="true">{n}</span><div>'
+            f'<h3 id="{anchor}">{html.escape(TITLE_CASE[anchor])}.</h3>'
+            f'<p class="bx-meta">Step {n} of {len(JOURNEY)} · {html.escape(time)}</p>'
             f'<p>{html.escape(problem)}</p>'
-            f'<ul class="cm-do">{items}</ul>'
-            f'<details class="cm-prompt"><summary>The prompt <span>· {html.escape(time)}</span></summary>'
+            f'<ul class="bx-do">{items}</ul>'
+            f'<details class="bx-prompt"><summary>The prompt</summary>'
             f'<p id="prompt-{n}">{html.escape(prompt)}</p>'
             f'<button type="button" class="pb-copy" data-copy="prompt-{n}">Copy prompt</button></details>'
-            f'<div class="cm-files">{files}</div></div></li>')
+            f'<div class="bx-files">{files}</div></div></li>')
 
 
 def body():
-    hero = ('<section class="cm-hero cm-hero-sub"><div class="cm-wrap">'
+    hero = ('<section class="bx-hero bx-hero-sub"><div class="bx-wrap">'
             '<div class="breadcrumb"><a href="/">Home</a> / The Journey</div>'
-            '<h1>The Journey.<span>Nine steps. Read the step, copy the prompt, take the file.</span></h1>'
-            '<p class="cm-hero-actions"><a class="sb-button" href="#step-1" data-cta="journey-start">Start Step 1</a>'
-            '<a class="text-link" href="#get-the-kits" data-cta="playbook-email">Get the playbook by email</a></p>'
+            '<h1>The Journey.</h1>'
+            '<p class="bx-lede">Nine steps. Read the step, copy the prompt, take the file.</p>'
+            '<p class="bx-actions"><a class="bx-btn" href="#step-1" data-cta="journey-start">Start Step 1</a>'
+            '<a class="bx-btn bx-btn-ghost" href="#get-the-kits" data-cta="playbook-email">Get The Playbook</a></p>'
             '</div></section>')
 
-    problem = ('<section class="cm-block" id="why"><div class="cm-wrap"><h2 class="cm-label">Before You Start</h2>'
-               '<h3 class="cm-title">Here’s Why Most Hosts Haven’t.</h3><ul class="cm-points">'
-               + ''.join(f'<li><strong>{t}</strong><span>{html.escape(a)}</span></li>' for t, (q, a) in zip(
-                   ['Not Another App.', 'The Margins Are Too Thin To Experiment.', 'I Tried ChatGPT Once. It Was Generic.'], PAINS[:3]))
-               + '</ul><p class="cm-turn">So start small. Step 1 takes one evening, and everything after it gets easier.</p></div></section>')
+    problem = ('<section class="bx-section" id="why"><div class="bx-wrap">' + tab('Before You Start', '▲')
+               + '<div class="bx-card bx-panel"><h2>Here’s Why Most Hosts Haven’t.</h2><ul class="bx-list bx-list-wide">'
+               + ''.join(f'<li><span class="bx-ico" aria-hidden="true">{g}</span><div><strong>{t}</strong><span>{html.escape(a)}</span></div></li>'
+                         for g, t, (q, a) in zip(['▣', '$', '?'],
+                             ['Not Another App.', 'The Margins Are Too Thin To Experiment.', 'I Tried ChatGPT Once. It Was Generic.'], PAINS[:3]))
+               + '</ul><p class="bx-turn">So start small. Step 1 takes one evening, and everything after it gets easier.</p></div></div></section>')
 
     stages = ''
-    for label, name, lo, hi in STAGES:
+    for idx, (label, name, lo, hi) in enumerate(STAGES, 1):
         steps = ''.join(journey_step(i + 1, *JOURNEY[i]) for i in range(lo, hi))
-        stages += (f'<div class="cm-stage"><h3 class="cm-stage-head"><span>{label}</span> {name}</h3>'
-                   f'<ol class="cm-steps">{steps}</ol></div>')
-    journey = ('<section class="cm-block" id="kits"><div class="cm-wrap" id="journey"><h2 class="cm-label">The Steps</h2>'
-               '<h3 class="cm-title">Nine Steps. Each One Builds On The Last.</h3>'
-               '<p class="cm-sub">Files marked “coming soon” are on the way. Use the prompt for that step until then.</p>'
-               + stages + '</div></section>')
+        stages += ('<section class="bx-section"><div class="bx-wrap">' + tab(f'{label} · Steps {lo + 1} to {hi}', '▮', f'stage-{idx}')
+                   + f'<div class="bx-card bx-panel"><h2>{name}</h2><ol class="bx-steps">{steps}</ol></div></div></section>')
+    journey = ('<div id="kits"><div id="journey"></div>' + stages + '</div>')
 
-    how = ('<section class="cm-block" id="how-files"><div class="cm-wrap"><h2 class="cm-label">How A File Works</h2>'
-           '<h3 class="cm-title">Three Steps. One Evening.</h3><ul class="cm-points">'
-           '<li><strong>Open Claude.</strong><span>A free account is fine to start. Create one project for your business.</span></li>'
-           '<li><strong>Add The File.</strong><span>Upload the .md file to the project, or save it as a Skill.</span></li>'
-           '<li><strong>Fill In The Brackets.</strong><span>Answer its questions once with your real facts. Then use it every week.</span></li>'
-           '</ul></div></section>')
+    how = ('<section class="bx-section" id="how-files"><div class="bx-wrap">' + tab('How A File Works', '◆')
+           + '<div class="bx-card bx-panel"><h2>Three Steps. One Evening.</h2><ul class="bx-list bx-list-wide">'
+           '<li><span class="bx-ico" aria-hidden="true">1</span><div><strong>Open Claude.</strong><span>A free account is fine to start. Create one project for your business.</span></div></li>'
+           '<li><span class="bx-ico" aria-hidden="true">2</span><div><strong>Add The File.</strong><span>Upload the .md file to the project, or save it as a Skill.</span></div></li>'
+           '<li><span class="bx-ico" aria-hidden="true">3</span><div><strong>Fill In The Brackets.</strong><span>Answer its questions once with your real facts. Then use it every week.</span></div></li>'
+           '</ul><p class="bx-small">Files marked “coming soon” are on the way. Use the prompt for that step until then.</p></div></div></section>')
 
-    faq = ('<section class="cm-block" id="faq"><div class="cm-wrap"><h2 class="cm-label">Questions</h2><h3 class="cm-title">Fair Questions.</h3><div class="faq">'
+    faq = ('<section class="bx-section" id="faq"><div class="bx-wrap">' + tab('Questions', '?')
+           + '<div class="bx-card bx-panel"><h2>Fair Questions.</h2><div class="faq">'
            + ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in [
                ('Is it really free?', 'Yes. The journey, the prompts, the files and the emailed playbook are free, and there is nothing to buy. You do not need to sign up to use anything on this page.'),
                ('Why Claude?', 'One assistant, set up once with your facts, replaces a pile of single-purpose apps. Projects keep each property’s facts together, and Skills let Claude follow the same steps every time.'),
                ('Do I need a paid Claude plan?', 'You can start on the free plan. Projects, Skills and longer files work best on a paid Claude plan, which is what we use.'),
                ('Do I need to be technical?', 'No. Each step is plain language and a prompt to copy. Each file is a text file you upload. If you can write a guest message, you can use these.'),
                ('Will the AI reply to my guests on its own?', 'Not unless you set it up to. Everything here drafts first, with clear rules for when a person must step in. Automate only what you have tested.'),
-           ]) + '</div></div></section>')
+           ]) + '</div></div></div></section>')
 
-    email = ('<section class="cm-block cm-email" id="get-the-kits"><div class="cm-wrap"><h2 class="cm-label">Email</h2>'
-             '<h3 class="cm-title" id="pb-signup-heading">Get The Playbook.</h3>'
-             '<p>The whole journey in one document, plus one email when a new file drops. No spam, nothing to buy.</p>'
-             + signup_form('pb-signup-form', 'pb-signup-heading') + '</div></section>')
+    email = ('<section class="bx-section bx-last" id="get-the-kits"><div class="bx-wrap">' + tab('Email', '✉')
+             + '<div class="bx-card bx-panel"><h2 id="pb-signup-heading">Get The Playbook.</h2>'
+             '<p class="bx-sub">The whole journey in one document. One email when a new file drops. No spam. Nothing to buy.</p>'
+             + signup_form('pb-signup-form', 'pb-signup-heading') + '</div></div></section>')
 
-    return '<div class="cm">' + hero + problem + journey + how + faq + email + '</div><script src="/playbook.js" defer></script>'
+    return '<div class="bx">' + hero + problem + journey + how + faq + email + '</div><script src="/playbook.js" defer></script><script src="/motion.js" defer></script>'

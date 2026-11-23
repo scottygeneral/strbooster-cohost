@@ -1,0 +1,146 @@
+{
+  "business": {
+    "name": "Hollow & Loft Stays (sample, made up)"
+  },
+  "as_of": "2026-11-23",
+  "period": "Dec 2025 to Nov 2026 (last 12 months)",
+  "goals": {
+    "statements": [
+      "Grow portfolio NOI to $40,000 a year by November 2027.",
+      "Keep both properties at 4.8 stars or better.",
+      "Get back 5 hours a week by handing off guest messages and turnovers.",
+      "Add a third property only once the portfolio cap rate is above 6%."
+    ],
+    "portfolio_noi": 40000,
+    "portfolio_cap_rate": 0.06
+  },
+  "properties": [
+    {
+      "name": "Pine Hollow Cabin",
+      "location": "Blue Ridge, GA",
+      "type": "Cabin",
+      "bedrooms": 3,
+      "sleeps": 8,
+      "self_managed": true,
+      "market_mgmt_pct": 0.2,
+      "revenue": {
+        "available_nights": 350,
+        "booked_nights": 210,
+        "stays": 70,
+        "rent": 51450,
+        "cleaning_fees": 10500,
+        "other_income": 1200
+      },
+      "costs": {
+        "percent_of_revenue": {
+          "platform_fees": 0.155
+        },
+        "per_stay": {
+          "cleaning": 165,
+          "laundry": 20,
+          "supplies": 18
+        },
+        "fixed_annual": {
+          "property_tax": 3800,
+          "insurance": 3200,
+          "electric": 3000,
+          "water": 600,
+          "internet": 1080,
+          "trash": 360,
+          "software": 900,
+          "pest_control": 420,
+          "hot_tub_service": 1500,
+          "repairs": 2400,
+          "str_license": 250
+        }
+      },
+      "reserve_pct": 0.03,
+      "value": {
+        "property": {
+          "amount": 520000,
+          "est": true,
+          "source": "Average of Zillow and Redfin estimates (Est.)"
+        },
+        "ffe": {
+          "amount": 45000,
+          "est": true,
+          "source": "3 bedrooms x $15,000 for a well-furnished cabin with hot tub (Est.)"
+        }
+      },
+      "market": {
+        "occupancy": 0.55,
+        "adr": 260,
+        "est": true,
+        "source": "Comparable 3-bed cabins nearby (Est.)"
+      },
+      "monthly_revenue_last_year": [
+        3900,
+        4200,
+        4600,
+        5200,
+        5600,
+        6800,
+        7600,
+        6200,
+        5300,
+        7400,
+        5800,
+        6550
+      ]
+    },
+    {
+      "name": "Midtown Loft",
+      "location": "Indianapolis, IN",
+      "type": "Condo",
+      "bedrooms": 1,
+      "sleeps": 4,
+      "self_managed": false,
+      "revenue": {
+        "available_nights": 365,
+        "booked_nights": 270,
+        "stays": 108,
+        "rent": 34560,
+        "cleaning_fees": 9180,
+        "other_income": 0
+      },
+      "costs": {
+        "percent_of_revenue": {
+          "management": 0.2,
+          "platform_fees": 0.03
+        },
+        "per_stay": {
+          "cleaning": 90,
+          "supplies": 10
+        },
+        "fixed_annual": {
+          "hoa": 4200,
+          "property_tax": 2400,
+          "insurance": 1100,
+          "electric": 1500,
+          "internet": 900,
+          "repairs": 1000,
+          "str_permit": 400
+        }
+      },
+      "reserve_pct": 0.03,
+      "value": {
+        "property": {
+          "amount": 240000,
+          "est": false,
+          "source": "Owner (recent appraisal)"
+        },
+        "ffe": {
+          "amount": 18000,
+          "est": false,
+          "source": "Owner (furnishing receipts)"
+        }
+      },
+      "market": {
+        "occupancy": 0.68,
+        "adr": 140,
+        "est": true,
+        "source": "Comparable 1-bed downtown condos (Est.)"
+      }
+    }
+  ]
+}

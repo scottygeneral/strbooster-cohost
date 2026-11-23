@@ -37,7 +37,7 @@
 <nav class="sb-wrap sb-navigation" aria-label="Main navigation">
 <a class="sb-brand" href="/" aria-label="STR Booster home"><svg viewBox="0 0 48 44" width="32" height="30" fill="none" aria-hidden="true"><polyline points="6,40 24,26 42,40" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="6,24 24,10 42,24" stroke="#1A7F64" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>STR BOOSTER</span></a>
 <button class="menu-toggle sb-menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<div class="nav-links sb-nav-links" id="nav-links"><a href="/playbook">The Journey</a><a href="/playbook#kits">Files</a><a href="/resources">Resources</a><a class="sb-button sb-button-small" href="/playbook" data-cta="navigation">Free Playbook <svg class="sb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
+<div class="nav-links sb-nav-links" id="nav-links"><a href="/playbook">The Journey</a><a href="/skills">Skills</a><a href="/resources">Resources</a><a class="sb-button sb-button-small" href="/playbook" data-cta="navigation">Free Playbook <svg class="sb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
 </nav>
 </header>
 <main id="main">
@@ -50,6 +50,7 @@
 <p class="bx-lede">Nine steps. Read the step, copy the prompt, take the file.</p>
 <p class="bx-actions">
 <a class="bx-btn" href="#step-1" data-cta="journey-start">Start Step 1</a>
+<a class="bx-btn bx-btn-ghost" href="/skills" data-cta="journey-skills">All Skills</a>
 <a class="bx-btn bx-btn-ghost" href="#get-the-kits" data-cta="playbook-email">Get The Playbook</a>
 </p>
 </div>
@@ -114,7 +115,8 @@
 <button type="button" class="pb-copy" data-copy="prompt-1">Copy prompt</button>
 </details>
 <div class="bx-files">
-<span class="bx-file bx-file-soon">business-brain.md · coming soon</span>
+<a class="bx-file bx-file-skill" href="/skills/the-brain.zip" download data-kit="the-brain">the-brain · Claude skill .zip<span class="sr-only"> (The Brain skill)</span> <span aria-hidden="true">↓</span>
+</a>
 </div>
 </div>
 </li>
@@ -156,6 +158,8 @@
 <button type="button" class="pb-copy" data-copy="prompt-3">Copy prompt</button>
 </details>
 <div class="bx-files">
+<a class="bx-file bx-file-skill" href="/skills/guest-intelligence-report.zip" download data-kit="guest-intelligence-report">guest-intelligence-report · Claude skill .zip<span class="sr-only"> (Guest Intelligence Report skill)</span> <span aria-hidden="true">↓</span>
+</a>
 <a class="bx-file" href="/assets/kits/review-reply-and-insights.md" download data-kit="review-reply-and-insights">review-reply-and-insights.md<span class="sr-only"> (Review Reply + Insight Miner)</span> <span aria-hidden="true">↓</span>
 </a>
 </div>
@@ -308,6 +312,7 @@
 <button type="button" class="pb-copy" data-copy="prompt-9">Copy prompt</button>
 </details>
 <div class="bx-files">
+<span class="bx-file bx-file-soon">guest-experience skill · coming soon</span>
 <a class="bx-file" href="/assets/kits/guest-messaging-agent.md" download data-kit="guest-messaging-agent">guest-messaging-agent.md<span class="sr-only"> (Guest Messaging Agent)</span> <span aria-hidden="true">↓</span>
 </a>
 </div>
@@ -336,7 +341,7 @@
 <span class="bx-ico" aria-hidden="true">2</span>
 <div>
 <strong>Add The File.</strong>
-<span>Upload the .md file to the project, or save it as a Skill.</span>
+<span>A .zip is a Claude skill: upload it in Claude under Settings, Skills. A .md file goes into your project.</span>
 </div>
 </li>
 <li>

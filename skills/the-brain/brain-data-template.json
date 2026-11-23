@@ -1,0 +1,52 @@
+{
+  "business": {"name": ""},
+  "as_of": "YYYY-MM-DD",
+  "period": "last 12 months",
+  "goals": {
+    "statements": ["Goals in the user's own words: revenue, NOI, occupancy, owners, time back, growth"],
+    "portfolio_noi": null,
+    "portfolio_cap_rate": null
+  },
+  "lever_settings": {
+    "target": {"occ_pts": 5, "adr_pct": 5, "cost_cut_pct": 0},
+    "stretch": {"occ_pts": 10, "adr_pct": 10, "cost_cut_pct": 3}
+  },
+  "properties": [
+    {
+      "name": "",
+      "location": "Town, State",
+      "type": "House | Cabin | Condo | Apartment | Unique",
+      "bedrooms": 0,
+      "sleeps": 0,
+      "self_managed": true,
+      "market_mgmt_pct": 0.20,
+      "revenue": {
+        "available_nights": 365,
+        "booked_nights": 0,
+        "stays": 0,
+        "rent": 0,
+        "cleaning_fees": 0,
+        "other_income": 0
+      },
+      "costs": {
+        "percent_of_revenue": {"management": 0.0, "platform_fees": 0.0, "payment_processing": 0.0},
+        "per_stay": {"cleaning": 0, "laundry": 0, "supplies": 0},
+        "fixed_annual": {
+          "property_tax": 0, "insurance": 0, "hoa": 0,
+          "electric": 0, "water": 0, "gas": 0, "internet": 0, "trash": 0,
+          "software": 0, "landscaping": 0, "pool_hot_tub": 0, "pest_control": 0,
+          "repairs": 0, "str_license": 0, "other": 0
+        }
+      },
+      "reserve_pct": 0.03,
+      "annual_debt_service": null,
+      "value": {
+        "property": {"amount": 0, "est": false, "source": "Owner"},
+        "ffe": {"amount": 0, "est": false, "source": "Owner"}
+      },
+      "market": {"occupancy": null, "adr": null, "est": true, "source": ""},
+      "monthly_revenue_last_year": null,
+      "levers": {}
+    }
+  ]
+}

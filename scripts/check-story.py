@@ -138,6 +138,12 @@ def check(root, content_only=False):
                 elif url.path.startswith('/.netlify/functions/'):
                     # Netlify maps this public route to the checked-in handler.
                     target = root / 'netlify/functions' / (url.path.rsplit('/', 1)[-1] + '.js')
+                elif url.path.startswith('/skills/') and url.path.endswith('.zip'):
+                    # build-public.py packages each skill folder or kit file as this zip.
+                    slug = url.path[len('/skills/'):-len('.zip')]
+                    target = root / 'skills' / slug / 'SKILL.md'
+                    if not target.is_file():
+                        target = root / 'assets' / 'kits' / f'{slug}.md'
                 if not target.is_file() and not target.suffix and target.with_name(target.name + '.html').is_file():
                     # Netlify pretty URLs: /growth-services serves growth-services.html.
                     target = target.with_name(target.name + '.html')

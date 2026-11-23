@@ -73,7 +73,8 @@ def check(root, content_only=False):
     require('<!--include:' not in text, 'Homepage has an unresolved partial include.')
     require('Get Started for Free' not in text and 'Get my free Guest Strategy' not in text,
             'Homepage must lead to the free playbook rather than the previous free entry.')
-    require(not any(tag == 'form' for tag, _ in doc.tags),
+    # The only form allowed is the newsletter signup; playbook CTAs stay plain links.
+    require(not any(tag == 'form' and 'sb-signup' not in attrs.get('class', '') for tag, attrs in doc.tags),
             'Homepage playbook CTA must be a direct, accessible link.')
     require('client-results' not in text and 'case-study-' not in text and 'sb-proof' not in text,
             'Homepage must not contain client stories or results promotions.')
@@ -160,7 +161,7 @@ def check(root, content_only=False):
                             f'{name}: missing anchor {value}')
 
     playbook = texts.get('playbook.html', '')
-    require('widget/form/X2ch8hqmAh3G9qypYlVe' in playbook and 'mailto:info@strbooster.com' in texts['index.html'],
+    require('newsletter-signup' in playbook and 'newsletter-signup' in texts['index.html'] and 'mailto:info@strbooster.com' in texts['index.html'],
             'Playbook signup form and a contact email are required.')
     require(not any('fp_ref=' in t or 'rel="sponsored' in t for t in texts.values()),
             'Affiliate links are retired: no page may carry one.')

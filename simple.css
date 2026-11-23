@@ -184,3 +184,7 @@ a.bx-file:hover { background: var(--ink); color: var(--cream); }
 .bx-btn:not(.bx-btn-ghost):hover, .story-header .sb-nav-links .sb-button:hover { background: var(--ink); }
 .bx-num { box-shadow: 3px 3px 0 #a9dbbc; }
 .bx-tab span, .bx-banner span { color: #a9dbbc; }
+/* Hero photo: founder caption only */
+.bx-photo img { object-position: 50% 30%; }
+.bx-photo figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 1.05rem; }
+.bx-photo figcaption span { font: 700 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #a9dbbc; }

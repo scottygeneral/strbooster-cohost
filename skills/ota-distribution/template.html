@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OTA Distribution Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--ground:#f6f2ea;--accent:#f07c33;--support:#3d5a48;--paper:#fff;--line:#e4ddd0;--mute:#6f6a60;--open:#2f7d4f;--late:#c98a1b;--closed:#a94438;--display:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:13px/1.5 Inter,system-ui,sans-serif}
+.page{max-width:900px;margin:0 auto;padding:32px 24px}
+h1,h2,h3,.disp{font-family:var(--display);font-weight:400;margin:0}
+h2{font-size:24px;margin:34px 0 4px;break-after:avoid}
+.kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.mute{color:var(--mute)}
+.lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:3px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.head .disp{font-size:30px;line-height:1.1}
+.head .meta{text-align:right;font-size:12px}
+.banner{background:var(--accent);color:#fff;font-weight:800;font-size:32px;letter-spacing:.02em;text-transform:uppercase;text-align:center;padding:14px 10px;margin:18px -24px 0;line-height:1.1}
+.promise{background:var(--ink);color:#fff;text-align:center;padding:14px 20px;margin:0 -24px}
+.promise .disp{font-size:22px;font-style:italic}
+.promise .sub{font-size:12px;opacity:.75;margin-top:4px}
+.inputs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink);margin-top:20px}
+.inputs>div{padding:10px 12px;border-right:2px solid var(--ink)}
+.inputs>div:last-child{border-right:0}
+.inputs b{display:block;font-size:13.5px;line-height:1.35}
+.inputs span{display:block;color:var(--mute);font-size:11.5px;margin-top:2px}
+.oneline{font-family:var(--display);font-size:19px;line-height:1.4;margin:22px 0 0;padding-left:14px;border-left:4px solid var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{text-align:center;white-space:nowrap}
+.dots{letter-spacing:1px;color:var(--accent);white-space:nowrap}
+.dots i{color:var(--line);font-style:normal}
+.tot{font-weight:800;font-size:14px}
+.vd{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700;white-space:nowrap}
+.vd.core{background:var(--support);color:#fff}
+.vd.test{background:var(--ground);border:1px solid var(--accent);color:var(--ink)}
+.vd.skip{background:#eee;color:var(--mute)}
+.why{color:var(--mute);font-size:11.5px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.card{background:var(--paper);border:2px solid var(--ink);break-inside:avoid;display:flex;flex-direction:column}
+.card .top{background:var(--ground);border-bottom:2px solid var(--ink);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .top h3{font-family:Inter,sans-serif;font-weight:800;font-size:17px}
+.card .body{padding:10px 14px 12px;display:grid;gap:8px}
+.card .title{font-family:var(--display);font-size:15.5px;font-style:italic;border-left:3px solid var(--accent);padding-left:8px}
+.card ul{margin:0;padding-left:16px}
+.card li{margin:0 0 2px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--line);padding-top:8px;font-size:11.5px}
+.matrix td,.matrix th{text-align:center}
+.matrix td:first-child,.matrix th:first-child{text-align:left}
+.cell{border-radius:6px;padding:5px 4px;font-size:10.5px;line-height:1.3;color:#fff;font-weight:600}
+.cell small{display:block;font-weight:400;opacity:.92;margin-top:1px}
+.cell.open{background:var(--open)}.cell.late{background:var(--late)}.cell.closed{background:var(--closed)}
+.legend{display:flex;gap:14px;font-size:11.5px;margin:6px 0 0}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.cls b{display:block}
+.cls span{color:var(--mute);font-size:11px;display:block;line-height:1.35}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line);border-radius:10px;padding:14px;break-inside:avoid}
+ul.plain{margin:4px 0 0;padding-left:18px}
+ul.plain li{margin:0 0 4px}
+.econ td:last-child{font-weight:700}
+.foot{margin-top:30px;border-top:2px solid var(--ink);padding-top:10px;font-size:11px;color:var(--mute)}
+@media (max-width:700px){.inputs,.cards,.row,.facts{grid-template-columns:1fr}.inputs>div{border-right:0;border-bottom:2px solid var(--ink)}.banner{font-size:22px}.scroll{overflow-x:auto}}
+@media print{.page{padding:18px 20px}.banner,.promise{margin-left:-20px;margin-right:-20px}h2{margin-top:24px}}
+</style>
+</head>
+<body>
+<div class="page" id="app"></div>
+<script type="application/json" id="plan-data">{}</script>
+<script>
+const D = JSON.parse(document.getElementById('plan-data').textContent);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const P = (D.brand && D.brand.palette) || {};
+for (const k of ['ink','ground','accent','support']) if (P[k]) document.documentElement.style.setProperty('--' + k, P[k]);
+if (D.brand && D.brand.displayFont) document.documentElement.style.setProperty('--display', D.brand.displayFont + ", Georgia, serif");
+const dots = n => { n = Math.max(0, Math.min(5, Number(n) || 0)); return '<span class="dots">' + '●'.repeat(n) + '<i>' + '●'.repeat(5 - n) + '</i></span>'; };
+const list = a => (a || []).map(x => '<li>' + esc(x) + '</li>').join('');
+const vclass = v => ({Core:'core', Test:'test', Skip:'skip'})[v] || 'skip';
+const chans = D.channels || [];
+const live = chans.filter(c => c.verdict !== 'Skip');
+const I = D.inputs || {};
+let h = '';
+h += `<div class="head"><div><div class="kicker">STR Booster playbook · Step 5</div><div class="disp">${esc(D.propertyName)}</div><div class="mute">${esc(D.location)}</div></div>
+<div class="meta">Prepared for <b>${esc(D.preparedFor)}</b><br>${esc(D.date)}</div></div>`;
+h += `<div class="banner">OTA Distribution Plan</div>`;
+if (D.brand && D.brand.promise) h += `<div class="promise"><div class="disp">“${esc(D.brand.promise)}”</div><div class="sub">Every channel, title and night below is tested against this promise.</div></div>`;
+h += `<div class="inputs">
+<div><div class="lbl">Goal</div><b>${esc(I.goal)}</b><span>${esc(I.goalSource)}</span></div>
+<div><div class="lbl">Ideal guest</div><b>${esc(I.guest)}</b><span>${esc(I.guestBooks)}</span></div>
+<div><div class="lbl">Strategy lean</div><b>${esc(I.strategyLean)}</b><span>${esc(I.strategyWhy)}</span></div>
+<div><div class="lbl">Guardrails</div><b>${esc(I.floor)}</b><span>${esc((I.rules || []).join(' · '))}</span></div></div>`;
+if (D.planLine) h += `<p class="oneline">${esc(D.planLine)}</p>`;
+
+h += `<h2>1. Where to list</h2><p class="mute">Each channel scored 1 to 5 on how well its users match the ideal guest, the brand, the strategy, the money you keep, and the effort. Core channels carry the calendar. Test channels get a 60-day trial with a clear exit rule.</p>
+<div class="scroll"><table><thead><tr><th>Channel</th><th>Verdict</th><th class="n">Guest</th><th class="n">Brand</th><th class="n">Strategy</th><th class="n">Money kept</th><th class="n">Easy</th><th class="n">Total</th></tr></thead><tbody>`;
+for (const c of chans) {
+  const s = c.scores || {};
+  const tot = ['guest','brand','strategy','economics','effort'].reduce((a, k) => a + (Number(s[k]) || 0), 0);
+  h += `<tr><td><b>${esc(c.name)}</b><div class="why">${esc(c.why)}</div></td><td><span class="vd ${vclass(c.verdict)}">${esc(c.verdict)}</span></td>
+<td class="n">${dots(s.guest)}</td><td class="n">${dots(s.brand)}</td><td class="n">${dots(s.strategy)}</td><td class="n">${dots(s.economics)}</td><td class="n">${dots(s.effort)}</td><td class="n tot">${tot}/25</td></tr>`;
+}
+h += `</tbody></table></div>`;
+
+h += `<h2>2. How to position on each channel</h2><p class="mute">Same facts everywhere. Different first line, because each channel's users arrive with a different question.</p><div class="cards">`;
+for (const c of live) {
+  const p = c.positioning || {};
+  h += `<div class="card"><div class="top"><h3>${esc(c.name)}</h3><span class="vd ${vclass(c.verdict)}">${esc(c.verdict)} · ${esc(c.role)}</span></div><div class="body">
+<div><div class="lbl">Who is on it</div>${esc(c.userBase)}</div>
+<div><div class="lbl">Position it as</div>${esc(p.angle)}</div>
+<div class="title">${esc(p.title)}</div>
+<div class="row"><div><div class="lbl">Lead with</div><ul>${list(p.emphasize)}</ul></div><div><div class="lbl">Leave out</div><ul>${list(p.avoid)}</ul></div></div>
+<div class="facts"><div><div class="lbl">Fee (checked ${esc(c.feeChecked)})</div>${esc(c.fee)}</div><div><div class="lbl">Connection</div>${esc(c.sync)}</div></div>
+${c.setup && c.setup.length ? `<div><div class="lbl">Set up</div><ul>${list(c.setup)}</ul></div>` : ''}
+${c.exitRule ? `<div><div class="lbl">Keep it if</div>${esc(c.exitRule)}</div>` : ''}
+</div></div>`;
+}
+h += `</div>`;
+
+if (D.economics && D.economics.rows) {
+  h += `<h2>3. What you keep on a ${esc(D.economics.basis)}</h2><p class="mute">${esc(D.economics.note)}</p><table class="econ"><thead><tr><th>Channel</th><th>How it is worked out</th><th>You keep</th></tr></thead><tbody>`;
+  for (const r of D.economics.rows) h += `<tr><td><b>${esc(r.channel)}</b></td><td class="mute">${esc(r.math)}</td><td>${esc(r.keep)}</td></tr>`;
+  h += `</tbody></table>`;
+}
+
+const classes = D.nightClasses || [];
+h += `<h2>4. Which nights open where</h2><p class="mute">Nights are sorted into classes by demand. Each class opens on some channels, opens late on others, and stays closed on the rest.</p>
+<div class="legend"><span style="--c:var(--open)">Open</span><span style="--c:var(--late)">Opens late, if still unsold</span><span style="--c:var(--closed)">Closed</span></div>
+<div class="scroll"><table class="matrix"><thead><tr><th>Night class</th>${live.map(c => `<th>${esc(c.name)}</th>`).join('')}</tr></thead><tbody>`;
+for (const k of classes) {
+  h += `<tr><td class="cls"><b>${esc(k.name)}</b><span>${esc(k.definition)}</span><span>Min stay: ${esc(k.minStay)}</span></td>`;
+  for (const c of live) {
+    const r = (k.release || {})[c.name] || {state:'closed', note:''};
+    const label = ({open:'Open', late:'Late', closed:'Closed'})[r.state] || r.state;
+    h += `<td><div class="cell ${esc(r.state)}">${esc(label)}${r.note ? `<small>${esc(r.note)}</small>` : ''}</div></td>`;
+  }
+  h += `</tr>`;
+}
+h += `</tbody></table></div>`;
+
+h += `<h2>5. High-demand nights</h2><p class="mute">The dates that make the year. Set these first, before anything else on the calendar.</p>
+<table><thead><tr><th>When</th><th>Why</th><th>Class</th><th>Release plan</th></tr></thead><tbody>`;
+for (const n of (D.highDemandNights || [])) h += `<tr><td><b>${esc(n.when)}</b>${n.confirm ? `<div class="why">${esc(n.confirm)}</div>` : ''}</td><td>${esc(n.event)}</td><td>${esc(n.class)}</td><td>${esc(n.plan)}</td></tr>`;
+h += `</tbody></table>`;
+
+h += `<h2>6. Rollout and rules</h2><div class="row"><div class="box"><div class="lbl">Next 90 days</div><table><tbody>`;
+for (const r of (D.rollout || [])) h += `<tr><td style="white-space:nowrap"><b>${esc(r.when)}</b></td><td>${esc(r.task)}<div class="why">${esc(r.owner)}</div></td></tr>`;
+h += `</tbody></table></div><div class="box"><div class="lbl">Never</div><ul class="plain">${list(D.never)}</ul><div class="lbl" style="margin-top:12px">Measure it monthly</div><ul class="plain">${list(D.measures)}</ul></div></div>`;
+
+if ((D.research || []).length) {
+  h += `<h2>7. What the research found</h2><table><thead><tr><th>Researcher</th><th>Question</th><th>Finding</th></tr></thead><tbody>`;
+  for (const r of D.research) h += `<tr><td><b>${esc(r.agent)}</b></td><td>${esc(r.question)}</td><td>${esc(r.finding)}${r.sources && r.sources.length ? `<div class="why">${r.sources.map(esc).join(' · ')}</div>` : ''}</td></tr>`;
+  h += `</tbody></table>`;
+}
+h += `<div class="foot">${esc(D.footer)}<br>Made with the free OTA Distribution skill from STR Booster · strbooster.com/skills</div>`;
+document.getElementById('app').innerHTML = h;
+</script>
+</body>
+</html>

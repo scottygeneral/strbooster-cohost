@@ -244,3 +244,37 @@ body {
 .bx-photo .bx-proof cite { font-style: normal; }
 .bx-photo figcaption .bx-who { font: 700 1.05rem/1.2 var(--sans); letter-spacing: -.01em; text-transform: none; color: #fff; }
 .bx-paths-one { grid-template-columns: minmax(0, 520px); }
+
+/* ===== Bigger problem diagram ===== */
+#problem .bx-split { grid-template-columns: 1.15fr 1fr; }
+.bx-diagram { padding: 10px 0 6px; }
+.bx-you { padding: 16px 26px; gap: 14px; box-shadow: 6px 6px 0 var(--ink); border-width: 4px; }
+.bx-you .bx-ico { font-size: 32px; }
+.bx-you b { font-size: 1.35rem; }
+.bx-you i { font-size: 13px; padding: 5px 8px; margin-top: 7px; }
+.bx-tree { max-width: 470px; gap: 14px 12px; margin-top: 44px; padding-top: 30px; }
+.bx-tree::before { top: -40px; font-size: 22px; }
+.bx-tree span { position: relative; font-size: 13px; padding: 10px 12px; box-shadow: 3px 3px 0 var(--lime); }
+
+/* ===== Scroll motion (only when motion.js runs) ===== */
+.has-motion .bx-section .bx-card.bx-panel, .has-motion .bx-section .bx-tab, .has-motion .bx-routes > a {
+  opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.has-motion .bx-routes > a:nth-child(2) { transition-delay: .08s; }
+.has-motion .bx-routes > a:nth-child(3) { transition-delay: .16s; }
+.has-motion .is-in.bx-panel, .has-motion .is-in.bx-tab, .has-motion .bx-routes > a.is-in { opacity: 1; transform: none; }
+.has-motion .bx-diagram .bx-you { opacity: 0; transform: translateY(-30px) scale(.9); transition: opacity .5s ease .15s, transform .6s cubic-bezier(.3,1.5,.5,1) .15s; }
+.has-motion .bx-diagram .bx-tree { border-top-color: transparent; }
+.has-motion .bx-diagram .bx-tree::after { content: ""; position: absolute; top: -3px; left: 0; right: 0; height: 3px; background: var(--brand); transform: scaleX(0); transition: transform .7s ease .55s; }
+.has-motion .bx-diagram .bx-tree::before { opacity: 0; transition: opacity .3s ease .5s; }
+.has-motion .bx-diagram .bx-tree span { opacity: 0; transform: translateY(26px) scale(.6) rotate(calc((var(--i) - 3.5) * 4deg)); transition: opacity .35s ease, transform .55s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(.9s + var(--i) * .09s); }
+.has-motion .bx-diagram.is-in .bx-you { opacity: 1; transform: none; }
+.has-motion .bx-diagram.is-in .bx-tree::after { transform: scaleX(1); }
+.has-motion .bx-diagram.is-in .bx-tree::before { opacity: 1; }
+.has-motion .bx-diagram.is-in .bx-tree span { opacity: 1; transform: rotate(calc((var(--i) - 3.5) * 1.2deg)); animation: bx-jitter 3.2s ease-in-out infinite; animation-delay: calc(2s + var(--i) * .27s); }
+.has-motion .bx-diagram.is-in .bx-you i { animation: bx-blink 1s steps(2, start) 3 2s; }
+@keyframes bx-jitter { 0%, 100% { translate: 0 0; } 25% { translate: 0 -4px; } 50% { translate: 2px 1px; } 75% { translate: -2px -2px; } }
+@keyframes bx-blink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .bx-tree span, .bx-you i { animation: none !important; } }
+@media (max-width: 640px) { .bx-tree span { font-size: 11px; padding: 8px 9px; } .bx-you b { font-size: 1.1rem; } }
+.has-motion .bx-section .bx-card.bx-panel.is-in, .has-motion .bx-section .bx-tab.is-in { opacity: 1; transform: none; }

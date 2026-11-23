@@ -206,4 +206,4 @@ def body():
              '<p class="bx-sub">The whole journey in one document. One email when a new file drops. No spam. Nothing to buy.</p>'
              + signup_form('pb-signup-form', 'pb-signup-heading') + '</div></div></section>')
 
-    return '<div class="bx">' + hero + problem + journey + how + faq + email + '</div><script src="/playbook.js" defer></script>'
+    return '<div class="bx">' + hero + problem + journey + how + faq + email + '</div><script src="/playbook.js" defer></script><script src="/motion.js" defer></script>'

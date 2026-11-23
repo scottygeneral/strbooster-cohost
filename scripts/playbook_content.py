@@ -127,63 +127,77 @@ def signup_form(form_id, heading_id):
 </div>'''
 
 
+TITLE_CASE = {
+    'brain': 'The Brain: Objectives And Strategies', 'brand': 'Brand Building', 'guest': 'Know Your Guest',
+    'listings': 'Optimize Your Listings', 'distribution': 'OTA Distribution', 'marketing': 'Marketing And Sales',
+    'revenue': 'Revenue Management', 'owners': 'Owner Acquisition', 'experience': 'Guest Experience',
+}
+STAGES = [('Stage 1', 'Foundation.', 0, 3), ('Stage 2', 'Get Booked.', 3, 6), ('Stage 3', 'Grow.', 6, 9)]
+
+
+def file_chip(slug, name):
+    if resource_ready(slug):
+        return (f'<a class="cm-file" href="/assets/kits/{slug}.md" download data-kit="{slug}">{slug}.md'
+                f'<span class="sr-only"> ({html.escape(name)})</span> <span aria-hidden="true">↓</span></a>')
+    return f'<span class="cm-file cm-file-soon">{slug}.md · coming soon</span>'
+
+
 def journey_step(n, anchor, title, problem, todo, prompt, time, resources):
     items = ''.join(f'<li>{html.escape(t)}</li>' for t in todo)
-    res = ''.join(resource_link(slug, name) for slug, name in resources)
-    return (f'<li class="pb-jstep" id="step-{n}"><div class="pb-jnum" aria-hidden="true">{n}</div><div class="pb-jbody">'
-            f'<p class="pb-jmeta">Step {n} of {len(JOURNEY)} · {html.escape(time)}</p>'
-            f'<h3 id="{anchor}">{html.escape(title)}</h3>'
-            f'<p class="pb-jproblem">{html.escape(problem)}</p>'
-            f'<h4>Do this</h4><ol class="pb-jtodo">{items}</ol>'
-            f'<div class="pb-prompt"><div class="pb-prompt-head"><span>Paste into Claude</span>'
-            f'<button type="button" class="pb-copy" data-copy="prompt-{n}">Copy prompt</button></div>'
-            f'<p id="prompt-{n}">{html.escape(prompt)}</p></div>'
-            f'<h4>Resources</h4><div class="pb-res-list">{res}</div></div></li>')
+    files = ''.join(file_chip(slug, name) for slug, name in resources)
+    return (f'<li class="cm-step" id="step-{n}"><span class="cm-num" aria-hidden="true">{n}</span><div>'
+            f'<h4 id="{anchor}">{html.escape(TITLE_CASE[anchor])}.</h4>'
+            f'<p>{html.escape(problem)}</p>'
+            f'<ul class="cm-do">{items}</ul>'
+            f'<details class="cm-prompt"><summary>The prompt <span>· {html.escape(time)}</span></summary>'
+            f'<p id="prompt-{n}">{html.escape(prompt)}</p>'
+            f'<button type="button" class="pb-copy" data-copy="prompt-{n}">Copy prompt</button></details>'
+            f'<div class="cm-files">{files}</div></div></li>')
 
 
 def body():
-    nav = ''.join(f'<li><a href="#step-{i}"><span>{i}</span>{html.escape(step[1].split(":")[0])}</a></li>'
-                  for i, step in enumerate(JOURNEY, 1))
-    hero = f'''<section class="pb-hero"><div class="wrap">
-<div class="breadcrumb"><a href="/">Home</a> / The journey</div>
-<p class="eyebrow">Free. Open. No sign-up needed.</p>
-<h1>Your AI journey for short-term rentals, <em>one step at a time.</em></h1>
-<p class="lead">Nine steps, in order, from a clear plan to happy guests. Each step has a prompt you can paste into Claude today and resources you can download. Nothing to buy, nothing to unlock.</p>
-<p class="pb-hero-actions"><a class="btn" href="#step-1" data-cta="journey-start">Start at step 1</a><a class="text-link" href="#why">Why most hosts haven’t started</a></p>
-<ol class="pb-jnav" aria-label="The nine steps">{nav}</ol>
-</div></section>'''
+    hero = ('<section class="cm-hero cm-hero-sub"><div class="cm-wrap">'
+            '<div class="breadcrumb"><a href="/">Home</a> / The Journey</div>'
+            '<h1>The Journey.<span>Nine steps. Read the step, copy the prompt, take the file.</span></h1>'
+            '<p class="cm-hero-actions"><a class="sb-button" href="#step-1" data-cta="journey-start">Start Step 1</a>'
+            '<a class="text-link" href="#get-the-kits" data-cta="playbook-email">Get the playbook by email</a></p>'
+            '</div></section>')
 
-    pains = ('<section class="section white" id="why"><div class="wrap"><div class="intro"><p class="eyebrow">Be honest</p>'
-             '<h2>Why you haven’t started yet.</h2><p>You are not behind because you are not smart enough. You are tired of tools that promise a lot and add work. Fair. Here is how this is different.</p></div>'
-             '<div class="pb-pains">' + ''.join(f'<article><h3>{html.escape(q)}</h3><p>{html.escape(a)}</p></article>' for q, a in PAINS)
-             + '</div></div></section>')
+    problem = ('<section class="cm-block" id="why"><div class="cm-wrap"><h2 class="cm-label">Before You Start</h2>'
+               '<h3 class="cm-title">Here’s Why Most Hosts Haven’t.</h3><ul class="cm-points">'
+               + ''.join(f'<li><strong>{t}</strong><span>{html.escape(a)}</span></li>' for t, (q, a) in zip(
+                   ['Not Another App.', 'The Margins Are Too Thin To Experiment.', 'I Tried ChatGPT Once. It Was Generic.'], PAINS[:3]))
+               + '</ul><p class="cm-turn">So start small. Step 1 takes one evening, and everything after it gets easier.</p></div></section>')
 
-    steps = ''.join(journey_step(i, *step) for i, step in enumerate(JOURNEY, 1))
-    journey = ('<section class="section" id="journey"><div class="wrap"><div class="intro"><p class="eyebrow">The journey</p>'
-               '<h2>Nine steps. Each one builds on the last.</h2>'
-               '<p>Go in order. Open Claude (a free account is fine to start), create a project for your business, and paste each prompt in as you go.</p></div>'
-               '<ol class="pb-journey">' + steps + '</ol></div></section>')
+    stages = ''
+    for label, name, lo, hi in STAGES:
+        steps = ''.join(journey_step(i + 1, *JOURNEY[i]) for i in range(lo, hi))
+        stages += (f'<div class="cm-stage"><h3 class="cm-stage-head"><span>{label}</span> {name}</h3>'
+                   f'<ol class="cm-steps">{steps}</ol></div>')
+    journey = ('<section class="cm-block" id="kits"><div class="cm-wrap" id="journey"><h2 class="cm-label">The Steps</h2>'
+               '<h3 class="cm-title">Nine Steps. Each One Builds On The Last.</h3>'
+               '<p class="cm-sub">Files marked “coming soon” are on the way. Use the prompt for that step until then.</p>'
+               + stages + '</div></section>')
 
-    signup = ('<section class="section white" id="get-the-kits"><div class="wrap"><div class="pb-closing"><div><p class="eyebrow">Optional</p>'
-              '<h2 id="pb-signup-heading">Get the full playbook by email.</h2>'
-              '<p>The complete STR AI Playbook goes to your inbox, followed by one short email a week with one idea you can use, and a note when a new resource drops. Free. Leave any time.</p></div>'
-              + signup_form('pb-signup-form', 'pb-signup-heading') + '</div></div></section>')
+    how = ('<section class="cm-block" id="how-files"><div class="cm-wrap"><h2 class="cm-label">How A File Works</h2>'
+           '<h3 class="cm-title">Three Steps. One Evening.</h3><ul class="cm-points">'
+           '<li><strong>Open Claude.</strong><span>A free account is fine to start. Create one project for your business.</span></li>'
+           '<li><strong>Add The File.</strong><span>Upload the .md file to the project, or save it as a Skill.</span></li>'
+           '<li><strong>Fill In The Brackets.</strong><span>Answer its questions once with your real facts. Then use it every week.</span></li>'
+           '</ul></div></section>')
 
-    rows = ''.join(f'<li><span class="pb-idx-step">Step {i}</span><span class="pb-idx-title">{html.escape(step[1].split(":")[0])}</span>'
-                   + ''.join(resource_link(slug, name) for slug, name in step[6]) + '</li>'
-                   for i, step in enumerate(JOURNEY, 1))
-    kits = ('<section class="section" id="kits"><div class="wrap"><div class="intro"><p class="eyebrow">All resources</p>'
-            '<h2>Every resource, in one place.</h2>'
-            '<p>Each file is plain Markdown. Upload it to Claude as a Skill, or add it to a Claude project. New ones are added as they are ready.</p></div>'
-            '<ul class="pb-idx">' + rows + '</ul></div></section>')
-
-    faq = ('<section class="section white" id="faq"><div class="wrap"><div class="intro"><p class="eyebrow">Questions</p><h2>Fair questions.</h2></div><div class="faq">'
+    faq = ('<section class="cm-block" id="faq"><div class="cm-wrap"><h2 class="cm-label">Questions</h2><h3 class="cm-title">Fair Questions.</h3><div class="faq">'
            + ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in [
-               ('Is it really free?', 'Yes. The journey, the prompts, the resources and the emailed playbook are free, and there is nothing to buy. You do not need to sign up to use anything on this page.'),
+               ('Is it really free?', 'Yes. The journey, the prompts, the files and the emailed playbook are free, and there is nothing to buy. You do not need to sign up to use anything on this page.'),
                ('Why Claude?', 'One assistant, set up once with your facts, replaces a pile of single-purpose apps. Projects keep each property’s facts together, and Skills let Claude follow the same steps every time.'),
                ('Do I need a paid Claude plan?', 'You can start on the free plan. Projects, Skills and longer files work best on a paid Claude plan, which is what we use.'),
-               ('Do I need to be technical?', 'No. Each step is plain language and a prompt to copy. Each resource is a text file you upload. If you can write a guest message, you can use these.'),
+               ('Do I need to be technical?', 'No. Each step is plain language and a prompt to copy. Each file is a text file you upload. If you can write a guest message, you can use these.'),
                ('Will the AI reply to my guests on its own?', 'Not unless you set it up to. Everything here drafts first, with clear rules for when a person must step in. Automate only what you have tested.'),
            ]) + '</div></div></section>')
 
-    return hero + pains + journey + signup + kits + faq + '<script src="/playbook.js" defer></script>'
+    email = ('<section class="cm-block cm-email" id="get-the-kits"><div class="cm-wrap"><h2 class="cm-label">Email</h2>'
+             '<h3 class="cm-title" id="pb-signup-heading">Get The Playbook.</h3>'
+             '<p>The whole journey in one document, plus one email when a new file drops. No spam, nothing to buy.</p>'
+             + signup_form('pb-signup-form', 'pb-signup-heading') + '</div></section>')
+
+    return '<div class="cm">' + hero + problem + journey + how + faq + email + '</div><script src="/playbook.js" defer></script>'

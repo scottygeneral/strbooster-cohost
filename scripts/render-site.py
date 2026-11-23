@@ -88,6 +88,9 @@ def apply_assets(source: str) -> str:
     additions = []
     if not re.search(r'\bhref=["\']/growth\.css(?:\?[^"\']*)?["\']', source):
         additions.append('<link rel="stylesheet" href="/growth.css">')
+    # The simple high-contrast theme loads last so its tokens win.
+    source = re.sub(r'<link\b[^>]*\bhref=["\']/simple\.css(?:\?[^"\']*)?["\'][^>]*>\s*', '', source, flags=re.I)
+    additions.append('<link rel="stylesheet" href="/simple.css">')
     for asset in ('app.js', 'growth.js', 'reviews.js'):
         if not re.search(r'\bsrc=["\']/' + re.escape(asset) + r'(?:\?[^"\']*)?["\']', source):
             additions.append(f'<script src="/{asset}" defer></script>')

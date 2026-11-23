@@ -202,7 +202,7 @@ SERVICE_PAGES = {
                         ['growth-audit', 'direct-revenue', 'owner-system', 'growth-partner']),
     'owner-acquisition': ('Owner Acquisition System', ['owner-system']),
 }
-FAQ_SCHEMA_PAGES = {'growth-services', 'owner-acquisition', 'tools-partners'}
+FAQ_SCHEMA_PAGES = {'growth-services', 'owner-acquisition', 'tools-partners', 'playbook'}
 LINK = re.compile(r'(\bhref=")/([A-Za-z0-9_-]+)\.html([#?][^"]*)?"')
 
 

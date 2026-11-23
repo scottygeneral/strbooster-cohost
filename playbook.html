@@ -58,36 +58,17 @@
 <div class="pb-signup" id="get-the-kits">
 <p class="eyebrow">Get the kits</p>
 <h2 id="pb-signup-heading">Where should we send them?</h2>
-<p>Enter your email and the downloads unlock right away. We will also send the weekly STR Booster Brief. Unsubscribe in one click.</p>
-<form class="pb-form" id="pb-signup-form" action="/.netlify/functions/brief-signup" method="post" aria-labelledby="pb-signup-heading" novalidate>
-<div class="pb-field">
-<label for="pb-signup-form-name">First name <span class="pb-optional">(optional)</span>
-</label>
-<input id="pb-signup-form-name" name="first_name" autocomplete="given-name" maxlength="80">
-</div>
-<div class="pb-field">
-<label for="pb-signup-form-email">Email</label>
-<input id="pb-signup-form-email" name="email" type="email" autocomplete="email" required maxlength="254">
-</div>
-<div class="pb-field">
-<label for="pb-signup-form-role">I am a</label>
-<select id="pb-signup-form-role" name="role">
-<option value="host">Host or owner</option>
-<option value="manager">Property manager or co-host</option>
-<option value="other">Something else</option>
-</select>
-</div>
-<div class="pb-hp" aria-hidden="true">
-<label for="pb-signup-form-company">Company</label>
-<input id="pb-signup-form-company" name="company" tabindex="-1" autocomplete="off">
-</div>
-<label class="pb-consent">
-<input type="checkbox" name="consent" required> <span>Send me the kits and the weekly STR Booster Brief. I can unsubscribe at any time. See our <a href="/privacy">privacy policy</a>.</span>
-</label>
-<button class="btn pb-submit" type="submit">Send me the kits</button>
+<p>Subscribe below, then open the kits. We will also send the weekly STR Booster Brief. Unsubscribe in one click.</p>
+<div class="pb-form pb-ghl" id="pb-signup-form" aria-labelledby="pb-signup-heading">
+<iframe src="https://api.leadconnectorhq.com/widget/form/X2ch8hqmAh3G9qypYlVe" id="inline-X2ch8hqmAh3G9qypYlVe" class="pb-ghl-frame" title="Newsletter sign up" loading="lazy" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Newsletter Sign Up" data-height="320" data-layout-iframe-id="inline-X2ch8hqmAh3G9qypYlVe" data-form-id="X2ch8hqmAh3G9qypYlVe">
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js" defer>
+</script>
+<p class="pb-consent-note">By subscribing you agree to get the kits and the weekly STR Booster Brief. Unsubscribe any time. See our <a href="/privacy">privacy policy</a>.</p>
 <p class="pb-status" role="status" tabindex="-1">
 </p>
-</form>
+<button class="text-link pb-unlock" type="button">I’ve subscribed: open the kits</button>
+</div>
 </div>
 </div>
 </section>
@@ -365,35 +346,9 @@
 <h2 id="pb-closing-heading">Get the kits and the weekly Brief.</h2>
 <p>One email a week. A new kit when it drops. Leave any time.</p>
 </div>
-<form class="pb-form" id="pb-closing-form" action="/.netlify/functions/brief-signup" method="post" aria-labelledby="pb-closing-heading" novalidate>
-<div class="pb-field">
-<label for="pb-closing-form-name">First name <span class="pb-optional">(optional)</span>
-</label>
-<input id="pb-closing-form-name" name="first_name" autocomplete="given-name" maxlength="80">
+<div class="pb-closing-cta">
+<a class="btn" href="#get-the-kits" data-cta="playbook-closing">Get the free kits</a>
 </div>
-<div class="pb-field">
-<label for="pb-closing-form-email">Email</label>
-<input id="pb-closing-form-email" name="email" type="email" autocomplete="email" required maxlength="254">
-</div>
-<div class="pb-field">
-<label for="pb-closing-form-role">I am a</label>
-<select id="pb-closing-form-role" name="role">
-<option value="host">Host or owner</option>
-<option value="manager">Property manager or co-host</option>
-<option value="other">Something else</option>
-</select>
-</div>
-<div class="pb-hp" aria-hidden="true">
-<label for="pb-closing-form-company">Company</label>
-<input id="pb-closing-form-company" name="company" tabindex="-1" autocomplete="off">
-</div>
-<label class="pb-consent">
-<input type="checkbox" name="consent" required> <span>Send me the kits and the weekly STR Booster Brief. I can unsubscribe at any time. See our <a href="/privacy">privacy policy</a>.</span>
-</label>
-<button class="btn pb-submit" type="submit">Send me the kits</button>
-<p class="pb-status" role="status" tabindex="-1">
-</p>
-</form>
 </div>
 </div>
 </section>

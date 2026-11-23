@@ -155,7 +155,7 @@ def check(root, content_only=False):
                             f'{name}: missing anchor {value}')
 
     playbook = texts.get('playbook.html', '')
-    require('/.netlify/functions/brief-signup' in playbook and 'mailto:info@strbooster.com' in texts['index.html'],
+    require('widget/form/X2ch8hqmAh3G9qypYlVe' in playbook and 'mailto:info@strbooster.com' in texts['index.html'],
             'Playbook signup form and a contact email are required.')
     require(not any('fp_ref=' in t or 'rel="sponsored' in t for t in texts.values()),
             'Affiliate links are retired: no page may carry one.')

@@ -80,16 +80,18 @@ def kit_link(slug, label=None, cls='pb-kit-link'):
             f'{html.escape(label)} <span aria-hidden="true">↓</span></a>')
 
 
+GHL_FORM_ID = 'X2ch8hqmAh3G9qypYlVe'  # HighLevel form "Newsletter Sign Up" (STR Booster sub-account)
+
+
 def signup_form(form_id, heading_id):
-    return f'''<form class="pb-form" id="{form_id}" action="/.netlify/functions/brief-signup" method="post" aria-labelledby="{heading_id}" novalidate>
-<div class="pb-field"><label for="{form_id}-name">First name <span class="pb-optional">(optional)</span></label><input id="{form_id}-name" name="first_name" autocomplete="given-name" maxlength="80"></div>
-<div class="pb-field"><label for="{form_id}-email">Email</label><input id="{form_id}-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
-<div class="pb-field"><label for="{form_id}-role">I am a</label><select id="{form_id}-role" name="role"><option value="host">Host or owner</option><option value="manager">Property manager or co-host</option><option value="other">Something else</option></select></div>
-<div class="pb-hp" aria-hidden="true"><label for="{form_id}-company">Company</label><input id="{form_id}-company" name="company" tabindex="-1" autocomplete="off"></div>
-<label class="pb-consent"><input type="checkbox" name="consent" required> <span>Send me the kits and the weekly STR Booster Brief. I can unsubscribe at any time. See our <a href="/privacy.html">privacy policy</a>.</span></label>
-<button class="btn pb-submit" type="submit">Send me the kits</button>
+    """HighLevel form embed: signups land in HighLevel directly, no API key needed."""
+    return f'''<div class="pb-form pb-ghl" id="{form_id}" aria-labelledby="{heading_id}">
+<iframe src="https://api.leadconnectorhq.com/widget/form/{GHL_FORM_ID}" id="inline-{GHL_FORM_ID}" class="pb-ghl-frame" title="Newsletter sign up" loading="lazy" data-layout="{{'id':'INLINE'}}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Newsletter Sign Up" data-height="320" data-layout-iframe-id="inline-{GHL_FORM_ID}" data-form-id="{GHL_FORM_ID}"></iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+<p class="pb-consent-note">By subscribing you agree to get the kits and the weekly STR Booster Brief. Unsubscribe any time. See our <a href="/privacy.html">privacy policy</a>.</p>
 <p class="pb-status" role="status" tabindex="-1"></p>
-</form>'''
+<button class="text-link pb-unlock" type="button">I’ve subscribed: open the kits</button>
+</div>'''
 
 
 def kit_card(slug, name, who, desc, time):
@@ -114,7 +116,7 @@ def body():
 <ul class="pb-hero-list"><li>12-step playbook, readable right here</li><li>5 ready-to-use Claude kits you can download and save as Skills</li><li>One useful email a week, plus a note when a new kit drops</li></ul>
 </div>
 <div class="pb-signup" id="get-the-kits"><p class="eyebrow">Get the kits</p><h2 id="pb-signup-heading">Where should we send them?</h2>
-<p>Enter your email and the downloads unlock right away. We will also send the weekly STR Booster Brief. Unsubscribe in one click.</p>
+<p>Subscribe below, then open the kits. We will also send the weekly STR Booster Brief. Unsubscribe in one click.</p>
 ''' + signup_form('pb-signup-form', 'pb-signup-heading') + '''</div></div></section>'''
 
     steps, n = [], 0
@@ -155,6 +157,6 @@ def body():
                ('Will the AI reply to my guests on its own?', 'Not unless you set it up to. The kits are built for drafting first, with clear rules for when a person must step in. Automate only what you have tested.'),
            ]) + '</div></div></section>')
 
-    closing = '''<section class="section white" id="join"><div class="wrap"><div class="pb-closing"><div><p class="eyebrow">Not ready yet?</p><h2 id="pb-closing-heading">Get the kits and the weekly Brief.</h2><p>One email a week. A new kit when it drops. Leave any time.</p></div>''' + signup_form('pb-closing-form', 'pb-closing-heading') + '''</div></div></section>'''
+    closing = '''<section class="section white" id="join"><div class="wrap"><div class="pb-closing"><div><p class="eyebrow">Not ready yet?</p><h2 id="pb-closing-heading">Get the kits and the weekly Brief.</h2><p>One email a week. A new kit when it drops. Leave any time.</p></div>''' + '<div class="pb-closing-cta"><a class="btn" href="#get-the-kits" data-cta="playbook-closing">Get the free kits</a></div>' + '''</div></div></section>'''
 
     return hero + playbook + kits + tools + faq + closing + '<script src="/playbook.js" defer></script>'

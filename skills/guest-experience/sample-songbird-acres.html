@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guest Experience Storyboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--ground:#f6f2ea;--accent:#f07c33;--support:#3d5a48;--paper:#fff;--line:#e4ddd0;--mute:#6f6a60;--display:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font:13px/1.5 Inter,system-ui,sans-serif}
+.page{max-width:880px;margin:0 auto;padding:32px 24px}
+h1,h2,h3,.disp{font-family:var(--display);font-weight:400;margin:0}
+.kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.mute{color:var(--mute)}
+.lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:3px}
+/* header, after concept 2 */
+.head{display:grid;grid-template-columns:auto 1fr 1fr;gap:20px;align-items:center}
+.av{width:62px;height:62px;border-radius:50%;background:var(--support);color:#fff;display:grid;place-items:center;font-weight:700;font-size:22px}
+.fill{border-bottom:2px solid var(--ink);padding:4px 0;font-size:13px}
+.fill b{font-weight:600}
+.banner{background:var(--accent);color:#fff;font-weight:800;font-size:34px;letter-spacing:.02em;text-transform:uppercase;text-align:center;padding:14px 10px;margin:18px -24px 0;line-height:1.1}
+.promise{background:var(--ink);color:#fff;text-align:center;padding:16px 20px;margin:0 -24px}
+.promise .disp{font-size:24px;font-style:italic}
+.promise .sub{font-size:12px;opacity:.75;margin-top:4px}
+/* six panels, after concept 1 */
+.six{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 30px;margin-top:26px}
+.pnl .box{border:4px solid var(--ink);aspect-ratio:1/0.82;display:grid;place-items:center;background:var(--paper)}
+.pnl .box svg{width:46%;height:auto}
+.pnl .st{color:var(--accent);font-weight:800;font-size:19px;text-align:center;padding:4px 0;border-bottom:2px solid var(--ink)}
+.pnl .bt{text-align:center;padding:5px 2px;border-bottom:2px solid var(--ink);font-size:14px}
+.pnl .bt small{display:block;color:var(--mute);font-size:11.5px;line-height:1.35;margin-top:1px}
+/* three columns, after concept 2 */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:10px}
+.col h3{font-family:Inter,sans-serif;font-weight:600;font-size:19px;text-align:center;border-bottom:2px solid var(--ink);padding-bottom:4px}
+.col ul{margin:12px 0 0;padding-left:16px}
+.col li{margin:0 0 8px}
+.col li b{font-weight:600;display:block}
+.col li span{color:var(--mute);font-size:12px}
+h2{font-size:24px;margin:34px 0 4px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0;break-inside:avoid}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--ground);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:11.5px}
+.chip.a{background:var(--accent);border-color:var(--accent);color:#fff}
+ul.plain{margin:4px 0 0;padding-left:18px}
+.curve svg{width:100%;height:auto;display:block}
+/* detailed frames */
+.stage{margin:28px 0 10px;display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;break-after:avoid}
+.stage .ic{width:38px;height:38px;border:3px solid var(--ink);display:grid;place-items:center;flex:none}
+.stage .ic svg{width:26px}
+.stage h3{font-family:Inter,sans-serif;font-weight:800;font-size:20px;color:var(--accent)}
+.frames{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.frame{border:2px solid var(--ink);background:var(--paper);break-inside:avoid;display:flex;flex-direction:column}
+.shot{background:var(--ground);border-bottom:2px solid var(--ink);padding:12px 14px;position:relative}
+.shot .no{font-weight:800;color:var(--accent);font-size:12px;letter-spacing:.08em}
+.shot .ttl{font-weight:700;font-size:15px}
+.shot .when{font-size:10.5px;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.shot .scene{font-family:var(--display);font-style:italic;font-size:13.5px;margin-top:7px;line-height:1.45}
+.shot .emo{position:absolute;top:12px;right:14px;font-size:10px;text-align:right;color:var(--mute)}
+.dots{letter-spacing:2px;color:var(--accent);font-size:11px}
+.moment{display:inline-block;background:var(--accent);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;padding:1px 6px;margin-top:7px}
+.notes{padding:11px 14px 13px;display:grid;gap:9px}
+.feel{font-size:12px}
+.feel b{font-weight:600}
+.proof{border-left:3px solid var(--accent);padding:2px 0 2px 10px;font-size:12.5px}
+.script{background:var(--ground);border-radius:6px;padding:9px 11px;font-size:12.5px;white-space:pre-line}
+.risk{font-size:11.5px;color:#9a3b2a}
+.meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;color:var(--mute)}
+.tag{border:1px solid var(--line);border-radius:4px;padding:1px 7px}
+.tag.cost{border-color:var(--support);color:var(--support);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding:6px 8px}
+td{border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+.never li::marker{content:"✕  ";color:#9a3b2a}
+.foot{font-size:11px;color:var(--mute);margin-top:26px;border-top:1px solid var(--line);padding-top:10px}
+.brk{break-before:page}
+@media (max-width:680px){.six,.three{grid-template-columns:1fr 1fr}.frames,.row,.head{grid-template-columns:1fr}.banner{font-size:24px}}
+@media (max-width:440px){.six,.three{grid-template-columns:1fr}}
+@media print{.page{padding:0 8px;max-width:none}.banner,.promise{margin-left:-8px;margin-right:-8px}}
+</style>
+</head>
+<body>
+<div class="page" id="app"></div>
+<script type="application/json" id="storyboard-data">{"propertyName": "Songbird Acres", "location": "Jefferson, GA", "guestCategory": "UGA parents on game and campus weekends", "preparedFor": "Songbird Acres hosts", "date": "November 2026", "brand": {"promise": "Eleven acres between you and noise.", "promiseMeaning": "The quiet is the product. Every touchpoint protects it or gets out of its way.", "values": ["Quiet", "Unhurried", "Honest", "Neighborly"], "personality": "A calm Georgia neighbor who waves from the porch, answers fast, and then leaves you be.", "voice": "Short, warm and plain. Specifics over adjectives: acres, minutes, bird names. Never pushy, never loud.", "antiVocabulary": ["cozy", "nestled", "stunning", "oasis", "amazing", "!!!"], "palette": {"ink": "#24382c", "ground": "#f3efe3", "accent": "#b5743b", "support": "#5d7a5f"}, "displayFont": "Georgia"}, "persona": {"name": "Denise Whitfield", "snapshot": "52, operations director from Alpharetta. Married to Mark. Daughter is a junior at UGA.", "why": "To be close to her daughter and the Dawgs without paying Athens game-day rates or sleeping somewhere loud.", "fears": ["Game-weekend price gouging and 2-night minimums", "Student-party noise next door", "Feeling watched on shared grounds", "Stairs with Mark's bad knee"], "wins": ["A fast, personal host reply", "A real king bed", "Deer at sunrise", "Under 30 minutes to campus"]}, "experienceLine": "Denise leaves the game-day noise at the gate, sleeps like she's at home, and books next season before she gets back to Alpharetta.", "panels": [{"stage": "Booking", "beats": [{"title": "Confirmation", "headline": "Confirm fast, answer the stairs question before she asks", "when": "Within 1 hour of booking", "emotion": 4, "scene": "Denise taps Request to Book at 9:40 pm, half expecting silence until morning. Twelve minutes later her phone lights up with a reply that uses her name and answers the one thing she hadn't asked yet.", "feelsBefore": "Unsure about a listing with 2 reviews.", "feelsAfter": "Relieved. A real person is on the other end.", "promiseProof": "Quiet starts with no worry. A fast, plain reply removes the first source of noise: doubt.", "scriptLabel": "Confirmation message", "script": "Hi Denise, you're all set for Oct 17 to 19. It's about 25 minutes to Sanford Stadium. On game day, take Hwy 129 in and give yourself extra time.\nOne honest note: there are stairs up to the studio. We'll leave a luggage cart at the bottom for the cooler and bags.\nWe live on the property but on the far side of the meadow. You'll have the patio and the quiet to yourselves.", "risk": "the reply is a long template, or the stairs are a surprise on arrival.", "touchpoints": ["Airbnb message"], "owner": "Host (Claude drafts once)", "cost": "$0"}, {"title": "Personalization", "headline": "One question, then a game-day guide made for her weekend", "when": "7 days before arrival", "emotion": 4, "scene": "A week out, Denise gets one short question: early riser or night owl, and is your student joining you? Her answer shapes the guide that arrives two days later.", "feelsBefore": "Busy, planning around the game schedule.", "feelsAfter": "Looked after. The plan is already half made.", "promiseProof": "Personal, but not chatty. One question, then everything she needs in one place, so she doesn't have to research.", "scriptLabel": "Pre-arrival guide (excerpt)", "script": "Game Day from Songbird Acres\n• Leave by 9:30 for a noon kickoff and book campus parking ahead.\n• Breakfast: our favorite spot in downtown Jefferson opens early.\n• Groceries: the nearest store is about 10 minutes away.\n• Back by dark? The patio lights come on at sunset.", "risk": "it reads like a brochure, or it pushes paid extras she didn't ask for.", "touchpoints": ["Airbnb message", "1-page PDF guide"], "owner": "Claude writes, host sends", "cost": "$0"}]}, {"stage": "Arrival", "beats": [{"title": "Smooth check-in", "headline": "Gate, parking, keypad: three steps, no calls", "when": "Arrival day, 4 pm", "emotion": 4, "moment": "first", "scene": "The gravel crunches, then stops. A small sign says 'Guests park here' next to the stairs. The keypad works on the first try. Mark carries the cooler up on the cart. Inside, it is completely quiet.", "feelsBefore": "Tired from the drive and Athens traffic.", "feelsAfter": "Calm the second the car door shuts.", "promiseProof": "No knocking, no meeting, no fumbling. The arrival itself is quiet.", "scriptLabel": "Arrival-day text, 10 am", "script": "Morning Denise. Your code is 4417. Park on the gravel pad by the stairs (sign says Guests). The cart is at the bottom of the steps. Text this number if anything is off. We'll stay out of your way.", "risk": "the code fails, parking is unclear, or a host walks over to say hello on the first evening.", "touchpoints": ["Text", "Parking sign", "Keypad", "Luggage cart"], "owner": "Scheduled message", "cost": "One-time, under $80 (sign and cart)"}, {"title": "Welcome token", "headline": "Pecans, a 'Go Dawgs' card and binoculars by the window", "when": "First 5 minutes inside", "emotion": 5, "moment": "peak", "scene": "On the counter: a jar of pecans from the trees outside, a handwritten card in red ink, and a pair of binoculars on the windowsill with a card naming the six birds most seen from the patio.", "feelsBefore": "Curious.", "feelsAfter": "Delighted. This place was set up for her.", "promiseProof": "The gift is the land itself: pecans from the property, birds from the meadow. It points her outside, into the quiet.", "scriptLabel": "Handwritten card", "script": "Denise and Mark, welcome. The pecans are from the trees you passed on the way in. The cardinals show up around 7 am. Go Dawgs. (Quietly.)", "risk": "it becomes a branded tchotchke or a pile of plastic-wrapped snacks.", "touchpoints": ["Card", "Pecans", "Binoculars", "Bird card"], "owner": "Host", "cost": "Under $5 a stay"}]}, {"stage": "Stay", "beats": [{"title": "Communicate", "headline": "One check-in message, then a 10-minute fix when Wi-Fi dips", "when": "Saturday morning", "emotion": 4, "moment": "recovery", "scene": "Denise needs to send one work email before the game. The Wi-Fi drops. She texts the host, expecting to wait. Nine minutes later: a reset tip that works, plus a backup hotspot left at the door.", "feelsBefore": "Annoyed. The one thing she needed failed.", "feelsAfter": "Impressed. It was handled faster than at home.", "promiseProof": "A problem is noise. Fixing it fast and without fuss puts the quiet back.", "scriptLabel": "Recovery reply", "script": "So sorry, Denise. Unplug the white box under the TV for 30 seconds, it's back in 2 minutes. I've also left a hotspot at the bottom of the stairs (password on the back) so you're covered for the weekend.", "risk": "the reply takes hours, blames the rural internet, or turns into a long apology.", "touchpoints": ["Text", "Backup hotspot"], "owner": "Host", "cost": "One-time, under $60 (hotspot)"}, {"title": "Quality", "headline": "Spotless, hotel-made bed, and everything labeled", "when": "Throughout the stay", "emotion": 4, "scene": "The king bed is made tight with white linens. Kitchen drawers have small labels. The house book is one page, not twenty. Nothing hums, rattles or beeps.", "feelsBefore": "Watchful. Is it as clean as the photos?", "feelsAfter": "At ease. Nothing to fix, nothing to figure out.", "promiseProof": "Clean and working means no small irritations. Labels mean no questions. The house stays silent.", "scriptLabel": "One-page house book (top)", "script": "Wi-Fi: SongbirdAcres / meadow2026\nThermostat: by the bedroom door\nQuiet hours are every hour. Enjoy them.\nCheckout: 11 am, just 3 things (on the back).", "risk": "dust, hair, a musty smell, a beeping smoke alarm, or a 20-page manual.", "touchpoints": ["Cleaning checklist", "Labels", "House book"], "owner": "Cleaner and host", "cost": "One-time, under $20 (labels)"}]}, {"stage": "Check Out", "beats": [{"title": "Make it simple", "headline": "Three tasks and a late checkout after night games", "when": "Sunday morning", "emotion": 5, "moment": "end", "scene": "Sunday after a night game, Denise wakes at 9 to a message: checkout is moved to 1 pm, no charge. She has coffee on the patio, watches two deer cross the meadow, loads the dishwasher, and leaves.", "feelsBefore": "Dreading the rushed Sunday packing.", "feelsAfter": "Unhurried. The weekend ends on the best note.", "promiseProof": "An unhurried ending is part of the quiet. Short list, late exit, no chore chart.", "scriptLabel": "Checkout message, 8 am", "script": "Late night? Take your time. Checkout is 1 pm today, no charge. Just: dishes in the dishwasher, towels in the tub, door locks itself. Safe drive home.", "risk": "a long chore list, a 10 am checkout after a night game, or a cleaner arriving early.", "touchpoints": ["Text", "Checkout card"], "owner": "Scheduled message, host decides the late checkout", "cost": "$0 when the next night is empty"}, {"title": "Offer support", "headline": "A route home and a 'did you forget anything?' check", "when": "1 hour after checkout", "emotion": 4, "scene": "On the drive home, Denise gets a short text: the cleaner found her daughter's UGA hoodie. It's in the mail tomorrow.", "feelsBefore": "Already back in her week.", "feelsAfter": "Cared for, even after leaving.", "promiseProof": "Neighborly means you look out for people, then step back. One message, a solved problem, no ask.", "scriptLabel": "Lost-and-found text", "script": "Hi Denise, found a red UGA hoodie on the sofa. We'll mail it tomorrow to the address on your booking unless you'd like it held for your next trip.", "risk": "the message includes a review ask or a sales pitch.", "touchpoints": ["Text"], "owner": "Cleaner flags, host sends", "cost": "Postage only"}]}, {"stage": "Post Stay", "beats": [{"title": "Say thanks", "headline": "A real thank-you that names something from her stay", "when": "Day after checkout", "emotion": 4, "scene": "Monday at lunch, Denise reads a message that mentions the deer she told the host about and the Dawgs' win. It doesn't ask for anything.", "feelsBefore": "Busy, back at work.", "feelsAfter": "Remembered.", "promiseProof": "Honest and unhurried. Thanks comes on its own, not as a setup for a request.", "scriptLabel": "Thank-you message", "script": "Denise, thank you for staying with us. Glad the deer showed up for your coffee, and what a win Saturday. The meadow will be here whenever you need it.", "risk": "it is a generic template or bundles in the review request.", "touchpoints": ["Airbnb message"], "owner": "Claude drafts, host personalizes one line", "cost": "$0"}, {"title": "Request review", "headline": "Ask once, say why it matters for a new place", "when": "3 days after checkout", "emotion": 3, "scene": "Three days later, one short message explains that Songbird Acres is new and that a few honest words help other UGA parents find a quiet place.", "feelsBefore": "Neutral.", "feelsAfter": "Happy to help. She writes it that evening.", "promiseProof": "Honest: the ask says exactly why. Quiet: it is asked once, never chased.", "scriptLabel": "Review request", "script": "One small favor: we're new, and other UGA parents read reviews closely. If you have a minute, a few honest words about the quiet and the drive in would help them find us. Thank you either way.", "risk": "it asks for 5 stars, sends reminders, or offers anything in return for a review.", "touchpoints": ["Airbnb message"], "owner": "Scheduled message", "cost": "$0"}]}, {"stage": "Advocacy", "beats": [{"title": "Network", "headline": "Keep in touch on her terms, and give her a link to share", "when": "In the thank-you, then twice a year", "emotion": 4, "scene": "Denise is in the UGA parents Facebook group when someone asks for 'somewhere quiet that isn't $500 a night.' She pastes the Songbird Acres link the hosts gave her.", "feelsBefore": "Proud of her find.", "feelsAfter": "Helpful. She's the one with the good tip.", "promiseProof": "Neighborly: a small list of past guests who hear from you rarely, and only with something useful.", "scriptLabel": "Keep-in-touch line (in the thank-you)", "script": "If you'd like first pick of next season's game weekends, reply 'yes' and we'll send one note when the schedule is out. That's it, no newsletters.", "risk": "she gets added to a weekly email list or tagged in posts without asking.", "touchpoints": ["Past-guest list", "Shareable link"], "owner": "Host", "cost": "$0"}, {"title": "Incentivize", "headline": "First pick of game weekends, not a discount", "when": "The day the UGA schedule is released", "emotion": 5, "scene": "In February the schedule drops. Before Athens hotels reprice, Denise gets one message offering her first pick of three home-game weekends. She books two.", "feelsBefore": "Bracing for game-day prices.", "feelsAfter": "Like an insider.", "promiseProof": "The reward is access, not a coupon. It protects margin and makes returning feel like coming home.", "scriptLabel": "Returning-guest message", "script": "The 2027 schedule is out. Before we open the calendar to everyone, you get first pick: Sept 11, Oct 2 or Nov 13. Reply with a date and it's yours.", "risk": "it becomes a blanket discount, or it's sent to everyone at once.", "touchpoints": ["Text or email to past guests"], "owner": "Host", "cost": "$0"}]}], "checklist": {"preStay": [{"item": "Confirm, reassure guests", "how": "Reply within the hour. Name the stairs, the drive time and where the hosts live."}, {"item": "Build excitement", "how": "Send one photo of the meadow at dusk with the 7-day message."}, {"item": "Personalize stay", "how": "Ask one question: early riser or night owl, and is your student joining?"}, {"item": "Clear check-in instructions", "how": "Code, parking pad and cart in one text at 10 am arrival day."}, {"item": "Offer local partner deals", "how": "Skip paid partnerships. Name two local places you'd send a friend instead."}, {"item": "Local insider tips", "how": "Game-day route and timing, campus parking, breakfast in Jefferson."}, {"item": "What to expect", "how": "Stairs, shared grounds, no fires, and that it's genuinely quiet."}], "stay": [{"item": "Smooth check-in & out", "how": "Keypad, signed parking, 3-task checkout, late checkout after night games."}, {"item": "Warm welcome with gift", "how": "Property pecans, handwritten card, binoculars and a bird card."}, {"item": "Tour / welcome book", "how": "One page. No tour, because no meeting is part of the promise."}, {"item": "Labels and instructions", "how": "Small labels on drawers, thermostat and Wi-Fi."}, {"item": "Support", "how": "Text replies inside 15 minutes, 7 am to 10 pm. Backup hotspot ready."}, {"item": "Clean", "how": "Checklist with photo proof after each turnover. Smell test before every arrival."}, {"item": "Functioning amenities", "how": "Test Wi-Fi, keypad battery and smoke alarms at every turnover."}], "afterStay": [{"item": "Thanks for stay", "how": "Next day, one personal line, no ask."}, {"item": "Keep in touch request", "how": "Offer first pick of game weekends. Reply 'yes' to opt in."}, {"item": "Join the network", "how": "A small past-guest list in your phone or PMS. Two messages a year."}, {"item": "Review request", "how": "Day 3, once, with the honest reason why."}, {"item": "Ask guest to promote", "how": "Give her the link to share when parents ask for quiet places."}, {"item": "Offer a reward / incentive", "how": "Early access to game weekends instead of a discount."}, {"item": "Maintain contact", "how": "Schedule release (Feb) and graduation booking window (Jan)."}]}, "buildList": [{"item": "Write the 8 message scripts once with Claude and save them as scheduled messages", "beat": "1, 2, 3, 7, 9, 10", "owner": "Host + Claude", "cost": "$0"}, {"item": "One-page game-day guide (PDF)", "beat": "2", "owner": "Claude", "cost": "$0"}, {"item": "One-page house book", "beat": "6", "owner": "Claude", "cost": "$0"}, {"item": "Past-guest list with an opt-in column", "beat": "11, 12", "owner": "Host", "cost": "$0"}, {"item": "Pecan jars and card stock", "beat": "4", "owner": "Host", "cost": "Under $5 a stay"}, {"item": "Drawer and appliance labels", "beat": "6", "owner": "Host", "cost": "Under $20"}, {"item": "Binoculars and a printed bird card", "beat": "4", "owner": "Host", "cost": "Under $40"}, {"item": "Guest parking sign", "beat": "3", "owner": "Host", "cost": "Under $30"}, {"item": "Luggage cart at the foot of the stairs", "beat": "1, 3", "owner": "Host", "cost": "Under $50"}, {"item": "Backup mobile hotspot", "beat": "5", "owner": "Host", "cost": "Under $60"}], "never": ["Walk over to say hello. Wave from a distance if you cross paths.", "Send more than one message on any day of the stay unless she writes first.", "Ask for 5 stars or offer anything in exchange for a review.", "Use exclamation marks, 'cozy', 'nestled' or 'oasis' in any message.", "Run a leaf blower, mower or any loud work while guests are on site.", "Discount to win a rebooking. Offer first access instead."], "measures": ["Reply time to first inquiry (goal: under 1 hour)", "Reviews that mention 'quiet', 'peaceful' or 'host' (goal: most of them)", "Review rate after the day-3 ask (goal: 60%+)", "Past guests who opt in for first pick (goal: 1 in 2)", "Repeat bookings per season"], "footer": "Sample storyboard. The brand core was written for this demo from the public listing; run the brand step first for a real one. Denise is a composite guest from the Guest Intelligence Report sample, not a real person. Costs are rough estimates."}</script>
+<script>
+const D = JSON.parse(document.getElementById('storyboard-data').textContent || '{}');
+const e = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const B = D.brand || {}, P = D.persona || {}, PN = D.panels || [], CL = D.checklist || {};
+const pal = B.palette || {};
+['ink','ground','accent','support'].forEach(k => { if (pal[k]) document.documentElement.style.setProperty('--' + k, pal[k]); });
+if (B.displayFont) document.documentElement.style.setProperty('--display', B.displayFont + ', Georgia, serif');
+const chips = (a, cls='') => `<div class="chips">${(a||[]).map(x => `<span class="chip ${cls}">${e(x)}</span>`).join('')}</div>`;
+const list = a => `<ul class="plain">${(a||[]).map(x => `<li>${e(x)}</li>`).join('')}</ul>`;
+const initials = (P.name||'?').split(' ').map(w => w[0]).slice(0,2).join('');
+const first = (P.name||'the guest').split(' ')[0];
+const dots = n => '●'.repeat(n||0) + '○'.repeat(5-(n||0));
+const momentLabel = {first:'First impression', peak:'Peak moment', recovery:'Recovery moment', end:'Last impression'};
+
+// Simple line icons, one per stage (fixed order: Booking, Arrival, Stay, Check Out, Post Stay, Advocacy)
+const S = 'fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"';
+const ICONS = [
+ `<svg viewBox="0 0 100 100" ${S}><rect x="14" y="20" width="72" height="66" rx="6"/><path d="M14 38h72M32 12v16M68 12v16M35 62l11 11 21-22"/></svg>`,
+ `<svg viewBox="0 0 100 100" ${S}><rect x="22" y="34" width="40" height="52" rx="5"/><path d="M34 34v-10h16v10M34 46v28M50 46v28"/><circle cx="76" cy="40" r="10"/><path d="M76 50v32M76 64h8M76 74h6"/></svg>`,
+ `<svg viewBox="0 0 100 100" ${S}><path d="M10 74V30M10 58h80v16M90 58V46a8 8 0 0 0-8-8H46v20"/><circle cx="28" cy="46" r="8"/><path d="M62 14h12l-12 12h12M78 4h8l-8 8h8"/></svg>`,
+ `<svg viewBox="0 0 100 100" ${S}><path d="M20 12h40v76H20zM60 30l14 0M60 88V12"/><path d="M48 50h40M78 40l10 10-10 10"/><circle cx="50" cy="52" r="2.5" fill="currentColor"/></svg>`,
+ `<svg viewBox="0 0 100 100" ${S}><rect x="10" y="24" width="80" height="56" rx="6"/><path d="M10 30l40 28 40-28"/><path d="M50 18c-4-8-16-6-14 3 2 6 14 13 14 13s12-7 14-13c2-9-10-11-14-3z" fill="currentColor" stroke-width="2"/></svg>`,
+ `<svg viewBox="0 0 100 100" ${S}><circle cx="50" cy="48" r="9"/><path d="M34 88c0-14 7-22 16-22s16 8 16 22"/><circle cx="24" cy="58" r="7"/><path d="M10 88c0-10 6-16 14-16"/><circle cx="76" cy="58" r="7"/><path d="M90 88c0-10-6-16-14-16"/><path d="M58 8h30v18H72l-8 7v-7h-6z"/></svg>`
+];
+
+function curve(frames){
+  if (!frames.length) return '';
+  const W = 820, H = 180, px = 34, py = 26;
+  const x = i => px + i * (W - 2*px) / Math.max(1, frames.length - 1);
+  const y = v => H - py - ((v||3) - 1) * (H - 2*py) / 4;
+  const pts = frames.map((f,i) => `${x(i).toFixed(1)},${y(f.emotion).toFixed(1)}`).join(' ');
+  const grid = [1,2,3,4,5].map(v => `<line x1="${px}" x2="${W-px}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/>`).join('');
+  const marks = frames.map((f,i) => {
+    const below = f.moment === 'recovery' || (i > 0 && (frames[i-1].emotion||3) > (f.emotion||3));
+    const lab = f.moment ? `<text x="${x(i)}" y="${below ? y(f.emotion)+20 : y(f.emotion)-12}" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--accent)">${e((momentLabel[f.moment]||f.moment).toUpperCase())}</text>` : '';
+    return `<circle cx="${x(i)}" cy="${y(f.emotion)}" r="${f.moment?7:4.5}" fill="${f.moment?'var(--accent)':'var(--ink)'}" stroke="#fff" stroke-width="2"/>${lab}<text x="${x(i)}" y="${H-6}" text-anchor="middle" font-size="10" fill="var(--mute)">${i+1}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="How the guest feels at each beat, 1 to 5">${grid}
+   <text x="2" y="${y(5)+4}" font-size="9" fill="var(--mute)">great</text><text x="2" y="${y(1)+4}" font-size="9" fill="var(--mute)">low</text>
+   <polyline points="${pts}" fill="none" stroke="var(--support)" stroke-width="2.5" stroke-linejoin="round"/>${marks}</svg>`;
+}
+
+let n = 0;
+const allBeats = PN.flatMap(p => p.beats || []);
+const frame = b => `<div class="frame">
+  <div class="shot"><div class="emo">feels<br><span class="dots">${dots(b.emotion)}</span></div>
+   <div class="no">BEAT ${String(++n).padStart(2,'0')}</div><div class="ttl">${e(b.title)}</div><div class="when">${e(b.when)}</div>
+   <div class="scene">${e(b.scene)}</div>${b.moment ? `<span class="moment">${e(momentLabel[b.moment]||b.moment)}</span>` : ''}</div>
+  <div class="notes">
+   <div class="feel"><b>Before:</b> ${e(b.feelsBefore)} <b>After:</b> ${e(b.feelsAfter)}</div>
+   <div class="proof"><div class="lbl">How this keeps the promise</div>${e(b.promiseProof)}</div>
+   ${b.script ? `<div><div class="lbl">${e(b.scriptLabel || 'The words')}</div><div class="script">${e(b.script)}</div></div>` : ''}
+   ${b.risk ? `<div class="risk"><b>Breaks the promise if:</b> ${e(b.risk)}</div>` : ''}
+   <div class="meta">${(b.touchpoints||[]).map(t => `<span class="tag">${e(t)}</span>`).join('')}${b.owner ? `<span class="tag">Who: ${e(b.owner)}</span>` : ''}${b.cost ? `<span class="tag cost">${e(b.cost)}</span>` : ''}</div>
+  </div></div>`;
+
+const col = (title, items) => `<div class="col"><h3>${title}</h3><ul>${(items||[]).map(i => `<li><b>${e(i.item)}</b><span>${e(i.how)}</span></li>`).join('')}</ul></div>`;
+
+document.getElementById('app').innerHTML = `
+<div class="head">
+  <div class="av">${e(initials)}</div>
+  <div class="mute" style="font-size:12.5px">Every touchpoint in ${e(first)}'s stay, built to keep one promise. Read the six panels for the story, the three columns for the checklist, and the beats for the exact words.</div>
+  <div><div class="fill"><b>Property:</b> ${e(D.propertyName)}${D.location ? ', ' + e(D.location) : ''}</div><div class="fill" style="margin-top:8px"><b>Guest Category:</b> ${e(D.guestCategory)}</div></div>
+</div>
+<div class="banner">Guest Experience Storyboard</div>
+<div class="promise"><div class="disp">“${e(B.promise)}”</div><div class="sub">The brand promise. ${e(B.promiseMeaning)}</div></div>
+
+<div class="six">${PN.map((p,i) => `<div class="pnl"><div class="box" style="color:var(--ink)">${ICONS[i]||''}</div><div class="st">${e(p.stage)}</div>${(p.beats||[]).map(b => `<div class="bt">${e(b.title)}<small>${e(b.headline)}</small></div>`).join('')}</div>`).join('')}</div>
+
+<h2>The checklist</h2>
+<div class="mute">The standard touchpoints, written for this property and this guest.</div>
+<div class="three">${col('Pre Stay', CL.preStay)}${col('Stay', CL.stay)}${col('After Stay', CL.afterStay)}</div>
+
+<div class="brk"></div>
+<h2>Brand first, then the guest</h2>
+<div class="row">
+  <div class="card"><div class="kicker">The brand</div>
+    <div class="lbl" style="margin-top:10px">Values</div>${chips(B.values,'a')}
+    <div class="lbl" style="margin-top:10px">Personality</div><div>${e(B.personality)}</div>
+    <div class="lbl" style="margin-top:10px">Voice</div><div>${e(B.voice)}</div>
+    ${B.antiVocabulary ? `<div class="lbl" style="margin-top:10px">Words we never use</div>${chips(B.antiVocabulary)}` : ''}</div>
+  <div class="card"><div class="kicker">The guest</div>
+    <div style="font-weight:700;font-size:15px;margin-top:10px">${e(P.name)}</div><div class="mute">${e(P.snapshot)}</div>
+    <div class="lbl" style="margin-top:10px">Why they travel</div><div>${e(P.why)}</div>
+    <div class="lbl" style="margin-top:10px">What they fear</div>${list(P.fears)}
+    <div class="lbl" style="margin-top:10px">What wins them</div>${chips(P.wins)}</div>
+</div>
+<div class="card"><div class="kicker">The experience in one line</div><div class="disp" style="font-size:19px;margin-top:6px">${e(D.experienceLine)}</div></div>
+
+<h2>How ${e(first)} feels, beat by beat</h2>
+<div class="mute">Guests remember the first impression, the high point, how you handled the one thing that went wrong, and the ending. Those beats are marked.</div>
+<div class="card curve">${curve(allBeats)}</div>
+
+<h2>The storyboard, beat by beat</h2>
+${PN.map((p,i) => `<div class="stage"><div class="ic">${ICONS[i]||''}</div><h3>${e(p.stage)}</h3></div><div class="frames">${(p.beats||[]).map(frame).join('')}</div>`).join('')}
+
+<h2>Build list</h2>
+<div class="mute">Everything the storyboard needs, cheapest and fastest first.</div>
+<div class="card"><table><thead><tr><th>What</th><th>Beat</th><th>Who</th><th>Cost</th></tr></thead><tbody>
+${(D.buildList||[]).map(b => `<tr><td>${e(b.item)}</td><td>${e(b.beat)}</td><td>${e(b.owner)}</td><td>${e(b.cost)}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="row">
+  <div class="card"><div class="kicker">Never, at any beat</div><ul class="plain never">${(D.never||[]).map(x => `<li>${e(x)}</li>`).join('')}</ul></div>
+  <div class="card"><div class="kicker">Measure it</div>${list(D.measures)}</div>
+</div>
+<div class="foot">${e(D.footer)}</div>`;
+</script>
+</body>
+</html>

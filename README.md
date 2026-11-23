@@ -35,6 +35,7 @@ Open http://127.0.0.1:8765 after building. Netlify runs the renderer and content
 - `templates/services.html`, `templates/approach.html`, `templates/discovery.html`: main-content fragments for the three core inner pages.
 - `growth.css`, `growth.js`: new design, responsive layout and progressively enhanced workflow.
 - `reviews.js`: floating client-reviews badge and panel (GHL Reputation widget, lazy-loaded). Styles live at the end of `growth.css`.
+- `scripts/playbook_content.py`, `playbook.js`, `assets/kits/*.md`: the free STR AI Playbook page (`/playbook`), its five downloadable kits and the email signup. The form posts to `netlify/functions/brief-signup.js`, which upserts the contact in the STR Booster HighLevel sub-account and adds the tags `str-booster-brief`, `free-playbook` and a `role-*` tag. It needs the Netlify environment variable `GHL_PRIVATE_TOKEN` (a HighLevel Private Integration token with `contacts.write`); without it the form shows an error and nothing is stored.
 - `scripts/guides_content.py`: long-form guide content adapted from *Booked Solid*.
 - `vendor/scrollcraft/`: unchanged third-party engine, license and source attribution.
 - `scripts/render-site.py`: build entry point, source overrides and shared discovery-call CTAs.

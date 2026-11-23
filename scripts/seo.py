@@ -41,6 +41,7 @@ META = {
  'get-expert-help': ('Vacation Rental Consulting: Talk to STR Booster', 'Discuss your vacation rental with STR Booster. Get help choosing a focused project or ongoing support for revenue, positioning, marketing and automation.'),
  'guest-positioning-guide': ('How to Identify Your Ideal Vacation Rental Guest', 'Use guest reviews, travel needs and seasonal demand to identify your ideal vacation rental guest and improve your listing positioning.'),
  'weekly-revenue-guide': ('Vacation Rental Pricing & Marketing Weekly Plan', 'Follow a weekly routine to review booking pace, target relevant guests and coordinate vacation rental pricing, stay rules and marketing.'),
+ 'playbook': ('Free STR AI Playbook & Starter Kits', 'A free 12-step AI playbook for short-term rental hosts and property managers, with five downloadable kits: guest messaging, listing audit, pricing check, reviews and owner reports.'),
  'resources': ('Guides & Tools for Short-Term Rental Managers', 'Free guides, video tutorials and tools for short-term rental managers: direct bookings, pricing, guest positioning and automation.'),
  'automation-guide': ('Short-Term Rental Automation: Where to Start', 'Choose your first short-term rental automation: map the task, check your existing tools, test the workflow and measure the effort saved.'),
 }

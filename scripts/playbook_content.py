@@ -83,7 +83,7 @@ JOURNEY = [
       'Answer every direct enquiry within five minutes, even with a holding reply.'],
      'Using my brand guide and guest profile, write a four-week plan: one past-guest email and two social posts a week, each built only from the reviews, photos and local events I give you. Keep my voice. No discounts unless I ask for one.',
      '1 hour a month',
-     [('marketing-plan', 'Monthly Marketing Plan kit')]),
+     [('skill:marketing-plan', 'Monthly Marketing Plan skill')]),
     ('revenue', 'Revenue management',
      'Prices left on autopilot, or panic-discounted. A calm weekly check beats both.',
      ['Export the next 90 days from your pricing tool or PMS.',

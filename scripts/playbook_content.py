@@ -5,14 +5,23 @@ assets/kits/*.md. A resource file that still contains the line
 "STATUS: placeholder" is shown as "Coming soon" with no download link; remove
 that line once the file is written and the page links it on the next build.
 
+Claude Skills with more than one file (a SKILL.md plus scripts, templates and
+samples) live in skills/<slug>/ at the repository root, so they can be read on
+GitHub. scripts/build-public.py zips each one to /skills/<slug>.zip, ready to
+upload to Claude. A step resource written as "skill:<slug>" links that zip, and
+shows "Coming soon" until skills/<slug>/SKILL.md exists.
+
 The full playbook is a separate document sent by email to newsletter signups.
 The optional signup is the embedded HighLevel form "Newsletter Sign Up".
 """
 import html
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 KIT_DIR = ROOT / 'assets' / 'kits'
+SKILL_DIR = ROOT / 'skills'
+GITHUB_SKILLS = 'https://github.com/scottygeneral/strbooster-cohost/tree/main/skills'
 PLACEHOLDER_MARK = 'STATUS: placeholder'
 
 PAINS = [
@@ -34,7 +43,7 @@ JOURNEY = [
       'Create one Claude project called “Business brain” and add that document. Every later step starts here.'],
      'Interview me one question at a time to build the “business brain” for my short-term rental business: my goals for the next 12 months, my properties, my guests, the numbers I track, my voice and my rules. When we are done, write it as one clear document I can add to a Claude project. Do not invent anything I have not told you.',
      '45 minutes, once',
-     [('business-brain', 'Business Brain template')]),
+     [('skill:the-brain', 'The Brain skill')]),
     ('brand', 'Brand building',
      'If your listing sounds like every other listing, you compete on price. A clear brand is why a guest books you, and books direct next time.',
      ['Write your promise in one sentence: who you are for and why they will love staying with you.',
@@ -50,7 +59,7 @@ JOURNEY = [
       'Add that guest profile to your business brain. It drives every step after this.'],
      'Here are my latest reviews. Find the guests who were happiest: their trip purpose, group type and season. List the top five things they praise, with exact short quotes, and anything that comes up more than once as a problem. Do not invent quotes or counts.',
      '20 minutes',
-     [('review-reply-and-insights', 'Review Reply + Insight Miner')]),
+     [('skill:guest-intelligence-report', 'Guest Intelligence Report skill'), ('review-reply-and-insights', 'Review Reply + Insight Miner')]),
     ('listings', 'Optimize your listings',
      'Most listings are written for the host, not the guest. The title, first photo and first two lines decide the click.',
      ['Run the Listing Audit for the guest you found in step 3.',
@@ -98,15 +107,33 @@ JOURNEY = [
       'Then automate only the safe questions: check-in, Wi-Fi, parking, directions. Keep money, complaints and safety with a person.'],
      'You are my guest messaging assistant. Using only the property facts I gave you, draft a reply to the guest message below in my voice, under 90 words. If it involves a refund, a complaint, damage, safety or anything not in my facts, start with “HOST NEEDED” and give me a holding reply instead.',
      '30 minutes to set up',
-     [('guest-messaging-agent', 'Guest Messaging Agent')]),
+     [('skill:guest-experience', 'Guest Experience Storyboard skill'), ('guest-messaging-agent', 'Guest Messaging Agent')]),
 ]
 
 GHL_FORM_ID = 'X2ch8hqmAh3G9qypYlVe'  # HighLevel form "Newsletter Sign Up" (STR Booster sub-account)
 
 
 def resource_ready(slug):
-    path = KIT_DIR / f'{slug}.md'
+    if slug.startswith('skill:'):
+        path = SKILL_DIR / slug[6:] / 'SKILL.md'
+    else:
+        path = KIT_DIR / f'{slug}.md'
     return path.is_file() and PLACEHOLDER_MARK not in path.read_text(encoding='utf-8')
+
+
+def frontmatter(text):
+    """name and description from a SKILL.md or kit's YAML front matter."""
+    meta = {}
+    m = re.match(r'---\n(.*?)\n---', text, re.S)
+    for line in (m.group(1).splitlines() if m else []):
+        key, _, value = line.partition(':')
+        meta[key.strip()] = value.strip().strip('"')
+    return meta
+
+
+def skill_files(slug):
+    return sorted(p.relative_to(SKILL_DIR / slug).as_posix()
+                  for p in (SKILL_DIR / slug).rglob('*') if p.is_file())
 
 
 def resource_link(slug, name):
@@ -136,6 +163,12 @@ STAGES = [('Stage 1', 'Foundation.', 0, 3), ('Stage 2', 'Get Booked.', 3, 6), ('
 
 
 def file_chip(slug, name):
+    if slug.startswith('skill:'):
+        skill = slug[6:]
+        if resource_ready(slug):
+            return (f'<a class="bx-file bx-file-skill" href="/skills/{skill}.zip" download data-kit="{skill}">'
+                    f'{skill} · Claude skill .zip<span class="sr-only"> ({html.escape(name)})</span> <span aria-hidden="true">↓</span></a>')
+        return f'<span class="bx-file bx-file-soon">{skill} skill · coming soon</span>'
     if resource_ready(slug):
         return (f'<a class="bx-file" href="/assets/kits/{slug}.md" download data-kit="{slug}">{slug}.md'
                 f'<span class="sr-only"> ({html.escape(name)})</span> <span aria-hidden="true">↓</span></a>')
@@ -167,6 +200,7 @@ def body():
             '<h1>The Journey.</h1>'
             '<p class="bx-lede">Nine steps. Read the step, copy the prompt, take the file.</p>'
             '<p class="bx-actions"><a class="bx-btn" href="#step-1" data-cta="journey-start">Start Step 1</a>'
+            '<a class="bx-btn bx-btn-ghost" href="/skills.html" data-cta="journey-skills">All Skills</a>'
             '<a class="bx-btn bx-btn-ghost" href="#get-the-kits" data-cta="playbook-email">Get The Playbook</a></p>'
             '</div></section>')
 
@@ -187,7 +221,7 @@ def body():
     how = ('<section class="bx-section" id="how-files"><div class="bx-wrap">' + tab('How A File Works', '◆')
            + '<div class="bx-card bx-panel"><h2>Three Steps. One Evening.</h2><ul class="bx-list bx-list-wide">'
            '<li><span class="bx-ico" aria-hidden="true">1</span><div><strong>Open Claude.</strong><span>A free account is fine to start. Create one project for your business.</span></div></li>'
-           '<li><span class="bx-ico" aria-hidden="true">2</span><div><strong>Add The File.</strong><span>Upload the .md file to the project, or save it as a Skill.</span></div></li>'
+           '<li><span class="bx-ico" aria-hidden="true">2</span><div><strong>Add The File.</strong><span>A .zip is a Claude skill: upload it in Claude under Settings, Skills. A .md file goes into your project.</span></div></li>'
            '<li><span class="bx-ico" aria-hidden="true">3</span><div><strong>Fill In The Brackets.</strong><span>Answer its questions once with your real facts. Then use it every week.</span></div></li>'
            '</ul><p class="bx-small">Files marked “coming soon” are on the way. Use the prompt for that step until then.</p></div></div></section>')
 
@@ -207,3 +241,93 @@ def body():
              + signup_form('pb-signup-form', 'pb-signup-heading') + '</div></div></section>')
 
     return '<div class="bx">' + hero + problem + journey + how + faq + email + '</div><script src="/playbook.js" defer></script><script src="/motion.js" defer></script>'
+
+
+def step_for(slug):
+    for n, row in enumerate(JOURNEY, 1):
+        if any(s == slug for s, _ in row[6]):
+            return n, TITLE_CASE[row[0]]
+    return None, ''
+
+
+def catalog():
+    """Every skill in journey order: (slug, title, description, zip slug, step, kind, ready).
+
+    Multi-file skills come from skills/<slug>/; single-file kits from
+    assets/kits/<slug>.md. build-public.py zips both kinds to /skills/<slug>.zip.
+    """
+    rows = []
+    for n, row in enumerate(JOURNEY, 1):
+        for slug, name in row[6]:
+            ready = resource_ready(slug)
+            if slug.startswith('skill:'):
+                key = slug[6:]
+                path = SKILL_DIR / key / 'SKILL.md'
+                kind = 'skill'
+            else:
+                key = slug
+                path = KIT_DIR / f'{slug}.md'
+                kind = 'kit'
+            meta = frontmatter(path.read_text(encoding='utf-8')) if ready else {}
+            rows.append((key, name, meta.get('description', ''), n, TITLE_CASE[row[0]], kind, ready))
+    return rows
+
+
+def short(text, limit=230):
+    text = re.sub(r'\s+', ' ', text).strip()
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(' ', 1)[0].rstrip(',;:') + '…'
+
+
+def skill_card(key, name, desc, n, step_title, kind, ready):
+    head = (f'<p class="bx-meta">Step {n} · {html.escape(step_title)}</p>'
+            f'<h3>{html.escape(name)}</h3>')
+    if not ready:
+        return (f'<li class="bx-skill bx-skill-soon">{head}<p>On the way. Use the prompt for step {n} until then.</p>'
+                f'<div class="bx-files"><span class="bx-file bx-file-soon">{key} · coming soon</span></div></li>')
+    if kind == 'skill':
+        files = skill_files(key)
+        extra = (f'<p class="bx-small">{len(files)} files: ' + ', '.join(html.escape(f) for f in files) + '</p>')
+        links = (f'<a class="bx-file bx-file-skill" href="/skills/{key}.zip" download data-kit="{key}">Download .zip <span aria-hidden="true">↓</span></a>'
+                 f'<a class="bx-file" href="/skills/{key}/SKILL.md" target="_blank" rel="noopener">Read SKILL.md</a>'
+                 f'<a class="bx-file" href="{GITHUB_SKILLS}/{key}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>')
+    else:
+        extra = ''
+        links = (f'<a class="bx-file bx-file-skill" href="/skills/{key}.zip" download data-kit="{key}">Download .zip <span aria-hidden="true">↓</span></a>'
+                 f'<a class="bx-file" href="/assets/kits/{key}.md" download data-kit="{key}">.md file <span aria-hidden="true">↓</span></a>'
+                 f'<a class="bx-file" href="https://github.com/scottygeneral/strbooster-cohost/blob/main/assets/kits/{key}.md" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>')
+    return (f'<li class="bx-skill" id="skill-{key}">{head}<p>{html.escape(short(desc))}</p>{extra}'
+            f'<div class="bx-files">{links}</div></li>')
+
+
+def skills_body():
+    rows = catalog()
+    ready = sum(1 for r in rows if r[6])
+    hero = ('<section class="bx-hero bx-hero-sub"><div class="bx-wrap">'
+            '<div class="breadcrumb"><a href="/">Home</a> / Skills</div>'
+            '<h1>Skills.</h1>'
+            f'<p class="bx-lede">{ready} free Claude skills for short-term rentals. Download one, upload it to Claude, and it does the job the same way every time.</p>'
+            '<p class="bx-actions"><a class="bx-btn" href="#all-skills" data-cta="skills-browse">Browse The Skills</a>'
+            f'<a class="bx-btn bx-btn-ghost" href="{GITHUB_SKILLS}" target="_blank" rel="noopener noreferrer" data-cta="skills-github">All Skills On GitHub ↗</a></p>'
+            '</div></section>')
+
+    install = ('<section class="bx-section" id="install"><div class="bx-wrap">' + tab('Install A Skill', '◆')
+               + '<div class="bx-card bx-panel"><h2>Three Steps. Two Minutes.</h2><ul class="bx-list bx-list-wide">'
+               '<li><span class="bx-ico" aria-hidden="true">1</span><div><strong>Download The .zip.</strong><span>Each skill is one .zip file. Don’t unzip it.</span></div></li>'
+               '<li><span class="bx-ico" aria-hidden="true">2</span><div><strong>Upload It To Claude.</strong><span>In Claude, open Settings, find Skills, and upload the .zip. Turn on code execution if Claude asks, since some skills run a small script.</span></div></li>'
+               '<li><span class="bx-ico" aria-hidden="true">3</span><div><strong>Just Ask.</strong><span>Say what you want, like “build my business brain” or “make a guest intelligence report for this listing.” Claude picks the skill up on its own.</span></div></li>'
+               '</ul><p class="bx-small">Prefer to read first? Every skill is plain text. Open SKILL.md here or browse the folder on GitHub. The .md files also work dropped into a Claude project.</p></div></div></section>')
+
+    cards = ''.join(skill_card(*r) for r in rows)
+    grid = ('<section class="bx-section" id="all-skills"><div class="bx-wrap">' + tab('In Journey Order', '▮')
+            + '<div class="bx-card bx-panel"><h2>Every Skill, Step By Step.</h2>'
+            '<p class="bx-sub">They follow the nine steps of <a href="/playbook.html">the journey</a>. Start with step 1: the others read the file it makes.</p>'
+            f'<ol class="bx-skills">{cards}</ol></div></div></section>')
+
+    email = ('<section class="bx-section bx-last" id="get-the-kits"><div class="bx-wrap">' + tab('Email', '✉')
+             + '<div class="bx-card bx-panel"><h2 id="sk-signup-heading">Get New Skills By Email.</h2>'
+             '<p class="bx-sub">One email when a new skill drops, plus the whole journey in one document. No spam. Nothing to buy.</p>'
+             + signup_form('sk-signup-form', 'sk-signup-heading') + '</div></div></section>')
+
+    return '<div class="bx">' + hero + grid + install + email + '</div><script src="/playbook.js" defer></script><script src="/motion.js" defer></script>'

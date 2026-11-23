@@ -278,3 +278,13 @@ body {
 @media (prefers-reduced-motion: reduce) { .bx-tree span, .bx-you i { animation: none !important; } }
 @media (max-width: 640px) { .bx-tree span { font-size: 11px; padding: 8px 9px; } .bx-you b { font-size: 1.1rem; } }
 .has-motion .bx-section .bx-card.bx-panel.is-in, .has-motion .bx-section .bx-tab.is-in { opacity: 1; transform: none; }
+
+/* Skills library (/skills) */
+.bx-skills { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+.bx-skill { display: flex; flex-direction: column; padding: 18px; background: var(--cream); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); scroll-margin-top: 110px; }
+.bx-skill h3 { font: 700 1.2rem/1.25 var(--sans); color: var(--ink); margin: 4px 0 8px; }
+.bx-skill > p:not(.bx-meta) { font-size: .96rem; line-height: 1.5; margin: 0 0 8px; }
+.bx-skill .bx-small { font-family: var(--mono); font-size: 11px; word-break: break-word; }
+.bx-skill .bx-files { margin-top: auto; padding-top: 10px; }
+.bx-skill-soon { border-style: dashed; box-shadow: none; background: transparent; }
+.bx-file-skill { background: var(--lime, #c4f421); }

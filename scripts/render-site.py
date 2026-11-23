@@ -16,6 +16,8 @@ import runpy
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
+# Nov 2026: nothing is for sale; every primary CTA leads to the free playbook.
+PLAYBOOK_URL = '/playbook.html'
 DISCOVERY_TITLE = 'Book a Discovery Call: STR Growth Systems'
 DISCOVERY_DESCRIPTION = (
     'Book a 30-minute discovery call with STR Booster. Discuss your portfolio, '
@@ -27,19 +29,19 @@ EXCLUDED_PAGES = {'index.html', 'STR Booster Website.dc.html', '404.html'}
 
 
 def booking_link(placement: str = 'page-final') -> str:
-    return (f'<a class="btn" href="{BOOKING_URL}" '
+    return (f'<a class="btn" href="{PLAYBOOK_URL}" '
             f'data-cta="{html.escape(placement, quote=True)}">'
-            'Let’s talk <svg class="sb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>')
+            'Get the free playbook <svg class="sb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>')
 
 
 def replace_legacy_ctas(source: str) -> str:
     """Replace global acquisition CTAs without rewriting resource-specific links."""
     source = re.sub(
         r'<section class="dark cta-band">.*?</section>',
-        '<section class="dark cta-band"><h2>What would make your rental business easier?</h2>'
-        '<p>Let’s talk about more bookings, less repetitive work and the right '
-        'AI systems for your business.</p><div class="actions">'
-        + booking_link() + '</div><p class="note">Book a 30-minute discovery call.</p></section>',
+        '<section class="dark cta-band"><h2>Put Claude to work on your rental business.</h2>'
+        '<p>Get the free STR AI Playbook and five Claude kits for guest messages, '
+        'listings, pricing, reviews and owner reports.</p><div class="actions">'
+        + booking_link() + '</div><p class="note">Free. No call, no catch.</p></section>',
         source, flags=re.S,
     )
 
@@ -197,12 +199,8 @@ OFFERS = {
     'owner-system': ('Owner Acquisition System', 2500, 995),
     'growth-partner': ('Growth Partner', None, 2000),
 }
-SERVICE_PAGES = {
-    'growth-services': ('Growth systems for short-term rental property managers',
-                        ['growth-audit', 'direct-revenue', 'owner-system', 'growth-partner']),
-    'owner-acquisition': ('Owner Acquisition System', ['owner-system']),
-}
-FAQ_SCHEMA_PAGES = {'growth-services', 'owner-acquisition', 'tools-partners', 'playbook'}
+SERVICE_PAGES = {}
+FAQ_SCHEMA_PAGES = {'playbook'}
 LINK = re.compile(r'(\bhref=")/([A-Za-z0-9_-]+)\.html([#?][^"]*)?"')
 
 
@@ -261,8 +259,8 @@ def apply_search_polish(root: Path) -> None:
             for node in nodes:
                 if node.get('@id') == SITE + '/#organization':
                     node['logo'] = {'@type': 'ImageObject', 'url': LOGO_URL, 'width': 512, 'height': 512}
-                    node['contactPoint'] = {'@type': 'ContactPoint', 'contactType': 'sales',
-                                            'email': 'info@strbooster.com', 'url': BOOKING_URL,
+                    node['contactPoint'] = {'@type': 'ContactPoint', 'contactType': 'customer support',
+                                            'email': 'info@strbooster.com',
                                             'availableLanguage': 'English'}
             if slug in SERVICE_PAGES and not any(n.get('@type') == 'Service' for n in nodes):
                 name, keys = SERVICE_PAGES[slug]

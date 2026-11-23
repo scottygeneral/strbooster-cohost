@@ -1,21 +1,19 @@
 # STR Booster
 
-> STR Booster builds and runs growth systems for independent short-term rental property managers with 10 to 100 doors. Two outcomes: more direct revenue (Direct Revenue System) and more owner contracts (Owner Acquisition System), tied together by revenue management in the Growth Partner plan. STR Booster is a division of Green Door Hotel Inc., founded by David Anthony Scott.
+> STR Booster builds growth systems for short-term rental hosts and property managers on Claude, and shares them for free: a 12-step STR AI Playbook and downloadable Claude kits (Skills) for guest messaging, listing audits, weekly pricing checks, review replies and "Who will book your home" owner reports. Nothing is for sale. STR Booster is a division of Green Door Hotel Inc., founded by David Anthony Scott.
 
-## About
+## Start here
 
-- [Homepage](https://strbooster.com/): the two systems, plans, how engagements work and the founder.
-- [Systems and pricing](https://strbooster.com/growth-services): Growth Audit (free), Direct Revenue System, Owner Acquisition System and Growth Partner, with starting prices and guarantees.
-- [Owner Acquisition System](https://strbooster.com/owner-acquisition): owner landing page, revenue estimate, AI follow-up, nurture for owners and realtors, monthly pipeline report.
-- [How we work](https://strbooster.com/our-approach): Growth Audit, build and run.
-- [Book a discovery call](https://strbooster.com/get-expert-help): 30-minute call; final scope is confirmed before any work begins.
+- [Homepage](https://strbooster.com/): what the growth systems do and how to start.
+- [The STR AI Playbook](https://strbooster.com/playbook): 12 steps, five free Claude kits and the weekly STR Booster Brief.
 
-## What's inside the systems
+## Claude kits
 
-- [Revenue management](https://strbooster.com/revenue-management): pricing, minimum stays, seasonal strategy and channel mix.
-- [Websites and booking funnels](https://strbooster.com/websites-funnels): direct booking websites, lead capture and follow-up.
-- [Listing optimization](https://strbooster.com/listing-optimization): ideal-guest positioning, listing copy and photo strategy.
-- [Technology and automation](https://strbooster.com/technology-automation): PMS, CRM and AI workflow setup.
+- [Guest Messaging Agent](https://strbooster.com/assets/kits/guest-messaging-agent.md)
+- ["Who Will Book Your Home" Owner Report](https://strbooster.com/assets/kits/who-will-book-your-home-report.md)
+- [Listing Audit](https://strbooster.com/assets/kits/listing-audit.md)
+- [Weekly Pricing Check](https://strbooster.com/assets/kits/weekly-pricing-check.md)
+- [Review Reply + Insight Miner](https://strbooster.com/assets/kits/review-reply-and-insights.md)
 
 ## Guides
 

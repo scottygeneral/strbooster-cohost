@@ -7,7 +7,8 @@ import argparse
 import json
 
 ROOT = Path(__file__).resolve().parent.parent
-BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/OnBzpe1qEasSowPwkxXU'
+# Nov 2026: nothing is for sale; primary CTAs lead to the free playbook.
+PLAYBOOK_URLS = {'/playbook', '/playbook.html'}
 REQUIRED_SECTIONS = ('main', 'premise', 'stack', 'how', 'guest-focus', 'founder',
                      'lets-talk')
 LEGACY_ASSETS = {'/story.css', '/story.js', '/guest-strategy.css', '/guest-strategy.js'}
@@ -72,9 +73,9 @@ def check(root, content_only=False):
     require(not any(tag == 'audio' for tag, _ in doc.tags), 'Homepage must not play audio.')
     require('<!--include:' not in text, 'Homepage has an unresolved partial include.')
     require('Get Started for Free' not in text and 'Get my free Guest Strategy' not in text,
-            'Homepage must lead to a discovery call rather than the previous free entry.')
+            'Homepage must lead to the free playbook rather than the previous free entry.')
     require(not any(tag == 'form' for tag, _ in doc.tags),
-            'Homepage discovery-call CTA must be a direct, accessible link.')
+            'Homepage playbook CTA must be a direct, accessible link.')
     require('client-results' not in text and 'case-study-' not in text and 'sb-proof' not in text,
             'Homepage must not contain client stories or results promotions.')
     home_canonicals = [a for tag, a in doc.tags if tag == 'link' and a.get('rel') == 'canonical']
@@ -94,7 +95,7 @@ def check(root, content_only=False):
                and any(tag == 'header' and 'site-header' in attrs.get('class', '').split()
                        for tag, attrs in page.tags)}
     require('index.html' in managed, 'Homepage shared navigation is missing.')
-    require('get-expert-help.html' in managed, 'Discovery-call contact page is missing.')
+    require('playbook.html' in managed, 'Free playbook page is missing.')
     for name, page in managed.items():
         page_text = texts[name]
         require(not [key for key, n in Counter(page.ids).items() if n > 1],
@@ -103,8 +104,8 @@ def check(root, content_only=False):
         require('GTM-55FK2NZ' in page_text and 'G-YQ9L9GHV31' in page_text,
                 f'{name}: existing analytics identifiers missing.')
         navigation = [a for tag, a in page.tags if tag == 'a' and a.get('data-cta') == 'navigation']
-        require(len(navigation) == 1 and navigation[0].get('href') == BOOKING_URL,
-                f'{name}: navigation CTA must open the verified discovery-call calendar.')
+        require(len(navigation) == 1 and navigation[0].get('href') in PLAYBOOK_URLS,
+                f'{name}: navigation CTA must open the free playbook.')
         scripts = [urlsplit(a.get('src', '')).path for tag, a in page.tags if tag == 'script']
         styles = [urlsplit(a.get('href', '')).path for tag, a in page.tags
                   if tag == 'link' and a.get('rel') == 'stylesheet']
@@ -121,8 +122,8 @@ def check(root, content_only=False):
             require(destination in footer, f'{name}: footer is missing {destination}')
         for tag, attrs in page.tags:
             if tag == 'a' and attrs.get('data-cta') in {'navigation', 'hero', 'final', 'page-final'}:
-                require(attrs.get('href') == BOOKING_URL,
-                        f'{name}: primary CTA must use the discovery-call destination.')
+                require(attrs.get('href') in PLAYBOOK_URLS,
+                        f'{name}: primary CTA must lead to the free playbook.')
             for attr in ('href', 'src', 'data-src', 'action', 'poster'):
                 value = attrs.get(attr, '')
                 if not value:
@@ -153,16 +154,17 @@ def check(root, content_only=False):
                     require(unquote(url.fragment) in target_doc.ids,
                             f'{name}: missing anchor {value}')
 
-    discovery = texts.get('get-expert-help.html', '')
-    require(BOOKING_URL in discovery and 'mailto:info@strbooster.com' in discovery,
-            'Discovery page requires the verified calendar and an email alternative.')
-    require('30-minute' in discovery, 'Discovery page must explain the call duration.')
+    playbook = texts.get('playbook.html', '')
+    require('/.netlify/functions/brief-signup' in playbook and 'mailto:info@strbooster.com' in texts['index.html'],
+            'Playbook signup form and a contact email are required.')
+    require(not any('fp_ref=' in t or 'rel="sponsored' in t for t in texts.values()),
+            'Affiliate links are retired: no page may carry one.')
 
     # Structured data must match what visitors read: offer prices visible on the
     # page, and every FAQ in the schema shown in the page's FAQ block.
     import html
     import re
-    for name in ('growth-services.html', 'owner-acquisition.html', 'tools-partners.html'):
+    for name in ('playbook.html',):
         page_text = texts.get(name, '')
         nodes = []
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page_text, re.S):
@@ -180,7 +182,7 @@ def check(root, content_only=False):
                     require(shown in page_text, f'{name}: offer price {shown} for {offer["name"]} is not on the page.')
     if errors:
         raise AssertionError('\n'.join(errors))
-    print(f'PASS: {len(managed)} pages; discovery CTAs, shared assets, schema, anchors and analytics.')
+    print(f'PASS: {len(managed)} pages; playbook CTAs, shared assets, schema, anchors and analytics.')
     if skipped_media:
         print(f'Legacy media not checked in this snapshot: {len(skipped_media)} asset(s). '
               'Homepage and all local code/link targets were checked.')

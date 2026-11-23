@@ -41,6 +41,117 @@
   status = 301
   force = true
 
+
+# Nov 2026: services, pricing and partner offers removed. STR Booster shares free
+# Claude growth systems, so old service pages lead to the free playbook.
+[[redirects]]
+  from = "/growth-services.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/growth-services"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/owner-acquisition.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/owner-acquisition"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/listing-optimization.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/listing-optimization"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/revenue-management.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/revenue-management"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/technology-automation.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/technology-automation"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/websites-funnels.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/websites-funnels"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tools-partners.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tools-partners"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/get-expert-help.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/get-expert-help"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-approach.html"
+  to = "/playbook"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-approach"
+  to = "/playbook"
+  status = 301
+  force = true
+
 # Preserve the existing decision not to publish branch/PR previews.
 [context.deploy-preview]
   ignore = "exit 0"
@@ -56,73 +167,73 @@
 # Retired client stories lead visitors to the current service overview.
 [[redirects]]
   from = "/client-results.html"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/client-results"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-brigantine.html"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-brigantine"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-north-carolina.html"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-north-carolina"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-tuscany.html"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-tuscany"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-phoenix.html"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-study-phoenix"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 # The 30-day growth sprint offer is retired; send old links to the service overview.
 [[redirects]]
   from = "/growth-sprint.html"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true
 
 [[redirects]]
   from = "/growth-sprint"
-  to = "/growth-services.html"
+  to = "/playbook"
   status = 301
   force = true

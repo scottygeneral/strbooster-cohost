@@ -23,7 +23,17 @@ RETIRED_STORY_PAGES = frozenset({
     'case-study-north-carolina.html',
     'case-study-tuscany.html',
     'case-study-phoenix.html',
-    'growth-sprint.html',  # 30-day sprint offer retired; redirects to /growth-services.html
+    'growth-sprint.html',  # 30-day sprint offer retired
+    # Nov 2026: services and pricing removed; STR Booster now shares free Claude growth systems.
+    'growth-services.html',
+    'owner-acquisition.html',
+    'listing-optimization.html',
+    'revenue-management.html',
+    'technology-automation.html',
+    'websites-funnels.html',
+    'tools-partners.html',
+    'get-expert-help.html',
+    'our-approach.html',
 })
 META = {
  'index': ('Vacation Rental Growth & Automation', 'Grow your vacation rental with guest insights, revenue management, listing optimization and automation. Explore expert services and a free host community.'),
@@ -53,14 +63,10 @@ HEADINGS = {
  'tools-partners': 'Vacation rental software.<br><em>Affiliate links, plainly disclosed.</em>',
 }
 RELATED = {
- 'guest-positioning-guide': [('guest-intel','Explore Guest Intel'),('listing-optimization','Get listing optimization support')],
- 'weekly-revenue-guide': [('revenue-management','Explore revenue management services'),('52rev','Discover 52Rev revenue marketing')],
- 'automation-guide': [('technology-automation','Explore rental automation services'),('technology-automation','Explore tech and automation support')],
- 'listing-optimization': [('guest-positioning-guide','How to identify your ideal guest'),('websites-funnels','Carry your positioning into your website')],
- 'revenue-management': [('weekly-revenue-guide','Build a weekly pricing and marketing routine'),('growth-services','See plans and pricing')],
- 'technology-automation': [('automation-guide','Choose your first automation'),('growth-services','See plans and pricing')],
- 'websites-funnels': [('guest-positioning-guide','Define the guest your website should attract'),('technology-automation','Connect your CRM and marketing workflows')],
- 'resources': [('growth-services','See growth systems and pricing'),('owner-acquisition','Explore the Owner Acquisition System')],
+ 'guest-positioning-guide': [('guest-intel','Explore Guest Intel'),('playbook','Run the free listing audit kit')],
+ 'weekly-revenue-guide': [('playbook','Get the free weekly pricing check kit'),('52rev','Discover 52Rev revenue marketing')],
+ 'automation-guide': [('playbook','Start with the free guest messaging kit'),('resources','Browse more resources')],
+ 'resources': [('playbook','Get the free STR AI Playbook'),('guest-intel','Explore Guest Intel')],
 }
 
 # Visible FAQ sections (rendered on the page) with matching FAQPage schema.
@@ -178,4 +184,4 @@ def write_crawl_files(root, pages):
           if p!='community.html' and p not in RETIRED_STORY_PAGES]
     (root/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('  <url><loc>'+html.escape(url)+'</loc><lastmod>'+mod+'</lastmod></url>\n' for url,mod in urls)+'</urlset>\n')
     (root/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\n')
-    (root/'404.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | STR Booster</title><link rel="stylesheet" href="/styles.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head><body><main class="wrap"><section class="page-hero"><p class="eyebrow">STR Booster · 404</p><h1>We could not find that page.</h1><p>The link may have changed. Explore our services or return to the homepage.</p><div class="actions"><a class="btn" href="/">Return Home</a><a class="btn secondary" href="/growth-services">Explore Growth Services</a></div></section></main></body></html>''')
+    (root/'404.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | STR Booster</title><link rel="stylesheet" href="/styles.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head><body><main class="wrap"><section class="page-hero"><p class="eyebrow">STR Booster · 404</p><h1>We could not find that page.</h1><p>The link may have changed. Get the free playbook or return to the homepage.</p><div class="actions"><a class="btn" href="/">Return Home</a><a class="btn secondary" href="/playbook">Get the Free Playbook</a></div></section></main></body></html>''')
